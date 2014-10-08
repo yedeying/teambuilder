@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .login-page
+    .banner
+      img.image(src="/images/topbanner.jpg")
+      .title
+        h1 teambuilder
+        span 高效简单, 简化您的工作
+    .form-unit
+      form.form(method="/login", action="post")
+        input.username(type="email", placeholder="邮箱")
+        input.password(type="password", placeholder="密码")
+        input.submit(type="submit", value="登录")
+      .action-wrapper
+        a.forget(href="/forget") 忘记密码?
+        a.sign-up(href="/signup") 免费注册
