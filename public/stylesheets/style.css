@@ -7,13 +7,13 @@ body a {
   text-decoration: none;
 }
 
-.login-page > .banner, .sign-up-page > .banner {
+.account-page > .banner {
   position: relative;
 }
-.login-page > .banner > .image, .sign-up-page > .banner > .image {
+.account-page > .banner > .image {
   width: 100%;
 }
-.login-page > .banner > .title, .sign-up-page > .banner > .title {
+.account-page > .banner > .title {
   text-align: center;
   margin: auto;
   color: #fff;
@@ -23,17 +23,17 @@ body a {
   right: 0;
   bottom: 20px;
 }
-.login-page > .banner > .title > h1, .sign-up-page > .banner > .title > h1 {
+.account-page > .banner > .title > h1 {
   margin-bottom: 0;
 }
-.login-page > .form-unit, .sign-up-page > .form-unit {
+.account-page > .form-unit {
   margin: 20px auto;
 }
-.login-page > .form-unit input, .sign-up-page > .form-unit input {
+.account-page > .form-unit input {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: 30px auto;
+  margin: 25px auto;
   display: block;
   padding: 12px;
   width: 300px;
@@ -42,15 +42,15 @@ body a {
   border-radius: 8px;
   border: 1px solid #d9d9d9;
 }
-.login-page > .form-unit input.username, .login-page > .form-unit input.password, .sign-up-page > .form-unit input.username, .sign-up-page > .form-unit input.password {
+.account-page > .form-unit input.email, .account-page > .form-unit input.username, .account-page > .form-unit input.password {
   -webkit-transition: border-color 0.3s;
   -o-transition: border-color 0.3s;
   transition: border-color 0.3s;
 }
-.login-page > .form-unit input.username:focus, .login-page > .form-unit input.password:focus, .sign-up-page > .form-unit input.username:focus, .sign-up-page > .form-unit input.password:focus {
+.account-page > .form-unit input.email:focus, .account-page > .form-unit input.username:focus, .account-page > .form-unit input.password:focus {
   border-color: #a6a6a6;
 }
-.login-page > .form-unit input.submit, .sign-up-page > .form-unit input.submit {
+.account-page > .form-unit input.submit {
   -webkit-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
@@ -60,10 +60,10 @@ body a {
   margin-bottom: 10px;
   cursor: pointer;
 }
-.login-page > .form-unit input.submit:hover, .sign-up-page > .form-unit input.submit:hover {
+.account-page > .form-unit input.submit:hover {
   background-color: #3071a9;
 }
-.login-page > .form-unit .action-wrapper, .sign-up-page > .form-unit .action-wrapper {
+.account-page > .form-unit .action-wrapper {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -72,11 +72,11 @@ body a {
   width: 300px;
   font-size: 14px;
 }
-.login-page > .form-unit .action-wrapper .forget, .sign-up-page > .form-unit .action-wrapper .forget {
+.account-page > .form-unit .action-wrapper .forget {
   color: #aaa;
   float: left;
 }
-.login-page > .form-unit .action-wrapper .sign-up, .sign-up-page > .form-unit .action-wrapper .sign-up {
+.account-page > .form-unit .action-wrapper .sign-up {
   color: #428bca;
   float: right;
 }
