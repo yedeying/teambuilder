@@ -28,7 +28,7 @@ router.post('/signup', function(req, res) {
   if(!signup.checkMailFormat(email)) {
     res.send({code: 1, info: '邮箱格式错误'});
   } else {
-    signup.checkMailReapet(email, function() {
+    signup.checkMailReapet(email, res, function() {
       var tid = signup.saveTempInfo(email, name, time, password, res);
       signup.sendMail(email, tid, res);
     });

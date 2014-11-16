@@ -12,6 +12,17 @@
   transition: $type $time;
 }
 
+@mixin clearfix {
+  &:before, &:after {
+    display: table;
+    content: " ";
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -43,7 +54,7 @@ body {
   }
   > .form-unit {
     margin: 20px auto;
-    input {
+    input, .alert {
       @include box-sizing;
       margin: 25px auto;
       display: block;
@@ -57,6 +68,23 @@ body {
         @include transition(border-color ,.3s);
         &:focus {
           border-color: #a6a6a6;
+        }
+      }
+      &.alert {
+        margin: 20px auto;
+        padding: 8px 12px;
+        border: 0;
+        display: none;
+        &.success {
+          background: rgb(223,240,216);
+        }
+        &.error {
+          background: rgb(249,242,244);
+        }
+        .close {
+          float: right;
+          cursor: pointer;
+          @include clearfix;
         }
       }
       &.submit {

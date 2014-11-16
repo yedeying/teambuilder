@@ -29,7 +29,7 @@ body a {
 .account-page > .form-unit {
   margin: 20px auto;
 }
-.account-page > .form-unit input {
+.account-page > .form-unit input, .account-page > .form-unit .alert {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -42,15 +42,39 @@ body a {
   border-radius: 8px;
   border: 1px solid #d9d9d9;
 }
-.account-page > .form-unit input.email, .account-page > .form-unit input.username, .account-page > .form-unit input.password {
+.account-page > .form-unit input.email, .account-page > .form-unit input.username, .account-page > .form-unit input.password, .account-page > .form-unit .alert.email, .account-page > .form-unit .alert.username, .account-page > .form-unit .alert.password {
   -webkit-transition: border-color 0.3s;
   -o-transition: border-color 0.3s;
   transition: border-color 0.3s;
 }
-.account-page > .form-unit input.email:focus, .account-page > .form-unit input.username:focus, .account-page > .form-unit input.password:focus {
+.account-page > .form-unit input.email:focus, .account-page > .form-unit input.username:focus, .account-page > .form-unit input.password:focus, .account-page > .form-unit .alert.email:focus, .account-page > .form-unit .alert.username:focus, .account-page > .form-unit .alert.password:focus {
   border-color: #a6a6a6;
 }
-.account-page > .form-unit input.submit {
+.account-page > .form-unit input.alert, .account-page > .form-unit .alert.alert {
+  margin: 20px auto;
+  padding: 8px 12px;
+  border: 0;
+  display: none;
+}
+.account-page > .form-unit input.alert.success, .account-page > .form-unit .alert.alert.success {
+  background: #dff0d8;
+}
+.account-page > .form-unit input.alert.error, .account-page > .form-unit .alert.alert.error {
+  background: #f9f2f4;
+}
+.account-page > .form-unit input.alert .close, .account-page > .form-unit .alert.alert .close {
+  float: right;
+  cursor: pointer;
+  *zoom: 1;
+}
+.account-page > .form-unit input.alert .close:before, .account-page > .form-unit input.alert .close:after, .account-page > .form-unit .alert.alert .close:before, .account-page > .form-unit .alert.alert .close:after {
+  display: table;
+  content: " ";
+}
+.account-page > .form-unit input.alert .close:after, .account-page > .form-unit .alert.alert .close:after {
+  clear: both;
+}
+.account-page > .form-unit input.submit, .account-page > .form-unit .alert.submit {
   -webkit-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
@@ -60,7 +84,7 @@ body a {
   margin-bottom: 10px;
   cursor: pointer;
 }
-.account-page > .form-unit input.submit:hover {
+.account-page > .form-unit input.submit:hover, .account-page > .form-unit .alert.submit:hover {
   background-color: #3071a9;
 }
 .account-page > .form-unit .action-wrapper {
