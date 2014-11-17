@@ -75,17 +75,22 @@ body a {
   clear: both;
 }
 .account-page > .form-unit input.submit, .account-page > .form-unit .alert.submit {
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.account-page > .form-unit input.submit.register, .account-page > .form-unit input.submit.sendagain, .account-page > .form-unit input.submit.login, .account-page > .form-unit .alert.submit.register, .account-page > .form-unit .alert.submit.sendagain, .account-page > .form-unit .alert.submit.login {
   -webkit-transition: background-color 0.3s;
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
   background-color: #428bca;
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 10px;
   cursor: pointer;
 }
-.account-page > .form-unit input.submit:hover, .account-page > .form-unit .alert.submit:hover {
+.account-page > .form-unit input.submit.register:hover, .account-page > .form-unit input.submit.sendagain:hover, .account-page > .form-unit input.submit.login:hover, .account-page > .form-unit .alert.submit.register:hover, .account-page > .form-unit .alert.submit.sendagain:hover, .account-page > .form-unit .alert.submit.login:hover {
   background-color: #3071a9;
+}
+.account-page > .form-unit input.submit.disabled, .account-page > .form-unit .alert.submit.disabled {
+  background-color: #84b4dc;
 }
 .account-page > .form-unit .action-wrapper {
   -webkit-box-sizing: border-box;

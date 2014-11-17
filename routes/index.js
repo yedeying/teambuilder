@@ -2,9 +2,6 @@ var express = require('express');
 var setting = require('../settings/global');
 var signup = require('../module/signup');
 var router = express.Router();
-function log(str) {
-  console.log(str);
-}
 router.get('/', function(req, res) {
   res.redirect('/login');
 });
@@ -24,13 +21,20 @@ router.post('/signup', function(req, res) {
   var name = req.body.username;
   var password = req.body.password;
   var time = new Date().getTime();
-  var password = signup.encodePassword(password, time);
-  if(!signup.checkMailFormat(email)) {
-    res.send({code: 1, info: '邮箱格式错误'});
-  } else {
-    signup.checkMailReapet(email, res, function() {
-      var tid = signup.saveTempInfo(email, name, time, password, res);
-      signup.sendMail(email, tid, res);
+  if(signup.validate(email, name, password, res)) {
+    password = signup.encodePassword(password, time);
+    signup.checkMailRepeat(email, res, function() {
+      signup.saveTempInfo(email, name, time, password, res, function(tid) {
+        signup.sendMail(email, tid, res);
+      });
+    });
+  }
+});
+router.post('/sendagain', function(req, res) {
+  var email = req.body.email;
+  if(signup.validateEmail(email, res)) {
+    signup.checkMailRepeatBeta(email, res, function() {
+      signup.sendAgain(email, res);
     });
   }
 });
