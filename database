@@ -1,0 +1,25 @@
+tmpuser
+- save the info of register with no access
+  uid
+  email
+  username
+  password
+  timestamp
+  createtime
+  tid
+user
+- save the info of users
+  uid
+  username
+  email
+  password
+  update
+  createtime
+  contact
+  gender
+project
+- save the info of projects
+  pid
+  name
+  createtime
+  

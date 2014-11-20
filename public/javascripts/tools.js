@@ -22,6 +22,9 @@ define(function(require, exports, module) {
     },
     checkPasswordFormat: function(pwd) {
       return /^[0-9a-zA-Z]+$/.test(pwd);
+    },
+    checkTidFormat: function(tid) {
+      return /[0-9a-f]{40}/.test(tid);
     }
   }
 });

@@ -1,0 +1,90 @@
+@import "mixins";
+.account-page {
+  > .banner {
+    position: relative;
+    > .image {
+      width: 100%;
+    }
+    > .title {
+      text-align: center;
+      margin: auto;
+      color: #fff;
+      font-size: 30px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 20px;
+      > h1 {
+        margin-bottom: 0;
+      }
+    }
+  }
+  > .form-unit {
+    margin: 20px auto;
+    input, .alert {
+      @include box-sizing;
+      margin: 25px auto;
+      display: block;
+      padding: 12px;
+      width: 300px;
+      font-size: 14px;
+      outline: none;
+      @include border-radius(8px);
+      border: 1px solid #d9d9d9;
+      &.email, &.username, &.password {
+        @include transition(border-color ,.3s);
+        &:focus {
+          border-color: #a6a6a6;
+        }
+      }
+      &.alert {
+        margin: 20px auto;
+        padding: 8px 12px;
+        border: 0;
+        display: none;
+        &.success {
+          background: rgb(223,240,216);
+        }
+        &.error {
+          background: rgb(249,242,244);
+        }
+        .close {
+          float: right;
+          cursor: pointer;
+          @include clearfix;
+        }
+      }
+      &.submit {
+        &.register, &.sendagain, &.login, &.vertify {
+          @include transition(background-color ,.3s);
+          background-color: rgb(66,139,202);
+          cursor: pointer;
+          &:hover {
+            background-color: rgb(48,113,169);
+          }
+        }
+        &.disabled {
+          background-color: rgb(132,180,220);
+        }
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 10px;
+      }
+    }
+    .action-wrapper {
+      @include box-sizing;
+      margin: auto;
+      padding: 12px;
+      width: 300px;
+      font-size: 14px;
+      .forget {
+        color: #aaa;
+        float: left;
+      }
+      .sign-up {
+        color: #428bca;
+        float: right;
+      }
+    }
+  }
+}

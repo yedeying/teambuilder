@@ -1,7 +1,17 @@
 var signup = {
-  getVerifyHtml: function (str) {
+  getVerifyHtml: function (str, name, callback) {
+    var jade = require('jade');
+    var fs = require('fs');
+    var tools = require('./tools');
     var setting = require('../settings/global');
-    return '<a href="http://' + setting.url + '/?' + str + '">点击验证</a>';
+    jade.renderFile('./views/vertify_mail.jade', {
+      url: tools.getCommonUrl() + 'vertify?tid=' + str,
+      name: name
+    }, function(err, html) {
+      if(err) { throw err; }
+      callback(html);
+    });
+    return '<a href="http://' + setting.url + '/vertify?' + str + '">点击验证</a>';
   },
   encodePassword: function(ori, time) {
     var crypto = require('crypto');
@@ -55,6 +65,9 @@ var signup = {
       callback();
     });
   },
+  checkTidFormat: function(tid) {
+    return /[0-9a-f]{40}/.test(tid);
+  },
   validate: function(email, name, password, res) {
     if(!this.validateEmail(email, res)) {
       return false;
@@ -104,36 +117,120 @@ var signup = {
       callback(tid);
     });
   },
-  sendMail: function(email, tid, res) {
+  sendMail: function(email, name, tid, res) {
     var mailSetting = require('../settings/mail');
     var mailTransporter = require('./mail');
-    var mailOptions = {
-      from: 'teambuilder<' + mailSetting.auth.user + '>',
-      subject: 'TeamBuilder 验证邮件',
-      html: this.getVerifyHtml('tid=' + tid),
-      to: email
-    };
-    mailTransporter.sendMail(mailOptions, function(err, info) {
-      if(err) {
-        res.send({code: 1, info: '发送邮件失败，请联系管理员'});
-      } else {
-        res.send({code: 0, info: '注册成功，请前往邮箱验证'});
-      }
+    this.getVerifyHtml(tid, name, function(html) {
+      var mailOptions = {
+        from: 'teambuilder<' + mailSetting.auth.user + '>',
+        subject: 'TeamBuilder 验证邮件',
+        html: html,
+        to: email
+      };
+      mailTransporter.sendMail(mailOptions, function(err, info) {
+        if(err) {
+          res.send({code: 1, info: '发送邮件失败，请联系管理员'});
+        } else {
+          res.send({code: 0, info: '注册成功，请前往邮箱验证'});
+        }
+      });
     });
   },
   sendAgain: function(email, res) {
     var that = this;
     var db = require('./db');
-    var sql = 'select tid from tmpuser where email = "' + email + '"';
+    var sql = 'select tid, username from tmpuser where email = "' + email + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
         res.send({code: 1, info: '数据库错误，请联系管理员'});
         throw err;
       } else if(rows && rows.length >= 1) {
         var tid = rows[0]['tid'];
-        that.sendMail(email, tid, res);
+        var name = rows[0]['username'];
+        that.sendMail(email, name, tid, res);
       } else {
         res.send({code: 1, info: '数据库错误，请联系管理员'});
+      }
+    });
+  },
+  vertifyRegister: function(email, tid, sess, res) {
+    var that = this;
+    var db = require('./db');
+    var sql = 'select email, username, password, createtime from tmpuser where email = "' + email + '" and tid = "' + tid + '"';
+    db.query(sql, function(err, rows, fields) {
+      if(err) {
+        res.send({code: 1, info: '数据库错误，请联系管理员'});
+        throw err;
+      } else if(rows && rows.length >= 1) {
+        if(rows.length > 1) {
+          throw new Error('vertify: tid及email匹配的数据不止一组');
+        } else {
+          var row = rows[0];
+          var name = row['username'];
+          var password = row['password'];
+          var time = row['createtime'];
+          var sql = 'insert into user (email, username, password, createtime, contact, gender) values ("' + email + '", "' + name + '", "' + password + '", "' + time + '", "", "未知")';
+          db.query(sql, function(err, rows, fields) {
+            if(err) {
+              res.send({code: 1, info: err.toString()});
+              throw err;
+            }
+            var sql = 'delete from tmpuser where email = "' + email + '" and tid = "' + tid + '"';
+            db.query(sql, function(err) {
+              if(err) {
+                res.send({code: 1, info: '数据库错误，请联系管理员'});
+                throw err;
+              }
+              sess.login = true;
+              sess.user = email;
+              res.send({code: 3, info: '验证成功'});
+            });
+          });
+        }
+      } else {
+        sql = 'select email from user where email = "' + email + '"';
+        db.query(sql, function(err, rows, fields) {
+          if(err) {
+            res.send({code: 1, info: err.toString()});
+            throw err;
+          }
+          if(rows && rows.length >= 1) {
+            res.send({code: 1, info: '您已成功注册，请直接登录'});
+          } else {
+            res.send({code: 1, info: '邮箱不匹配，请重试'}); 
+          }
+        });
+      }
+    });
+  },
+  login: function(email, password, sess, res) {
+    var that = this;
+    var db = require('./db');
+    var sql = 'select createtime from user where email = "' + email + '"';
+    db.query(sql, function(err, rows, fields) {
+      if(err) {
+        res.send({code: 1, info: '数据库错误，请联系管理员'});
+        throw err;
+      }
+      if(rows && rows.length >= 1) {
+        var time = rows[0]['createtime'];
+        password = that.encodePassword(password, time);
+        var sql = 'select * from user where email = "' + email + '" and password = "' + password + '"';
+        db.query(sql, function(err, rows, fields) {
+          if(err) {
+            res.send({code: 1, info: '数据库错误，请联系管理员'});
+            throw err;
+          }
+          if(rows && rows.length >= 1) {
+            sess.login = true;
+            sess.username = email;
+            res.send({code: 5, info: '登录成功'});
+          } else {
+            res.send({code: 1, info: '用户名或密码错误'});
+          }
+        })
+      } else {
+        res.send({code: 4, info: '该邮箱未注册'});
       }
     });
   }

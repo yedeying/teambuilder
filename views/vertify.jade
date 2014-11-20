@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .account-page
+    .banner
+      img.image(src="/images/topbanner.jpg")
+      .title
+        h1 teambuilder
+        span 高效简单, 简化您的工作
+    .form-unit
+      form.form(method="post", action="/vertify")
+        input.email(id="email", name="email", type="email", placeholder="确认邮箱")
+        input.tid(id="tid", name="tid", type="hidden", value="#{tid}")
+        input.submit.vertify(type="submit", value="请确认注册邮箱")
+        div.alert
+  include includes/sea
+  script.
+    seajs.use('/javascripts/signup');

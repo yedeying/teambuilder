@@ -1,0 +1,27 @@
+header.header
+  nav.navbar
+    - var links = ['index', 'task', 'comment', 'review', 'calendar', 'people', 'logout', 'setting']
+    - var icons = ['home', 'tasks', 'comments', 'refresh', 'calendar', 'phone', 'power-off', 'cog']
+    - var texts = ['首页', '任务', '讨论区', '动态回顾', '日程', '通讯录', '注销', '设置']
+    each link, i in links
+      if i < 6 && page != links[i]
+        a.left(href='/#{links[i]}', class='link-#{links[i]}')
+          i.fa(class='fa-#{icons[i]}')
+          span &nbsp;#{texts[i]}
+      else if i < 6 && page == links[i]
+        a.left.active(href='/#{links[i]}', class='link-#{links[i]}')
+          i.fa(class='fa-#{icons[i]}')
+          span &nbsp;#{texts[i]}
+      else
+        a.right(href='/#{links[i]}', class='link-#{links[i]}')
+          i.fa(class='fa-#{icons[i]}')
+          span &nbsp;#{texts[i]}
+  .title-block
+    h1.left.title SZU岗位实践
+    span.right.notification
+      i.fa.fa-bell
+    img.right.user-icon(src='/images/nophoto.png')
+    span.right.search-block
+      span.search-btn
+        i.fa.fa-search
+      input.search(type='text', placeholder='Search')

@@ -1,5 +1,14 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+  include includes/header
+  .index.main
+    table.layout
+      tr
+        td.left
+          .inner SZU
+        td.right
+          .inner
+            include includes/project_list
+  include includes/sea
+  script.
+    seajs.use('/javascripts/index.js');

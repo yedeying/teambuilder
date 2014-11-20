@@ -1,0 +1,47 @@
+.project_header {
+  position: relative;
+  .title-wrapper {
+    @include clearfix;
+    padding: 20px;
+    .title {
+      display: inline;
+      margin: 0;
+      font-weight: normal;
+    }
+    .add_project {
+      .fa {
+        font-size: 1.2em;
+      }
+      cursor: pointer;
+      outline-width: 0;
+      border-width: 0;
+      padding: 9px;
+      color: $white;
+      float: right;
+      background-color: $green;
+      border-radius: 4px;
+      &:hover {
+        background-color: darken($green, 5%);
+      }
+    }
+  }
+  .activity-label {
+    color: #777;
+    margin: 0 20px;
+  }
+  .activity-triangle-black {
+    @include triangle(6px, 8px, "up", #ccc);
+    left: 43px;
+    bottom: 0;
+  }
+  .activity-triangle-white {
+    @include triangle(6px, 8px, "up", #fff); 
+    left: 43px;
+    bottom: -2px;
+  }
+  .hr {
+    margin: 15px 0;
+    border: 0px;
+    border-top: 1px solid #ccc;
+  }
+}

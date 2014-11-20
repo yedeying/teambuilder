@@ -1,0 +1,41 @@
+@mixin box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+@mixin transition($type, $time) {
+  -webkit-transition: $type $time;
+  -o-transition: $type $time;
+  transition: $type $time;
+}
+@mixin clearfix {
+  &:before, &:after {
+    display: table;
+    content: " ";
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}
+@mixin triangle($width, $height, $direction, $color) {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: $height solid rgba(0,0,0,0);
+  border-right: $width solid rgba(0,0,0,0);
+  border-bottom: $height solid rgba(0,0,0,0);
+  border-left: $width solid rgba(0,0,0,0);
+  @if $direction == "up" {
+    border-bottom: $height solid $color;
+  } @else if $direction == "down" {
+    border-top: $height solid $color;
+  } @else if $direction == "left" {
+    border-right: $width solid $color;
+  } @else if $direction == "right" {
+    border-left: $width solid $color;
+  }
+}

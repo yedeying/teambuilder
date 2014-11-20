@@ -31,7 +31,7 @@ define(function(require, exports, module) {
       $submit.val('邮件已发送，请前往验证');
       turnClass('disabled');
       var time = 30;
-      var tid = setInterval(function(){
+      var tid = setInterval(function() {
         $submit.val('邮件已发送，请前往验证(' + time + ')');
         time--;
         if(time <= 0) {
@@ -40,6 +40,22 @@ define(function(require, exports, module) {
           clearInterval(tid);
         }
       }, 1000);
+    } else if(code === 3) {
+      turnClass('disabled');
+      var time = 3;
+      var tid = setInterval(function() {
+        $submit.val('验证成功，' + time + '秒后跳转');
+        time--;
+        if(time <= 0) {
+          $submit.val('正在跳转');
+          location.href = 'http://' + window.location.host + '/index';
+          clearInterval(tid);
+        }
+      });
+    } else if(code === 5) {
+      $submit.val('登录成功');
+      turnClass('disabled');
+      location.href = 'http://' + window.location.host + '/index';
     } else {
       throw new Error('alert plugin error');
     }
@@ -53,6 +69,14 @@ define(function(require, exports, module) {
     if(!checkMailFormat(email)) {
       showInfo(1, '邮箱格式错误');
       $('.email').val('').focus();
+      return false;
+    }
+    return true;
+  }
+  function validatePassword(psd) {
+    if(psd.length < 1) {
+      showInfo(1, '密码不能为空');
+      $('.password').val('').focus();
       return false;
     }
     return true;
@@ -93,7 +117,15 @@ define(function(require, exports, module) {
     var data = getFormData($form);
     if($submit.hasClass('register')) {
       if(validate(data)) {
+        var cnt = 0;
+        var str = '...';
+        var tid = setInterval(function() {
+          cnt = (cnt + 1) % 3;
+          $submit.val('邮件发送中' + str.substring(0, cnt + 1));
+        }, 500);
         $.post('/signup', data, function(data) {
+          clearInterval(tid);
+          $submit.val('注册');
           if(typeof data.code === 'number') {
             showInfo(data.code, data.info);
           }
@@ -106,6 +138,22 @@ define(function(require, exports, module) {
             showInfo(data.code, data.info);
           }
         });
+      }
+    } else if($submit.hasClass('vertify')) {
+      if(validateEmail(data.email) && tools.checkTidFormat(data.tid)) {
+        $.post('/vertify', data, function(data) {
+          if(typeof data.code === 'number') {
+            showInfo(data.code, data.info);
+          }
+        });
+      }
+    } else if($submit.hasClass('login')) {
+      if(validateEmail(data.email) && validatePassword(data.password)) {
+        $.post('/login', data, function(data) {
+          if(typeof data.code === 'number') {
+            showInfo(data.code, data.info);
+          }
+        })
       }
     } else if($submit.hasClass('disabled')) {
       // do nothing
