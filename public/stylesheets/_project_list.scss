@@ -1,6 +1,7 @@
 $lightpurple: rgb(175,164,223);
 $lightred: rgb(241,154,146);
 $lightcyan: rgb(140,216,221);
+$lightgreen: rgb(124,215,156);
 $linkblue: rgb(0,97,188);
 .project-header {
   position: relative;
@@ -68,6 +69,7 @@ $linkblue: rgb(0,97,188);
   }
   .project-activity {
     width: 100%;
+    margin-bottom: 20px;
     tr {
       td {
         padding: 10px 0;
@@ -94,6 +96,9 @@ $linkblue: rgb(0,97,188);
         .file {
           background-color: $lightcyan;
         }
+        .project {
+          background-color: $lightgreen;
+        }
       }
       .second {
         padding: 8px 4px;
@@ -108,11 +113,15 @@ $linkblue: rgb(0,97,188);
         padding: 8px 4px;
         text-align: right;
         color: #999;
+        a {
+          color: $linkblue;
+        }
       }
       .fourth {
-        width: 85px;
+        width: 100px;
         padding: 8px 4px;
         text-align: right;
+        color: #999;
       }
     }
   }

@@ -73,6 +73,27 @@ module.exports = {
       }
     })
   },
+  generateProject: function(pid, activity, obj, event) {
+    var db = require('./db');
+    var tools = require('./tools');
+    var sql = 'select user.username as name, user.uid as uid, unix_timestamp(project.createtime) as time, project.name as title from user, project where user.uid = project.creater and project.pid = ' + pid;
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      var row = rows[0];
+      activity.push({
+        type: 'project',
+        id: pid,
+        title: row['title'],
+        time: row['time'],
+        people: row['name'],
+        uid: row['uid']
+      });
+      obj.cnt++;
+      if(obj.cnt === obj.len) {
+        event.emit('add');
+      }
+    })
+  },
   generatePage: function(email, callback) {
     var that = this;
     var emitter = require('events').EventEmitter;
@@ -80,7 +101,7 @@ module.exports = {
     var db = require('./db');
     var data = {};
     data.email = email;
-    var sql = 'select project.pid as pid, project.name as name, groups.name as groupname from project, user, groups where groups.gid = project.gid && project.gid = user.gid && user.email = "' + email + '"';
+    var sql = 'select project.pid as pid, project.name as name, unix_timestamp(project.createtime) as time, user.uid as uid, groups.name as groupname from project, user, groups where groups.gid = project.gid && project.gid = user.gid && user.email = "' + email + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
       if(rows.length > 0) {
@@ -89,7 +110,7 @@ module.exports = {
       var cnt = 0;
       var len = rows.length;
       rows.forEach(function(row, index) {
-        var obj = { cnt: 0, len: 3 };
+        var obj = { cnt: 0, len: 4 };
         data.project = data.project || [];
         data.project.push({
           name: row['name'],
@@ -100,6 +121,7 @@ module.exports = {
         that.generateComment(row['pid'], activity, obj, event);
         that.generateFile(row['pid'], activity, obj, event);
         that.generateTask(row['pid'], activity, obj, event);
+        that.generateProject(row['pid'], activity, obj, event);
       });
       event.on('add', function() {
         cnt++;

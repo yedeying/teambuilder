@@ -11,7 +11,7 @@
 .project-list
   each project in data.project
     .project-title-block
-      a.project-title(href="/project/overview?pid=#{func.sha1(project.pid.toString())}") #{project.name}
+      a.project-title(href="/project?pid=#{func.sha1(project.pid.toString())}") #{project.name}
       span &nbsp;-&nbsp;
       span.group-name #{data.groupname}
     table.project-activity
@@ -20,7 +20,9 @@
           td.first
             span(class="#{act.type}")= act.type
           td.second
-            a(href="javascript:void(0)")= act.title
-          td.third= 'created by ' + act.people
-          td.fourth= (new Date(act.time * 1000)).toLocaleTimeString()
-          //- td.fourth= (new Date(act.time * 1000)).toLocaleDateString()
+            a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}")= act.title
+          td.third
+            span By&nbsp;
+            a(href="/people?uid=#{func.sha1(act.uid + '')}")= act.people
+          td.fourth= func.getTime(act.time, 'hh:mm DD C')
+//- include includes/footer

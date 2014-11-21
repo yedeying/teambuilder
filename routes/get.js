@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var moduleArray = {};
+var tools = require('../module/tools');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 // get mothod
@@ -24,7 +25,8 @@ router.get('/', function(req, res) {
     moduleArray[page].generatePage(sess.email, function(data) {
       res.render(page, { title: 'teambuilder', page: page, data: data, func: {
         JSON: JSON,
-        sha1: require('../module/tools').getSha1
+        sha1: tools.getSha1,
+        getTime: tools.getTime
       }});
     });
   });
