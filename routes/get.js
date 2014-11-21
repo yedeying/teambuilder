@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var signup = require('../module/signup');
+var moduleArray = {};
+moduleArray.signup = require('../module/signup');
+moduleArray.index = require('../module/index');
 // get mothod
 router.get('/', function(req, res) {
   var sess = req.session;
@@ -13,11 +15,18 @@ router.get('/', function(req, res) {
 ['index', 'task', 'comment', 'review', 'calendar', 'people'].forEach(function(page) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
-    if(!sess.login) {
-      res.redirect('/login');
-      return;
-    }
-    res.render(page, { title: 'teambuilder', page: page });
+    sess.email = 'kanwode918@qq.com'
+    // to be change up
+    // if(!sess.login) {
+    //   res.redirect('/login');
+    //   return;
+    // }
+    moduleArray[page].generatePage(sess.email, function(data) {
+      res.render(page, { title: 'teambuilder', page: page, data: data, func: {
+        JSON: JSON,
+        sha1: require('../module/tools').getSha1
+      }});
+    });
   });
 });
 var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
@@ -32,7 +41,7 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
       res.render(page, { title: titles[i]});
     } else {
       var tid = req.query.tid;
-      if(signup.checkTidFormat(tid)) { 
+      if(moduleArray.signup.checkTidFormat(tid)) { 
         res.render('vertify', { title: '完成注册', tid: tid });
       } else {
         res.redirect('/404');

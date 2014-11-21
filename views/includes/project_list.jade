@@ -1,11 +1,26 @@
-.project_header
+.project-header
   .title-wrapper
     h1.title 我的项目
-    button.add_project
+    button.add-project
       i.fa.fa-plus-circle
       span &nbsp;添加项目
   span.activity-label 所有活动
   span.activity-triangle-black
   span.activity-triangle-white
   hr.hr
-.project_list
+.project-list
+  each project in data.project
+    .project-title-block
+      a.project-title(href="/project/overview?pid=#{func.sha1(project.pid.toString())}") #{project.name}
+      span &nbsp;-&nbsp;
+      span.group-name #{data.groupname}
+    table.project-activity
+      each act in project.activity
+        tr
+          td.first
+            span(class="#{act.type}")= act.type
+          td.second
+            a(href="javascript:void(0)")= act.title
+          td.third= 'created by ' + act.people
+          td.fourth= (new Date(act.time * 1000)).toLocaleTimeString()
+          //- td.fourth= (new Date(act.time * 1000)).toLocaleDateString()

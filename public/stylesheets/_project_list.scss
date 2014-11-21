@@ -1,4 +1,8 @@
-.project_header {
+$lightpurple: rgb(175,164,223);
+$lightred: rgb(241,154,146);
+$lightcyan: rgb(140,216,221);
+$linkblue: rgb(0,97,188);
+.project-header {
   position: relative;
   .title-wrapper {
     @include clearfix;
@@ -8,7 +12,7 @@
       margin: 0;
       font-weight: normal;
     }
-    .add_project {
+    .add-project {
       .fa {
         font-size: 1.2em;
       }
@@ -43,5 +47,73 @@
     margin: 15px 0;
     border: 0px;
     border-top: 1px solid #ccc;
+  }
+}
+.project-list {
+  padding: 20px;
+  .project-title-block {
+    .project-title {
+      font-weight: bold;
+      color: #000;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .group-name {
+      color: #666;
+    }
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgb(236,236,236);
+  }
+  .project-activity {
+    width: 100%;
+    tr {
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+      }
+      border-bottom: 1px solid #ccc;
+      .first {
+        width: 85px;
+        text-align: center;
+        color: #fff;
+        padding: 8px 4px;
+        span {
+          width: 100%;
+          display: inline-block;
+          border-radius: 4px;
+          padding: 2px;
+        }
+        .comment {
+          background-color: $lightpurple;
+        }
+        .task {
+          background-color: $lightred;
+        }
+        .file {
+          background-color: $lightcyan;
+        }
+      }
+      .second {
+        padding: 8px 4px;
+        a {
+          color: $linkblue;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .third {
+        padding: 8px 4px;
+        text-align: right;
+        color: #999;
+      }
+      .fourth {
+        width: 85px;
+        padding: 8px 4px;
+        text-align: right;
+      }
+    }
   }
 }

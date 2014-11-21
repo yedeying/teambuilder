@@ -6,3 +6,13 @@ FE signup中收到的code
   4: 登录 - 邮箱未注册
   5: 登录 - 成功
   6: 退出登录 - 成功
+database status
+  0 进行中
+  1 已完成
+  2 已过期
+database type
+  0 project
+  1 task
+  2 user
+  3 group
+  4 reply

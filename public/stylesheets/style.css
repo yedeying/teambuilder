@@ -10,12 +10,6 @@
   border-radius: 4px;
 }
 
-/*!
- *  Font Awesome 4.2.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
- */
-/* FONT PATH
- * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
   src: url("/stylesheets/fontawesome/fonts/fontawesome-webfont.eot");
@@ -197,8 +191,6 @@
   color: #fff;
 }
 
-/* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
-   readers do not read off random characters that represent icons */
 .fa-glass:before {
   content: "";
 }
@@ -2402,26 +2394,26 @@ body a {
   vertical-align: top;
 }
 
-.project_header {
+.project-header {
   position: relative;
 }
-.project_header .title-wrapper {
+.project-header .title-wrapper {
   *zoom: 1;
   padding: 20px;
 }
-.project_header .title-wrapper:before, .project_header .title-wrapper:after {
+.project-header .title-wrapper:before, .project-header .title-wrapper:after {
   display: table;
   content: " ";
 }
-.project_header .title-wrapper:after {
+.project-header .title-wrapper:after {
   clear: both;
 }
-.project_header .title-wrapper .title {
+.project-header .title-wrapper .title {
   display: inline;
   margin: 0;
   font-weight: normal;
 }
-.project_header .title-wrapper .add_project {
+.project-header .title-wrapper .add-project {
   cursor: pointer;
   outline-width: 0;
   border-width: 0;
@@ -2431,17 +2423,17 @@ body a {
   background-color: #43c86f;
   border-radius: 4px;
 }
-.project_header .title-wrapper .add_project .fa {
+.project-header .title-wrapper .add-project .fa {
   font-size: 1.2em;
 }
-.project_header .title-wrapper .add_project:hover {
+.project-header .title-wrapper .add-project:hover {
   background-color: #37bb62;
 }
-.project_header .activity-label {
+.project-header .activity-label {
   color: #777;
   margin: 0 20px;
 }
-.project_header .activity-triangle-black {
+.project-header .activity-triangle-black {
   width: 0;
   height: 0;
   padding: 0;
@@ -2456,7 +2448,7 @@ body a {
   left: 43px;
   bottom: 0;
 }
-.project_header .activity-triangle-white {
+.project-header .activity-triangle-white {
   width: 0;
   height: 0;
   padding: 0;
@@ -2471,8 +2463,77 @@ body a {
   left: 43px;
   bottom: -2px;
 }
-.project_header .hr {
+.project-header .hr {
   margin: 15px 0;
   border: 0px;
   border-top: 1px solid #ccc;
+}
+
+.project-list {
+  padding: 20px;
+}
+.project-list .project-title-block {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #ececec;
+}
+.project-list .project-title-block .project-title {
+  font-weight: bold;
+  color: #000;
+}
+.project-list .project-title-block .project-title:hover {
+  text-decoration: underline;
+}
+.project-list .project-title-block .group-name {
+  color: #666;
+}
+.project-list .project-activity {
+  width: 100%;
+}
+.project-list .project-activity tr {
+  border-bottom: 1px solid #ccc;
+}
+.project-list .project-activity tr td {
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+}
+.project-list .project-activity tr .first {
+  width: 85px;
+  text-align: center;
+  color: #fff;
+  padding: 8px 4px;
+}
+.project-list .project-activity tr .first span {
+  width: 100%;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 2px;
+}
+.project-list .project-activity tr .first .comment {
+  background-color: #afa4df;
+}
+.project-list .project-activity tr .first .task {
+  background-color: #f19a92;
+}
+.project-list .project-activity tr .first .file {
+  background-color: #8cd8dd;
+}
+.project-list .project-activity tr .second {
+  padding: 8px 4px;
+}
+.project-list .project-activity tr .second a {
+  color: #0061bc;
+}
+.project-list .project-activity tr .second a:hover {
+  text-decoration: underline;
+}
+.project-list .project-activity tr .third {
+  padding: 8px 4px;
+  text-align: right;
+  color: #999;
+}
+.project-list .project-activity tr .fourth {
+  width: 85px;
+  padding: 8px 4px;
+  text-align: right;
 }

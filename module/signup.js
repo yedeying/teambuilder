@@ -14,10 +14,7 @@ var signup = {
     return '<a href="http://' + setting.url + '/vertify?' + str + '">点击验证</a>';
   },
   encodePassword: function(ori, time) {
-    var crypto = require('crypto');
-    var sha1 = crypto.createHash('sha1');
-    sha1.update(ori + time);
-    return sha1.digest('hex');
+    return require('./tools').getSha1(ori + time);
   },
   checkMailFormat: function(email) {
     return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
@@ -182,7 +179,7 @@ var signup = {
                 throw err;
               }
               sess.login = true;
-              sess.user = email;
+              sess.email = email;
               res.send({code: 3, info: '验证成功'});
             });
           });
@@ -223,7 +220,7 @@ var signup = {
           }
           if(rows && rows.length >= 1) {
             sess.login = true;
-            sess.username = email;
+            sess.email = email;
             res.send({code: 5, info: '登录成功'});
           } else {
             res.send({code: 1, info: '用户名或密码错误'});

@@ -1,25 +1,76 @@
 tmpuser
-- save the info of register with no access
-  uid
-  email
-  username
-  password
-  timestamp
-  createtime
-  tid
+  uid           id
+  tid           id
+  email         string
+  username      string
+  password      string
+  timestamp     time
+  createtime    time
 user
-- save the info of users
-  uid
-  username
-  email
-  password
-  update
-  createtime
-  contact
-  gender
+  uid           id
+  cid           id
+  gid           id
+  icon          string +
+  username      string
+  email         string
+  password      string
+  createtime    time
+  contact       string
+  gender        boolean
+  accessibility number
+class
+  cid           id
+  teacher       id
+  grade         string
+  major         string
+  class         string
+group
+  gid           id
+  cid           id
+  admin         id
+  name          string
+  memberlist    array
 project
-- save the info of projects
-  pid
-  name
-  createtime
-  
+  pid           id
+  gid           id
+  status        number
+  creater       id
+  name          string
+  description   string
+  createtime    time
+  expecttime    time
+  finishtime    time
+task
+  tid           id
+  pid           id
+  title         string 
+  content       string
+  status        number
+  createtime    time
+  expecttime    time
+  finishtime    time
+  creater       id
+  participant   array
+  visiblelist   array
+comment
+  cid           id
+  id            id
+  uid           id
+  type          number
+  deep          number
+  time          time
+  content       string
+update
+  did           id
+  tid           id
+  uid           id
+  time          time
+  description   string
+file
+  fid           id
+  id            id
+  uploader      id
+  type          number
+  filename      string
+  fsha1         string
+  uploadtime    time
