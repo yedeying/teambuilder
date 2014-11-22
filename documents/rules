@@ -1,4 +1,4 @@
-FE signup中收到的code
+FE signup中收到的code {code, info}
   0: 成功
   1: 失败
   2: 邮件已发送
@@ -16,3 +16,5 @@ database type
   2 user
   3 group
   4 reply
+FE get model中收到的code {code, html}
+  0: 成功

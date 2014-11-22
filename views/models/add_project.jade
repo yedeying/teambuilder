@@ -1,0 +1,13 @@
+extend model_layout
+
+block content
+  .inner
+    h3 项目名称
+    input(type='text')
+    h3 任务详情
+    textarea
+    .date-block
+      span 开始时间
+      input.start-time(type='date')
+      span 期待完成时间
+      input.expect-time(type='date')

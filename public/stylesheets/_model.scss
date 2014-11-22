@@ -1,0 +1,82 @@
+@mixin input($padding) {
+  @include box-sizing;
+  @include border-radius(4px);
+  padding: $padding;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  @include transition(border-color, .3s);
+  &:focus {
+    border-color: #a6a6a6;
+  }
+}
+.cover {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.3);
+}
+.model {
+  width: 800px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: absolute;
+  .model-wrapper {
+    @include border-radius(8px);
+    width: 800px;
+    position: relative;
+    left: 0;
+    top: 0;
+    background: #fff;
+    .title-block {
+      h2 {
+        float: left;
+        margin: 0;
+      }
+      .close {
+        float: right;
+        cursor: pointer;
+        font-size: 21px;
+      }
+      @include clearfix;
+      @include border-radius(8px 8px 0 0);
+      @include background-image(linear-gradient(to bottom, #fff, #ddd));
+      cursor: move;
+      padding: 20px;
+      border-bottom: 1px solid #ccc;
+    }
+    .hr {
+      border: 1px dashed #ddd;
+      margin-bottom: 0;
+    }
+    .footer {
+      padding: 10px;
+      .confirm, .cancel {
+        padding: 5px;
+        margin: 0 5px;
+      }
+      .confirm {
+        @include btn($btngreen);
+      }
+      .cancel {
+        @include btn($btnred);
+      }
+    }
+    .inner {
+      padding: 20px;
+      input[type="text"] {
+        @include input(9px);
+        width: 100%;
+      }
+      textarea {
+        @include input(9px);
+        resize: vertical;
+        width: 100%;
+        height: 100px;
+      }
+    }
+  }
+}

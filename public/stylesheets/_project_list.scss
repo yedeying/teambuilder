@@ -1,8 +1,3 @@
-$lightpurple: rgb(175,164,223);
-$lightred: rgb(241,154,146);
-$lightcyan: rgb(140,216,221);
-$lightgreen: rgb(124,215,156);
-$linkblue: rgb(0,97,188);
 .project-header {
   position: relative;
   .title-wrapper {
@@ -17,17 +12,8 @@ $linkblue: rgb(0,97,188);
       .fa {
         font-size: 1.2em;
       }
-      cursor: pointer;
-      outline-width: 0;
-      border-width: 0;
-      padding: 9px;
-      color: $white;
+      @include btn($btngreen);
       float: right;
-      background-color: $green;
-      border-radius: 4px;
-      &:hover {
-        background-color: darken($green, 5%);
-      }
     }
   }
   .activity-label {
@@ -64,7 +50,7 @@ $linkblue: rgb(0,97,188);
       color: #666;
     }
     padding: 15px;
-    border-radius: 8px;
+    @include border-radius(8px);
     background-color: rgb(236,236,236);
   }
   .project-activity {
@@ -73,9 +59,8 @@ $linkblue: rgb(0,97,188);
     tr {
       td {
         padding: 10px 0;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #eee;
       }
-      border-bottom: 1px solid #ccc;
       .first {
         width: 85px;
         text-align: center;
@@ -84,7 +69,7 @@ $linkblue: rgb(0,97,188);
         span {
           width: 100%;
           display: inline-block;
-          border-radius: 4px;
+          @include border-radius(4px);
           padding: 2px;
         }
         .comment {
@@ -123,6 +108,21 @@ $linkblue: rgb(0,97,188);
         text-align: right;
         color: #999;
       }
+    }
+  }
+}
+.project_list_nav {
+  padding: 20px;
+  h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  a {
+    display: block;
+    padding: 5px 0;
+    color: $linkblue;
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

@@ -1,0 +1,15 @@
+.model
+  .model-wrapper
+    .title-block
+      h2.title #{title}
+      span.close &times;
+    .content
+      block content
+    hr.hr
+    .footer
+      button.confirm 
+        i.fa.fa-check
+        span &nbsp;#{title}
+      button.cancel 
+        i.fa.fa-close
+        span &nbsp;取消

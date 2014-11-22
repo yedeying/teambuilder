@@ -39,3 +39,15 @@
     border-left: $width solid $color;
   }
 }
+@mixin btn($color) {
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  color: $white;
+  background-color: $color;
+  @include border-radius(4px);
+  &:hover {
+    background-color: darken($color, 5%);
+  }
+}

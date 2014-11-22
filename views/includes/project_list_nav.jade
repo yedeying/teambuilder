@@ -1,0 +1,4 @@
+.project_list_nav
+  h4 项目列表
+  each project in data.project
+    a.project(href="/project?pid=#{func.sha1(project.pid.toString())}") #{project.name}
