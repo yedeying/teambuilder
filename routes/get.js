@@ -1,3 +1,4 @@
+"use strict";
 var express = require('express');
 var router = express.Router();
 var moduleArray = {};
@@ -13,15 +14,13 @@ router.get('/', function(req, res) {
     res.redirect('/login');
   }
 });
-['index', 'task', 'comment', 'review', 'calendar', 'people'].forEach(function(page) {
+['index', 'task', 'comment', 'calendar', 'people'].forEach(function(page) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
-    sess.email = 'kanwode918@qq.com'
-    // to be change up
-    // if(!sess.login) {
-    //   res.redirect('/login');
-    //   return;
-    // }
+    if(!sess.login) {
+      res.redirect('/login');
+      return;
+    }
     moduleArray[page].generatePage(sess.email, function(data) {
       res.render(page, { title: 'teambuilder', page: page, data: data, func: {
         JSON: JSON,
@@ -49,6 +48,30 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
         res.redirect('/404');
       }
     }
+  });
+});
+router.get('/project', function(req, res) {
+  var sess = req.session;
+  var project = require('../module/project');
+  var tools = require('../module/tools');
+  if(!sess.login) {
+    res.redirect('/index');
+    return;
+  }
+  if(!tools.checkSha1(req.query.pid)) {
+    if(sess.pid) {
+      req.query.pid = tools.getSha1(sess.pid.toString());
+    } else {
+      res.redirect('/404');
+      return;
+    }
+  }
+  project.generatePage(req.query.pid, res, sess, function(data) {
+    res.render('project', { title: 'teambuilder', page: 'project', data: data, func: {
+      JSON: JSON,
+      sha1: tools.getSha1,
+      getTime: tools.getTime
+    }});
   });
 });
 module.exports = router;

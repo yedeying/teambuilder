@@ -1,0 +1,15 @@
+extends layout
+block content
+  include includes/header
+  .index.main
+    table.layout
+      tr
+        td.left
+          .inner
+            include includes/project_list_description
+        td.right
+          .inner
+            include includes/project_list_detail
+  include includes/sea
+  script.
+    seajs.use('/javascripts/project.js');

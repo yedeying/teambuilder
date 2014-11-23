@@ -1,6 +1,6 @@
 header.header
   nav.navbar
-    - var links = ['index', 'task', 'comment', 'review', 'calendar', 'people', 'logout', 'setting']
+    - var links = ['index', 'task', 'comment', 'project', 'calendar', 'people', 'logout', 'setting']
     - var icons = ['home', 'tasks', 'comments', 'refresh', 'calendar', 'phone', 'power-off', 'cog']
     - var texts = ['首页', '任务', '讨论区', '动态回顾', '日程', '通讯录', '注销', '设置']
     each link, i in links
@@ -17,7 +17,7 @@ header.header
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
   .title-block
-    h1.left.title #{data.groupname}
+    h1.left.title #{page === 'index' && data.groupname || page === 'project' && (data.title + ' - ' + data.groupname)}
     span.right.notification
       i.fa.fa-bell
     img.right.user-icon(src='/images/nophoto.png')

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-11-21 01:31:59
+-- 生成日期: 2014-11-23 13:00:27
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -127,20 +127,19 @@ CREATE TABLE IF NOT EXISTS `project` (
   `name` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `expecttime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `finishtime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` int(11) NOT NULL,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `project`
 --
 
-INSERT INTO `project` (`pid`, `gid`, `creater`, `name`, `description`, `createtime`, `expecttime`, `finishtime`, `status`) VALUES
-(1, 1, 13, 'teambuilder', '这是teambuilder项目，属于岗位实践课程', '2014-11-20 18:56:52', '2014-11-30 01:17:30', '0000-00-00 00:00:00', 0),
-(2, 1, 13, '第二个Project', '第二个Project', '2014-11-20 20:54:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0);
+INSERT INTO `project` (`pid`, `gid`, `creater`, `name`, `description`, `createtime`, `status`) VALUES
+(1, 1, 13, 'teambuilder', '这是teambuilder项目，属于岗位实践课程', '2014-11-20 18:56:52', 0),
+(2, 1, 13, '第二个Project', '第二个Project', '2014-11-20 20:54:18', 0),
+(13, 1, 13, 'test', 'test', '2014-11-23 09:02:52', 0);
 
 -- --------------------------------------------------------
 

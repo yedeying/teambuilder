@@ -8,12 +8,26 @@
       margin: 0;
       font-weight: normal;
     }
-    .add-project {
+    .add-project, .add-to-project {
       .fa {
         font-size: 1.2em;
       }
       @include btn($btngreen);
       float: right;
+    }
+    .edit-project {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnblue);
+      float: right; 
+    }
+    .remove-project {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnred);
+      float: right; 
     }
   }
   .activity-label {
@@ -111,18 +125,32 @@
     }
   }
 }
-.project_list_nav {
+.project-list-nav {
   padding: 20px;
   h4 {
-    margin-top: 0;
-    margin-bottom: 10px;
+    display: inline-block;
+    margin: 10px 5px;
   }
   a {
     display: block;
     padding: 5px 0;
     color: $linkblue;
+    margin-left: 20px;
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+.project-description-nav {
+  padding: 20px 10px;
+  h4 {
+    display: inline-block;
+    margin: 10px 5px;
+  }
+  .wall {
+    padding: 10px;
+    background-color: $white;
+    border: 1px solid #aaa;
+    @include border-radius(4px);
   }
 }

@@ -1,0 +1,8 @@
+extend model_layout
+
+block content
+  .add-project-inner
+    h3 项目名称
+    input.name(id='title', type='text', value='#{name}')
+    h3 任务描述
+    textarea(id='description') #{description}

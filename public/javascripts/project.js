@@ -3,12 +3,14 @@ define(function(require, exports, module) {
   require('jquery');
   var tools = require('./tools');
   var $body = $('body');
-  var $cover = $('.cover');
-  $body.on('click', '.add-project', function(e) {
-    tools.getModel('add_project', 'add_project');
+  $body.on('click', '.add-to-project', function(e) {
+    tools.getModel('add_to_project', 'add_to_project');
+  });
+  $body.on('click', '.edit-project', function(e) {
+    tools.getModel('edit_project', 'edit_project');
   });
   module.exports = {
-    addProject: function() {
+    editProject: function() {
       var $title = $('.model #title');
       var $description = $('.model #description');
       if($title.val().replace(' ', '').length === 0) {
@@ -20,7 +22,7 @@ define(function(require, exports, module) {
         title: $title.val(),
         description: $description.val()
       };
-      $.post('/add_project', data, function(data) {
+      $.post('/edit_project', data, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

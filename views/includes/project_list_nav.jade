@@ -1,4 +1,9 @@
-.project_list_nav
+.project-list-nav
+  i.fa.fa-list
   h4 项目列表
   each project in data.project
     a.project(href="/project?pid=#{func.sha1(project.pid.toString())}") #{project.name}
+  i.fa.fa-users
+  h4 我的小组成员
+  each member in data.team
+    a.project(href="/people?uid=#{func.sha1(member.uid.toString())}") #{member.name}

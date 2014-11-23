@@ -13,6 +13,9 @@ module.exports = {
     sha1.update(str);
     return sha1.digest('hex');
   },
+  checkSha1: function(sha1) {
+    return /[0-9a-f]{40}/.test(sha1);
+  },
   shortenString: function(str, num) {
     if(str.length <= num) return str;
     return str.substring(0, num) + '...';
@@ -54,7 +57,7 @@ module.exports = {
                  .replace('h', date.getHours().toString())
                  .replace('m', date.getMinutes().toString())
                  .replace('s', date.getSeconds().toString())
-                 .replace('C', Months[date.getMonth()])
-                 .replace('c', months[date.getMonth()]);
+                 .replace('c', months[date.getMonth()])
+                 .replace('C', Months[date.getMonth()]);
   }
 };

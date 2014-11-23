@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var signup = require('../module/signup');
+var index = require('../module/index');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -45,5 +46,20 @@ router.post('/vertify', function(req, res) {
   if(signup.validateEmail(email, res) && signup.checkTidFormat(tid)) {
     signup.vertifyRegister(email, tid, sess, res);
   }
+});
+router.post('/add_project', function(req, res) {
+  var sess = req.session;
+  sess.login = true;
+  sess.email = 'kanwode918@qq.com';
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  var email = sess.email;
+  var data = req.body;
+  index.addProject(email, data, res);
 });
 module.exports = router;

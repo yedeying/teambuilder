@@ -65,10 +65,12 @@
         @include btn($btnred);
       }
     }
-    .inner {
+    .add-project-inner {
       padding: 20px;
       input[type="text"] {
         @include input(9px);
+      }
+      .name {
         width: 100%;
       }
       textarea {

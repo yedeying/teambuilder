@@ -1,0 +1,29 @@
+- var typeArr = {project: '项目', task: '任务', file: '文件', comment: '评论'}
+.project-header
+  .title-wrapper
+    h1.title #{data.title}
+    button.remove-project
+      i.fa.fa-times-circle
+      span &nbsp;移除项目
+    button.edit-project
+      i.fa.fa-pencil
+      span &nbsp;编辑项目
+    button.add-to-project
+      i.fa.fa-plus-circle
+      span &nbsp;添加内容
+  span.activity-label 项目动态
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.project-list
+  table.project-activity
+    each act in data.activity
+      tr
+        td.first
+          span(class="#{act.type}")= typeArr[act.type]
+        td.second
+          a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}")= act.title
+        td.third
+          span By&nbsp;
+          a(href="/people?uid=#{func.sha1(act.uid + '')}")= act.people
+        td.fourth= func.getTime(act.time, 'hh:mm DD C')
