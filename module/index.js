@@ -115,7 +115,8 @@ module.exports = {
       });
     });
   },
-  generatePage: function(email, callback) {
+  generatePage: function(sess, callback) {
+    var email = sess.email;
     var that = this;
     var emitter = require('events').EventEmitter;
     var event = new emitter();
@@ -127,13 +128,14 @@ module.exports = {
       if(err) throw err;
       if(rows.length > 0) {
         data.groupname = rows[0]['groupname'];
+        sess.groupname = data.groupname;
       }
       var cnt = {};
       cnt.cnt = 0;
       cnt.len = rows.length + 1;
+      data.project = data.project || [];
       rows.forEach(function(row, index) {
         var obj = { cnt: 0, len: 4 };
-        data.project = data.project || [];
         data.project.push({
           name: row['name'],
           pid: row['pid'],

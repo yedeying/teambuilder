@@ -5,6 +5,7 @@ var moduleArray = {};
 var tools = require('../module/tools');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
+moduleArray.people = require('../module/people');
 // get mothod
 router.get('/', function(req, res) {
   var sess = req.session;
@@ -21,7 +22,7 @@ router.get('/', function(req, res) {
       res.redirect('/login');
       return;
     }
-    moduleArray[page].generatePage(sess.email, function(data) {
+    moduleArray[page].generatePage(sess, function(data) {
       res.render(page, { title: 'teambuilder', page: page, data: data, func: {
         JSON: JSON,
         sha1: tools.getSha1,
@@ -49,6 +50,15 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
       }
     }
   });
+});
+router.get('/invite', function(req, res) {
+  var code = req.query.code;
+  var people = require('../module/people');
+  if(/[0-9a-f]{40}/.test(code)) {
+    people.finishInvite(code, req.session, res);
+  } else {
+    res.redirect('/404');
+  }
 });
 router.get('/project', function(req, res) {
   var sess = req.session;

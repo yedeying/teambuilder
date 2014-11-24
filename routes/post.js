@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var signup = require('../module/signup');
 var index = require('../module/index');
+var project = require('../module/project');
+var people = require('../module/people');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -49,8 +51,6 @@ router.post('/vertify', function(req, res) {
 });
 router.post('/add_project', function(req, res) {
   var sess = req.session;
-  sess.login = true;
-  sess.email = 'kanwode918@qq.com';
   if(!sess.login) {
     res.send({
       code: 1,
@@ -61,5 +61,56 @@ router.post('/add_project', function(req, res) {
   var email = sess.email;
   var data = req.body;
   index.addProject(email, data, res);
+});
+router.post('/edit_project', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  if(!sess.pid) {
+    res.send({
+      code: 1,
+      info: '你尚未选择项目'
+    });
+    return;
+  }
+  var pid = sess.pid;
+  var data = req.body;
+  project.editProject(pid, data, sess, res);
+});
+router.post('/remove_project', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  if(!sess.pid) {
+    res.send({
+      code: 1,
+      info: '你尚未选择项目'
+    });
+    return;
+  }
+  var pid = sess.pid;
+  project.removeProject(pid, sess, res);
+});
+router.post('/add_people', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 2,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  var data = req.body;
+  people.addPeople(data, sess, res);
 });
 module.exports = router;

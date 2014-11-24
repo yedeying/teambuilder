@@ -3,11 +3,11 @@ define(function(require, exports, module) {
   require('jquery');
   var tools = require('./tools');
   var $body = $('body');
-  $body.on('click', '.add-to-project', function(e) {
-    tools.getModel('add_to_project', 'add_to_project');
-  });
   $body.on('click', '.edit-project', function(e) {
     tools.getModel('edit_project', 'edit_project');
+  });
+  $body.on('click', '.remove-project', function(e) {
+    tools.getModel('remove_project', 'remove_project');
   });
   module.exports = {
     editProject: function() {
@@ -26,10 +26,24 @@ define(function(require, exports, module) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
-            location.reload(true);
+            setTimeout(function(){
+              location.reload(true);
+            }, 1000);
           }
         }
       });
+    },
+    removeProject: function() {
+      $.post('/remove_project', {}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.href = "/";
+            }, 1000);
+          }
+        }
+      })
     }
   };
 });

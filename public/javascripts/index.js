@@ -3,7 +3,6 @@ define(function(require, exports, module) {
   require('jquery');
   var tools = require('./tools');
   var $body = $('body');
-  var $cover = $('.cover');
   $body.on('click', '.add-project', function(e) {
     tools.getModel('add_project', 'add_project');
   });
@@ -24,7 +23,9 @@ define(function(require, exports, module) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
-            location.reload(true);
+            setTimeout(function() {
+              location.reload(true);
+            }, 1000);
           }
         }
       });

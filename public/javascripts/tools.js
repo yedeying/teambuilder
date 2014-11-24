@@ -96,7 +96,7 @@ define(function(require, exports, module) {
       $body.on('click', '.alert-box .close', hide);
       var tid = setTimeout(hide, time);
     },
-    getModel: function(url, type) {
+    getModel: function(url, type, callback) {
       require('jquery');
       var $body = $('body');
       var $cover = $('.cover');
@@ -111,6 +111,7 @@ define(function(require, exports, module) {
             top: ($body.scrollTop() + 60) + 'px'
           });
           $model.data('type', type);
+          if(typeof callback === 'function') callback();
         }
       });
     }

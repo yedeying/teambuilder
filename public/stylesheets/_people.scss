@@ -1,0 +1,106 @@
+.people-inner {
+  .head-block {
+    position: relative;
+    padding: 20px;
+    .title-block {
+      @include clearfix;
+      .head-title {
+        float: left;
+        font-weight: normal;
+        margin: 0;
+      }
+      .add-people {
+        float: right;
+        @include btn($lightgreen);
+      }
+      .remove-people, .exit-group {
+        float: right;
+        @include btn($lightred);
+      }
+    }
+    .hr {
+      margin: 15px 0;
+      border: 0px;
+      border-top: 1px solid #ccc;
+    }
+  }
+  .main {
+    padding: 0 20px;
+    .icon-inform {
+      text-align: right;
+      position: relative;
+      top: -10px;
+      > span {
+        margin-left: 10px;
+        &.user .fa {
+          color: $icongreen;
+        }
+        &.admin .fa {
+          color: $iconblue;
+        }
+        &.edit .fa {
+          color: #888;
+        }
+      }
+    }
+    table {
+      width: 100%;
+      text-align: left;
+      border-spacing: 0;
+      border-collapse: collapse;
+      tr:hover {
+        background-color: #f8f8f8;
+        cursor: pointer;
+      }
+      tr:first-child {
+        cursor: auto;
+      }
+      th:first-child {
+        @include border-radius(8px 0 0 0);
+        border-left-width: 0;
+        padding-left: 11px;
+      }
+      th:last-child {
+        @include border-radius(0 8px 0 0);
+        border-right-width: 0;
+        padding-right: 11px;
+      }
+      th {
+        padding: 11px 10px;
+        border-left: 1px solid $borderheader;
+        border-right: 1px solid $borderheader;
+        background-color: $borderheader;
+        color: white;
+      }
+      td {
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      .self {
+        color: $icongreen;
+      }
+      .creater {
+        color: $iconblue;
+      }
+      .self, .creater, .edit {
+        width: 19px;
+        text-align: center;
+      }
+      .email {
+        a {
+          color: $linkblue;
+          &:hover {
+            color: lighten($linkblue, 30%);;
+          }
+        }
+      }
+      .edit {
+        color: #888;
+        &:hover {
+          cursor: pointer;
+          color: #000;
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,66 @@
 extends layout
 block content
   include includes/header
+  .people-inner
+    .head-block
+      .title-block
+        h1.head-title 我的小组
+        if data.admin
+          button.remove-people 
+            i.fa.fa-times-circle
+            span &nbsp;移除成员
+          button.add-people
+            i.fa.fa-plus-circle
+            span &nbsp;添加成员
+        else
+          button.exit-group
+            i.fa.fa-times-circle
+            span &nbsp;退出该组
+      hr.hr
+    .main
+      .icon-inform
+        span.user
+          i.fa.fa-user
+          span &nbsp;自己
+        span.admin
+          i.fa.fa-legal
+          span &nbsp;组长
+        span.edit
+          i.fa.fa-pencil
+          span &nbsp;编辑信息
+      table
+        tr
+          th.self
+          th.creater
+          th.name 姓名
+          th.gender 性别
+          th.class 班级
+          th.email 邮箱
+          th.contact 联系方式
+          th.edit
+        each people in data.team
+          tr.tr(data-uid='#{func.sha1(people.uid.toString())}')
+            td.self
+              if people.self == 'self'
+                i.fa.fa-user
+              else
+                span &nbsp;
+            td.creater
+              if people.admin == 'admin'
+                i.fa.fa-legal
+              else
+                span &nbsp;
+            td.name= people.name
+            td.gender= people.gender
+            td.class= people.className
+            td.email
+              a.send-email(href="mailto:#{people.email}")
+                i.fa.fa-envelope-o
+                span &nbsp;#{people.email}
+            td.contact= people.contact
+            td.edit(class="#{(data.admin || people.self === 'self') ? 'edit-profile' : ''}")
+              if data.admin || people.self === 'self'
+                i.fa.fa-pencil
+  include includes/sea
+  script.
+    seajs.use('/javascripts/people.js');

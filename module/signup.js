@@ -11,7 +11,6 @@ var signup = {
       if(err) { throw err; }
       callback(html);
     });
-    return '<a href="http://' + setting.url + '/vertify?' + str + '">点击验证</a>';
   },
   encodePassword: function(ori, time) {
     return require('./tools').getSha1(ori + time);

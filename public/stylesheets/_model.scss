@@ -80,5 +80,15 @@
         height: 100px;
       }
     }
+    .remove-project-inner {
+      padding: 10px 20px;
+    }
+    .add-people-inner {
+      padding: 10px 20px;
+      .email {
+        @include input(9px);
+        width: 100%;
+      }
+    }
   }
 }

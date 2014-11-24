@@ -20,10 +20,13 @@ user
   accessibility number
 class
   cid           id
-  teacher       id
   grade         string
   major         string
   class         string
+course
+  cid           id
+  title         string
+  teacher       id
 group
   gid           id
   cid           id
@@ -74,3 +77,8 @@ file
   filename      string
   fsha1         string
   uploadtime    time
+invite
+  iid
+  user
+  admin
+  sha1

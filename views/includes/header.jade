@@ -17,7 +17,7 @@ header.header
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
   .title-block
-    h1.left.title #{page === 'index' && data.groupname || page === 'project' && (data.title + ' - ' + data.groupname)}
+    h1.left.title #{page === 'index' && data.groupname || page === 'project' && (data.title + ' - ' + data.groupname) || page === 'people' && data.groupname}
     span.right.notification
       i.fa.fa-bell
     img.right.user-icon(src='/images/nophoto.png')

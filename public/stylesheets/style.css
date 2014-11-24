@@ -2826,3 +2826,173 @@ body a {
 .model .model-wrapper .add-project-inner textarea:focus {
   border-color: #a6a6a6;
 }
+.model .model-wrapper .remove-project-inner {
+  padding: 10px 20px;
+}
+.model .model-wrapper .add-people-inner {
+  padding: 10px 20px;
+}
+.model .model-wrapper .add-people-inner .email {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.model .model-wrapper .add-people-inner .email:focus {
+  border-color: #a6a6a6;
+}
+
+.people-inner .head-block {
+  position: relative;
+  padding: 20px;
+}
+.people-inner .head-block .title-block {
+  *zoom: 1;
+}
+.people-inner .head-block .title-block:before, .people-inner .head-block .title-block:after {
+  display: table;
+  content: " ";
+}
+.people-inner .head-block .title-block:after {
+  clear: both;
+}
+.people-inner .head-block .title-block .head-title {
+  float: left;
+  font-weight: normal;
+  margin: 0;
+}
+.people-inner .head-block .title-block .add-people {
+  float: right;
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  color: white;
+  background-color: #7cd79c;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+.people-inner .head-block .title-block .add-people:hover {
+  background-color: #68d18d;
+}
+.people-inner .head-block .title-block .remove-people, .people-inner .head-block .title-block .exit-group {
+  float: right;
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  color: white;
+  background-color: #f19a92;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+.people-inner .head-block .title-block .remove-people:hover, .people-inner .head-block .title-block .exit-group:hover {
+  background-color: #ee857b;
+}
+.people-inner .head-block .hr {
+  margin: 15px 0;
+  border: 0px;
+  border-top: 1px solid #ccc;
+}
+.people-inner .main {
+  padding: 0 20px;
+}
+.people-inner .main .icon-inform {
+  text-align: right;
+  position: relative;
+  top: -10px;
+}
+.people-inner .main .icon-inform > span {
+  margin-left: 10px;
+}
+.people-inner .main .icon-inform > span.user .fa {
+  color: #55cb7e;
+}
+.people-inner .main .icon-inform > span.admin .fa {
+  color: #5eb1ff;
+}
+.people-inner .main .icon-inform > span.edit .fa {
+  color: #888;
+}
+.people-inner .main table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+.people-inner .main table tr:hover {
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+.people-inner .main table tr:first-child {
+  cursor: auto;
+}
+.people-inner .main table th:first-child {
+  -webkit-border-radius: 8px 0 0 0;
+  -moz-border-radius: 8px 0 0 0;
+  -ms-border-radius: 8px 0 0 0;
+  -o-border-radius: 8px 0 0 0;
+  border-radius: 8px 0 0 0;
+  border-left-width: 0;
+  padding-left: 11px;
+}
+.people-inner .main table th:last-child {
+  -webkit-border-radius: 0 8px 0 0;
+  -moz-border-radius: 0 8px 0 0;
+  -ms-border-radius: 0 8px 0 0;
+  -o-border-radius: 0 8px 0 0;
+  border-radius: 0 8px 0 0;
+  border-right-width: 0;
+  padding-right: 11px;
+}
+.people-inner .main table th {
+  padding: 11px 10px;
+  border-left: 1px solid #667686;
+  border-right: 1px solid #667686;
+  background-color: #667686;
+  color: white;
+}
+.people-inner .main table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+.people-inner .main table .self {
+  color: #55cb7e;
+}
+.people-inner .main table .creater {
+  color: #5eb1ff;
+}
+.people-inner .main table .self, .people-inner .main table .creater, .people-inner .main table .edit {
+  width: 19px;
+  text-align: center;
+}
+.people-inner .main table .email a {
+  color: #0061bc;
+}
+.people-inner .main table .email a:hover {
+  color: #56adff;
+}
+.people-inner .main table .edit {
+  color: #888;
+}
+.people-inner .main table .edit:hover {
+  cursor: pointer;
+  color: #000;
+}

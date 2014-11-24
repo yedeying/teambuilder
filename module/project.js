@@ -139,5 +139,70 @@ module.exports = {
         callback(data);
       });
     });
+  },
+  editProject: function(pid, data, sess, res) {
+    var db = require('./db');
+    if(data.title.length === 0) {
+      res.send({ code: 1, info: '项目名称不能为空'} );
+      return;
+    }
+    data.description = data.description || '';
+    var sql = 'update project set name = "' + data.title + '", description = "' + data.description + '" where pid = ' + pid;
+    console.log(sql);
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      sess.projectTitle = data.title;
+      sess.description = data.description;
+      res.send({code: 0, info: '修改成功'});
+    });
+  },
+  removeProject: function(pid, sess, res) {
+    var db = require('./db');
+    var emitter = require('events').EventEmitter;
+    var event = new emitter();
+    var sql = 'select task.tid as tid from task where task.pid = ' + pid;
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      var cnt = 0;
+      var len = rows.length;
+      if(rows.length === 0) {
+        event.emit('finishfile');
+      }
+      for(var i = 0; i < rows.length; i++) {
+        var id = rows[i]['tid'];
+        var sql = 'delete from file where file.type = 1 and file.id = ' + id;
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          cnt++;
+          if(cnt === len) {
+            event.emit('finishfile');
+          }
+        });
+      }
+    });
+    event.on('finishfile', function() {
+      var cnt = 0;
+      var sqls = [
+        'delete from project where pid = ' + pid,
+        'delete from task where pid = ' + pid,
+        'delete from file where type = 0 and id = ' + pid,
+        'delete from comment where type = 0 and id = ' + pid
+      ];
+      sqls.forEach(function(sql) {
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          cnt++;
+          if(cnt === sqls.length) {
+            event.emit('finish');
+          }
+        });
+      });
+    });
+    event.on('finish', function() {
+      sess.pid = undefined;
+      sess.projectTitle = undefined;
+      sess.description = undefined;
+      res.send({code: 0, info: '移除成功'});
+    })
   }
 };

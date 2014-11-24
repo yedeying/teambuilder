@@ -4,6 +4,7 @@ define(function(require, exports, module) {
   var tools = require('./tools');
   var index = require('./index');
   var project = require('./project');
+  var people = require('./people');
   var $body = $('body');
   var $cover = $('.cover');
   var startX = 0;
@@ -49,6 +50,10 @@ define(function(require, exports, module) {
       index.addProject();
     } else if(type === 'edit_project') {
       project.editProject();
+    } else if(type === 'remove_project') {
+      project.removeProject();
+    } else if(type === 'add_people') {
+      people.addPeople();
     }
   });
 });
