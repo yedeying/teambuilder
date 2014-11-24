@@ -90,5 +90,59 @@
         width: 100%;
       }
     }
+    .remove-people-inner {
+      padding: 10px 20px;
+      .name-block {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        input,
+        label {
+          order: 2;
+        }
+        input[type="checkbox"]:checked,
+        input[type="checkbox"]:checked + label {
+          order: 0 !important;
+        }
+        hr {
+          display: none;
+          order: 1;
+          width: 100%;
+          border: 1px solid #ccc;
+        }
+        input[type="checkbox"]:checked ~ hr {
+          display: block;
+        }
+        input[type="checkbox"] {
+          display: none;
+        }
+        label {
+          min-width: 120px;
+          border: 1px solid #ccc;
+          padding: 6px 8px;
+          text-align: center;
+          margin: 0 5px 5px 0;
+          background: #fff;
+          color: #333;
+          border-radius: 3px;
+          @include box-sizing;
+          &:hover {
+            border-color: #adadad;
+            background: #ebebeb;
+            cursor: pointer;
+          }
+        }
+        input[type="checkbox"]:checked + label {
+          order: 0;
+          background-color: #428bca;
+          border-color: #357ebd;
+          color: #fff;
+          &:hover {
+            background-color: darken(#428bca, 10%);
+            border-color: #285e8e;
+          }
+        }
+      }
+    }
   }
 }

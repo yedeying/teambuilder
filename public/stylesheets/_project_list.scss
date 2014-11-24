@@ -13,6 +13,7 @@
         font-size: 1.2em;
       }
       @include btn($btngreen);
+      margin-left: 10px;
       float: right;
     }
     .edit-project {

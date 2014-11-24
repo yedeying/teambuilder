@@ -2191,6 +2191,9 @@ body {
 body a {
   text-decoration: none;
 }
+body button {
+  margin: 0;
+}
 
 .alert-box {
   -webkit-transition: top 0.5s;
@@ -2463,6 +2466,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #43c86f;
   -webkit-border-radius: 4px;
@@ -2470,6 +2474,7 @@ body a {
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
+  margin-left: 10px;
   float: right;
 }
 .project-header .title-wrapper .add-project .fa, .project-header .title-wrapper .add-to-project .fa {
@@ -2483,6 +2488,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #428bca;
   -webkit-border-radius: 4px;
@@ -2503,6 +2509,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #eb7065;
   -webkit-border-radius: 4px;
@@ -2752,6 +2759,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #43c86f;
   -webkit-border-radius: 4px;
@@ -2768,6 +2776,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #eb7065;
   -webkit-border-radius: 4px;
@@ -2852,6 +2861,62 @@ body a {
 .model .model-wrapper .add-people-inner .email:focus {
   border-color: #a6a6a6;
 }
+.model .model-wrapper .remove-people-inner {
+  padding: 10px 20px;
+}
+.model .model-wrapper .remove-people-inner .name-block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.model .model-wrapper .remove-people-inner .name-block input,
+.model .model-wrapper .remove-people-inner .name-block label {
+  order: 2;
+}
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked,
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
+  order: 0 !important;
+}
+.model .model-wrapper .remove-people-inner .name-block hr {
+  display: none;
+  order: 1;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked ~ hr {
+  display: block;
+}
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"] {
+  display: none;
+}
+.model .model-wrapper .remove-people-inner .name-block label {
+  min-width: 120px;
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: center;
+  margin: 0 5px 5px 0;
+  background: #fff;
+  color: #333;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.model .model-wrapper .remove-people-inner .name-block label:hover {
+  border-color: #adadad;
+  background: #ebebeb;
+  cursor: pointer;
+}
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
+  order: 0;
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff;
+}
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label:hover {
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
 
 .people-inner .head-block {
   position: relative;
@@ -2878,6 +2943,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #7cd79c;
   -webkit-border-radius: 4px;
@@ -2895,6 +2961,7 @@ body a {
   outline-width: 0;
   border-width: 0;
   padding: 9px;
+  margin: 5px;
   color: white;
   background-color: #f19a92;
   -webkit-border-radius: 4px;

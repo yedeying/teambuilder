@@ -54,6 +54,8 @@ define(function(require, exports, module) {
       project.removeProject();
     } else if(type === 'add_people') {
       people.addPeople();
+    } else if(type === 'remove_people') {
+      people.removePeople();
     }
   });
 });

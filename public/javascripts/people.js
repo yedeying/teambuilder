@@ -41,6 +41,28 @@ define(function(require, exports, module) {
           }
         }
       });
+    },
+    removePeople: function() {
+      var data = {};
+      var $checkbox = $('.model input[type="checkbox"]:checked');
+      data.uids = [];
+      $checkbox.each(function(index, element) {
+        data.uids.push(element.getAttribute('data-uid'));
+      });
+      if(data.uids.length === 0) {
+        tools.showInfo('你还没有选择任何人');
+        return;
+      }
+      $.post('/remove_people', {data: data}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.reload;
+            }, 1000);
+          }
+        }
+      });
     }
   };
 });

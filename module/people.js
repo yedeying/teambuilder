@@ -168,5 +168,42 @@ module.exports = {
         res.send({code: 2, info: '你不是组长, 无权限'});
       }
     });
+  },
+  renderRemovePeople: function(sess, callback) {
+    var db = require('./db');
+    var email = sess.email;
+    var sql = 'select user.username as username, user.uid as uid from user, user as self where user.gid = self.gid and self.email = "' + email + '"';
+    var group = [];
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      for(var i = 0; i < rows.length; i++) {
+        group.push({
+          name: rows[i]['username'],
+          uid: rows[i]['uid']
+        });
+      }
+      callback(group);
+    });
+  },
+  removePeople: function(data, sess, res) {
+    var db = require('./db');
+    var email = sess.email;
+    var emitter = require('events').EventEmitter;
+    var event = new emitter();
+    var sql = 'select (groups.admin = user.uid) as admin from groups, user where groups.gid = user.gid and user.email = "' + email+ '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length >= 1 && rows[0]['admin'] === 1) {
+        for(var i = 0; i < data.uids.length; i++) {
+          var sql = 'select * from user where sha1(uid) = "' + data.uids[i] + '"';
+          db.query(sql, function(err, rows) {
+            if(err) throw err;
+            
+          });
+        }
+      } else {
+        res.send({code: 1, info: '你不是组长, 无权限'});
+      }
+    });
   }
-}
+};

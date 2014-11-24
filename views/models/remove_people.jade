@@ -1,0 +1,12 @@
+extend model_layout
+
+block content
+  .remove-people-inner
+    h3.title 请选择你要移除的组员
+    .name-block
+      - var index = 0
+      each user in data
+        - index++
+        input(type='checkbox', data-uid='#{func.sha1(user.uid.toString())}', id='q#{index}')
+        label(for='q#{index}') #{user.name}
+      hr

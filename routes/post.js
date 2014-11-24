@@ -113,4 +113,23 @@ router.post('/add_people', function(req, res) {
   var data = req.body;
   people.addPeople(data, sess, res);
 });
+router.post('/remove_people', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  var data = req.body;
+  if(!data.uids || data.uids.length === 0) {
+    res.send({
+      code: 1,
+      info: '你还没有选择任何人'
+    });
+    return;
+  }
+  people.removePeople(data, sess, res);
+});
 module.exports = router;

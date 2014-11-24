@@ -11,7 +11,23 @@ urls.forEach(function(url, index) {
       description: sess.description || ''
     }, function(err, html) {
       if(err) {
-        res.send({code: 1, html: ''});
+        res.send({code: 1, html: 'render err'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
+});
+router.get('/remove_people', function(req, res) {
+  var sess = req.session;
+  var tools = require('../module/tools');
+  var people = require('../module/people');
+  people.renderRemovePeople(sess, function(data) {
+    res.render('models/remove_people', {title: '移除成员', data: data, func: {
+      sha1: tools.getSha1
+    }}, function(err, html) {
+      if(err) {
+        res.send({code: 1, html: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});
