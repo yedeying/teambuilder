@@ -4,6 +4,7 @@ var signup = require('../module/signup');
 var index = require('../module/index');
 var project = require('../module/project');
 var people = require('../module/people');
+var joingroup = require('../module/joingroup');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -123,7 +124,8 @@ router.post('/remove_people', function(req, res) {
     return;
   }
   var data = req.body;
-  if(!data.uids || data.uids.length === 0) {
+  data.uids = JSON.parse(data.uid);
+  if(data.uids.length === 0) {
     res.send({
       code: 1,
       info: '你还没有选择任何人'
@@ -131,5 +133,46 @@ router.post('/remove_people', function(req, res) {
     return;
   }
   people.removePeople(data, sess, res);
+});
+router.post('/exit_group', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  people.exitGroup(sess, res);
+});
+router.post('/remove_group', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  people.removeGroup(sess, res);
+});
+router.post('/joingroup', function(req, res) {
+  var sess = req.session;
+  if(!sess.login) {
+    res.send({
+      code: 1,
+      info: '你尚未登录'
+    });
+    return;
+  }
+  var data = req.body;
+  if(!data.groupName) {
+    res.send({
+      code: 1,
+      info: '小组名不能为空'
+    });
+    return;
+  }
+  joingroup.joinGroup(data, sess, res);
 });
 module.exports = router;

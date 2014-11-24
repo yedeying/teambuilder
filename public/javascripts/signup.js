@@ -1,10 +1,10 @@
 define(function(require, exports, module) {
   "use strict";
   require("jquery");
-  var tools = require('./tools'),
-    getFormData = tools.getFormData,
-    checkMailFormat = tools.checkMailFormat,
-    checkPasswordFormat = tools.checkPasswordFormat;
+  var tools = require('./tools');
+  var getFormData = tools.getFormData;
+  var checkMailFormat = tools.checkMailFormat;
+  var checkPasswordFormat = tools.checkPasswordFormat;
   var $submit = $('.submit'),
     $form = $('.form').get(0),
     $alert = $('.alert'),
@@ -49,14 +49,14 @@ define(function(require, exports, module) {
         time--;
         if(time <= 0) {
           $submit.val('正在跳转');
-          location.href = 'http://' + window.location.host + '/index';
+          location.href = 'http://' + window.location.host + '/';
           clearInterval(tid);
         }
       });
     } else if(code === 5) {
       $submit.val('登录成功');
       turnClass('disabled');
-      location.href = 'http://' + window.location.host + '/index';
+      location.href = 'http://' + window.location.host + '/';
     } else {
       throw new Error('alert plugin error');
     }

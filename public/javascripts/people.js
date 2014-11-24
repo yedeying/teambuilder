@@ -14,6 +14,9 @@ define(function(require, exports, module) {
   $body.on('click', '.exit-group', function(e) {
     tools.getModel('exit_group', 'exit_group');
   });
+  $body.on('click', '.remove-group', function(e) {
+    tools.getModel('remove_group', 'remove_group');
+  });
   $body.on('click', '.edit-profile', function(e) {
     return false;
   });
@@ -43,22 +46,46 @@ define(function(require, exports, module) {
       });
     },
     removePeople: function() {
-      var data = {};
       var $checkbox = $('.model input[type="checkbox"]:checked');
-      data.uids = [];
+      var uid = [];
       $checkbox.each(function(index, element) {
-        data.uids.push(element.getAttribute('data-uid'));
+        uid.push(element.getAttribute('data-uid'));
       });
-      if(data.uids.length === 0) {
+      if(uid.length === 0) {
         tools.showInfo('你还没有选择任何人');
         return;
       }
-      $.post('/remove_people', {data: data}, function(data) {
+      uid = JSON.stringify(uid);
+      $.post('/remove_people', {uid: uid}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
             setTimeout(function() {
-              location.reload;
+              location.reload(true);
+            }, 1000);
+          }
+        }
+      });
+    },
+    exitGroup: function() {
+      $.post('/exit_group', {}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.href = "/";
+            }, 1000);
+          }
+        }
+      });
+    },
+    removeGroup: function() {
+      $.post('/remove_group', {}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.href = '/joingroup';
             }, 1000);
           }
         }

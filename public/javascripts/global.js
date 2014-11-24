@@ -56,6 +56,10 @@ define(function(require, exports, module) {
       people.addPeople();
     } else if(type === 'remove_people') {
       people.removePeople();
+    } else if(type === 'exit_group') {
+      people.exitGroup();
+    } else if(type === 'remove_group') {
+      people.removeGroup();
     }
   });
 });

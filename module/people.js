@@ -172,7 +172,7 @@ module.exports = {
   renderRemovePeople: function(sess, callback) {
     var db = require('./db');
     var email = sess.email;
-    var sql = 'select user.username as username, user.uid as uid from user, user as self where user.gid = self.gid and self.email = "' + email + '"';
+    var sql = 'select user.username as username, user.uid as uid from user, user as self where user.gid = self.gid and user.uid != self.uid and self.email = "' + email + '"';
     var group = [];
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -193,17 +193,73 @@ module.exports = {
     var sql = 'select (groups.admin = user.uid) as admin from groups, user where groups.gid = user.gid and user.email = "' + email+ '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
+      var cnt = 0;
+      var len = data.uids.length;
       if(rows.length >= 1 && rows[0]['admin'] === 1) {
         for(var i = 0; i < data.uids.length; i++) {
-          var sql = 'select * from user where sha1(uid) = "' + data.uids[i] + '"';
+          var sql = 'select * from user where sha1(uid) = "' + data.uids[i] + '" and user.email != "' + email + '"';
           db.query(sql, function(err, rows) {
             if(err) throw err;
-            
+            if(rows.length === 1) {
+              cnt++;
+              if(cnt === len) {
+                event.emit('valid');
+              }
+            } else {
+              event.emit('invalid');
+            }
           });
         }
       } else {
         res.send({code: 1, info: '你不是组长, 无权限'});
       }
+    });
+    event.on('valid', function() {
+      var sql = 'update user set gid = 0 where ';
+      for(var i = 0; i < data.uids.length; i++) {
+        if(i !== 0) {
+          sql += ' or ';
+        }
+        sql += 'sha1(uid) = "' + data.uids[i] + '"';
+      }
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        res.send({code: 0, info: '移除成功'});
+      });
+    });
+    event.on('invalid', function() {
+      res.send({code: 1, info: '数据源有误, 你不会是hacker吧'});
+    })
+  },
+  exitGroup: function(sess, res) {
+    var db = require('./db');
+    var sql = 'update user set gid = 0 where email = "' + sess.email + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      res.send({code: 0, info: '退出成功'});
+    });
+  },
+  removeGroup: function(sess, res) {
+    var db = require('./db');
+    var email = sess.email;
+    var gid = sess.gid;
+    var sql = 'select (groups.admin = user.uid) as admin from groups, user where groups.gid = user.gid and user.email = "' + email+ '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows[0]['admin'] !== 1) {
+        res.send({code: 1, info: '你不是组长, 无权限'});
+        return;
+      }
+      var sql = 'update user set gid = 0 where gid = ' + gid;
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        var sql = 'delete from groups where gid = ' + gid;
+        db.query(sql, function(err, rows) {
+          sess.groupname = undefined;
+          sess.gid = undefined;
+          res.send({code: 0, info: '解散成功'});
+        });
+      });
     });
   }
 };

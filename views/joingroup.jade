@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  .account-page
+    .banner
+      img.image(src="/images/topbanner.jpg")
+      .title
+        h1 teambuilder
+        span 高效简单, 简化您的工作
+    .joingroup-inner
+      h3 检测到你尚未加入任何小组, 你可以进行以下两项之一
+      ul
+        li 请你一个作为组长的同学邀请你进他的组
+        li 创建一个新组, 你作为组长
+      h4 若要创建一个新组, 请完善以下信息
+    form.form-unit(type='post', action='/joingroup')
+      input.groupname(type='text', placeholder='小组名称', name='groupname')
+      input.joingroup(type='submit')
+      .alert.success
+  include includes/sea
+  script.
+    seajs.use('/javascripts/joingroup');

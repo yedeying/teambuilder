@@ -3,6 +3,7 @@ var express = require('express');
 var router = express.Router();
 var moduleArray = {};
 var tools = require('../module/tools');
+var index = require('../module/index');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
@@ -10,7 +11,7 @@ moduleArray.people = require('../module/people');
 router.get('/', function(req, res) {
   var sess = req.session;
   if(sess.login) {
-    res.redirect('/index');
+    index.checkGroup(sess, res);
   } else {
     res.redirect('/login');
   }
@@ -21,6 +22,9 @@ router.get('/', function(req, res) {
     if(!sess.login) {
       res.redirect('/login');
       return;
+    }
+    if(!sess.groupname) {
+      res.redirect('/joingroup');
     }
     moduleArray[page].generatePage(sess, function(data) {
       res.render(page, { title: 'teambuilder', page: page, data: data, func: {
@@ -36,7 +40,7 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
   router.get('/' + page, function(req, res) {
     var sess = req.session;
     if(sess.login) {
-      res.redirect('/index');
+      res.redirect('/');
       return;
     }
     if(page !== 'vertify') {
@@ -65,8 +69,11 @@ router.get('/project', function(req, res) {
   var project = require('../module/project');
   var tools = require('../module/tools');
   if(!sess.login) {
-    res.redirect('/index');
+    res.redirect('/');
     return;
+  }
+  if(!sess.groupname) {
+    res.redirect('/joingroup');
   }
   if(!tools.checkSha1(req.query.pid)) {
     if(sess.pid) {
@@ -84,4 +91,12 @@ router.get('/project', function(req, res) {
     }});
   });
 });
+router.get('/joingroup', function(req, res) {
+  var sess = req.session;
+  if(!sess.login || sess.groupname) {
+    res.redirect('/');
+    return;
+  }
+  res.render('joingroup', {});
+})
 module.exports = router;

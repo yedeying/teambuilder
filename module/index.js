@@ -115,6 +115,18 @@ module.exports = {
       });
     });
   },
+  getGroup: function(email, callback) {
+    var db = require('./db');
+    var sql = 'select groups.name as name from user, groups where user.gid = groups.gid and user.email = "' + email +'"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1) {
+        callback(rows[0]['name']);
+      } else {
+        throw new Error('the email has no group');
+      }
+    });
+  },
   generatePage: function(sess, callback) {
     var email = sess.email;
     var that = this;
@@ -123,37 +135,38 @@ module.exports = {
     var db = require('./db');
     var data = {};
     data.email = email;
-    var sql = 'select project.pid as pid, project.name as name, unix_timestamp(project.createtime) as time, user.uid as uid, groups.name as groupname from project, user, groups where groups.gid = project.gid && project.gid = user.gid && user.email = "' + email + '" order by project.createtime desc';
-    db.query(sql, function(err, rows) {
-      if(err) throw err;
-      if(rows.length > 0) {
-        data.groupname = rows[0]['groupname'];
-        sess.groupname = data.groupname;
-      }
-      var cnt = {};
-      cnt.cnt = 0;
-      cnt.len = rows.length + 1;
-      data.project = data.project || [];
-      rows.forEach(function(row, index) {
-        var obj = { cnt: 0, len: 4 };
-        data.project.push({
-          name: row['name'],
-          pid: row['pid'],
-          activity: []
+    this.getGroup(email, function(name) {
+      sess.groupname = name;
+      data.groupname = name;
+      var sql = 'select project.pid as pid, project.name as name, unix_timestamp(project.createtime) as time, user.uid as uid, groups.name as groupname from project, user, groups where groups.gid = project.gid && project.gid = user.gid && user.email = "' + email + '" order by project.createtime desc';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        var cnt = {};
+        cnt.cnt = 0;
+        cnt.len = rows.length + 1;
+        data.project = data.project || [];
+        rows.forEach(function(row, index) {
+          var obj = { cnt: 0, len: 4 };
+          data.project.push({
+            name: row['name'],
+            pid: row['pid'],
+            activity: []
+          });
+          var activity = data.project[index].activity;
+          that.generateComment(row['pid'], activity, obj, event);
+          that.generateFile(row['pid'], activity, obj, event);
+          that.generateTask(row['pid'], activity, obj, event);
+          that.generateProject(row['pid'], activity, obj, event);
         });
-        var activity = data.project[index].activity;
-        that.generateComment(row['pid'], activity, obj, event);
-        that.generateFile(row['pid'], activity, obj, event);
-        that.generateTask(row['pid'], activity, obj, event);
-        that.generateProject(row['pid'], activity, obj, event);
+        that.generateTeam(email, data, cnt, event);
+        event.on('add', function() {
+          cnt.cnt++;
+          if(cnt.cnt === cnt.len) {
+            event.emit('finish');
+          }
+        });
       });
-      that.generateTeam(email, data, cnt, event);
-      event.on('add', function() {
-        cnt.cnt++;
-        if(cnt.cnt === cnt.len) {
-          event.emit('finish');
-        }
-      });
+
     });
     event.on('finish', function() {
       that.sortActivity(data.project);
@@ -176,6 +189,28 @@ module.exports = {
         if(err) throw err;
         res.send({ code: 0, info: '创建成功' });
       });
+    });
+  },
+  checkGroup: function(sess, res) {
+    var db = require('./db');
+    var email = sess.email;
+    var sql = 'select gid from user where email = "' + email + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1 && rows[0]['gid'] !== 0) {
+        var gid = rows[0]['gid'];
+        var sql = 'select name from groups where gid = ' + gid;
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          if(rows.length === 1) {
+            sess.groupname = rows[0]['name'];
+            sess.gid = gid;
+            res.redirect('/index');
+          }
+        });
+      } else {
+        res.redirect('/joingroup');
+      }
     });
   }
 };
