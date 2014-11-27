@@ -27,7 +27,23 @@ router.get('/remove_people', function(req, res) {
       sha1: tools.getSha1
     }}, function(err, html) {
       if(err) {
-        res.send({code: 1, html: 'render err'});
+        res.send({code: 1, code: 'render err'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
+});
+router.get('/switch_project', function(req, res) {
+  var sess = req.session;
+  var tools = require('../module/tools');
+  var global = require('../module/global');
+  global.renderSwitchProject(sess, res, function(data) {
+    res.render('models/switch_project', {title: '选择项目', data: data, func: {
+      sha1: tools.getSha1
+    }}, function(err, html) {
+      if(err) {
+        res.send({code: 1, code: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});

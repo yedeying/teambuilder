@@ -1,0 +1,8 @@
+extend model_layout
+
+block content
+  .switch-project-inner
+    each project, index in data.project
+      .radio-box
+        input(type='radio', name='radio-project', data-pid='#{func.sha1(project.pid.toString())}', id='radio#{index}')
+        label(for='radio#{index}')= project.name

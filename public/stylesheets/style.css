@@ -2820,6 +2820,15 @@ body button {
 .model .model-wrapper .add-people-inner .email:focus {
   border-color: #a6a6a6;
 }
+.model .model-wrapper .switch-project-inner {
+  padding-top: 10px;
+}
+.model .model-wrapper .switch-project-inner .radio-box {
+  padding: 10px 20px;
+}
+.model .model-wrapper .switch-project-inner .radio-box label {
+  margin-left: 8px;
+}
 .model .model-wrapper .remove-people-inner {
   padding: 10px 20px;
 }

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var global = require('../module/global');
 var signup = require('../module/signup');
 var index = require('../module/index');
 var project = require('../module/project');
@@ -175,4 +176,13 @@ router.post('/joingroup', function(req, res) {
   }
   joingroup.joinGroup(data, sess, res);
 });
+router.post('/switch_project', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.pid || !/[0-9a-f]{40}/.test(data.pid)) {
+    res.send({code: 1, info: '你是hacker吧'});
+    return;
+  }
+  global.switchProject(sess, data.pid, res);
+})
 module.exports = router;

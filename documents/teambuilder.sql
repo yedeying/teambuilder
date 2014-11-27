@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-11-23 13:00:27
+-- 生成日期: 2014-11-27 11:32:59
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -113,6 +113,26 @@ CREATE TABLE IF NOT EXISTS `groups` (
 
 INSERT INTO `groups` (`gid`, `cid`, `admin`, `name`, `memberlist`) VALUES
 (1, 1, 13, 'teambuilder小组', '[11,13]');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `invite`
+--
+
+CREATE TABLE IF NOT EXISTS `invite` (
+  `iid` bigint(20) NOT NULL,
+  `user` varchar(100) NOT NULL,
+  `admin` varchar(100) NOT NULL,
+  `sha1code` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `invite`
+--
+
+INSERT INTO `invite` (`iid`, `user`, `admin`, `sha1code`) VALUES
+(0, '945173727@qq.com', 'kanwode918@qq.com', '84d743a860e95e5f94cad2346bba4608427961a0');
 
 -- --------------------------------------------------------
 
@@ -235,7 +255,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`uid`, `cid`, `gid`, `username`, `email`, `password`, `createtime`, `contact`, `gender`, `accessibility`) VALUES
 (10, 0, 0, 'liyawen', '413235793@qq.com', 'a95a42d0088fc0d240262959270c5e5cd465226b', '1416312146586', '', '未知', 0),
 (11, 1, 0, 'Aron', '273305282@qq.com', '22acfa0ed5e62263fe522b06876d9f78fe9c0479', '1416326684633', '', '未知', 0),
-(12, 1, 0, 'yedeying', '945173727@qq.com', '738ef8264fd22bd7ca197c7bb6cfdb8b1ceb4904', '1416377473896', '13760284409', '男', 2),
+(12, 1, 1, 'yedeying', '945173727@qq.com', '738ef8264fd22bd7ca197c7bb6cfdb8b1ceb4904', '1416377473896', '13760284409', '男', 2),
 (13, 1, 1, '叶德颖', 'kanwode918@qq.com', '0fc213126df2decaff2a169ca50ede8e04682c03', '1416498219505', '13760284409', '男', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

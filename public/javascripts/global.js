@@ -19,6 +19,10 @@ define(function(require, exports, module) {
     });
     return false;
   });
+  $body.on('click', '.link-switch', function(e) {
+    tools.getModel('switch_project', 'switch_project');
+    return false;
+  });
   $body.on('mousedown', '.model-wrapper .title-block', function(e) {
     startX = e.pageX;
     startY = e.pageY;
@@ -60,6 +64,21 @@ define(function(require, exports, module) {
       people.exitGroup();
     } else if(type === 'remove_group') {
       people.removeGroup();
+    } else if(type === 'switch_project') {
+      switchProject();
     }
   });
+  function switchProject() {
+    var $project = $('.radio-box input[type="radio"]:checked');
+    var pid = $project.attr('data-pid');
+    $.post('/switch_project', {pid: pid}, function(data) {
+      if(typeof data.code === 'number') {
+        if(data.code === 0) {
+          location.reload();
+        } else {
+          tools.showInfo(data.info);
+        }
+      }
+    });
+  }
 });
