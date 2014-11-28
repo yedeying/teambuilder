@@ -11,6 +11,7 @@ define(function(require, exports, module) {
   var startY = 0;
   var left = 0;
   var top = 0;
+  var href = undefined;
   $body.on('click', '.link-logout', function(e) {
     $.post('/logout', {}, function(data) {
       if(data && data.code === 6) {
@@ -23,6 +24,25 @@ define(function(require, exports, module) {
     tools.getModel('switch_project', 'switch_project', function(data) {
       if(typeof data.code === 'number' && data.code === 1) {
         tools.showInfo(data.info);
+      }
+    });
+    return false;
+  });
+  $body.on('click', '.link-project', function(e) {
+    $.post('/get_project_status', function(data) {
+      if(typeof data.code === 'number') {
+        if(data.code === 1) {
+          tools.showInfo(data.info);
+        } else if(data.code === 0) {
+          location.href = '/project';
+        } else {
+          href = '/project';
+          tools.getModel('switch_project', 'switch_project_beta', function(data) {
+            if(typeof data.code === 'number' && data.code === 1) {
+              tools.showInfo(data.info);
+            }
+          });
+        }
       }
     });
     return false;
@@ -86,15 +106,21 @@ define(function(require, exports, module) {
       people.removeGroup();
     } else if(type === 'switch_project') {
       switchProject();
+    } else if(type === 'switch_project_beta') {
+      switchProject(true);
     }
   });
-  function switchProject() {
+  function switchProject(option) {
     var $project = $('.radio-box input[type="radio"]:checked');
     var pid = $project.attr('data-pid');
     $.post('/switch_project', {pid: pid}, function(data) {
       if(typeof data.code === 'number') {
         if(data.code === 0) {
-          location.reload();
+          if(option) {
+            location.href = href;
+          } else {
+            location.reload();
+          }
         } else {
           tools.showInfo(data.info);
         }
