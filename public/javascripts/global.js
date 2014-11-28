@@ -20,7 +20,11 @@ define(function(require, exports, module) {
     return false;
   });
   $body.on('click', '.link-switch', function(e) {
-    tools.getModel('switch_project', 'switch_project');
+    tools.getModel('switch_project', 'switch_project', function(data) {
+      if(typeof data.code === 'number' && data.code === 1) {
+        tools.showInfo(data.info);
+      }
+    });
     return false;
   });
   $body.on('mousedown', '.model-wrapper .title-block', function(e) {
@@ -46,6 +50,22 @@ define(function(require, exports, module) {
     $cover.css({
       visibility: 'hidden'
     });
+  });
+  $body.on('click', 'a', function(e) {
+    var url = $(this).attr('href');
+    if(/^\/project\?pid\=[0-9a-f]{40}$/.test(url)) {
+      var pid = url.split('=')[1];
+      $.post('/switch_project', {pid: pid}, function(data) {
+        if(typeof data.code === 'number') {
+          if(data.code === 0) {
+            location.href = '/project';
+          } else {
+            tools.showInfo(data.info);
+          }
+        }
+      });
+      return false;
+    }
   });
   $body.on('click', '.model .confirm', function(e) {
     var $model = $('.model');

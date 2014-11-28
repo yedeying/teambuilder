@@ -111,7 +111,8 @@ define(function(require, exports, module) {
             top: ($body.scrollTop() + 60) + 'px'
           });
           $model.data('type', type);
-          if(typeof callback === 'function') callback();
+        } else if(typeof callback === 'function') {
+          callback(data);
         }
       });
     }

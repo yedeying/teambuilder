@@ -21,7 +21,7 @@
           td.first
             span(class="#{act.type}")= typeArr[act.type]
           td.second
-            a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}")= act.title
+            a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
           td.third
             span By&nbsp;
             a(href="/people?uid=#{func.sha1(act.uid + '')}")= act.people

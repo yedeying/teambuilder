@@ -30,7 +30,12 @@ app.use(session({
 app.use(cookieParser());
 app.use(require('node-compass')({mode: 'expanded'}));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function(req, res, next) {
+  var url = req.originalUrl;
+  var routes = require('./settings/router');
+  url = url.split('?')[0];
+  next();
+});
 app.use('/', get);
 app.use('/', post);
 app.use('/model', model);

@@ -19,7 +19,7 @@ define(function(require, exports, module) {
   }
   function showInfo(code, info) {
     if(info.length < 1) return;
-    if(code === 1 || code === 2) {
+    if(code === 1 || code === 2 || code === 4) {
       $alert.html(info + '<span class="close">&times;</span>')
             .removeClass('success')
             .addClass('error')

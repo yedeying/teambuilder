@@ -8,4 +8,4 @@
     i.fa.fa-users
     h4 我的小组成员
   each member in data.team
-    a.project(href="/people?uid=#{func.sha1(member.uid.toString())}") #{member.name}
+    a.team(href="/people?uid=#{func.sha1(member.uid.toString())}") #{member.name}
