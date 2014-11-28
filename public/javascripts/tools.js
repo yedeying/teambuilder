@@ -96,11 +96,15 @@ define(function(require, exports, module) {
       $body.on('click', '.alert-box .close', hide);
       var tid = setTimeout(hide, time);
     },
-    getModel: function(url, type, callback) {
+    getModel: function(url, type, data, callback) {
       require('jquery');
       var $body = $('body');
       var $cover = $('.cover');
-      $.get('/model/' + url, {}, function(data) {
+      if(typeof data !== 'object') {
+        callback = data;
+        data = {};
+      }
+      $.get('/model/' + url, data, function(data) {
         if(data && data.code === 0) {
           $body.append(data.html);
           $cover.css({

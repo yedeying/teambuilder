@@ -198,4 +198,9 @@ router.post('/get_project_status', function(req, res) {
     res.send({code: 0, info: '跳转成功'});
   }
 });
+router.post('/edit_profile', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  people.editProfile(data, sess, res);
+});
 module.exports = router;

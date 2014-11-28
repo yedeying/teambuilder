@@ -1,0 +1,66 @@
+extend model_layout
+
+block content
+  .edit-profile-inner
+    form(type='post', action='/edit_profile', data-uid='#{func.sha1(data.uid.toString())}')
+      table
+        tr
+          td
+            label.label-email 邮箱
+          td
+            .email #{data.email}
+        tr
+          td
+            label.label-name(for='name') 姓名
+          td
+            input(name='name', id='name', type='text', placeholder='姓名', value='#{data.username}')
+        tr
+          td
+            label.label-gender(for='gender') 性别
+          td
+            select.gender(name='gender', id='gender')
+              if data.gender === ''
+                option(value='0', selected) 空
+              else
+                option(value='0') 空
+              if data.gender === '男'
+                option(value='1', selected) 男
+              else
+                option(value='1') 男
+              if data.gender === '女'
+                option(value='2', selected) 女
+              else
+                option(value='2') 女
+        tr
+          td
+            label.label-contact(for='contact') 联系方式
+          td
+            input(name='contact', id='contact', type='tel', placeholder='联系方式', value='#{data.contact}')
+        tr
+          td
+            label.label-class(for='class') 班级
+          td
+            select.class(name='class', id='class')
+              option(value='0', selected) 空
+              each cla in data.classList
+                if cla.name === data.className
+                  option(value='#{func.sha1(cla.cid.toString())}', selected) #{cla.name}
+                else
+                  option(value='#{func.sha1(cla.cid.toString())}') #{cla.name}
+        tr
+          td
+            label.label-oripass(for='oripass') 原密码
+          td
+            input(name='oripass', id='oripass', type='password', placeholder='原密码')
+        tr
+          td
+            label.label-newpass(for='newpass') 新密码
+          td
+            input(name='newpass', id='newpass', type='password', placeholder='新密码')
+        tr
+          td
+            label.label-conpass(for='conpass') 确认密码
+          td
+            input(name='conpass', id='conpass', type='password', placeholder='确认密码')
+    .title
+      h4 Notice: 若需要修改密码, 可直接在密码框中填写, 否则留空

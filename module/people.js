@@ -1,3 +1,4 @@
+"use strict";
 module.exports = {
   getVerifyHtml: function (str, callback) {
     var jade = require('jade');
@@ -104,7 +105,6 @@ module.exports = {
       if(err) throw err;
       if(rows[0]) {
         var sql = 'select gid from user where email = "' + rows[0]['admin'] + '"';
-        console.log(sql);
         var user = rows[0]['user'];
         db.query(sql, function(err, rows) {
           if(err) throw err;
@@ -261,5 +261,146 @@ module.exports = {
         });
       });
     });
+  },
+  renderEditProfile: function(uid, sess, res, callback) {
+    var db = require('./db');
+    var data = {};
+    if(!/[0-9a-f]{40}/.test(uid)) {
+      res.send({code: 1, info: '用户id格式错误'});
+      return;
+    }
+    var sql = 'select user.uid as uid, user.username as username, user.gender as gender, user.email as email, user.contact as contact, user.cid as cid, (groups.admin = self.uid) as admin, (user.email = "' + sess.email + '") as self from user as user, user as self, groups where groups.gid = self.gid and user.gid = self.gid and self.email = "' + sess.email + '" and sha1(user.uid) = "' + uid + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1) {
+        var row = rows[0];
+        var self = row['self'];
+        var admin = row['admin'];
+        var cid = row['cid'];
+        data.uid = row['uid'];
+        data.username = row['username'];
+        data.gender = row['gender'];
+        data.email = row['email'];
+        data.contact = row['contact'];
+        if(self === 0 && admin === 0) {
+          res.send({code: 1, info: '你无权查看此用户信息'});
+          return;
+        }
+        var sql = 'select cid, concat(grade, major, class) as classname from class order by grade desc, major, class';
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          data.classList = [];
+          rows.forEach(function(row, index) {
+            if(row['cid'] === cid) {
+              data.className = row['classname'];
+            }
+            data.classList.push({
+              name: row['classname'],
+              cid: row['cid']
+            });
+          });
+          if(!data.className) {
+            data.className = '';
+          }
+          callback(data);
+        });
+      }
+    });
+  },
+  validateProfileData: function(data, res) {
+    data.changePassword = false;
+    if(data.name === '') {
+      res.send({code: 1, info: '姓名不能为空'});
+      return false;
+    } else if(data.name.length > 20) {
+      res.send({code: 1, info: '姓名长度不宜多于20'});
+    } else if(!/1|2|0/.test(data.gender)) {
+      res.send({code: 1, info: '性别格式错误'});
+      return false;
+    } else if(data.contact.length !== 0 && !/[0-9]{5,11}/.test(data.contact)) {
+      res.send({code: 1, info: '联系方式不合理'});
+      return false;
+    } else if(!/0|[0-9a-f]{40}/.test(data.class.toString())) {
+      res.send({code: 1, info: '班级格式错误'});
+      return false;
+    } else if(typeof data.oripass === 'string' && data.oripass !== '' || typeof data.newpass === 'string' && data.newpass !== '' || typeof data.conpass === 'string' && data.conpass !== '') {
+      data.changePassword = true;
+      if(typeof data.oripass !== 'string' || data.oripass === '') {
+        res.send({code: 1, info: '原密码不能为空'});
+        return false;
+      }
+      if(typeof data.newpass !== 'string' || data.newpass === '') {
+        res.send({code: 1, info: '新密码不能为空'});
+        return false;
+      }
+      if(typeof data.conpass !== 'string' || data.conpass === '') {
+        res.send({code: 1, info: '请确认密码'});
+        return false;
+      }
+      if(data.newpass !== data.conpass) {
+        res.send({code: 1, info: '密码不一致'});
+        return false;
+      }
+    } else if(!/[0-9a-f]{40}/.test(data.uid.toString())) {
+      res.send({code: 1, info: '用户id格式错误'});
+      return false;
+    }
+    return true;
+  },
+  editProfile: function(data, sess, res) {
+    var db = require('./db');
+    var tools = require('./tools');
+    var email = sess.email;
+    if(this.validateProfileData(data, res)) {
+      var sql = 'select (user.email = "' + email + '") as self, (groups.admin = self.uid) as admin from user user, groups, user self where user.gid = groups.gid and sha1(user.uid) = "' + data.uid + '" and self.email = "' + email + '"';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        if(rows.length === 1) {
+          var row = rows[0];
+          if(row['self'] !== 1 && row['admin'] !== 1) {
+            res.send({code: 1, info: '你没有权限'});
+            return;
+          }
+          if(data.gender === '0') data.gender = '';
+          if(data.gender === '1') data.gender = '男';
+          if(data.gender === '2') data.gender = '女';
+          if(data.changePassword) {
+            var sql = 'select 1 as correct from user where sha1(concat("' + data.oripass + '", createtime)) = password and sha1(uid) = "' + data.uid + '"';
+            db.query(sql, function(err, rows) {
+              if(err) throw err;
+              if(rows.length === 1 && rows[0]['correct'] === 1) {
+                update(true);
+              } else {
+                res.send({code: 1, info: '密码错误, 请重新输入'});
+              }
+            });
+          } else {
+            update(false);
+          }
+        } else {
+          res.send({code: 1, info: '用户不存在'});
+        }
+      });
+    }
+    function update(bl) {
+      var sql = 'select cid from class where sha1(cid) = "' + data.class + '"';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        var sql = 'update user set username = "' + data.name + '", gender = "' + data.gender + '", contact = "' + data.contact + '"';
+        if(rows.length === 1) {
+          var cid = rows[0]['cid'];
+          sql += ', cid = ' + cid;
+        }
+        if(bl) {
+          sql += ', password = sha1(concat("' + data.newpass + '", createtime))';
+        }
+        sql += ' where sha1(uid) = "' + data.uid + '"';
+        console.log(sql);
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          res.send({code: 0, info: '修改成功'});
+        });
+      });
+    }
   }
 };

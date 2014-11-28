@@ -108,6 +108,8 @@ define(function(require, exports, module) {
       switchProject();
     } else if(type === 'switch_project_beta') {
       switchProject(true);
+    } else if(type === 'edit_profile') {
+      people.editProfile();
     }
   });
   function switchProject(option) {

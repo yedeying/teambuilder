@@ -50,4 +50,22 @@ router.get('/switch_project', function(req, res) {
     });
   });
 });
+router.get('/edit_profile', function(req, res) {
+  var sess = req.session;
+  var tools = require('../module/tools');
+  var people = require('../module/people');
+  var data = req.query;
+  people.renderEditProfile(data.uid, sess, res, function(data) {
+    res.render('models/edit_profile', {title: '修改个人信息', data: data, func: {
+      sha1: tools.getSha1,
+      json: JSON.stringify
+    }}, function(err, html) {
+      if(err) {
+        res.send({code: 1, code: 'render err'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
+});
 module.exports = router;

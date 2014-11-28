@@ -153,5 +153,43 @@
         }
       }
     }
+    .edit-profile-inner {
+      padding: 20px;
+      h4 {
+        padding: 10px;
+        background: #6FA9DA;
+        color: white;
+        border-radius: 8px;
+        width: 50%;
+        margin: 10px auto 0 auto;
+      }
+      table {
+        width: 100%;
+        input, select {
+          @include input(8px);
+          padding: 4px 8px;
+          height: 30px;
+        }
+        label {
+          font-size: 16px;
+        }
+        tr {
+          td {
+            padding: 4px 5px;
+            &:first-child {
+              text-align: right;
+              width: 33%;
+              &:after {
+                content:': ';
+              }
+            }
+            &:last-child {
+              text-align: left;
+              width: 50%;
+            }
+          }
+        }
+      }
+    }
   }
 }
