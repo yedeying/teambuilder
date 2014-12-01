@@ -1,3 +1,15 @@
 extends layout
 block content
   include includes/header
+  .index.main
+    table.layout
+      tr
+        td.left
+          .inner
+            include includes/task_list_nav
+        td.right
+          .inner
+            include includes/task_list
+  include includes/sea
+  script.
+    seajs.use('/javascripts/task.js');

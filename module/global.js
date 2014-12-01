@@ -22,11 +22,12 @@ module.exports = {
   },
   switchProject: function(sess, pid, res) {
     var db = require('./db');
-    var sql = 'select name, pid from project where sha1(pid) = "' + pid + '"';
+    var sql = 'select name, pid, description from project where sha1(pid) = "' + pid + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
       if(rows.length === 1) {
-        sess.name = rows[0]['name'];
+        sess.projectTitle = rows[0]['name'];
+        sess.description = rows[0]['description'];
         sess.pid = rows[0]['pid'];
         res.send({code: 0, info: '切换成功'});
       } else {

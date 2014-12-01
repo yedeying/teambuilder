@@ -1,4 +1,4 @@
-- var typeArr = {project: '项目', task: '任务', file: '文件', comment: '评论'}
+- var typeArr = {project: '项目', task: '任务列表', file: '文件', comment: '评论', detail: '任务'}
 .project-header
   .title-wrapper
     h1.title 我的项目
@@ -13,15 +13,16 @@
   each project in data.project
     .project-title-block
       a.project-title(href="/project?pid=#{func.sha1(project.pid.toString())}") #{project.name}
-      span &nbsp;-&nbsp;
-      span.group-name #{data.groupname}
     table.project-activity
       each act in project.activity
         tr
           td.first
             span(class="#{act.type}")= typeArr[act.type]
           td.second
-            a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
+            if act.type === 'detail'
+              a(href="/task?tid=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
+            else
+              a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
           td.third
             span By&nbsp;
             a(href="/people?uid=#{func.sha1(act.uid + '')}")= act.people

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-11-27 11:32:59
+-- 生成日期: 2014-12-01 13:35:45
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -28,20 +28,50 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `class` (
   `cid` bigint(20) NOT NULL AUTO_INCREMENT,
-  `teacher` bigint(20) NOT NULL,
   `grade` varchar(100) NOT NULL,
   `major` varchar(100) NOT NULL,
   `class` varchar(100) NOT NULL,
   PRIMARY KEY (`cid`),
   UNIQUE KEY `cid` (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `class`
 --
 
-INSERT INTO `class` (`cid`, `teacher`, `grade`, `major`, `class`) VALUES
-(1, 12, '12级', '软件工程', '2班');
+INSERT INTO `class` (`cid`, `grade`, `major`, `class`) VALUES
+(1, '12级', '软件工程', '2班'),
+(2, '11级', '软件工程', '1班'),
+(3, '11级', '软件工程', '2班'),
+(4, '11级', '软件工程', '3班'),
+(5, '11级', '计算机科学与技术', '3班'),
+(6, '11级', '计算机科学与技术', '2班'),
+(7, '11级', '计算机科学与技术', '1班'),
+(8, '12级', '计算机科学与技术', '1班'),
+(9, '12级', '计算机科学与技术', '2班'),
+(10, '12级', '计算机科学与技术', '3班'),
+(11, '12级', '软件工程', '1班'),
+(12, '12级', '软件工程', '3班'),
+(13, '12级', '软件工程', '4班'),
+(14, '11级', '网络工程', '1班'),
+(15, '11级', '网络工程', '2班'),
+(16, '12级', '网络工程', '1班'),
+(17, '12级', '网络工程', '2班'),
+(25, '13级', '计算机与软件学院', '1班'),
+(26, '13级', '计算机与软件学院', '2班'),
+(27, '13级', '计算机与软件学院', '3班'),
+(28, '13级', '计算机与软件学院', '4班'),
+(29, '13级', '计算机与软件学院', '5班'),
+(30, '13级', '计算机与软件学院', '6班'),
+(31, '13级', '计算机与软件学院', '7班'),
+(32, '13级', '计算机与软件学院', '8班'),
+(33, '13级', '计算机与软件学院', '9班'),
+(34, '14级', '计算机与软件学院', '1班'),
+(35, '14级', '计算机与软件学院', '2班'),
+(36, '14级', '计算机与软件学院', '3班'),
+(37, '14级', '计算机与软件学院', '4班'),
+(38, '14级', '计算机与软件学院', '5班'),
+(39, '14级', '计算机与软件学院', '6班');
 
 -- --------------------------------------------------------
 
@@ -66,6 +96,28 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 INSERT INTO `comment` (`cid`, `id`, `uid`, `type`, `deep`, `time`, `content`) VALUES
 (1, 1, 13, 0, 0, '2014-11-20 23:20:19', 'i''m just a message');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `detail`
+--
+
+CREATE TABLE IF NOT EXISTS `detail` (
+  `did` bigint(20) NOT NULL AUTO_INCREMENT,
+  `tid` bigint(20) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `content` text NOT NULL,
+  `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`did`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `detail`
+--
+
+INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`) VALUES
+(1, 1, '我是子任务', '我是子任务的内容', '2014-12-01 09:24:10');
 
 -- --------------------------------------------------------
 
@@ -150,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `status` int(11) NOT NULL,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
 --
 -- 转存表中的数据 `project`
@@ -158,8 +210,10 @@ CREATE TABLE IF NOT EXISTS `project` (
 
 INSERT INTO `project` (`pid`, `gid`, `creater`, `name`, `description`, `createtime`, `status`) VALUES
 (1, 1, 13, 'teambuilder', '这是teambuilder项目，属于岗位实践课程', '2014-11-20 18:56:52', 0),
-(2, 1, 13, '第二个Project', '第二个Project', '2014-11-20 20:54:18', 0),
-(13, 1, 13, 'test', 'test', '2014-11-23 09:02:52', 0);
+(2, 1, 13, '第二个Project', '第二个Projectchange', '2014-11-20 20:54:18', 0),
+(13, 1, 13, 'test', 'test', '2014-11-23 09:02:52', 0),
+(14, 1, 13, '啦啦啦第四个项目', '啦啦啦第四个项目', '2014-12-01 07:40:26', 0),
+(15, 1, 13, '啦啦啦第五个项目', '啦啦啦第四个项目', '2014-12-01 07:41:33', 0);
 
 -- --------------------------------------------------------
 
@@ -253,10 +307,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`uid`, `cid`, `gid`, `username`, `email`, `password`, `createtime`, `contact`, `gender`, `accessibility`) VALUES
-(10, 0, 0, 'liyawen', '413235793@qq.com', 'a95a42d0088fc0d240262959270c5e5cd465226b', '1416312146586', '', '未知', 0),
-(11, 1, 0, 'Aron', '273305282@qq.com', '22acfa0ed5e62263fe522b06876d9f78fe9c0479', '1416326684633', '', '未知', 0),
-(12, 1, 1, 'yedeying', '945173727@qq.com', '738ef8264fd22bd7ca197c7bb6cfdb8b1ceb4904', '1416377473896', '13760284409', '男', 2),
-(13, 1, 1, '叶德颖', 'kanwode918@qq.com', '0fc213126df2decaff2a169ca50ede8e04682c03', '1416498219505', '13760284409', '男', 1);
+(10, 0, 0, 'liyawen', '413235793@qq.com', 'a95a42d0088fc0d240262959270c5e5cd465226b', '1416312146586', '15019499703', '女', 0),
+(11, 1, 1, 'Aron', '273305282@qq.com', '22acfa0ed5e62263fe522b06876d9f78fe9c0479', '1416326684633', '', '男', 0),
+(12, 3, 1, 'yedeying', '945173727@qq.com', '738ef8264fd22bd7ca197c7bb6cfdb8b1ceb4904', '1416377473896', '13760284409', '男', 2),
+(13, 3, 1, '叶德颖', 'kanwode918@qq.com', '0fc213126df2decaff2a169ca50ede8e04682c03', '1416498219505', '13760284409', '男', 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -59,5 +59,14 @@ module.exports = {
                  .replace('s', date.getSeconds().toString())
                  .replace('c', months[date.getMonth()])
                  .replace('C', Months[date.getMonth()]);
+  },
+  decodeNumberArray: function(str) {
+    var arr = [];
+    if(str === '') return arr;
+    arr = str.split('[')[1].split(']')[0].split(',');
+    arr = arr.map(function(str) {
+      return parseInt(str, 10);
+    });
+    return arr;
   }
 };

@@ -1,0 +1,22 @@
+- var typeArr = {project: '项目', task: '任务列表', file: '文件', comment: '评论', detail: '任务'}
+.task-header
+  .title-wrapper
+    h1.title #{data.title}
+    button.create-task
+      i.fa.fa-plus-circle
+      span &nbsp;新建任务
+  span.activity-label 所有任务
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.task-list
+  each task in data.task
+    .task-title-block
+      a.task-title(href="/task?tid=#{func.sha1(task.tid.toString())}") #{task.title}
+    table.detail
+      each detail in task.detail
+        tr
+          td.first
+            span #{detail.title}
+          td.second #{detail.content}
+          td.third #{func.getTime(detail.time, 'hh:mm DD C')}

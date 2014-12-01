@@ -1,4 +1,4 @@
-.project-header {
+.task-header {
   position: relative;
   .title-wrapper {
     @include clearfix;
@@ -8,27 +8,13 @@
       margin: 0;
       font-weight: normal;
     }
-    .add-project, .add-to-project {
+    .create-task {
       .fa {
         font-size: 1.2em;
       }
       @include btn($btngreen);
       margin-left: 10px;
       float: right;
-    }
-    .edit-project {
-      .fa {
-        font-size: 1.2em;
-      }
-      @include btn($btnblue);
-      float: right; 
-    }
-    .remove-project {
-      .fa {
-        font-size: 1.2em;
-      }
-      @include btn($btnred);
-      float: right; 
     }
   }
   .activity-label {
@@ -51,10 +37,10 @@
     border-top: 1px solid #ccc;
   }
 }
-.project-list {
+.task-list {
   padding: 20px;
-  .project-title-block {
-    .project-title {
+  .task-title-block {
+    .task-title {
       font-weight: bold;
       color: #000;
       &:hover {
@@ -64,11 +50,11 @@
     .group-name {
       color: #666;
     }
-    padding: 15px;
+    padding: 10px;
     @include border-radius(8px);
     background-color: rgb(236,236,236);
   }
-  .project-activity {
+  .detail {
     width: 100%;
     margin-bottom: 20px;
     tr {
@@ -82,25 +68,11 @@
         color: #fff;
         padding: 8px 4px;
         span {
+          background-color: $lightred;
           width: 100%;
           display: inline-block;
           @include border-radius(4px);
           padding: 2px;
-        }
-        .comment {
-          background-color: $lightpurple;
-        }
-        .task {
-          background-color: $lightblue;
-        }
-        .detail {
-          background-color: $lightred;
-        }
-        .file {
-          background-color: $lightcyan;
-        }
-        .project {
-          background-color: $lightgreen;
         }
       }
       .second {
@@ -113,18 +85,7 @@
         }
       }
       .third {
-        padding: 8px 4px;
         text-align: right;
-        color: #999;
-        a {
-          color: $linkblue;
-        }
-      }
-      .fourth {
-        width: 100px;
-        padding: 8px 4px;
-        text-align: right;
-        color: #999;
       }
     }
   }

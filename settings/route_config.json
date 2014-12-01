@@ -1,0 +1,56 @@
+{
+  "get": {
+    "index": 2,
+    "task": 3,
+    "comment": 3,
+    "calendar": 2,
+    "people": 2,
+    "login": 0,
+    "register": 0,
+    "forget": 0,
+    "vertify": 0,
+    "invite": 4,
+    "project": 2,
+    "joingroup": 5,
+    "model": 1
+  },
+  "post": {
+    "login": 3,
+    "logout": 1,
+    "signup": 0,
+    "sendagain": 4,
+    "vertify": 4,
+    "add_project": 1,
+    "edit_project": 1,
+    "remove_project": 1,
+    "add_people": 1,
+    "remove_people": 1,
+    "exit_group": 1,
+    "remove_group": 1,
+    "joingroup": 1,
+    "switch_project": 1,
+    "get_project_status": 1,
+    "edit_profile": 1
+  },
+  "_info": {
+    "need unlogin": 0,
+    "need login": 1,
+    "need login and group": 2,
+    "need login and pid": 3,
+    "nomatter": 4,
+    "need and ungroup": 5,
+    "changes": {
+      "login": ["login", "vertify", "invite"],
+      "project": ["switch_project", "project", "task", "comment", "add_project"],
+      "group": ["/", "index", "joingroup"],
+      "unlogin": ["logout"],
+      "unproject": ["remove_project"],
+      "ungroup": ["remove_group"]
+    },
+    "sess api": {
+      "login": ["login", "email"],
+      "project": ["pid", "projectTitle", "description"],
+      "group": ["gid", "groupName"]
+    }
+  }
+}

@@ -18,8 +18,13 @@ router.post('/login', function(req, res) {
 router.post('/logout', function(req, res) {
   var sess = req.session;
   sess.login = false;
-  sess.email = null;
-  res.send({ code: 6, info: '退出登录' });
+  sess.email = undefined;
+  sess.pid = undefined;
+  sess.projectTitle = undefined;
+  sess.description = undefined;
+  sess.gid = undefined;
+  sess.groupName = undefined;
+  res.send({code: 6, info: '退出登录'});
 });
 router.post('/signup', function(req, res) {
   var email = req.body.email;
@@ -53,26 +58,12 @@ router.post('/vertify', function(req, res) {
 });
 router.post('/add_project', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   var email = sess.email;
   var data = req.body;
-  index.addProject(email, data, res);
+  index.addProject(email, data, sess, res);
 });
 router.post('/edit_project', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   if(!sess.pid) {
     res.send({
       code: 1,
@@ -86,13 +77,6 @@ router.post('/edit_project', function(req, res) {
 });
 router.post('/remove_project', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   if(!sess.pid) {
     res.send({
       code: 1,
@@ -117,13 +101,6 @@ router.post('/add_people', function(req, res) {
 });
 router.post('/remove_people', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   var data = req.body;
   data.uids = JSON.parse(data.uid);
   if(data.uids.length === 0) {
@@ -137,35 +114,14 @@ router.post('/remove_people', function(req, res) {
 });
 router.post('/exit_group', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   people.exitGroup(sess, res);
 });
 router.post('/remove_group', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   people.removeGroup(sess, res);
 });
 router.post('/joingroup', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({
-      code: 1,
-      info: '你尚未登录'
-    });
-    return;
-  }
   var data = req.body;
   if(!data.groupName) {
     res.send({
@@ -190,9 +146,7 @@ router.post('/switch_project', function(req, res) {
 });
 router.post('/get_project_status', function(req, res) {
   var sess = req.session;
-  if(!sess.login) {
-    res.send({code: 1, info: '你尚未登录'});
-  } else if(!sess.pid) {
+  if(!sess.pid) {
     res.send({code: 2, info: '请先选择项目'});
   } else {
     res.send({code: 0, info: '跳转成功'});

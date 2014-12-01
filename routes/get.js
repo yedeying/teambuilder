@@ -4,6 +4,7 @@ var router = express.Router();
 var moduleArray = {};
 var tools = require('../module/tools');
 var index = require('../module/index');
+var task = require('../module/task');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
@@ -16,19 +17,12 @@ router.get('/', function(req, res) {
     res.redirect('/login');
   }
 });
-['index', 'task', 'comment', 'calendar', 'people'].forEach(function(page) {
+['index', 'comment', 'calendar', 'people'].forEach(function(page) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
-    if(!sess.login) {
-      res.redirect('/login');
-      return;
-    }
-    if(!sess.groupname) {
-      res.redirect('/joingroup');
-    }
     moduleArray[page].generatePage(sess, function(data) {
       res.render(page, { title: 'teambuilder', page: page, data: data, func: {
-        JSON: JSON,
+        json: JSON.stringify,
         sha1: tools.getSha1,
         getTime: tools.getTime
       }});
@@ -39,21 +33,17 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
 ['login', 'signup', 'forget', 'vertify'].forEach(function(page, i) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
-    if(sess.login) {
-      res.redirect('/');
-      return;
-    }
-    if(page !== 'vertify') {
-      res.render(page, { title: titles[i]});
-    } else {
-      var tid = req.query.tid;
-      if(moduleArray.signup.checkTidFormat(tid)) { 
-        res.render('vertify', { title: '完成注册', tid: tid });
-      } else {
-        res.redirect('/404');
-      }
-    }
+    res.render(page, { title: titles[i]});
   });
+});
+router.get('/vertify', function(req, res) {
+  var sess = req.session;
+  var tid = req.query.tid;
+  if(moduleArray.signup.checkTidFormat(tid)) {
+    res.render('vertify', {title: '完成注册', tid: tid});
+  } else {
+    res.redirect('/404');
+  }
 });
 router.get('/invite', function(req, res) {
   var code = req.query.code;
@@ -68,13 +58,6 @@ router.get('/project', function(req, res) {
   var sess = req.session;
   var project = require('../module/project');
   var tools = require('../module/tools');
-  if(!sess.login) {
-    res.redirect('/');
-    return;
-  }
-  if(!sess.groupname) {
-    res.redirect('/joingroup');
-  }
   if(!tools.checkSha1(req.query.pid)) {
     if(sess.pid) {
       req.query.pid = tools.getSha1(sess.pid.toString());
@@ -91,12 +74,20 @@ router.get('/project', function(req, res) {
     }});
   });
 });
-router.get('/joingroup', function(req, res) {
+router.get('/task', function(req, res) {
   var sess = req.session;
-  if(!sess.login || sess.groupname) {
-    res.redirect('/');
-    return;
+  var tid = req.query.tid;
+  if(tid) {
+    if(!/[0-9a-f]{40}/.test(tid)) {
+      res.redirect('/404');
+      return;
+    }
+    task.generateDetailPage(sess, tid, res);
+  } else {
+    task.generatePage(sess, res);
   }
+});
+router.get('/joingroup', function(req, res) {
   res.render('joingroup', {});
 })
 module.exports = router;

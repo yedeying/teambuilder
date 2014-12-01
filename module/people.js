@@ -74,7 +74,7 @@ module.exports = {
             cnt++;
             if(cnt === len) {
               that.sortByName(data);
-              data.groupname = sess.groupname;
+              data.groupName = sess.groupName;
               callback(data);
             }
           });

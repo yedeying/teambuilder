@@ -28,24 +28,26 @@ define(function(require, exports, module) {
     });
     return false;
   });
-  $body.on('click', '.link-project', function(e) {
-    $.post('/get_project_status', function(data) {
-      if(typeof data.code === 'number') {
-        if(data.code === 1) {
-          tools.showInfo(data.info);
-        } else if(data.code === 0) {
-          location.href = '/project';
-        } else {
-          href = '/project';
-          tools.getModel('switch_project', 'switch_project_beta', function(data) {
-            if(typeof data.code === 'number' && data.code === 1) {
-              tools.showInfo(data.info);
-            }
-          });
+  ['project', 'task', 'comment'].forEach(function(type) {
+    $body.on('click', '.link-' + type, function(e) {
+      $.post('/get_project_status', function(data) {
+        if(typeof data.code === 'number') {
+          if(data.code === 1) {
+            tools.showInfo(data.info);
+          } else if(data.code === 0) {
+            location.href = '/' + type;
+          } else {
+            href = '/' + type;
+            tools.getModel('switch_project', 'switch_project_beta', function(data) {
+              if(typeof data.code === 'number' && data.code === 1) {
+                tools.showInfo(data.info);
+              }
+            });
+          }
         }
-      }
+      });
+      return false;
     });
-    return false;
   });
   $body.on('mousedown', '.model-wrapper .title-block', function(e) {
     startX = e.pageX;
@@ -64,7 +66,12 @@ define(function(require, exports, module) {
         top: (top + y) + 'px'
       });
     }
-  })
+  });
+  $body.on('keypress', '.model' ,function(e) {
+    if(e.which === 13) {
+      $('.model .confirm').trigger('click');
+    }
+  });
   $body.on('click', '.model .close, .cover, .model .cancel', function(e) {
     $('.model').remove();
     $cover.css({

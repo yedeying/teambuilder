@@ -30,13 +30,16 @@ module.exports = {
         var sql = 'insert into groups (admin, name) values (' + uid + ', "' + data.groupName + '")';
         db.query(sql, function(err, rows) {
           if(err) throw err;
-          var sql = 'select gid from groups where admin = ' + uid;
+          var sql = 'select gid, name from groups where admin = ' + uid;
           db.query(sql, function(err, rows) {
             if(err) throw err;
             var gid = rows[0]['gid'];
+            var groupName = rows['0']['name'];
             var sql = 'update user set gid = ' + gid + ' where uid = ' + uid;
             db.query(sql, function(err, rows) {
               if(err) throw err;
+              sess.gid = gid;
+              sess.groupName = groupName;
               res.send({code: 0, info: '创建成功'});
             });
           });

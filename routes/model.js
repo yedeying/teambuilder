@@ -11,7 +11,7 @@ urls.forEach(function(url, index) {
       description: sess.description || ''
     }, function(err, html) {
       if(err) {
-        res.send({code: 1, html: 'render err'});
+        res.send({code: 1, info: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});
@@ -27,7 +27,7 @@ router.get('/remove_people', function(req, res) {
       sha1: tools.getSha1
     }}, function(err, html) {
       if(err) {
-        res.send({code: 1, code: 'render err'});
+        res.send({code: 1, info: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});
@@ -43,7 +43,7 @@ router.get('/switch_project', function(req, res) {
       sha1: tools.getSha1
     }}, function(err, html) {
       if(err) {
-        res.send({code: 1, code: 'render err'});
+        res.send({code: 1, info: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});
@@ -61,7 +61,7 @@ router.get('/edit_profile', function(req, res) {
       json: JSON.stringify
     }}, function(err, html) {
       if(err) {
-        res.send({code: 1, code: 'render err'});
+        res.send({code: 1, info: 'render err'});
         throw err;
       }
       res.send({code: 0, html: html});

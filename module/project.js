@@ -97,7 +97,7 @@ module.exports = {
     var sql = 'select groups.name as name from groups, project where groups.gid = project.gid and project.pid = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
-      data.groupname = rows[0]['name'];
+      data.groupName = rows[0]['name'];
       obj.cnt++;
       if(obj.cnt === obj.len) {
         event.emit('finish');

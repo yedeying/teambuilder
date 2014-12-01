@@ -24,6 +24,9 @@
   left: 0;
   right: 0;
   position: absolute;
+  label {
+    cursor: pointer;
+  }
   .model-wrapper {
     @include border-radius(8px);
     width: 800px;
