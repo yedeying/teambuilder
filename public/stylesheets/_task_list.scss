@@ -8,7 +8,7 @@
       margin: 0;
       font-weight: normal;
     }
-    .create-task {
+    .create-task-list {
       .fa {
         font-size: 1.2em;
       }
@@ -40,6 +40,19 @@
 .task-list {
   padding: 20px;
   .task-title-block {
+    &:hover {
+      span {
+        visibility: visible;
+      }
+    }
+    span {
+      color: $linkblue;
+      cursor: pointer;
+      visibility: hidden;
+      &.edit {
+        margin: 0 8px;
+      }
+    }
     .task-title {
       font-weight: bold;
       color: #000;

@@ -83,6 +83,17 @@
         height: 100px;
       }
     }
+    .create-task-list-inner {
+      padding: 20px;
+      .name {
+        @include input(9px);
+        width: 100%;
+      }
+      .date {
+        @include input(9px);
+        width: 30%;
+      }
+    }
     .remove-project-inner {
       padding: 10px 20px;
     }

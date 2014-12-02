@@ -2,9 +2,9 @@
 .task-header
   .title-wrapper
     h1.title #{data.title}
-    button.create-task
+    button.create-task-list
       i.fa.fa-plus-circle
-      span &nbsp;新建任务
+      span &nbsp;新建任务列表
   span.activity-label 所有任务
   span.activity-triangle-black
   span.activity-triangle-white
@@ -13,6 +13,8 @@
   each task in data.task
     .task-title-block
       a.task-title(href="/task?tid=#{func.sha1(task.tid.toString())}") #{task.title}
+      span.edit 修改
+      span.add 添加
     table.detail
       each detail in task.detail
         tr
