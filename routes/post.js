@@ -157,4 +157,31 @@ router.post('/edit_profile', function(req, res) {
   var data = req.body;
   people.editProfile(data, sess, res);
 });
+router.post('/create_task_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.name === '') {
+    res.send({code: 1, info: '列表名不能为空'});
+    return;
+  }
+  var time = tools.checkDateFormat(data.time);
+  if(time.code !== 0) {
+    res.send(time);
+    return;
+  }
+  if(data.participant.length === 0) {
+    res.send({code: 1, info: '请至少选择一个以上的参与者'});
+    return;
+  }
+  var bl = false;
+  data.participant.forEach(function(value) {
+    if(/[0-9a-f]{40}/.test(value)) bl = true;
+  });
+  if(bl) {
+    res.send({code: 1, info: '参与者格式错误'});
+    return;
+  }
+  data.time = time.time;
+  task.createTaskList(data, sess, res);
+});
 module.exports = router;

@@ -38,7 +38,7 @@ define(function(require, exports, module) {
       if(!/\d\d\d\d\/\d\d\/\d\d \d\d\:\d\d/.test(str)) {
         return {
           code: 1,
-          info: '格式不满足1970/01/01 00:00'
+          info: '格式不满足1990/01/01 12:00'
         };
       }
       var now = new Date();
@@ -68,6 +68,10 @@ define(function(require, exports, module) {
       date.setHours(hour);
       date.setMinutes(minute);
       date.setSeconds(0);
+      console.log(date.getTime());
+      console.log(now.getTime());
+      console.log(date);
+      console.log(now);
       if(date.getTime() < now.getTime()) {
         return {
           code: 2,

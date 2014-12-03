@@ -85,13 +85,30 @@
     }
     .create-task-list-inner {
       padding: 20px;
-      .name {
+      .name, .content {
         @include input(9px);
         width: 100%;
       }
       .date {
         @include input(9px);
         width: 30%;
+      }
+      .member {
+        padding: 4px 8px;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+        &:hover {
+          background-color: #f3f4f5;
+        }
+        @include border-radius(4px);
+      }
+      .check {
+        display: none;
+        &:checked + .member {
+          background-color: $lightblue;
+          border-color: $lightblue;
+          color: $white;
+        }
       }
     }
     .remove-project-inner {

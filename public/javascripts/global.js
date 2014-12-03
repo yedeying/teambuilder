@@ -5,6 +5,7 @@ define(function(require, exports, module) {
   var index = require('./index');
   var project = require('./project');
   var people = require('./people');
+  var task = require('./task');
   var $body = $('body');
   var $cover = $('.cover');
   var startX = 0;
@@ -117,6 +118,8 @@ define(function(require, exports, module) {
       switchProject(true);
     } else if(type === 'edit_profile') {
       people.editProfile();
+    } else if(type === 'create_task_list') {
+      task.createTaskList();
     }
   });
   function switchProject(option) {

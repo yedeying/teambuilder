@@ -402,5 +402,20 @@ module.exports = {
         });
       });
     }
+  },
+  getMemberList: function(sess, callback) {
+    var db = require('./db');
+    var sql = 'select user.username as username, user.uid as uid from user user, user self where user.gid = self.gid and self.email = "' + sess.email + '"';
+    var memberList = [];
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      for(var i = 0; i < rows.length; i++) {
+        memberList.push({
+          name: rows[i]['username'],
+          uid: rows[i]['uid']
+        });
+      }
+      callback(memberList);
+    });
   }
 };

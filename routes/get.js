@@ -30,9 +30,10 @@ router.get('/', function(req, res) {
   });
 });
 var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
-['login', 'signup', 'forget', 'vertify'].forEach(function(page, i) {
+['login', 'signup', 'forget'].forEach(function(page, i) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
+    console.log(page);
     res.render(page, { title: titles[i]});
   });
 });

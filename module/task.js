@@ -61,5 +61,40 @@ module.exports = {
         getTime: tools.getTime
       }});
     });
+  },
+  createTaskList: function(data, sess, res) {
+    var db = require('./db');
+    var people = require('./peopel');
+    var name = data.name;
+    var content = data.content;
+    var time = data.time;
+    var participant = [];
+    var cnt = 0;
+    var bl = false;
+    data.participant.forEach(function(member, index) {
+      var sql = 'select uid from user where sha1(uid) = "' + member + '"';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        if(rows.length !== 1) {
+          bl = true;
+        } else {
+          participant.push(rows[0]['uid']);
+        }
+        cnt++;
+        if(cnt === data.participant.length) {
+          event.emit('counted');
+        }
+      });
+    });
+    event.on('counted', function() {
+      if(bl) {
+        res.send({code: 1, info: '参与者不存在'});
+        return;
+      }
+      people.getUidFromMail(email, function(uid) {
+        var sql = 'insert into task(pid, creater, title, content, status, createtime, expectedtime, finishtime) values (' + sess.pid + ', ' + uid + ', "' + name + '", "' + content + '", 0, from_unixtime(' + ((new Date()).getTime() / 1000) + '), from_unixtime(' + (time.getTime() / 1000) + '), "0000-00-00 00:00:00"';
+        console.log(sql);
+      });
+    });
   }
 };
