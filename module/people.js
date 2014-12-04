@@ -417,5 +417,16 @@ module.exports = {
       }
       callback(memberList);
     });
+  },
+  getUidFromMail: function(email, callback) {
+    var db = require('./db');
+    var sql = 'select uid from user where email = "' + email + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length !== 1) {
+        throw new Error('uncorrect email');
+      }
+      callback(rows[0]['uid']);
+    });
   }
 };

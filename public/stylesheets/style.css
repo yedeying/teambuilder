@@ -2782,6 +2782,7 @@ body button {
   background-color: #37bb62;
 }
 .task-header .activity-label {
+  cursor: pointer;
   color: #777;
   margin: 0 20px;
 }
@@ -2797,6 +2798,9 @@ body button {
   border-bottom: 8px solid transparent;
   border-left: 6px solid transparent;
   border-bottom: 8px solid #ccc;
+  -webkit-transition: left 0.3s;
+  -o-transition: left 0.3s;
+  transition: left 0.3s;
   left: 43px;
   bottom: 0;
 }
@@ -2812,6 +2816,9 @@ body button {
   border-bottom: 8px solid transparent;
   border-left: 6px solid transparent;
   border-bottom: 8px solid #fff;
+  -webkit-transition: left 0.3s;
+  -o-transition: left 0.3s;
+  transition: left 0.3s;
   left: 43px;
   bottom: -2px;
 }
@@ -3123,6 +3130,27 @@ body button {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
+}
+.model .model-wrapper .add-task-inner {
+  padding: 20px;
+}
+.model .model-wrapper .add-task-inner .name, .model .model-wrapper .add-task-inner .content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+.model .model-wrapper .add-task-inner .name:focus, .model .model-wrapper .add-task-inner .content:focus {
+  border-color: #a6a6a6;
 }
 .model .model-wrapper .remove-project-inner {
   padding: 10px 20px;

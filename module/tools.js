@@ -70,6 +70,9 @@ module.exports = {
     return arr;
   },
   checkDateFormat: function(stamp) {
+    if(typeof stamp === 'string') {
+      stamp = parseInt(stamp, 10);
+    }
     var time = new Date(stamp);
     var now = new Date();
     if(stamp < now.getTime()) {

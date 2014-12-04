@@ -68,10 +68,6 @@ define(function(require, exports, module) {
       date.setHours(hour);
       date.setMinutes(minute);
       date.setSeconds(0);
-      console.log(date.getTime());
-      console.log(now.getTime());
-      console.log(date);
-      console.log(now);
       if(date.getTime() < now.getTime()) {
         return {
           code: 2,
@@ -123,6 +119,13 @@ define(function(require, exports, module) {
           callback(data);
         }
       });
+    },
+    slideActivityTriangle: function(ele) {
+      var left = ele.offsetLeft + ele.offsetWidth / 2 - 6;
+      var $black = $('.activity-triangle-black');
+      var $white = $('.activity-triangle-white');
+      $black.css({left: left + 'px'});
+      $white.css({left: left + 'px'});
     }
   }
 });

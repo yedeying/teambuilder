@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-12-01 13:35:45
+-- 生成日期: 2014-12-04 09:50:37
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -110,14 +110,15 @@ CREATE TABLE IF NOT EXISTS `detail` (
   `content` text NOT NULL,
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `detail`
 --
 
 INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`) VALUES
-(1, 1, '我是子任务', '我是子任务的内容', '2014-12-01 09:24:10');
+(1, 1, '我是子任务', '我是子任务的内容', '2014-12-01 09:24:10'),
+(2, 2, '我是子任务2', '我是子任务2的内容', '2014-12-01 09:24:10');
 
 -- --------------------------------------------------------
 
@@ -157,14 +158,15 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `memberlist` text NOT NULL,
   PRIMARY KEY (`gid`),
   UNIQUE KEY `gid` (`gid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `groups`
 --
 
 INSERT INTO `groups` (`gid`, `cid`, `admin`, `name`, `memberlist`) VALUES
-(1, 1, 13, 'teambuilder小组', '[11,13]');
+(1, 1, 13, 'teambuilder小组', '[11,13]'),
+(2, 0, 14, 'yedeying', '');
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `status` int(11) NOT NULL,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `project`
@@ -213,7 +215,8 @@ INSERT INTO `project` (`pid`, `gid`, `creater`, `name`, `description`, `createti
 (2, 1, 13, '第二个Project', '第二个Projectchange', '2014-11-20 20:54:18', 0),
 (13, 1, 13, 'test', 'test', '2014-11-23 09:02:52', 0),
 (14, 1, 13, '啦啦啦第四个项目', '啦啦啦第四个项目', '2014-12-01 07:40:26', 0),
-(15, 1, 13, '啦啦啦第五个项目', '啦啦啦第四个项目', '2014-12-01 07:41:33', 0);
+(15, 1, 13, '啦啦啦第五个项目', '啦啦啦第四个项目', '2014-12-01 07:41:33', 0),
+(16, 2, 14, 'aaa', 'aaa', '2014-12-03 02:48:13', 0);
 
 -- --------------------------------------------------------
 
@@ -234,16 +237,21 @@ CREATE TABLE IF NOT EXISTS `task` (
   `participant` text NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `tid` (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `task`
 --
 
 INSERT INTO `task` (`tid`, `pid`, `creater`, `title`, `content`, `status`, `createtime`, `expecttime`, `finishtime`, `participant`) VALUES
-(1, 1, 13, '这是第一个任务', 'test', 0, '2014-11-20 19:00:29', '2014-11-29 21:30:24', '0000-00-00 00:00:00', '[11]'),
-(2, 1, 13, '第二个任务', '第二个任务', 0, '2014-11-20 20:53:24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(3, 2, 13, '第三个任务', '第三个任务', 0, '2014-11-20 20:53:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(1, 1, 13, 'aaaa', '', 0, '2014-12-04 06:52:49', '2014-12-05 03:41:00', '0000-00-00 00:00:00', '[11]'),
+(2, 1, 13, 'aa', '', 0, '2014-12-04 08:09:16', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11,13]'),
+(3, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
+(4, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
+(5, 1, 13, 'aasdafasd', '', 0, '2014-12-04 06:53:02', '2014-12-05 03:41:00', '0000-00-00 00:00:00', '[11]'),
+(7, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
+(8, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
+(9, 14, 13, '我是第一个任务', '', 0, '2014-12-04 08:28:43', '2015-12-04 08:30:00', '0000-00-00 00:00:00', '[11,13]');
 
 -- --------------------------------------------------------
 
@@ -300,7 +308,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `user`
@@ -309,8 +317,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`uid`, `cid`, `gid`, `username`, `email`, `password`, `createtime`, `contact`, `gender`, `accessibility`) VALUES
 (10, 0, 0, 'liyawen', '413235793@qq.com', 'a95a42d0088fc0d240262959270c5e5cd465226b', '1416312146586', '15019499703', '女', 0),
 (11, 1, 1, 'Aron', '273305282@qq.com', '22acfa0ed5e62263fe522b06876d9f78fe9c0479', '1416326684633', '', '男', 0),
-(12, 3, 1, 'yedeying', '945173727@qq.com', '738ef8264fd22bd7ca197c7bb6cfdb8b1ceb4904', '1416377473896', '13760284409', '男', 2),
-(13, 3, 1, '叶德颖', 'kanwode918@qq.com', '0fc213126df2decaff2a169ca50ede8e04682c03', '1416498219505', '13760284409', '男', 1);
+(13, 3, 1, '叶德颖', 'kanwode918@qq.com', '0fc213126df2decaff2a169ca50ede8e04682c03', '1416498219505', '13760284409', '男', 1),
+(14, 0, 2, '叶德颖', '945173727@qq.com', '29ce1c535cd9dd3f6b1bab4b1e77618040ef1464', '1417574147961', '', '未知', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

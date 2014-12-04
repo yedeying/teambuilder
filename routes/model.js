@@ -76,6 +76,7 @@ router.get('/create_task_list', function(req, res) {
     res.render('models/create_task_list', {
       title: '创建任务列表',
       sha1: tools.getSha1,
+      now: tools.getTime(((new Date()).getTime() + 100000) / 1000, 'YY/MM/DD hh:mm'),
       memberList: data
     }, function(err, html) {
       if(err) {
@@ -84,6 +85,30 @@ router.get('/create_task_list', function(req, res) {
       }
       res.send({code: 0, html: html});
     });
+  });
+});
+router.get('/edit_task_list', function(req, res) {
+  var task = require('../module/task');
+  var sess = req.session;
+  var tid = req.query.tid;
+  if(!/[0-9a-f]{40}/.test(tid)) {
+    res.send({code: 1, info: '任务列表格式错误'});
+    return;
+  }
+  task.getTaskList(tid, sess, res);
+});
+router.get('/add_task', function(req, res) {
+  var tid = req.query.tid;
+  if(!/[0-9a-f]{40}/.test(tid)) {
+    res.send({code: 1, info: '任务列表格式错误'});
+    return;
+  }
+  res.render('models/add_task.jade', {
+    tid: tid,
+    title: '添加任务'
+  }, function(err, html) {
+    if(err) throw err;
+    res.send({code: 0, html: html});
   });
 });
 module.exports = router;

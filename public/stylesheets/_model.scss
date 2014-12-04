@@ -111,6 +111,13 @@
         }
       }
     }
+    .add-task-inner {
+      padding: 20px;
+      .name, .content {
+        @include input(9px);
+        width: 100%;
+      }
+    }
     .remove-project-inner {
       padding: 10px 20px;
     }

@@ -120,6 +120,8 @@ define(function(require, exports, module) {
       people.editProfile();
     } else if(type === 'create_task_list') {
       task.createTaskList();
+    } else if(type === 'edit_task_list') {
+      task.editTaskList();
     }
   });
   function switchProject(option) {

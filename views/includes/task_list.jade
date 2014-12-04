@@ -5,16 +5,20 @@
     button.create-task-list
       i.fa.fa-plus-circle
       span &nbsp;新建任务列表
-  span.activity-label 所有任务
+  span.activity-label.all 所有任务
+  span.activity-label.doing 未完成任务
+  span.activity-label.finish 已完成任务
+  span.activity-label.over 逾期任务
   span.activity-triangle-black
   span.activity-triangle-white
   hr.hr
 .task-list
   each task in data.task
-    .task-title-block
+    .task-title-block(data-tid='#{func.sha1(task.tid.toString())}')
       a.task-title(href="/task?tid=#{func.sha1(task.tid.toString())}") #{task.title}
-      span.edit 修改
-      span.add 添加
+      span.edit 修改列表
+      span.add 添加任务
+      span.remove 移除列表
     table.detail
       each detail in task.detail
         tr

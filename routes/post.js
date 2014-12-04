@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var tools = require('../module/tools');
 var global = require('../module/global');
 var signup = require('../module/signup');
 var index = require('../module/index');
 var project = require('../module/project');
 var people = require('../module/people');
 var joingroup = require('../module/joingroup');
+var task = require('../module/task');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -159,7 +161,8 @@ router.post('/edit_profile', function(req, res) {
 });
 router.post('/create_task_list', function(req, res) {
   var sess = req.session;
-  var data = req.body;
+  var data = req.body.data;
+  data = JSON.parse(data);
   if(data.name === '') {
     res.send({code: 1, info: '列表名不能为空'});
     return;
@@ -175,7 +178,7 @@ router.post('/create_task_list', function(req, res) {
   }
   var bl = false;
   data.participant.forEach(function(value) {
-    if(/[0-9a-f]{40}/.test(value)) bl = true;
+    if(!/[0-9a-f]{40}/.test(value)) bl = true;
   });
   if(bl) {
     res.send({code: 1, info: '参与者格式错误'});
@@ -183,5 +186,37 @@ router.post('/create_task_list', function(req, res) {
   }
   data.time = time.time;
   task.createTaskList(data, sess, res);
+});
+router.post('/edit_task_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body.data;
+  data = JSON.parse(data);
+  if(data.name === '') {
+    res.send({code: 1, info: '列表名不能为空'});
+    return;
+  }
+  var time = tools.checkDateFormat(data.time);
+  if(time.code !== 0) {
+    res.send(time);
+    return;
+  }
+  if(data.participant.length === 0) {
+    res.send({code: 1, info: '请至少选择一个以上的参与者'});
+    return;
+  }
+  var bl = false;
+  data.participant.forEach(function(value) {
+    if(!/[0-9a-f]{40}/.test(value)) bl = true;
+  });
+  if(bl) {
+    res.send({code: 1, info: '参与者格式错误'});
+    return;
+  }
+  if(!/[0-9a-f]{40}/.test(data.tid)) {
+    res.send({code: 1, info: '任务列表格式错误'});
+    return;
+  }
+  data.time = time.time;
+  task.editTaskList(data, sess, res);
 });
 module.exports = router;

@@ -18,16 +18,19 @@
     }
   }
   .activity-label {
+    cursor: pointer;
     color: #777;
     margin: 0 20px;
   }
   .activity-triangle-black {
     @include triangle(6px, 8px, "up", #ccc);
+    @include transition(left, .3s);
     left: 43px;
     bottom: 0;
   }
   .activity-triangle-white {
     @include triangle(6px, 8px, "up", #fff); 
+    @include transition(left, .3s);
     left: 43px;
     bottom: -2px;
   }
