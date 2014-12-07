@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
   "use strict";
   require('jquery');
+  window.teambuilder = {};
   var tools = require('./tools');
   var index = require('./index');
   var project = require('./project');

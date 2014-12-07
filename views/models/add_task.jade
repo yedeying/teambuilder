@@ -7,4 +7,10 @@ block content
     h3 任务描述
     input.content(id='content', type='text', placeholder='任务列表描述')
     h3 添加附件
-    input.file(id='file', type='file', value='选择文件')
+    .file-box
+      .file-label-box
+      .file-control-box
+        input(id='file', type='file')
+        label.file(for='file')
+          i.fa.fa-plus-circle
+          span &nbsp;添加附件

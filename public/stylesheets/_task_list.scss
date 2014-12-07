@@ -52,9 +52,7 @@
       color: $linkblue;
       cursor: pointer;
       visibility: hidden;
-      &.edit {
-        margin: 0 8px;
-      }
+      margin-left: 8px;
     }
     .task-title {
       font-weight: bold;
