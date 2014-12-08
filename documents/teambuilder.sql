@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-12-04 09:50:37
+-- 生成日期: 2014-12-08 13:51:24
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `detail` (
   `tid` bigint(20) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
+  `filelist` varchar(1000) NOT NULL DEFAULT '[]',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`did`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
@@ -116,9 +117,9 @@ CREATE TABLE IF NOT EXISTS `detail` (
 -- 转存表中的数据 `detail`
 --
 
-INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`) VALUES
-(1, 1, '我是子任务', '我是子任务的内容', '2014-12-01 09:24:10'),
-(2, 2, '我是子任务2', '我是子任务2的内容', '2014-12-01 09:24:10');
+INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `filelist`, `createtime`) VALUES
+(1, 1, '我是子任务', '我是子任务的内容', '', '2014-12-01 09:24:10'),
+(2, 2, '我是子任务2', '我是子任务2的内容', '', '2014-12-01 09:24:10');
 
 -- --------------------------------------------------------
 

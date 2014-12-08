@@ -22,7 +22,6 @@ define(function(require, exports, module) {
     tools.getModel('add_task', 'add_task', {tid: tid});
     $body.on('click', '.file-label .close-label', function() {
       var no = parseInt($(this).parent().attr('data-no'), 10);
-      console.log(no);
       $(this).parent().remove();
     });
     $body.on('change', '.model #file', function(e) {
@@ -157,6 +156,32 @@ define(function(require, exports, module) {
           }
         }
       });
+    },
+    addTask: function() {
+      var fileList = window.teambuilder.fileList;
+      var data = new FormData();
+      var name = $('.name').val();
+      var content = $('.content').val();
+      var fileLen = 0;
+      if(name === '') {
+        tools.showInfo('任务名称不能为空');
+        $('.name').focus();
+        return;
+      }
+      if(fileList && fileList.length !== 0) {
+        fileList.forEach(function(file, index) {
+          if(file.upload) {
+            fileLen++;
+            data.append('file' + index, file.file);
+          }
+        });
+      }
+      data.append('fileLength', fileLen);
+      data.append('name', name);
+      data.append('content', content);
+      var xhr = new XMLHttpRequest();
+      xhr.open('post', '/add_task');
+      xhr.send(data);
     }
   };
 });

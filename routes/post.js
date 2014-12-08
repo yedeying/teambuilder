@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 var tools = require('../module/tools');
 var global = require('../module/global');
 var signup = require('../module/signup');
@@ -218,5 +220,22 @@ router.post('/edit_task_list', function(req, res) {
   }
   data.time = time.time;
   task.editTaskList(data, sess, res);
+});
+router.post('/add_task', multipartMiddleware, function(req, res) {
+  var upfile = req.files;
+  var sess = req.session;
+  var data = req.body;
+  if(data.title === '') {
+    res.send({code: 1, info: '任务名称不能为空'});
+    return;
+  }
+  var files = [];
+  if(upfile instanceof Array) {
+    files = upfile;
+  } else {
+    files.push(upfile);
+  }
+  data.files = files;
+  task.addTask(data, sess, res);
 });
 module.exports = router;

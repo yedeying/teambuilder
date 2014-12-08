@@ -75,6 +75,7 @@ define(function(require, exports, module) {
     }
   });
   $body.on('click', '.model .close, .cover, .model .cancel', function(e) {
+    window.teambuilder.fileList = [];
     $('.model').remove();
     $cover.css({
       visibility: 'hidden'
@@ -123,6 +124,8 @@ define(function(require, exports, module) {
       task.createTaskList();
     } else if(type === 'edit_task_list') {
       task.editTaskList();
+    } else if(type === 'add_task') {
+      task.addTask();
     }
   });
   function switchProject(option) {
