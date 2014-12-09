@@ -187,5 +187,12 @@ module.exports = {
         });
       });
     });
+  },
+  addTask: function(data, sess, res) {
+    var db = require('./db');
+    var saveFile = require('./file').saveFile;
+    saveFile(data.files, function(files) {
+      console.log(files);
+    });
   }
 };
