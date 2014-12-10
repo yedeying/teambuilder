@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group'];
-var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组'];
+var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list'];
+var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表'];
 urls.forEach(function(url, index) {
   router.get(url, function(req, res) {
     var sess = req.session;

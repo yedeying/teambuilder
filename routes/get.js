@@ -78,15 +78,11 @@ router.get('/project', function(req, res) {
 router.get('/task', function(req, res) {
   var sess = req.session;
   var tid = req.query.tid;
-  if(tid) {
-    if(!/[0-9a-f]{40}/.test(tid)) {
-      res.redirect('/404');
-      return;
-    }
-    task.generateDetailPage(sess, tid, res);
-  } else {
-    task.generatePage(sess, res);
+  if(tid && !/[0-9a-f]{40}/.test(tid)) {
+    res.redirect('/404');
+    return;
   }
+  task.generatePage(sess, res, tid);
 });
 router.get('/joingroup', function(req, res) {
   res.render('joingroup', {});

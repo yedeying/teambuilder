@@ -2379,6 +2379,7 @@ body button {
   font-size: 29px;
   color: #fff;
   cursor: pointer;
+  margin-left: 10px;
 }
 .header .title-block .search-btn {
   color: #aaa;
@@ -3240,7 +3241,9 @@ body button {
   cursor: pointer;
   margin-left: 10px;
 }
-.model .model-wrapper .remove-project-inner {
+.model .model-wrapper .remove-project-inner,
+.model .model-wrapper .remove-task-list-inner,
+.model .model-wrapper .remove-task-inner {
   padding: 10px 20px;
 }
 .model .model-wrapper .add-people-inner {

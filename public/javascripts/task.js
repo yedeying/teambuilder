@@ -7,11 +7,17 @@ define(function(require, exports, module) {
   $body.on('click', '.create-task-list', function(e) {
     tools.getModel('create_task_list', 'create_task_list');
   });
-  $body.on('click', '.edit', function(e) {
+  $body.on('click', '.task-title-block .edit', function(e) {
     var tid = $(this).parent().attr('data-tid');
     tools.getModel('edit_task_list', 'edit_task_list', {tid: tid});
   });
-  $body.on('click', '.add', function(e) {
+  $body.on('click', '.task-title-block .remove', function() {
+    var that = this;
+    tools.getModel('remove_task_list', 'remove_task_list', {}, undefined, function() {
+      $('.model').attr('data-tid', $(that).parent().attr('data-tid'));
+    });
+  });
+  $body.on('click', '.task-title-block .add', function(e) {
     function appendFile(file) {
       var html = '<span data-no="' + fileList.length + '" class="file-label"><span>' + file.name + '</span><span class="close-label">×</span></span>';
       $('.file-label-box').append(html);
@@ -199,6 +205,21 @@ define(function(require, exports, module) {
           }
         }
       };
+    },
+    removeTaskList: function() {
+      var tid = $('.model').attr('data-tid');
+      $.post('/remove_task_list', {tid: tid}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.reload(false);
+            }, 1000);
+          }
+        }
+      })
+    },
+    removeTask: function() {
     }
   };
 });

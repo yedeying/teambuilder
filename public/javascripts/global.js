@@ -126,6 +126,10 @@ define(function(require, exports, module) {
       task.editTaskList();
     } else if(type === 'add_task') {
       task.addTask();
+    } else if(type === 'remove_task_list') {
+      task.removeTaskList();
+    } else if(type === 'remove_task') {
+      task.removeTask();
     }
   });
   function switchProject(option) {

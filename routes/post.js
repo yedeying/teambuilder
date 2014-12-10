@@ -238,4 +238,9 @@ router.post('/add_task', multipartMiddleware, function(req, res) {
   data.files = files;
   task.addTask(data, sess, res);
 });
+router.post('/remove_task_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  task.removeTaskList(data, sess, res);
+});
 module.exports = router;

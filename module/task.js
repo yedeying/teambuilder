@@ -14,7 +14,7 @@ module.exports = {
       callback();
     });
   },
-  generatePage: function(sess, res) {
+  generatePage: function(sess, res, tidSha1) {
     var that = this;
     var db = require('./db');
     var tools = require('./tools');
@@ -25,7 +25,11 @@ module.exports = {
     var data = {};
     data.task = [];
     data.title = sess.projectTitle;
-    var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' order by expecttime desc';
+    if(tidSha1) {
+      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' and sha1(tid) = "' + tidSha1 + '" order by expecttime desc';
+    } else {
+      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' order by expecttime desc';
+    }    
     db.query(sql, function(err, rows) {
       if(err) throw err;
       var cnt = {};
@@ -230,5 +234,29 @@ module.exports = {
         }
       });
     });
+  },
+  removeTaskList: function(data, sess, res) {
+    var db = require('./db');
+    var cnt = 0;
+    var sql = 'delete from detail where sha1(tid) = "' + data.tid + '"';
+    console.log(sql);
+    db.query(sql, function(err) {
+      if(err) throw err;
+      cnt++;
+      if(cnt === 2) {
+        finish();
+      }
+    });
+    sql = 'delete from task where sha1(tid) = "' + data.tid + '"';
+    db.query(sql, function(err) {
+      if(err) throw err;
+      cnt++;
+      if(cnt === 2) {
+        finish();
+      }
+    });
+    function finish() {
+      res.send({code: 0, info: '删除成功'});
+    }
   }
 };
