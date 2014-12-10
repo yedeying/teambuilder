@@ -30,7 +30,8 @@
     "joingroup": 1,
     "switch_project": 1,
     "get_project_status": 1,
-    "edit_profile": 1
+    "edit_profile": 1,
+    "add_task": 1
   },
   "_info": {
     "need unlogin": 0,

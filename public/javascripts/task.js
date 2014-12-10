@@ -161,8 +161,9 @@ define(function(require, exports, module) {
       var fileList = window.teambuilder.fileList;
       var data = new FormData();
       var name = $('.name').val();
-      var content = $('.content').val();
+      var content = $('.add-task-inner .content').val();
       var fileLen = 0;
+      var fileName = [];
       if(name === '') {
         tools.showInfo('任务名称不能为空');
         $('.name').focus();
@@ -173,15 +174,31 @@ define(function(require, exports, module) {
           if(file.upload) {
             fileLen++;
             data.append('file' + index, file.file);
+            fileName.push(file.file.name);
           }
         });
       }
+      data.append('tid', $('.add-task-inner').attr('data-tid'));
       data.append('fileLength', fileLen);
       data.append('name', name);
       data.append('content', content);
+      data.append('fileName', JSON.stringify(fileName));
       var xhr = new XMLHttpRequest();
       xhr.open('post', '/add_task');
       xhr.send(data);
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+          var data = JSON.parse(xhr.responseText);
+          if(typeof data.code === 'number') {
+            tools.showInfo(data.info);
+          }
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.reload();
+            }, 1000);
+          }
+        }
+      };
     }
   };
 });

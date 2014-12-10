@@ -230,10 +230,10 @@ router.post('/add_task', multipartMiddleware, function(req, res) {
     return;
   }
   var files = [];
-  if(upfile instanceof Array) {
-    files = upfile;
-  } else {
-    files.push(upfile);
+  for(var file in upfile) {
+    if(upfile.hasOwnProperty(file)) {
+      files.push(upfile[file]);
+    }
   }
   data.files = files;
   task.addTask(data, sess, res);

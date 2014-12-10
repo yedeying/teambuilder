@@ -63,7 +63,6 @@ module.exports = {
         json: JSON.stringify,
         getTime: tools.getTime
       }});
-      console.log('ok');
     });
   },
   createTaskList: function(data, sess, res) {
@@ -191,8 +190,45 @@ module.exports = {
   addTask: function(data, sess, res) {
     var db = require('./db');
     var saveFile = require('./file').saveFile;
-    saveFile(data.files, function(files) {
-      console.log(files);
+    var cnt = 0;
+    var len = data.files.length;
+    var sql = 'select task.tid as tid, user.uid as uid from task, user where sha1(task.tid) = "' + data.tid + '" and user.email = "' + sess.email + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length !== 1) {
+        res.send({code: 1, info: 'tid格式错误'});
+        return;
+      }
+      var tid = rows[0]['tid'];
+      var uid = rows[0]['uid'];
+      var sql = 'insert into detail (tid, title, content, createtime) values (' + tid + ', "' + data.name + '", "' + data.content + '", current_timestamp())';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        if(data.files.length === 0) {
+          res.send({code: 0, info: '添加成功'});
+        } else {
+          var sql = 'select max(did) as did from detail';
+          db.query(sql, function(err, rows) {
+            if(err) throw err;
+            if(rows.length === 1) {
+              var did = rows[0]['did'];
+              saveFile(data.files, function(sha1, fileName, callback) {
+                var time = (new Date()).getTime();
+                var sql = 'insert into file (id, uploader, type, filename, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", "' + sha1 + '", ' + time + ', current_timestamp())';
+                db.query(sql, function(err, rows) {
+                  if(err) throw err;
+                  callback(sha1 + time);
+                });
+              }, function() {
+                cnt++;
+                if(cnt === len) {
+                  res.send({code: 0, info: '添加成功'});
+                }
+              });
+            }
+          });
+        }
+      });
     });
   }
 };
