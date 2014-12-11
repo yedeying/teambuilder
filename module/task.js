@@ -187,5 +187,9 @@ module.exports = {
         });
       });
     });
+  },
+  addTask: function(data, sess, res) {
+    var db = require('./db');
+    
   }
 };

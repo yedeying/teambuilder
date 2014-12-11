@@ -197,6 +197,10 @@
   top:0px;
   width:32px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u11_img {
@@ -220,6 +224,10 @@
   top:0px;
   width:133px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u13_img {
@@ -232,7 +240,7 @@
 #u14 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:129px;
   word-wrap:break-word;
 }
@@ -242,6 +250,10 @@
   top:0px;
   width:79px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u15_img {
@@ -254,7 +266,7 @@
 #u16 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:75px;
   word-wrap:break-word;
 }
@@ -264,6 +276,10 @@
   top:0px;
   width:128px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u17_img {
@@ -276,7 +292,7 @@
 #u18 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:124px;
   word-wrap:break-word;
 }
@@ -286,6 +302,10 @@
   top:0px;
   width:141px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u19_img {
@@ -298,7 +318,7 @@
 #u20 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:137px;
   word-wrap:break-word;
 }
@@ -308,6 +328,10 @@
   top:0px;
   width:201px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u21_img {
@@ -320,7 +344,7 @@
 #u22 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:197px;
   word-wrap:break-word;
 }
@@ -330,6 +354,10 @@
   top:0px;
   width:106px;
   height:30px;
+  font-family:'微软雅黑 Regular', '微软雅黑';
+  font-weight:400;
+  font-style:normal;
+  color:#FFFFFF;
   text-align:center;
 }
 #u23_img {
@@ -342,7 +370,7 @@
 #u24 {
   position:absolute;
   left:2px;
-  top:7px;
+  top:6px;
   width:102px;
   word-wrap:break-word;
 }
