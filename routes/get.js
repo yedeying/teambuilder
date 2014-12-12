@@ -82,6 +82,9 @@ router.get('/task', function(req, res) {
     res.redirect('/404');
     return;
   }
+  if(!tid && !sess.gid) {
+    res.redirect('/index');
+  }
   task.generatePage(sess, res, tid);
 });
 router.get('/joingroup', function(req, res) {

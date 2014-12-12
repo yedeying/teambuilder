@@ -1,14 +1,16 @@
 module.exports = {
   getTaskDetail: function(tid, detail, callback) {
     var db = require('./db');
-    var sql = 'select title, content, unix_timestamp(createtime) as time from detail where tid = ' + tid;
+    var sql = 'select did, title, content, unix_timestamp(createtime) as time, (select count(*) from file where file.type = 1 and file.id = detail.did) as num from detail where tid = ' + tid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
       rows.forEach(function(row) {
         detail.push({
+          did: row['did'],
           title: row['title'],
           content: row['content'],
-          time: row['time']
+          time: row['time'],
+          num: row['num']
         });
       });
       callback();
@@ -26,7 +28,7 @@ module.exports = {
     data.task = [];
     data.title = sess.projectTitle;
     if(tidSha1) {
-      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' and sha1(tid) = "' + tidSha1 + '" order by expecttime desc';
+      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where sha1(tid) = "' + tidSha1 + '" order by expecttime desc';
     } else {
       var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' order by expecttime desc';
     }    

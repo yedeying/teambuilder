@@ -91,16 +91,36 @@
       }
       .second {
         padding: 8px 4px;
-        a {
+        .file {
+          cursor: pointer;
           color: $linkblue;
-          &:hover {
-            text-decoration: underline;
-          }
+          margin-right: 5px;
+        }
+        .fa {
+          color: $iconblue;
+          margin-right: 2px;
         }
       }
+      .operation {
+        @include border-radius(4px);
+        padding: 4px 10px;
+      }
       .third {
+        color: #666;
+        text-align: right;
+        i {
+          display: none;
+          margin-left: 10px;
+          cursor: pointer;
+        }
+      }
+      .fourth {
+        width: 90px;
         text-align: right;
       }
+    }
+    tr:hover .fa {
+      display: inline;
     }
   }
 }

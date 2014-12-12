@@ -2922,14 +2922,38 @@ body button {
 .task-list .detail tr .second {
   padding: 8px 4px;
 }
-.task-list .detail tr .second a {
+.task-list .detail tr .second .file {
+  cursor: pointer;
   color: #0061bc;
+  margin-right: 5px;
 }
-.task-list .detail tr .second a:hover {
-  text-decoration: underline;
+.task-list .detail tr .second .fa {
+  color: #5eb1ff;
+  margin-right: 2px;
+}
+.task-list .detail tr .operation {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  padding: 4px 10px;
 }
 .task-list .detail tr .third {
+  color: #666;
   text-align: right;
+}
+.task-list .detail tr .third i {
+  display: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.task-list .detail tr .fourth {
+  width: 90px;
+  text-align: right;
+}
+.task-list .detail tr:hover .fa {
+  display: inline;
 }
 
 .project-list-nav {
