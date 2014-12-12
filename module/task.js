@@ -195,7 +195,6 @@ module.exports = {
   },
   addTask: function(data, sess, res) {
     var db = require('./db');
-<<<<<<< HEAD
     var saveFile = require('./file').saveFile;
     var cnt = 0;
     var len = data.files.length;
@@ -261,8 +260,5 @@ module.exports = {
     function finish() {
       res.send({code: 0, info: '删除成功'});
     }
-=======
-    
->>>>>>> 89881430215f3d1e4065972b63d49335fa69db12
   }
 };
