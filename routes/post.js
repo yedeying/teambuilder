@@ -174,18 +174,6 @@ router.post('/create_task_list', function(req, res) {
     res.send(time);
     return;
   }
-  if(data.participant.length === 0) {
-    res.send({code: 1, info: '请至少选择一个以上的参与者'});
-    return;
-  }
-  var bl = false;
-  data.participant.forEach(function(value) {
-    if(!/[0-9a-f]{40}/.test(value)) bl = true;
-  });
-  if(bl) {
-    res.send({code: 1, info: '参与者格式错误'});
-    return;
-  }
   data.time = time.time;
   task.createTaskList(data, sess, res);
 });
@@ -202,18 +190,6 @@ router.post('/edit_task_list', function(req, res) {
     res.send(time);
     return;
   }
-  if(data.participant.length === 0) {
-    res.send({code: 1, info: '请至少选择一个以上的参与者'});
-    return;
-  }
-  var bl = false;
-  data.participant.forEach(function(value) {
-    if(!/[0-9a-f]{40}/.test(value)) bl = true;
-  });
-  if(bl) {
-    res.send({code: 1, info: '参与者格式错误'});
-    return;
-  }
   if(!/[0-9a-f]{40}/.test(data.tid)) {
     res.send({code: 1, info: '任务列表格式错误'});
     return;
@@ -225,8 +201,21 @@ router.post('/add_task', multipartMiddleware, function(req, res) {
   var upfile = req.files;
   var sess = req.session;
   var data = req.body;
+  data.participant = JSON.parse(data.participant);
   if(data.title === '') {
     res.send({code: 1, info: '任务名称不能为空'});
+    return;
+  }
+  if(data.participant.length === 0) {
+    res.send({code: 1, info: '请至少选择一个以上的参与者'});
+    return;
+  }
+  var bl = false;
+  data.participant.forEach(function(value) {
+    if(!/[0-9a-f]{40}/.test(value)) bl = true;
+  });
+  if(bl) {
+    res.send({code: 1, info: '参与者格式错误'});
     return;
   }
   var files = [];
@@ -241,6 +230,19 @@ router.post('/add_task', multipartMiddleware, function(req, res) {
 router.post('/remove_task_list', function(req, res) {
   var sess = req.session;
   var data = req.body;
+  if(!/[0-9a-f{40}]/.test(data.tid)) {
+    res.send({code: 1, info: 'tid格式错误'});
+    return;
+  }
   task.removeTaskList(data, sess, res);
+});
+router.post('/remove_task', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!/[0-9a-f{40}]/.test(data.did)) {
+    res.send({code: 1, info: 'did格式错误'});
+    return;
+  }
+  task.removeTask(data, sess, res);
 });
 module.exports = router;

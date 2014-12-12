@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-12-08 13:51:24
+-- 生成日期: 2014-12-12 12:59:19
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -35,6 +35,11 @@ CREATE TABLE IF NOT EXISTS `class` (
   UNIQUE KEY `cid` (`cid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
+--
+-- 插入之前先把表清空（truncate） `class`
+--
+
+TRUNCATE TABLE `class`;
 --
 -- 转存表中的数据 `class`
 --
@@ -91,6 +96,11 @@ CREATE TABLE IF NOT EXISTS `comment` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
+-- 插入之前先把表清空（truncate） `comment`
+--
+
+TRUNCATE TABLE `comment`;
+--
 -- 转存表中的数据 `comment`
 --
 
@@ -110,16 +120,29 @@ CREATE TABLE IF NOT EXISTS `detail` (
   `content` text NOT NULL,
   `filelist` varchar(1000) NOT NULL DEFAULT '[]',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `participant` varchar(1000) NOT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
+--
+-- 插入之前先把表清空（truncate） `detail`
+--
+
+TRUNCATE TABLE `detail`;
 --
 -- 转存表中的数据 `detail`
 --
 
-INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `filelist`, `createtime`) VALUES
-(1, 1, '我是子任务', '我是子任务的内容', '', '2014-12-01 09:24:10'),
-(2, 2, '我是子任务2', '我是子任务2的内容', '', '2014-12-01 09:24:10');
+INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `filelist`, `createtime`, `participant`) VALUES
+(2, 2, '我是子任务2', '我是子任务2的内容', '', '2014-12-01 09:24:10', '[11,13]'),
+(3, 2, 'ye', 'aa', '[]', '2014-12-12 03:51:17', '[11,13]'),
+(5, 2, 'asf', 'sfd', '[]', '2014-12-12 03:54:23', '[11,13]'),
+(6, 9, 'asf', 'sdf', '[]', '2014-12-12 03:56:40', '[11,13]'),
+(8, 2, 'hgh', 'afds', '[]', '2014-12-12 06:41:53', '[11,13]'),
+(9, 2, 'a', 'f', '[]', '2014-12-12 06:45:10', '[11]'),
+(10, 10, 'af', 'asf', '[]', '2014-12-12 10:11:54', '[13]'),
+(11, 13, 'af', 'fsdfg', '[]', '2014-12-12 10:57:48', '[11]'),
+(12, 2, '我是来传文件的', 'yeyeey', '[]', '2014-12-12 11:48:55', '[11,13]');
 
 -- --------------------------------------------------------
 
@@ -134,16 +157,30 @@ CREATE TABLE IF NOT EXISTS `file` (
   `type` int(11) NOT NULL,
   `filename` varchar(1024) NOT NULL,
   `fsha1` varchar(40) NOT NULL,
+  `timestamp` varchar(100) NOT NULL,
   `uploadtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`fid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
+--
+-- 插入之前先把表清空（truncate） `file`
+--
+
+TRUNCATE TABLE `file`;
 --
 -- 转存表中的数据 `file`
 --
 
-INSERT INTO `file` (`fid`, `id`, `uploader`, `type`, `filename`, `fsha1`, `uploadtime`) VALUES
-(1, 1, 13, 0, 'my.css', 'fdgfsdfsaf1df6sadf4dsa56fa', '2014-11-20 23:06:22');
+INSERT INTO `file` (`fid`, `id`, `uploader`, `type`, `filename`, `fsha1`, `timestamp`, `uploadtime`) VALUES
+(2, 5, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356463382', '2014-12-12 03:54:23'),
+(3, 6, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356600638', '2014-12-12 03:56:40'),
+(4, 9, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418366710761', '2014-12-12 06:45:10'),
+(5, 10, 13, 1, 'line.png', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418379114441', '2014-12-12 10:11:54'),
+(6, 11, 13, 1, 'line.png', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418381868075', '2014-12-12 10:57:48'),
+(7, 11, 13, 1, '60045286[1].png', '8a6bd174a2d7814d2ce0dd93bb661719a4cc5f5b', '1418381868076', '2014-12-12 10:57:48'),
+(8, 11, 13, 1, '60047692[1].png', '2dfd92d2a2fb4a90c3ac34250b510451c5197677', '1418381868081', '2014-12-12 10:57:48'),
+(9, 11, 13, 1, 'LLLS0SWR', '60c31e9e889da63ded69cc71537548dda4c2235c', '1418381868083', '2014-12-12 10:57:48'),
+(10, 12, 13, 1, '高保真.zip', '1573f04160c64b5b3e6f255dde24fd66c23178c7', '1418384936003', '2014-12-12 11:48:56');
 
 -- --------------------------------------------------------
 
@@ -161,6 +198,11 @@ CREATE TABLE IF NOT EXISTS `groups` (
   UNIQUE KEY `gid` (`gid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- 插入之前先把表清空（truncate） `groups`
+--
+
+TRUNCATE TABLE `groups`;
 --
 -- 转存表中的数据 `groups`
 --
@@ -182,6 +224,11 @@ CREATE TABLE IF NOT EXISTS `invite` (
   `sha1code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 插入之前先把表清空（truncate） `invite`
+--
+
+TRUNCATE TABLE `invite`;
 --
 -- 转存表中的数据 `invite`
 --
@@ -207,6 +254,11 @@ CREATE TABLE IF NOT EXISTS `project` (
   UNIQUE KEY `pid` (`pid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
+--
+-- 插入之前先把表清空（truncate） `project`
+--
+
+TRUNCATE TABLE `project`;
 --
 -- 转存表中的数据 `project`
 --
@@ -238,21 +290,22 @@ CREATE TABLE IF NOT EXISTS `task` (
   `participant` text NOT NULL,
   PRIMARY KEY (`tid`),
   UNIQUE KEY `tid` (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
+--
+-- 插入之前先把表清空（truncate） `task`
+--
+
+TRUNCATE TABLE `task`;
 --
 -- 转存表中的数据 `task`
 --
 
 INSERT INTO `task` (`tid`, `pid`, `creater`, `title`, `content`, `status`, `createtime`, `expecttime`, `finishtime`, `participant`) VALUES
-(1, 1, 13, 'aaaa', '', 0, '2014-12-04 06:52:49', '2014-12-05 03:41:00', '0000-00-00 00:00:00', '[11]'),
 (2, 1, 13, 'aa', '', 0, '2014-12-04 08:09:16', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11,13]'),
-(3, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
-(4, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
-(5, 1, 13, 'aasdafasd', '', 0, '2014-12-04 06:53:02', '2014-12-05 03:41:00', '0000-00-00 00:00:00', '[11]'),
-(7, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
-(8, 1, 13, 'aa', '', 0, '2014-12-04 06:45:59', '2014-12-05 03:41:01', '0000-00-00 00:00:00', '[11]'),
-(9, 14, 13, '我是第一个任务', '', 0, '2014-12-04 08:28:43', '2015-12-04 08:30:00', '0000-00-00 00:00:00', '[11,13]');
+(9, 14, 13, '我是第一个任务', '', 0, '2014-12-04 08:28:43', '2015-12-04 08:30:00', '0000-00-00 00:00:00', '[11,13]'),
+(10, 15, 13, 'hg', '', 0, '2014-12-12 05:31:20', '2014-12-31 05:32:00', '0000-00-00 00:00:00', '[11,13]'),
+(13, 13, 13, 'dsaf', '', 0, '2014-12-12 10:57:20', '2014-12-12 10:58:01', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -273,6 +326,11 @@ CREATE TABLE IF NOT EXISTS `tmpuser` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `tmpuser`
+--
+
+TRUNCATE TABLE `tmpuser`;
 -- --------------------------------------------------------
 
 --
@@ -289,6 +347,11 @@ CREATE TABLE IF NOT EXISTS `update` (
   UNIQUE KEY `did` (`did`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- 插入之前先把表清空（truncate） `update`
+--
+
+TRUNCATE TABLE `update`;
 -- --------------------------------------------------------
 
 --
@@ -311,6 +374,11 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
+--
+-- 插入之前先把表清空（truncate） `user`
+--
+
+TRUNCATE TABLE `user`;
 --
 -- 转存表中的数据 `user`
 --

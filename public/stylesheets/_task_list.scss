@@ -53,6 +53,7 @@
       cursor: pointer;
       visibility: hidden;
       margin-left: 8px;
+      float: right;
     }
     .task-title {
       font-weight: bold;
@@ -76,6 +77,10 @@
         padding: 10px 0;
         border-bottom: 1px solid #eee;
       }
+      .participant {
+        color: #aaa;
+        display: none;
+      }
       .first {
         width: 85px;
         text-align: center;
@@ -91,7 +96,7 @@
       }
       .second {
         padding: 8px 4px;
-        .file {
+        .view {
           cursor: pointer;
           color: $linkblue;
           margin-right: 5px;
@@ -119,8 +124,10 @@
         text-align: right;
       }
     }
-    tr:hover .fa {
-      display: inline;
+    tr:hover {
+      .fa, .participant {
+        display: inline;
+      }
     }
   }
 }

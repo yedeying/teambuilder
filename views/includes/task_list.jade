@@ -16,25 +16,36 @@
   each task in data.task
     .task-title-block(data-tid='#{func.sha1(task.tid.toString())}')
       a.task-title(href="/task?tid=#{func.sha1(task.tid.toString())}") #{task.title}
-      span.edit 修改列表
-      span.add 添加任务
-      span.remove 移除列表
+      span.remove
+        i.fa.fa-trash
+        span 移除列表
+      span.edit
+        i.fa.fa-edit
+        span 修改列表
+      span.add
+        i.fa.fa-plus
+        span 添加任务
     table.detail
       each detail in task.detail
         tr(data-did='#{func.sha1(detail.did.toString())}')
           td.first
             span #{detail.title}
-          if detail.num === 0
-            td.second
-              span #{detail.content}
-          else
-            td.second
-              span.file
+          td.second
+            if detail.num === 0
+              span.view #{detail.content}
+            else
+              span.view
                 i.fa.fa-file
                 span (#{detail.num}个文件)
-              span #{detail.content}
+                span #{detail.content}
+            span.participant
+              if detail.participant.length !== 0
+                span &nbsp;(参与者:
+                each member in detail.participant
+                  span &nbsp;#{member}
+                span )
           td.third
-            span.operation
-              i.fa.fa-edit(title='编辑任务')
-              i.fa.fa-trash(title='移除任务')
+            span.operation(data-did='#{func.sha1(detail.did.toString())}')
+              i.fa.fa-edit.edit-task(title='编辑任务')
+              i.fa.fa-trash.del-task(title='移除任务')
           td.fourth #{func.getTime(detail.time, 'hh:mm DD C')}

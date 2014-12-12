@@ -111,14 +111,62 @@
         }
       }
     }
+    .view-task-inner {
+      padding: 20px;
+      .description {
+        @include border-radius(4px);
+        padding: 12px;
+        background-color: #eee;
+      }
+      hr {
+        border-width: 0;
+        padding: 5px 0;
+        border-bottom: 1px solid #f1f2f3;
+      }
+      .name {
+        @include border-radius(4px);
+        background-color: #5A5A5A;
+        padding: 4px 8px;
+        color: white;
+        margin-right: 5px;
+      }
+      .down-file {
+        cursor: pointer;
+        margin-right: 16px;
+        color: $linkblue;
+      }
+    }
     .add-task-inner {
       padding: 20px;
       .name, .content {
         @include input(9px);
         width: 100%;
       }
+      .member {
+        padding: 4px 8px;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+        &:hover {
+          background-color: #f3f4f5;
+        }
+        @include border-radius(4px);
+      }
+      .check {
+        display: none;
+        &:checked + .member {
+          background-color: $lightblue;
+          border-color: $lightblue;
+          color: $white;
+        }
+      }
       #file {
         display: none;
+      }
+      textarea {
+        @include input(9px);
+        resize: vertical;
+        width: 100%;
+        height: 60px;
       }
       .file {
         display: inline-block;

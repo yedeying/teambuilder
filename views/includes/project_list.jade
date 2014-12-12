@@ -20,7 +20,7 @@
             span(class="#{act.type}")= typeArr[act.type]
           td.second
             if act.type === 'detail'
-              a(href="/task?tid=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
+              span(class='#{act.type}')= act.title
             else
               a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
           td.third

@@ -5,6 +5,9 @@ var moduleArray = {};
 var tools = require('../module/tools');
 var index = require('../module/index');
 var task = require('../module/task');
+var file = require('../module/file');
+var people = require('../module/people');
+var project = require('../module/project');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
@@ -48,7 +51,6 @@ router.get('/vertify', function(req, res) {
 });
 router.get('/invite', function(req, res) {
   var code = req.query.code;
-  var people = require('../module/people');
   if(/[0-9a-f]{40}/.test(code)) {
     people.finishInvite(code, req.session, res);
   } else {
@@ -57,8 +59,6 @@ router.get('/invite', function(req, res) {
 });
 router.get('/project', function(req, res) {
   var sess = req.session;
-  var project = require('../module/project');
-  var tools = require('../module/tools');
   if(!tools.checkSha1(req.query.pid)) {
     if(sess.pid) {
       req.query.pid = tools.getSha1(sess.pid.toString());
@@ -89,5 +89,14 @@ router.get('/task', function(req, res) {
 });
 router.get('/joingroup', function(req, res) {
   res.render('joingroup', {});
-})
+});
+router.get('/download/task', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(!/[0-9a-f]{40}/.test(data.id) || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '格式错误'});
+    return;
+  }
+  file.downloadFile(data, 1, res);
+});
 module.exports = router;

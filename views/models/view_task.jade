@@ -1,0 +1,16 @@
+.model
+  .model-wrapper
+    .title-block
+      h2.title #{title}
+      span.close &times;
+    .content
+      .view-task-inner
+        h3.title 任务详情
+        .description #{content}
+        h3.participant 参与者
+        each people in memberList
+          a.name(href='/people', target='_blank') #{people.name}
+        if fileList.length !== 0
+          h3.files 相关附件
+          each file in fileList
+            a.down-file(href='/download/task?id=#{sha1(did.toString())}&fid=#{sha1(file.fid.toString())}', target='_blank') #{file.name}

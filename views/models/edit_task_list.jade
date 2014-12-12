@@ -8,11 +8,3 @@ block content
     input.content(id='content', type='text', placeholder='任务列表描述', value='#{content}')
     h3 截止日期(留空代表截止日期)
     input.date(id='expected_time', type='text', placeholder='1990/01/01 12:00', value='#{time}')
-    h3 指定参与者
-    each people, index in memberList
-      if people.on
-        input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}', checked='checked')
-      else
-        input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}')
-      label.member(for='member#{index}')
-        span.username= people.name

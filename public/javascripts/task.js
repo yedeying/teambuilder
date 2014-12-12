@@ -11,10 +11,23 @@ define(function(require, exports, module) {
     var tid = $(this).parent().attr('data-tid');
     tools.getModel('edit_task_list', 'edit_task_list', {tid: tid});
   });
-  $body.on('click', '.task-title-block .remove', function() {
+  $body.on('click', '.task-title-block .remove', function(e) {
     var that = this;
     tools.getModel('remove_task_list', 'remove_task_list', {}, undefined, function() {
       $('.model').attr('data-tid', $(that).parent().attr('data-tid'));
+    });
+  });
+  $body.on('click', '.del-task', function(e) {
+    var that = this;
+    tools.getModel('remove_task', 'remove_task', {}, undefined, function() {
+      $('.model').attr('data-did', $(that).parent().attr('data-did'));
+    });
+  });
+  $body.on('click', '.view', function(e) {
+    var that = this;
+    var did = $(that).parent().parent().attr('data-did');
+    tools.getModel('view_task', 'view_task', {did: did}, undefined, function() {
+      $('.model').attr('data-did', did);
     });
   });
   $body.on('click', '.task-title-block .add', function(e) {
@@ -71,11 +84,6 @@ define(function(require, exports, module) {
       var content = $('.model .content').val();
       var name = $name.val();
       var time = $time.val();
-      var $check = $('.check:checked');
-      var participant = [];
-      $check.each(function(index) {
-        participant.push(this.getAttribute('data-uid'));
-      });
       if(name === '') {
         tools.showInfo('列表名不能为空');
         $name.focus();
@@ -90,16 +98,11 @@ define(function(require, exports, module) {
           time = res.time;
         }
       }
-      if(participant.length === 0) {
-        tools.showInfo('请至少选择一个以上的参与者');
-        return;
-      }
       if(time !== '') time = time.getTime();
       var data = {
         name: name,
         content: content,
-        time: time,
-        participant: participant
+        time: time
       };
       data = JSON.stringify(data);
       $.post('/create_task_list', {data: data}, function(data) {
@@ -121,10 +124,6 @@ define(function(require, exports, module) {
       var time = $time.val();
       var tid = $('.create-task-list-inner').attr('data-tid');
       var $check = $('.check:checked');
-      var participant = [];
-      $check.each(function(index) {
-        participant.push(this.getAttribute('data-uid'));
-      });
       if(name === '') {
         tools.showInfo('列表名不能为空');
         $name.focus();
@@ -139,16 +138,11 @@ define(function(require, exports, module) {
           time = res.time;
         }
       }
-      if(participant.length === 0) {
-        tools.showInfo('请至少选择一个以上的参与者');
-        return;
-      }
       if(time !== '') time = time.getTime();
       var data = {
         name: name,
         content: content,
         time: time,
-        participant: participant,
         tid: tid
       };
       data = JSON.stringify(data);
@@ -184,6 +178,16 @@ define(function(require, exports, module) {
           }
         });
       }
+      var $check = $('.check:checked');
+      var participant = [];
+      $check.each(function(index) {
+        participant.push(this.getAttribute('data-uid'));
+      });
+      if(participant.length === 0) {
+        tools.showInfo('请至少选择一个以上的参与者');
+        return;
+      }
+      data.append('participant', JSON.stringify(participant));
       data.append('tid', $('.add-task-inner').attr('data-tid'));
       data.append('fileLength', fileLen);
       data.append('name', name);
@@ -220,6 +224,17 @@ define(function(require, exports, module) {
       })
     },
     removeTask: function() {
+      var did = $('.model').attr('data-did');
+      $.post('/remove_task', {did: did}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            setTimeout(function() {
+              location.reload(false);
+            }, 1000);
+          }
+        }
+      })
     }
   };
 });
