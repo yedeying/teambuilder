@@ -1,4 +1,7 @@
 extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/people.css')
 block content
   include includes/header
   .people-inner
@@ -64,6 +67,7 @@ block content
             td.edit(class="#{(data.admin || people.self === 'self') ? 'edit-profile' : ''}")
               if data.admin || people.self === 'self'
                 i.fa.fa-pencil
-  include includes/sea
+
+block scripts
   script.
     seajs.use('/javascripts/people.js');

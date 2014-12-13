@@ -30,7 +30,10 @@ app.use(session({
   saveUninitialized: true
 }));
 app.use(cookieParser());
-app.use(require('node-compass')({mode: 'expanded'}));
+app.use(require('node-compass')({
+  mode: 'compress',
+  sass: 'sass'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
   var route = require('./settings/route_config');

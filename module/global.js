@@ -1,6 +1,6 @@
+var db = require('./db');
 module.exports = {
   renderSwitchProject: function(sess, res, callback) {
-    var db = require('./db');
     var email = sess.email;
     var sql = 'select project.name as name, project.pid as pid from user, project where user.gid = project.gid and user.email = "' + email + '"';
     var data = {};
@@ -21,7 +21,6 @@ module.exports = {
     });
   },
   switchProject: function(sess, pid, res) {
-    var db = require('./db');
     var sql = 'select name, pid, description from project where sha1(pid) = "' + pid + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;

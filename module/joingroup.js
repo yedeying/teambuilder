@@ -1,6 +1,6 @@
+var db = require('./db');
 module.exports = {
   getUid: function(email, callback) {
-    var db = require('./db');
     var sql = 'select uid from user where email = "' + email + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -10,7 +10,6 @@ module.exports = {
     });
   },
   checkName: function(name, res, callback) {
-    var db = require('./db');
     var sql = 'select * from groups where name = "' + name + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -22,7 +21,6 @@ module.exports = {
     });
   },
   joinGroup: function(data, sess, res) {
-    var db = require('./db');
     var email = sess.email;
     var that = this;
     that.getUid(email, function(uid) {

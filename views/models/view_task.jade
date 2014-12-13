@@ -1,7 +1,7 @@
 .model
   .model-wrapper
     .title-block
-      h2.title #{title}
+      h2.title #{taskTitle}
       span.close &times;
     .content
       .view-task-inner
@@ -9,7 +9,8 @@
         .description #{content}
         h3.participant 参与者
         each people in memberList
-          a.name(href='/people', target='_blank') #{people.name}
+          if people.on
+            a.name(href='/people', target='_blank') #{people.name}
         if fileList.length !== 0
           h3.files 相关附件
           each file in fileList

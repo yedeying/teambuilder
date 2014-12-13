@@ -1,7 +1,7 @@
 define(function(require, exports, module) {
   "use strict";
   require('jquery');
-  window.teambuilder = {};
+  window.teambuilder = window.teambuilder || {};
   var tools = require('./tools');
   var index = require('./index');
   var project = require('./project');
@@ -130,6 +130,8 @@ define(function(require, exports, module) {
       task.removeTaskList();
     } else if(type === 'remove_task') {
       task.removeTask();
+    } else if(type === 'edit_task') {
+      task.editTask();
     }
   });
   function switchProject(option) {

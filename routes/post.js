@@ -10,6 +10,7 @@ var project = require('../module/project');
 var people = require('../module/people');
 var joingroup = require('../module/joingroup');
 var task = require('../module/task');
+var file = require('../module/file');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -244,5 +245,44 @@ router.post('/remove_task', function(req, res) {
     return;
   }
   task.removeTask(data, sess, res);
+});
+router.post('/edit_task', multipartMiddleware, function(req, res) {
+  var upfile = req.files;
+  var sess = req.session;
+  var data = req.body;
+  data.participant = JSON.parse(data.participant);
+  if(data.title === '') {
+    res.send({code: 1, info: '任务名称不能为空'});
+    return;
+  }
+  if(data.participant.length === 0) {
+    res.send({code: 1, info: '请至少选择一个以上的参与者'});
+    return;
+  }
+  var bl = false;
+  data.participant.forEach(function(value) {
+    if(!/[0-9a-f]{40}/.test(value)) bl = true;
+  });
+  if(bl) {
+    res.send({code: 1, info: '参与者格式错误'});
+    return;
+  }
+  var files = [];
+  for(var file in upfile) {
+    if(upfile.hasOwnProperty(file)) {
+      files.push(upfile[file]);
+    }
+  }
+  data.files = files;
+  task.editTask(data, sess, res);
+});
+router.post('/delete_file', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!/[0-9a-f]{40}/.test(data.id) || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '格式错误'});
+    return;
+  }
+  file.deleteFile(data, 1, res);
 });
 module.exports = router;

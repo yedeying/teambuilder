@@ -1,0 +1,14 @@
+table.layout {
+  min-height: 800px;
+  width: 100%;
+  border-spacing: 0;
+  td.left {
+    vertical-align: top;
+    width: 250px;
+    background-color: #f1f1f1;
+    border-right: 1px solid #b9babc;
+  }
+  td.right {
+    vertical-align: top;
+  }
+}

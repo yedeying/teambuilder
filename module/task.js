@@ -246,7 +246,7 @@ module.exports = {
       res.send({code: 0, info: '删除成功'});
     });
   },
-  viewTask: function(data, sess, res) {
+  getTaskInfo: function(data, sess, res, callback) {
     var sql = 'select did, title, content, participant from detail where sha1(did) = "' + data.did + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -259,32 +259,88 @@ module.exports = {
       var title = row['title'];
       var content = row['content'];
       var participant = tools.decodeNumberArray(row['participant']);
-      var names = [];
       people.getMemberList(sess, function(memberList) {
+        for(var i = 0; i < memberList.length; i++) {
+          memberList[i].on = false;
+        }
         for(var i = 0; i < memberList.length; i++) {
           for(var j = 0; j < participant.length; j++) {
             if(memberList[i].uid == participant[j]) {
-              names.push(memberList[i]);
+              memberList[i].on = true;
             }
           }
         }
         file.getFile(did, 1, function(files) {
-          res.render('models/view_task', {
+          callback({
             did: did,
-            title: title,
+            taskTitle: title,
             content: content,
-            memberList: names,
+            memberList: memberList,
             fileList: files,
             sha1: tools.getSha1
-          }, function(err, html) {
-            if(err) {
-              res.send({code: 1, info: 'render error'});
-              throw err;
-            }
-            res.send({code: 0, html: html});
           });
         });
       });
     });
-  }
+  },
+  editTask: function(data, sess, res) {
+    var saveFile = require('./file').saveFile;
+    var event = new emitter();
+    var cnt = 0;
+    var len = data.files.length;
+    var participant = [];
+    var bl = false;
+    data.participant.forEach(function(member, index) {
+      var sql = 'select uid from user where sha1(uid) = "' + member + '"';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        if(rows.length !== 1) {
+          bl = true;
+        } else {
+          participant.push(rows[0]['uid']);
+        }
+        cnt++;
+        if(cnt === data.participant.length) {
+          event.emit('counted');
+        }
+      });
+    });
+    event.on('counted', function() {
+      if(bl) {
+        res.send({code: 1, info: '参与者不存在'});
+        return;
+      }
+      cnt = 0;
+      var sql = 'update detail set title = "' + data.name + '", content = "' + data.content + '", participant = "' + JSON.stringify(participant) + '" where sha1(did) = "' + data.did + '"';
+      db.query(sql, function(err, rows) {
+        if(err) throw err;
+        if(data.files.length === 0) {
+          res.send({code: 0, info: '编辑成功'});
+        } else {
+          var sql = 'select did from detail where sha1(did) = "' + data.did +'"';
+          db.query(sql, function(err, rows) {
+            if(err) throw err;
+            if(rows.length === 1) {
+              var did = rows[0]['did'];
+              saveFile(data.files, function(sha1, fileName, callback) {
+                var time = (new Date()).getTime();
+                people.getUid(sess, function(uid) {
+                  var sql = 'insert into file (id, uploader, type, filename, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", "' + sha1 + '", ' + time + ', current_timestamp())';
+                  db.query(sql, function(err, rows) {
+                    if(err) throw err;
+                    callback(sha1 + time);
+                  });
+                });
+              }, function() {
+                cnt++;
+                if(cnt === len) {
+                  res.send({code: 0, info: '编辑成功'});
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+  },
 };

@@ -4,8 +4,8 @@ html
     title= title
     meta(charset='utf8')
     link(rel='short icon', href='/favicon.ico')
-    link(rel='bookmark', href='/favicon.ico')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    block styles
+      link(rel='stylesheet', href='/stylesheets/login.css')
   body
     block content
     .cover
@@ -13,5 +13,7 @@ html
       span.info-block
         span.info This is some alerting info
         span.close &times;
+    include includes/sea
     script.
       seajs.use('/javascripts/global.js');
+    block scripts

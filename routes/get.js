@@ -36,15 +36,14 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
 ['login', 'signup', 'forget'].forEach(function(page, i) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
-    console.log(page);
-    res.render(page, { title: titles[i]});
+    res.render(page, { title: titles[i], page: 'login' });
   });
 });
 router.get('/vertify', function(req, res) {
   var sess = req.session;
   var tid = req.query.tid;
   if(moduleArray.signup.checkTidFormat(tid)) {
-    res.render('vertify', {title: '完成注册', tid: tid});
+    res.render('vertify', {title: '完成注册', tid: tid, page: 'login'});
   } else {
     res.redirect('/404');
   }
@@ -88,7 +87,7 @@ router.get('/task', function(req, res) {
   task.generatePage(sess, res, tid);
 });
 router.get('/joingroup', function(req, res) {
-  res.render('joingroup', {});
+  res.render('joingroup', {page: 'index'});
 });
 router.get('/download/task', function(req, res) {
   var sess = req.session;

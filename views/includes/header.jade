@@ -20,7 +20,5 @@ header.header
     h1.left.title #{page === 'index' && data.groupName || (page === 'project' || page === 'task') && (data.title) || page === 'people' && data.groupName}
     span.right.notification
       i.fa.fa-bell
-    span.right.search-block
-      span.search-btn
-        i.fa.fa-search
-      input.search(type='text', placeholder='Search')
+    span.right.search-block.
+      <span class="search-btn"><i class="fa fa-search"></i></span><input class="search" type="text" placeholder="Search">

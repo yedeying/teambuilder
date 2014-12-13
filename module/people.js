@@ -1,10 +1,14 @@
-"use strict";
+var jade = require('jade');
+var fs = require('fs');
+var emitter = require('events').EventEmitter;
+var db = require('./db');
+var tools = require('./tools');
+var signup = require('./signup');
+var mailTransporter = require('./mail');
+var setting = require('../settings/global');
+var mailSetting = require('../settings/mail');
 module.exports = {
   getVerifyHtml: function (str, callback) {
-    var jade = require('jade');
-    var fs = require('fs');
-    var tools = require('./tools');
-    var setting = require('../settings/global');
     jade.renderFile('./views/invite_mail.jade', {
       url: tools.getCommonUrl() + 'invite?code=' + str
     }, function(err, html) {
@@ -12,9 +16,22 @@ module.exports = {
       callback(html);
     });
   },
+  getUid: function(sess, callback) {
+    if(sess.uid) {
+      callback(sess.uid);
+      return;
+    }
+    var sql = 'select uid from user where email = "' + sess.email + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1) {
+        callback(rows[0]['uid']);
+      } else {
+        throw new Error('unknown error');
+      }
+    });
+  },
   sendMail: function(email, code, res, callback) {
-    var mailSetting = require('../settings/mail');
-    var mailTransporter = require('./mail');
     this.getVerifyHtml(code, function(html) {
       var mailOptions = {
         from: 'teambuilder<' + mailSetting.auth.user + '>',
@@ -41,7 +58,6 @@ module.exports = {
   generatePage: function(sess, callback) {
     var that = this;
     var data = {};
-    var db = require('./db');
     data.team = [];
     data.admin = false;
     var sql = 'select user.uid as uid, user.username as username, user.gender as gender, user.email as email, user.contact as contact, user.cid as cid, (groups.admin = user.uid) as admin, (user.email = "' + sess.email + '") as self from user as user, user as self, groups where groups.gid = self.gid and user.gid = self.gid and self.email = "' + sess.email + '"';
@@ -84,9 +100,6 @@ module.exports = {
   },
   invitePeople: function(email, self, res, callback) {
     var that = this;
-    var db = require('./db');
-    var tools = require('./tools');
-    var emitter = require('events').EventEmitter;
     var event = new emitter();
     var time = (new Date()).getTime().toString();
     var code = tools.getSha1(email + time + self);
@@ -99,7 +112,6 @@ module.exports = {
     });
   },
   finishInvite: function(code, sess, res) {
-    var db = require('./db');
     var sql = 'select user, admin from invite where sha1code = "' + code + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -124,8 +136,6 @@ module.exports = {
     });
   },
   addPeople: function(data, sess, res) {
-    var signup = require('./signup');
-    var db = require('./db');
     var email = data.email;
     var self = sess.email;
     var that = this;
@@ -170,7 +180,6 @@ module.exports = {
     });
   },
   renderRemovePeople: function(sess, callback) {
-    var db = require('./db');
     var email = sess.email;
     var sql = 'select user.username as username, user.uid as uid from user, user as self where user.gid = self.gid and user.uid != self.uid and self.email = "' + email + '"';
     var group = [];
@@ -186,9 +195,7 @@ module.exports = {
     });
   },
   removePeople: function(data, sess, res) {
-    var db = require('./db');
     var email = sess.email;
-    var emitter = require('events').EventEmitter;
     var event = new emitter();
     var sql = 'select (groups.admin = user.uid) as admin from groups, user where groups.gid = user.gid and user.email = "' + email+ '"';
     db.query(sql, function(err, rows) {
@@ -232,7 +239,6 @@ module.exports = {
     })
   },
   exitGroup: function(sess, res) {
-    var db = require('./db');
     var sql = 'update user set gid = 0 where email = "' + sess.email + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -240,7 +246,6 @@ module.exports = {
     });
   },
   removeGroup: function(sess, res) {
-    var db = require('./db');
     var email = sess.email;
     var gid = sess.gid;
     var sql = 'select (groups.admin = user.uid) as admin from groups, user where groups.gid = user.gid and user.email = "' + email+ '"';
@@ -263,7 +268,6 @@ module.exports = {
     });
   },
   renderEditProfile: function(uid, sess, res, callback) {
-    var db = require('./db');
     var data = {};
     if(!/[0-9a-f]{40}/.test(uid)) {
       res.send({code: 1, info: '用户id格式错误'});
@@ -348,8 +352,6 @@ module.exports = {
     return true;
   },
   editProfile: function(data, sess, res) {
-    var db = require('./db');
-    var tools = require('./tools');
     var email = sess.email;
     if(this.validateProfileData(data, res)) {
       var sql = 'select (user.email = "' + email + '") as self, (groups.admin = self.uid) as admin from user user, groups, user self where user.gid = groups.gid and sha1(user.uid) = "' + data.uid + '" and self.email = "' + email + '"';
@@ -404,7 +406,6 @@ module.exports = {
     }
   },
   getMemberList: function(sess, callback) {
-    var db = require('./db');
     var sql = 'select user.username as username, user.uid as uid from user user, user self where user.gid = self.gid and self.email = "' + sess.email + '"';
     var memberList = [];
     db.query(sql, function(err, rows) {
@@ -419,7 +420,6 @@ module.exports = {
     });
   },
   getUidFromMail: function(email, callback) {
-    var db = require('./db');
     var sql = 'select uid from user where email = "' + email + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;

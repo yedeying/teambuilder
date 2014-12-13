@@ -1,3 +1,6 @@
+var db = require('./db');
+var tools = require('./tools');
+var emitter = require('events').EventEmitter;    
 module.exports = {
   sortActivity: function(project) {
     project.forEach(function(pro) {
@@ -12,7 +15,6 @@ module.exports = {
     });
   },
   generateTask: function(pid, activity, obj, event) {
-    var db = require('./db');
     var sql = 'select task.tid as id, task.title as title, unix_timestamp(task.createtime) as time, user.username as username, user.uid as uid from task, user where user.uid = task.creater && task.pid = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -33,7 +35,6 @@ module.exports = {
     });
   },
   generateTaskDetail: function(pid, activity, obj, event) {
-    var db = require('./db');
     var sql = 'select task.tid as id, detail.title as title, unix_timestamp(task.createtime) as time, user.uid as uid, user.username as username from task, user, detail where detail.tid = task.tid && user.uid = task.creater && task.pid = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -54,7 +55,6 @@ module.exports = {
     });
   },
   generateFile: function(pid, activity, obj, event) {
-    var db = require('./db');
     var sql = 'select file.fid as id, file.filename as filename, unix_timestamp(file.uploadtime) as time, user.username as username, user.uid as uid from file, user where user.uid = file.uploader && file.type = "0" && file.id = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -75,8 +75,6 @@ module.exports = {
     })
   },
   generateComment: function(pid, activity, obj, event) {
-    var db = require('./db');
-    var tools = require('./tools');
     var sql = 'select comment.cid as id, comment.content as content, unix_timestamp(comment.time) as time, user.username as username, user.uid as uid from comment, user where user.uid = comment.uid && comment.type = "0" && comment.id = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -97,8 +95,6 @@ module.exports = {
     })
   },
   generateProject: function(pid, activity, obj, event) {
-    var db = require('./db');
-    var tools = require('./tools');
     var sql = 'select user.username as name, user.uid as uid, unix_timestamp(project.createtime) as time, project.name as title from user, project where user.uid = project.creater and project.pid = ' + pid;
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -118,7 +114,6 @@ module.exports = {
     })
   },
   generateTeam: function(email, data, cnt, event) {
-    var db = require('./db');
     data.team = [];
     var sql = 'select team.username as name, team.uid as uid, self.uid as self from user team, user self where team.gid = self.gid and self.email = "' + email + '" group by team.createtime desc';
     db.query(sql, function(err, rows) {
@@ -139,7 +134,6 @@ module.exports = {
     });
   },
   getGroup: function(email, callback) {
-    var db = require('./db');
     var sql = 'select groups.name as name, groups.gid as gid from user, groups where user.gid = groups.gid and user.email = "' + email +'"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
@@ -153,9 +147,7 @@ module.exports = {
   generatePage: function(sess, callback) {
     var email = sess.email;
     var that = this;
-    var emitter = require('events').EventEmitter;
     var event = new emitter();
-    var db = require('./db');
     var data = {};
     data.email = email;
     this.getGroup(email, function(name, gid) {
@@ -199,7 +191,6 @@ module.exports = {
     });
   },
   addProject: function(email, data, sess, res) {
-    var db = require('./db');
     if(data.title.length === 0) {
       res.send({ code: 1, info: '项目名称不能为空'} );
       return;
@@ -226,7 +217,6 @@ module.exports = {
     });
   },
   checkGroup: function(sess, res) {
-    var db = require('./db');
     var email = sess.email;
     var sql = 'select gid from user where email = "' + email + '"';
     db.query(sql, function(err, rows) {

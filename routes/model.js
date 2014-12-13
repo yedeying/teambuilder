@@ -1,4 +1,5 @@
 var express = require('express');
+var merge = require('utils-merge');
 var router = express.Router();
 var task = require('../module/task');
 var tools = require('../module/tools');
@@ -114,13 +115,38 @@ router.get('/add_task', function(req, res) {
     });
   });
 });
-router.get('/view_task', function(req,res) {
+router.get('/view_task', function(req, res) {
   var data = req.query;
   var sess = req.session;
   if(!/[0-9a-f]{40}/.test(data.did)) {
     res.send({code: 1, info: '任务格式错误'});
     return;
   }
-  task.viewTask(data, sess, res);
+  task.getTaskInfo(data, sess, res, function(data) {
+    res.render('models/view_task', data, function(err, html) {
+      if(err) {
+        res.send({code: 1, info: 'render error'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
+});
+router.get('/edit_task', function(req, res) {
+  var data = req.query;
+  var sess = req.session;
+  if(!/[0-9a-f]{40}/.test(data.did)) {
+    res.send({code: 1, info: '任务格式错误'});
+    return;
+  }
+  task.getTaskInfo(data, sess, res, function(data) {
+    res.render('models/edit_task', merge(data, {title: '编辑任务'}), function(err, html) {
+      if(err) {
+        res.send({code: 1, info: 'render error'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
 });
 module.exports = router;

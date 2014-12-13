@@ -1,7 +1,11 @@
 extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/project.css')
+
 block content
   include includes/header
-  .index.main
+  .project-inner
     table.layout
       tr
         td.left
@@ -10,6 +14,7 @@ block content
         td.right
           .inner
             include includes/project_list_detail
-  include includes/sea
+
+block scripts
   script.
     seajs.use('/javascripts/project.js');

@@ -1,0 +1,27 @@
+extend model_layout
+
+block content
+  .edit-task-inner
+    h3 任务名称
+    input.name(id='title', type='text', placeholder='任务名称', value='#{taskTitle}')
+    h3 任务详情
+    textarea.content(id='content', placeholder='任务详情')= content
+    h3 指定参与者
+    each people, index in memberList
+      input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}', checked=people.on)
+      label.member(for='member#{index}')
+        span.username= people.name
+    if fileList.length !== 0
+      h3.files 已添加附件
+      each file in fileList
+        span.exist-file-label
+          a.down-file(href='/download/task?id=#{sha1(did.toString())}&fid=#{sha1(file.fid.toString())}', target='_blank') #{file.name}
+          span.del-file(data-id=sha1(did.toString()), data-fid=sha1(file.fid.toString())) ×
+    h3 添加附件
+    .file-box
+      .file-label-box
+      .file-control-box
+        input(id='file', type='file')
+        label.file(for='file')
+          i.fa.fa-plus-circle
+          span &nbsp;添加附件

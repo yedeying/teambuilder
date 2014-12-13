@@ -61,3 +61,10 @@ exports.downloadFile = function(data, type, res) {
     res.download(path, name);
   });
 };
+exports.deleteFile = function(data, type, res) {
+  var sql = 'delete from file where type = ' + type + ' and sha1(id) = "' + data.id +'" and sha1(fid) = "' + data.fid + '"';
+  db.query(sql, function(err) {
+    if(err) throw err;
+    res.send({code: 0, info: '删除成功'});
+  });
+}

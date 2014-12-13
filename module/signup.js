@@ -1,9 +1,12 @@
+var fs = require('fs');
+var jade = require('jade');
+var db = require('./db');
+var tools = require('./tools');
+var mailTransporter = require('./mail');
+var setting = require('../settings/global');
+var mailSetting = require('../settings/mail');
 var signup = {
   getVerifyHtml: function (str, name, callback) {
-    var jade = require('jade');
-    var fs = require('fs');
-    var tools = require('./tools');
-    var setting = require('../settings/global');
     jade.renderFile('./views/vertify_mail.jade', {
       url: tools.getCommonUrl() + 'vertify?tid=' + str,
       name: name
@@ -22,7 +25,6 @@ var signup = {
     return /^[0-9a-zA-Z]+$/.test(pwd);
   },
   checkMailRepeat: function(email, res, callback) {
-    var db = require('./db');
     var sql = 'select * from user where email = "' + email + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
@@ -47,7 +49,6 @@ var signup = {
     });
   },
   checkMailRepeatBeta: function(email, res, callback) {
-    var db = require('./db');
     var sql = 'select * from user where email = "' + email + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
@@ -102,7 +103,6 @@ var signup = {
     return true;
   },
   saveTempInfo: function(email, name, time, password, res, callback) {
-    var db = require('./db');
     var tid = this.encodePassword(email, time);
     var sql = 'insert into tmpuser (uid, email, username, password, timestamp, createtime, tid) values (null, "' + email + '", "' + name + '", "' + password + '", current_timestamp, "' + time + '", "' + tid + '")';
     db.query(sql, function(err, rows, fields) {
@@ -114,8 +114,6 @@ var signup = {
     });
   },
   sendMail: function(email, name, tid, res) {
-    var mailSetting = require('../settings/mail');
-    var mailTransporter = require('./mail');
     this.getVerifyHtml(tid, name, function(html) {
       var mailOptions = {
         from: 'teambuilder<' + mailSetting.auth.user + '>',
@@ -134,7 +132,6 @@ var signup = {
   },
   sendAgain: function(email, res) {
     var that = this;
-    var db = require('./db');
     var sql = 'select tid, username from tmpuser where email = "' + email + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
@@ -151,7 +148,6 @@ var signup = {
   },
   vertifyRegister: function(email, tid, sess, res) {
     var that = this;
-    var db = require('./db');
     var sql = 'select email, username, password, createtime from tmpuser where email = "' + email + '" and tid = "' + tid + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
@@ -201,7 +197,6 @@ var signup = {
   },
   login: function(email, password, sess, res) {
     var that = this;
-    var db = require('./db');
     var sql = 'select createtime from user where email = "' + email + '"';
     db.query(sql, function(err, rows, fields) {
       if(err) {
