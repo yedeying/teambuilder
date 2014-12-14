@@ -2,50 +2,48 @@ var db = require('./db');
 var file = require('./file');
 var tools = require('./tools');
 var people = require('./people');
+var project = require('./project');
 var emitter = require('events').EventEmitter;
 module.exports = {
   getTaskDetail: function(tid, detail, sess, callback) {
     var that = this;
     people.getMemberList(sess, function(memberList) {
-      var sql = 'select did, title, content, unix_timestamp(createtime) as time, participant, (select count(*) from file where file.type = 1 and file.id = detail.did) as num from detail where tid = ' + tid;
-      db.query(sql, function(err, rows) {
-        if(err) throw err;
-        rows.forEach(function(row) {
-          var names = [];
-          var participant = tools.decodeNumberArray(row['participant']);
-          for(var i = 0; i < participant.length; i++) {
-            for(var j = 0; j < memberList.length; j++) {
-              if(participant[i] === memberList[j].uid) {
-                names.push(memberList[j].name);
+      people.getUid(sess, function(uid) {
+        var sql = 'select did, title, content, unix_timestamp(createtime) as time, participant, (not (select count(*) from detail tmp where tmp.did = detail.did and (participant like "%,' + uid + ',%" || participant like "%[' + uid + ',%" || participant like "%,' + uid + ']%" || participant like "%[' + uid + ']%")) = 0) as mine, (select count(*) from file where file.type = 1 and file.id = detail.did) as num, finish from detail where tid = ' + tid;
+        db.query(sql, function(err, rows) {
+          if(err) throw err;
+          rows.forEach(function(row) {
+            var names = [];
+            var participant = tools.decodeNumberArray(row['participant']);
+            for(var i = 0; i < participant.length; i++) {
+              for(var j = 0; j < memberList.length; j++) {
+                if(participant[i] === memberList[j].uid) {
+                  names.push(memberList[j].name);
+                }
               }
             }
-          }
-          detail.push({
-            did: row['did'],
-            title: row['title'],
-            content: row['content'],
-            time: row['time'],
-            num: row['num'],
-            participant: names
+            detail.push({
+              did: row['did'],
+              title: row['title'],
+              content: row['content'],
+              time: row['time'],
+              num: row['num'],
+              finish: row['finish'],
+              self: row['mine'],
+              status: (row['finish'] ? 'finish' : 'unfinish') + ' ' + (row['mine'] ? 'self' : 'unself'),
+              participant: names
+            });
           });
+          callback();
         });
-        callback();
       });
     });
   },
-  generatePage: function(sess, res, tidSha1) {
+  generateTaskList: function(tidSha1, data, sess, event) {
     var that = this;
-    var event = new emitter();
-    var email = sess.email;
     var pid = sess.pid;
-    var data = {};
-    data.task = [];
     data.title = sess.projectTitle;
-    if(tidSha1) {
-      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where sha1(tid) = "' + tidSha1 + '" order by expecttime desc';
-    } else {
-      var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' order by expecttime desc';
-    }    
+    var sql = 'select tid, creater, title, content, status, unix_timestamp(createtime), unix_timestamp(expecttime), unix_timestamp(finishtime), participant from task where pid = ' + pid + ' order by expecttime desc';
     db.query(sql, function(err, rows) {
       if(err) throw err;
       var cnt = {};
@@ -56,9 +54,14 @@ module.exports = {
       }
       rows.forEach(function(row, index) {
         var tid = row['tid'];
+        var show = true;
         var participant = tools.decodeNumberArray(row['participant']);
+        if(tidSha1 && tidSha1 !== tools.getSha1(tid.toString())) {
+          show = false;
+        }
         data.task.push({
           tid: tid,
+          show: show,
           creater: row['creater'],
           title: row['title'],
           content: row['content'],
@@ -77,13 +80,34 @@ module.exports = {
         });
       });
     });
+  },
+  generatePage: function(sess, res, tidSha1) {
+    var that = this;
+    var event = new emitter();
+    var email = sess.email;
+    var data = {};
+    data.task = [];
     event.on('finish', function() {
-      res.render('task', {page: 'task', title: 'teambuilder', data: data, func: {
-        sha1: tools.getSha1,
-        json: JSON.stringify,
-        getTime: tools.getTime
-      }});
+      res.render('task', {
+        page: 'task',
+        title: 'teambuilder',
+        data: data,
+        func: {
+          sha1: tools.getSha1,
+          json: JSON.stringify,
+          getTime: tools.getTime
+        }
+      });
     });
+    if(tidSha1) {
+      project.getPidFromTidSha1(tidSha1, function(pid, name) {
+        sess.pid = pid;
+        sess.projectTitle = name;
+        that.generateTaskList(tidSha1, data, sess, event);
+      });
+    } else {
+      that.generateTaskList(undefined, data, sess, event);
+    }
   },
   editTaskList: function(data, sess, res) {
     var event = new emitter();
@@ -343,4 +367,11 @@ module.exports = {
       });
     });
   },
+  changeStatus: function(data, sess, res) {
+    var sql = 'update detail set finish = ' + (data.checked ? '1' : '0') + ' where sha1(did) = "' + data.did + '"';
+    db.query(sql, function(err) {
+      if(err) throw err;
+      res.send({code: 0, info: '已标记为' + (data.checked ? '完成' : '未完成') + '状态'});
+    });
+  }
 };

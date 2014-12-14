@@ -1,0 +1,8 @@
+.task-list-nav
+  .title-block
+    i.fa.fa-list
+    h4 任务列表
+  each task in data.task
+    .line
+      a.task(href="/task?tid=#{func.sha1(task.tid.toString())}") #{task.title}
+      span= task.detail.length

@@ -285,4 +285,15 @@ router.post('/delete_file', function(req, res) {
   }
   file.deleteFile(data, 1, res);
 });
+router.post('/task/change_status', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.checked === 'true') data.checked = true;
+  if(data.checked === 'false') data.checked = false;
+  if(!/[0-9a-f]{40}/.test(data.did) || typeof data.checked !== 'boolean') {
+    res.send({code: 1, info: '格式错误'});
+    return;
+  }
+  task.changeStatus(data, sess, res);
+});
 module.exports = router;

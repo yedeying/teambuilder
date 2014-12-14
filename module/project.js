@@ -9,6 +9,17 @@ module.exports = {
       return 0;
     });
   },
+  getPidFromTidSha1: function(tidSha1, callback) {
+    var sql = 'select task.pid as pid, project.name as name from task, project where task.pid = project.pid and sha1(task.tid) = "' + tidSha1 +'"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1) {
+        callback(rows[0]['pid'], rows[0]['name']);
+      } else {
+        throw new Error('invalid tidSha1');
+      }
+    });
+  },
   generateTask: function(pid, activity, obj, event) {
     var sql = 'select task.tid as id, task.title as title, unix_timestamp(task.createtime) as time, user.username as username, user.uid as uid from task, user where user.uid = task.creater && task.pid = ' + pid;
     db.query(sql, function(err, rows) {

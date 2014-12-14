@@ -81,20 +81,36 @@ define(function(require, exports, module) {
         time: date
       }
     },
+    tid: undefined,
+    showing: false,
     showInfo: function(str, time) {
       require('jquery');
+      var that = this;
       var $body = $('body');
       var $alert = $('.alert-box');
       var $info = $('.alert-box .info');
       var hide = function() {
         $alert.css({ top: '-55px' });
-        if(tid) clearTimeout(tid);
+        that.showing = false;
+        if(that.tid) clearTimeout(that.tid);
       };
       time = time || 3000;
-      $info.text(str);
-      $alert.css({ top: '70px' });
-      $body.on('click', '.alert-box .close', hide);
-      var tid = setTimeout(hide, time);
+      if(this.showing) {
+        hide();
+        setTimeout(function() {
+          that.showing = false;
+          show();
+        }, 500);
+      } else {
+        show();
+      }
+      function show() {
+        $info.text(str);
+        $alert.css({ top: '70px' });
+        $body.on('click', '.alert-box .close', hide);
+        that.showing = true;
+        that.tid = setTimeout(hide, time);
+      }
     },
     getModel: function(url, type, data, callback, callback2) {
       require('jquery');

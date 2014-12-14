@@ -81,13 +81,39 @@
         color: #aaa;
         display: none;
       }
+      .unself label {
+        cursor: not-allowed;
+      }
+      .check {
+        width: 10px;
+        label {
+          display: inline-block;
+          width: 12px;
+          height: 12px;
+          font-size: 12px;
+          color: $white;
+          border: 1px solid #ccc;
+        }
+        input[type=checkbox] {
+          display: none;
+          &:checked + label {
+            background-color: $checkboxblue;
+            border: 1px solid $checkboxblue;
+          }
+        }
+      }
       .first {
         width: 85px;
         text-align: center;
         color: #fff;
         padding: 8px 4px;
-        span {
+        &.unself span {
           background-color: $lightred;
+        }
+        &.self span {
+          background-color: $lightgreen;
+        }
+        span {
           width: 100%;
           display: inline-block;
           @include border-radius(4px);
@@ -131,13 +157,17 @@
     }
   }
 }
-.project-list-nav {
+.task-list-nav {
   padding: 20px;
+  .line {
+    @include clearfix;
+  }
   h4 {
     display: inline-block;
     margin: 10px 5px;
   }
   a {
+    float: left;
     display: block;
     padding: 5px 0;
     color: $linkblue;
@@ -146,17 +176,16 @@
       text-decoration: underline;
     }
   }
-}
-.project-description-nav {
-  padding: 20px 10px;
-  h4 {
+  span {
+    float: right;
+    margin: 5px 0;
+    padding: 1px 7px;
+    background-color: #666;
     display: inline-block;
-    margin: 10px 5px;
-  }
-  .wall {
-    padding: 10px;
-    background-color: $white;
-    border: 1px solid #aaa;
-    @include border-radius(4px);
+    border-radius: 10px;
+    font-size: 12px;
+    width: 18px;
+    color: white;
+    text-align: center;
   }
 }

@@ -143,7 +143,11 @@ define(function(require, exports, module) {
           if(option) {
             location.href = href;
           } else {
-            location.reload();
+            if(location.href.indexOf('task') !== -1) {
+              location.href = '/task';
+            } else {
+              location.reload();
+            }
           }
         } else {
           tools.showInfo(data.info);

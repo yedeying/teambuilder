@@ -40,8 +40,45 @@ define(function(require, exports, module) {
     var tid = $(this).parent().attr('data-tid');
     tools.getModel('add_task', 'add_task', {tid: tid});
   });
+  $body.on('change', 'td.check input[type=checkbox]', function(e) {
+    var that = this;
+    var checked = that.checked;
+    that.checked = !checked;
+    if($(this).parent().hasClass('unself')) {
+      tools.showInfo('不是指派给自己的任务, 无法标记其完成状态');
+      return;
+    }
+    var did = $(this).attr('data-did');
+    $.post('/task/change_status', {did: did, checked: checked}, function(data) {
+      if(typeof data.code === 'number') {
+        tools.showInfo(data.info);
+        if(data.code === 0) {
+          that.checked = checked;
+          var $tr = $(that).parents('tr').eq(0);
+          $tr.toggleClass('finish');
+          $tr.toggleClass('unfinish');
+          $('.activity-label.active').trigger('click');
+        }
+      }
+    });
+  });
   $body.on('click', '.activity-label', function(e) {
+    var $this = $(this);
     tools.slideActivityTriangle(this);
+    $('.activity-label').removeClass('active');
+    $this.addClass('active');
+    $('tr.unself').show();
+    $('tr.unfinish').show();
+    $('tr.finish').show();
+    if(!$this.hasClass('all')) {
+      $('tr.unself').hide();
+    }
+    if($this.hasClass('doing')) {
+      $('tr.finish').hide();
+    }
+    if($this.hasClass('finish')) {
+      $('tr.unfinish').hide();
+    }
   });
   $body.on('click', '.exist-file-label .del-file', function() {
     var id = $(this).attr('data-id');
