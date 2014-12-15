@@ -1,4 +1,4 @@
-- var typeArr = {project: '项目', task: '任务', file: '文件', comment: '评论'}
+- var typeArr = {project: '项目', task: '任务列表', detail: '任务', file: '文件', comment: '评论'}
 .project-header
   .title-wrapper
     h1.title #{data.title}
@@ -19,7 +19,10 @@
         td.first
           span(class="#{act.type}")= typeArr[act.type]
         td.second
-          a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}")= act.title
+          if act.type === 'detail'
+            span(class='#{act.type}')= act.title
+          else
+            a(href="/#{act.type}?#{act.type[0]}id=#{func.sha1(act.id + '')}", class='#{act.type}')= act.title
         td.third
           span By&nbsp;
           a(href="/people?uid=#{func.sha1(act.uid + '')}")= act.people

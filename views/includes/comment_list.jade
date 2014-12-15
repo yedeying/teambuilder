@@ -1,0 +1,26 @@
+- var typeArr = {create: '创建讨论', comment: '新发言', modify: '修改'}
+.comment-header
+  .title-wrapper
+    h1.title 讨论区
+    button.add-comment-list
+      i.fa.fa-plus-circle
+      span &nbsp;创建讨论
+  span.activity-label 所有讨论
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.comment-list
+  each list in data.commentList
+    .comment-title-block
+      a.comment-title(href="/comment/detail?cid=#{func.sha1(list.cid.toString())}") #{list.title}
+    table.comment-activity
+      each comment in list.comments
+        tr
+          td.first
+            span(class="#{comment.status}")= typeArr[comment.status]
+          td.second
+            a(class='#{comment.status}', href="/comment/detail?cid=#{func.sha1(list.cid.toString())}")= comment.content
+          td.third
+            span By&nbsp;
+            a(href="/people?uid=#{func.sha1(comment.uid.toString())}")= comment.username
+          td.fourth= func.getTime(comment.time, 'hh:mm DD C')

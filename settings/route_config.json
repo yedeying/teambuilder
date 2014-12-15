@@ -2,7 +2,8 @@
   "get": {
     "index": 2,
     "task": 2,
-    "comment": 3,
+    "comment": 2,
+    "comment/detail": 2,
     "calendar": 2,
     "people": 2,
     "login": 0,
@@ -10,7 +11,7 @@
     "forget": 0,
     "vertify": 0,
     "invite": 4,
-    "project": 2,
+    "project": 3,
     "joingroup": 5,
     "model": 1
   },
@@ -31,7 +32,8 @@
     "switch_project": 1,
     "get_project_status": 1,
     "edit_profile": 1,
-    "add_task": 1
+    "add_task": 1,
+    "add_comment_list": 3
   },
   "_info": {
     "need unlogin": 0,

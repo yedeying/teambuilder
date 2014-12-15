@@ -83,6 +83,19 @@
         height: 100px;
       }
     }
+    .add-comment-list-inner {
+      padding: 20px;
+      .name {
+        @include input(9px);
+        width: 100%;
+      }
+      .description {
+        @include input(9px);
+        resize: vertical;
+        width: 100%;
+        height: 60px;
+      }
+    }
     .create-task-list-inner {
       padding: 20px;
       .name, .content {

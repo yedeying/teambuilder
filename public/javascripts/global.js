@@ -7,6 +7,7 @@ define(function(require, exports, module) {
   var project = require('./project');
   var people = require('./people');
   var task = require('./task');
+  var comment = require('./comment');
   var $body = $('body');
   var $cover = $('.cover');
   var startX = 0;
@@ -132,6 +133,8 @@ define(function(require, exports, module) {
       task.removeTask();
     } else if(type === 'edit_task') {
       task.editTask();
+    } else if(type === 'add_comment_list') {
+      comment.addCommentList();
     }
   });
   function switchProject(option) {
@@ -145,6 +148,8 @@ define(function(require, exports, module) {
           } else {
             if(location.href.indexOf('task') !== -1) {
               location.href = '/task';
+            } else if(location.href.indexOf('comment') !== -1) {
+              location.href = '/comment';
             } else {
               location.reload();
             }

@@ -1,0 +1,161 @@
+@import "include/common";
+@import "include/header";
+@import "include/model";
+@import "include/layout";
+.comment-header {
+  position: relative;
+  .title-wrapper {
+    @include clearfix;
+    padding: 20px;
+    .title {
+      display: inline;
+      margin: 0;
+      font-weight: normal;
+    }
+    .add-comment-list {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btngreen);
+      margin-left: 10px;
+      float: right;
+    }
+    .edit-comment {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnblue);
+      float: right; 
+    }
+    .remove-comment {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnred);
+      float: right; 
+    }
+  }
+  .activity-label {
+    color: #777;
+    margin: 0 20px;
+  }
+  .activity-triangle-black {
+    @include triangle(6px, 8px, "up", #ccc);
+    left: 43px;
+    bottom: 0;
+  }
+  .activity-triangle-white {
+    @include triangle(6px, 8px, "up", #fff); 
+    left: 43px;
+    bottom: -2px;
+  }
+  .hr {
+    margin: 15px 0;
+    border: 0px;
+    border-top: 1px solid #ccc;
+  }
+}
+.comment-list {
+  padding: 20px;
+  .comment-title-block {
+    .comment-title {
+      font-weight: bold;
+      color: #000;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .group-name {
+      color: #666;
+    }
+    padding: 15px;
+    @include border-radius(8px);
+    background-color: rgb(236,236,236);
+  }
+  .comment-activity {
+    width: 100%;
+    margin-bottom: 20px;
+    tr {
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .first {
+        width: 85px;
+        text-align: center;
+        color: #fff;
+        padding: 8px 4px;
+        span {
+          width: 100%;
+          display: inline-block;
+          @include border-radius(4px);
+          padding: 2px;
+        }
+        .create {
+          background-color: $lightblue;
+        }
+        .comment {
+          background-color: $lightpurple;
+        }
+        .modify {
+          background-color: $lightred;
+        }
+      }
+      .second {
+        padding: 8px 4px;
+        a {
+          color: $linkblue;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+      .third {
+        padding: 8px 4px;
+        text-align: right;
+        color: #999;
+        a {
+          color: $linkblue;
+        }
+      }
+      .fourth {
+        width: 100px;
+        padding: 8px 4px;
+        text-align: right;
+        color: #999;
+      }
+    }
+  }
+}
+.comment-list-nav {
+  padding: 20px;
+  .line {
+    @include clearfix;
+  }
+  h4 {
+    display: inline-block;
+    margin: 10px 5px;
+  }
+  a {
+    float: left;
+    display: block;
+    padding: 5px 0;
+    color: $linkblue;
+    margin-left: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  span {
+    float: right;
+    margin: 5px 0;
+    padding: 1px 7px;
+    background-color: #666;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 12px;
+    width: 18px;
+    color: white;
+    text-align: center;
+  }
+}

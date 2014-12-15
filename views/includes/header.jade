@@ -4,11 +4,11 @@ header.header
     - var icons = ['home', 'tasks', 'comments', 'info-circle', 'calendar', 'phone', 'power-off', 'refresh']
     - var texts = ['首页', '任务', '讨论区', '动态回顾', '日程', '通讯录', '注销', '切换项目']
     each link, i in links
-      if i < 6 && page != links[i]
+      if i < 6 && page != links[i] && !(i == 2 && page === 'commentDetail')
         a.left(href='/#{links[i]}', class='link-#{links[i]}')
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
-      else if i < 6 && page == links[i]
+      else if i < 6 && page == links[i] || i == 2 && page == 'commentDetail'
         a.left.active(href='/#{links[i]}', class='link-#{links[i]}')
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
@@ -17,7 +17,7 @@ header.header
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
   .title-block
-    h1.left.title #{page === 'index' && data.groupName || (page === 'project' || page === 'task') && (data.title) || page === 'people' && data.groupName}
+    h1.left.title #{page === 'index' && data.groupName || (page === 'project' || page === 'task' || page === 'comment' || page === 'commentDetail') && (data.title) || page === 'people' && data.groupName}
     span.right.notification
       i.fa.fa-bell
     span.right.search-block.

@@ -40,6 +40,26 @@ module.exports = {
       }
     });
   },
+  generateTaskDetail: function(pid, activity, obj, event) {
+    var sql = 'select task.tid as id, detail.title as title, unix_timestamp(task.createtime) as time, user.uid as uid, user.username as username from task, user, detail where detail.tid = task.tid && user.uid = task.creater && task.pid = ' + pid;
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      for(var i = 0; i < rows.length; i++) {
+        activity.push({
+          type: 'detail',
+          id: rows[i]['id'],
+          title: rows[i]['title'],
+          time: rows[i]['time'],
+          people: rows[i]['username'],
+          uid: rows[i]['uid']
+        });
+      }
+      obj.cnt++;
+      if(obj.cnt == obj.len) {
+        event.emit('add');
+      }
+    });
+  },
   generateFile: function(pid, activity, obj, event) {
     var sql = 'select file.fid as id, file.filename as filename, unix_timestamp(file.uploadtime) as time, user.username as username, user.uid as uid from file, user where user.uid = file.uploader && file.type = "0" && file.id = ' + pid;
     db.query(sql, function(err, rows) {
@@ -136,6 +156,7 @@ module.exports = {
       that.generateComment(pid, activity, obj, event);
       that.generateFile(pid, activity, obj, event);
       that.generateTask(pid, activity, obj, event);
+      that.generateTaskDetail(row['pid'], activity, obj, event);
       that.generateProject(pid, activity, obj, event);
       that.generateGroupName(pid, data, obj, event);
       event.on('finish', function() {

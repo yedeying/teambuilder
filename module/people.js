@@ -21,11 +21,22 @@ module.exports = {
       callback(sess.uid);
       return;
     }
-    var sql = 'select uid from user where email = "' + sess.email + '"';
+    var sql = 'select uid, username from user where email = "' + sess.email + '"';
     db.query(sql, function(err, rows) {
       if(err) throw err;
       if(rows.length === 1) {
-        callback(rows[0]['uid']);
+        callback(rows[0]['uid'], rows[0]['username']);
+      } else {
+        throw new Error('unknown error');
+      }
+    });
+  },
+  getUser: function(uid, callback) {
+    var sql = 'select username from user where uid = ' + uid;
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length === 1) {
+        callback(rows[0]['username']);
       } else {
         throw new Error('unknown error');
       }

@@ -11,6 +11,7 @@ var people = require('../module/people');
 var joingroup = require('../module/joingroup');
 var task = require('../module/task');
 var file = require('../module/file');
+var comment = require('../module/comment');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -295,5 +296,27 @@ router.post('/task/change_status', function(req, res) {
     return;
   }
   task.changeStatus(data, sess, res);
+});
+router.post('/add_comment_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.title === '') {
+    res.send({code: 1, info: '讨论主题不能为空'});
+    return;
+  }
+  comment.addCommentList(data, sess, res);
+});
+router.post('/comment/reply', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.reply === '') {
+    res.send({code: 0, info: '你还没填东西呢'});
+    return;
+  }
+  if(!/[0-9a-f]{40}/.test(data.cid)) {
+    res.send({code: 0, info: '页面错误'});
+    return;
+  }
+  comment.replyComment(data, sess, res);
 });
 module.exports = router;

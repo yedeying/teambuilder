@@ -1,0 +1,8 @@
+.comment-list-nav
+  .title-block
+    i.fa.fa-list
+    h4 讨论列表
+  each comment in data.commentList
+    .line
+      a.project(href="/comment?cid=#{func.sha1(comment.cid.toString())}") #{comment.title}
+      span= comment.comments.length

@@ -1,0 +1,150 @@
+@import "include/common";
+@import "include/header";
+@import "include/model";
+@import "include/layout";
+.comment-header {
+  position: relative;
+  .title-wrapper {
+    @include clearfix;
+    padding: 20px;
+    .title {
+      display: inline;
+      margin: 0;
+      font-weight: normal;
+    }
+    .edit-comment-list {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnblue);
+      margin-left: 10px;
+      float: right;
+    }
+    .del-comment-list {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnred);
+      margin-left: 10px;
+      float: right;
+    }
+    .edit-comment {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnblue);
+      float: right; 
+    }
+    .reply-comment {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btngreen);
+      float: right;
+    }
+    .remove-comment {
+      .fa {
+        font-size: 1.2em;
+      }
+      @include btn($btnred);
+      float: right; 
+    }
+  }
+  .activity-label {
+    color: #777;
+    margin: 0 20px;
+  }
+  .activity-triangle-black {
+    @include triangle(6px, 8px, "up", #ccc);
+    left: 43px;
+    bottom: 0;
+  }
+  .activity-triangle-white {
+    @include triangle(6px, 8px, "up", #fff); 
+    left: 43px;
+    bottom: -2px;
+  }
+  .hr {
+    margin: 15px 0;
+    border: 0px;
+    border-top: 1px solid #ccc;
+  }
+}
+.comment-content {
+  .description {
+    @include border-radius(8px);
+    background-color: #f1f1f1;
+    padding: 10px;
+    margin: 0 20px;
+    text-indent: 2em;
+  }
+  .comment-block {
+    @include clearfix;
+    border-top: 1px solid #f3f3f3;
+    padding: 10px;
+    margin: 10px 20px;
+    .content {
+      float: left;
+    }
+    .title {
+      float: right;
+      .name {
+        margin-right: 10px;
+        color: $linkblue;
+      }
+    }
+  }
+}
+.comment-list-nav {
+  padding: 20px;
+  .line {
+    @include clearfix;
+  }
+  h4 {
+    display: inline-block;
+    margin: 10px 5px;
+  }
+  a {
+    float: left;
+    display: block;
+    padding: 5px 0;
+    color: $linkblue;
+    margin-left: 20px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  span {
+    float: right;
+    margin: 5px 0;
+    padding: 1px 7px;
+    background-color: #666;
+    display: inline-block;
+    border-radius: 10px;
+    font-size: 12px;
+    width: 18px;
+    color: white;
+    text-align: center;
+  }
+}
+.reply-block {
+  margin: 10px 20px 100px 20px;
+  @include clearfix;
+  .reply {
+    @include box-sizing;
+    .fa {
+      font-size: 1.2em;
+    }
+    @include btn($btngreen);
+    width: 100%;
+    text-align: center;
+    margin: 0;
+  }
+  .reply-area {
+    @include input(9px);
+    margin-bottom: 10px;
+    resize: vertical;
+    width: 100%;
+    height: 60px;
+  }
+}

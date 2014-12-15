@@ -1,0 +1,32 @@
+.comment-header
+  .title-wrapper
+    h1.title #{data.target.title}
+    button.del-comment-list
+      i.fa.fa-trash
+      span &nbsp;删除讨论
+    button.edit-comment-list
+      i.fa.fa-edit
+      span &nbsp;编辑讨论
+    button.reply-comment
+      i.fa.fa-reply
+      span &nbsp;发表回复
+  span.activity-label 讨论详情
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.comment-content(data-cid='#{func.sha1(data.target.cid.toString())}')
+  if data.target.description
+    .description #{data.target.description}
+  .comments
+    each comment in data.target.comments
+      if comment.status === 'comment'
+        .comment-block
+          .content #{comment.content}
+          span.title
+            a.name(href="/people?uid=#{func.sha1(comment.uid.toString())}")= comment.username
+            span.time #{func.getTime(comment.time, 'hh:mm DD,C')}
+  .reply-block
+    textarea.reply-area(id='reply', placeholder='reply here')
+    button.reply
+      i.fa.fa-reply
+      span &nbsp;确认回复

@@ -8,6 +8,7 @@ var task = require('../module/task');
 var file = require('../module/file');
 var people = require('../module/people');
 var project = require('../module/project');
+var comment = require('../module/comment');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
@@ -20,7 +21,7 @@ router.get('/', function(req, res) {
     res.redirect('/login');
   }
 });
-['index', 'comment', 'calendar', 'people'].forEach(function(page) {
+['index', 'calendar', 'people'].forEach(function(page) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
     moduleArray[page].generatePage(sess, function(data) {
@@ -37,6 +38,67 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
   router.get('/' + page, function(req, res) {
     var sess = req.session;
     res.render(page, { title: titles[i], page: 'login' });
+  });
+});
+router.get('/comment', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(data.cid && /[0-9a-f]{40}/.test(data.cid)) {
+    comment.getPidFromCidSha1(data.cid, function(pid, name) {
+      sess.pid = pid;
+      sess.projectTitle = name;
+      cont();
+    });
+  } else if(sess.pid !== undefined) {
+    cont();
+  } else {
+    res.redirect('/index');
+  }
+  function cont() {
+    comment.generatePage(sess, function(data) {
+      res.render('comment', {
+        title: 'teambuilder',
+        page: 'comment',
+        data: data,
+        func: {
+          json: JSON.stringify,
+          sha1: tools.getSha1,
+          getTime: tools.getTime
+        }
+      });
+    });  
+  }
+});
+router.get('/comment/detail', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(!/[0-9a-f]{40}/.test(data.cid) || sess.pid === undefined) {
+    res.redirect('/404');
+    return;
+  }
+  var cid = data.cid;
+  comment.generatePage(sess, function(data) {
+    var bl = true;
+    data.commentList.forEach(function(commentList, index) {
+      if(tools.getSha1(commentList.cid) === cid) {
+        data.target = commentList;
+        bl = false;
+      }
+    });
+    if(bl) {
+      res.redirect('/404');
+      return;
+    }
+    res.render('comment_detail', {
+      title: 'teambuilder',
+      page: 'commentDetail',
+      data: data,
+      func: {
+        json: JSON.stringify,
+        sha1: tools.getSha1,
+        getTime: tools.getTime
+      }
+    });
   });
 });
 router.get('/vertify', function(req, res) {
