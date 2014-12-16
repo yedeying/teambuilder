@@ -1,5 +1,6 @@
 var db = require('./db');
 var tools = require('./tools');
+var publish = require('./publish');
 var emitter = require('events').EventEmitter;    
 module.exports = {
   sortActivity: function(project) {
@@ -187,7 +188,9 @@ module.exports = {
     });
     event.on('finish', function() {
       that.sortActivity(data.project);
-      callback(data);
+      publish.addPublishBar(data, sess, function() {
+        callback(data);
+      });
     });
   },
   addProject: function(email, data, sess, res) {

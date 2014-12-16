@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-12-12 12:59:19
+-- 生成日期: 2014-12-16 13:08:08
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -35,11 +35,6 @@ CREATE TABLE IF NOT EXISTS `class` (
   UNIQUE KEY `cid` (`cid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
 
---
--- 插入之前先把表清空（truncate） `class`
---
-
-TRUNCATE TABLE `class`;
 --
 -- 转存表中的数据 `class`
 --
@@ -92,20 +87,27 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `deep` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `content` text NOT NULL,
+  `description` text NOT NULL,
+  `status` varchar(100) NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
 
---
--- 插入之前先把表清空（truncate） `comment`
---
-
-TRUNCATE TABLE `comment`;
 --
 -- 转存表中的数据 `comment`
 --
 
-INSERT INTO `comment` (`cid`, `id`, `uid`, `type`, `deep`, `time`, `content`) VALUES
-(1, 1, 13, 0, 0, '2014-11-20 23:20:19', 'i''m just a message');
+INSERT INTO `comment` (`cid`, `id`, `uid`, `type`, `deep`, `time`, `content`, `description`, `status`) VALUES
+(1, 1, 13, 0, 0, '2014-12-16 03:21:31', '新名字fas', 'gagagagagagfdsaf', 'create'),
+(2, 1, 13, 4, 1, '2014-12-15 04:10:41', '我是第一个回复', '', 'comment'),
+(4, 1, 13, 0, 0, '2014-12-15 06:57:25', 'the newest', '', 'create'),
+(5, 2, 13, 0, 0, '2014-12-15 06:57:51', 'a new', '', 'create'),
+(6, 14, 13, 0, 0, '2014-12-15 07:33:25', 'sdfasdf', '', 'create'),
+(7, 13, 13, 0, 0, '2014-12-15 08:01:40', 'aaa', '', 'create'),
+(8, 1, 13, 4, 1, '2014-12-15 04:10:41', '我是第二个回复', '', 'comment'),
+(12, 1, 13, 4, 1, '2014-12-15 12:18:48', '发送', '', 'comment'),
+(13, 1, 13, 4, 1, '2014-12-15 12:20:31', '我是第三个回复', '', 'comment'),
+(14, 1, 13, 4, 1, '2014-12-15 12:25:32', 'haha', '', 'comment'),
+(15, 4, 13, 4, 1, '2014-12-15 12:26:29', 'lalala', '', 'comment');
 
 -- --------------------------------------------------------
 
@@ -118,31 +120,26 @@ CREATE TABLE IF NOT EXISTS `detail` (
   `tid` bigint(20) NOT NULL,
   `title` varchar(100) NOT NULL,
   `content` text NOT NULL,
-  `filelist` varchar(1000) NOT NULL DEFAULT '[]',
   `createtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `participant` varchar(1000) NOT NULL,
+  `finish` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`did`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
--- 插入之前先把表清空（truncate） `detail`
---
-
-TRUNCATE TABLE `detail`;
---
 -- 转存表中的数据 `detail`
 --
 
-INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `filelist`, `createtime`, `participant`) VALUES
-(2, 2, '我是子任务2', '我是子任务2的内容', '', '2014-12-01 09:24:10', '[11,13]'),
-(3, 2, 'ye', 'aa', '[]', '2014-12-12 03:51:17', '[11,13]'),
-(5, 2, 'asf', 'sfd', '[]', '2014-12-12 03:54:23', '[11,13]'),
-(6, 9, 'asf', 'sdf', '[]', '2014-12-12 03:56:40', '[11,13]'),
-(8, 2, 'hgh', 'afds', '[]', '2014-12-12 06:41:53', '[11,13]'),
-(9, 2, 'a', 'f', '[]', '2014-12-12 06:45:10', '[11]'),
-(10, 10, 'af', 'asf', '[]', '2014-12-12 10:11:54', '[13]'),
-(11, 13, 'af', 'fsdfg', '[]', '2014-12-12 10:57:48', '[11]'),
-(12, 2, '我是来传文件的', 'yeyeey', '[]', '2014-12-12 11:48:55', '[11,13]');
+INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`, `participant`, `finish`) VALUES
+(2, 2, '我是子任务2', '我是子任务2的内容', '2014-12-01 09:24:10', '[11,13]', 0),
+(3, 2, 'ye', 'aa', '2014-12-12 03:51:17', '[11,13]', 0),
+(5, 2, 'asf', 'sfd', '2014-12-12 03:54:23', '[11,13]', 0),
+(6, 9, 'asf', 'sdf', '2014-12-12 03:56:40', '[11,13]', 0),
+(8, 2, 'hgh', 'afds', '2014-12-12 06:41:53', '[11,13]', 0),
+(9, 2, 'a', 'f', '2014-12-12 06:45:10', '[11]', 0),
+(10, 10, 'af', 'asf', '2014-12-12 10:11:54', '[13]', 0),
+(11, 13, 'af', 'fsdfg', '2014-12-12 10:57:48', '[11]', 0),
+(12, 2, '我是来传文件的', 'yeyeey', '2014-12-12 11:48:55', '[11]', 0);
 
 -- --------------------------------------------------------
 
@@ -162,11 +159,6 @@ CREATE TABLE IF NOT EXISTS `file` (
   PRIMARY KEY (`fid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
---
--- 插入之前先把表清空（truncate） `file`
---
-
-TRUNCATE TABLE `file`;
 --
 -- 转存表中的数据 `file`
 --
@@ -199,11 +191,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- 插入之前先把表清空（truncate） `groups`
---
-
-TRUNCATE TABLE `groups`;
---
 -- 转存表中的数据 `groups`
 --
 
@@ -224,11 +211,6 @@ CREATE TABLE IF NOT EXISTS `invite` (
   `sha1code` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 插入之前先把表清空（truncate） `invite`
---
-
-TRUNCATE TABLE `invite`;
 --
 -- 转存表中的数据 `invite`
 --
@@ -255,11 +237,6 @@ CREATE TABLE IF NOT EXISTS `project` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
--- 插入之前先把表清空（truncate） `project`
---
-
-TRUNCATE TABLE `project`;
---
 -- 转存表中的数据 `project`
 --
 
@@ -270,6 +247,29 @@ INSERT INTO `project` (`pid`, `gid`, `creater`, `name`, `description`, `createti
 (14, 1, 13, '啦啦啦第四个项目', '啦啦啦第四个项目', '2014-12-01 07:40:26', 0),
 (15, 1, 13, '啦啦啦第五个项目', '啦啦啦第四个项目', '2014-12-01 07:41:33', 0),
 (16, 2, 14, 'aaa', 'aaa', '2014-12-03 02:48:13', 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `publish`
+--
+
+CREATE TABLE IF NOT EXISTS `publish` (
+  `pid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `uid` bigint(20) NOT NULL,
+  `gid` bigint(20) NOT NULL,
+  `content` text NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`pid`),
+  UNIQUE KEY `pid` (`pid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `publish`
+--
+
+INSERT INTO `publish` (`pid`, `uid`, `gid`, `content`, `time`) VALUES
+(1, 13, 1, '哈哈哈我是第一个上榜', '2014-12-16 06:17:23');
 
 -- --------------------------------------------------------
 
@@ -292,11 +292,6 @@ CREATE TABLE IF NOT EXISTS `task` (
   UNIQUE KEY `tid` (`tid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
---
--- 插入之前先把表清空（truncate） `task`
---
-
-TRUNCATE TABLE `task`;
 --
 -- 转存表中的数据 `task`
 --
@@ -326,11 +321,6 @@ CREATE TABLE IF NOT EXISTS `tmpuser` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户' AUTO_INCREMENT=1 ;
 
---
--- 插入之前先把表清空（truncate） `tmpuser`
---
-
-TRUNCATE TABLE `tmpuser`;
 -- --------------------------------------------------------
 
 --
@@ -347,11 +337,6 @@ CREATE TABLE IF NOT EXISTS `update` (
   UNIQUE KEY `did` (`did`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
---
--- 插入之前先把表清空（truncate） `update`
---
-
-TRUNCATE TABLE `update`;
 -- --------------------------------------------------------
 
 --
@@ -374,11 +359,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
---
--- 插入之前先把表清空（truncate） `user`
---
-
-TRUNCATE TABLE `user`;
 --
 -- 转存表中的数据 `user`
 --

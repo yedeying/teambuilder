@@ -6,8 +6,8 @@ var tools = require('../module/tools');
 var people = require('../module/people');
 var comment = require('../module/comment');
 var global = require('../module/global');
-var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list'];
-var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论'];
+var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list', '/del_comment_list'];
+var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论', '移除讨论'];
 urls.forEach(function(url, index) {
   router.get(url, function(req, res) {
     var sess = req.session;
@@ -153,7 +153,7 @@ router.get('/edit_task', function(req, res) {
 router.get('/edit_comment_list', function(req, res) {
   var sess = req.session;
   var data = req.query;
-  if(data.tid && /[0-9a-f]{40}/.test(data.tid)) {
+  if(data.cid && /[0-9a-f]{40}/.test(data.cid)) {
     comment.renderEditModel(data, sess, res);
   }
 });

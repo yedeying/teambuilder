@@ -110,6 +110,18 @@ comment.addCommentList = function(data, sess, res) {
   });
 };
 
+comment.editCommentList = function(data, sess, res) {
+  var email = sess.email;
+  var pid = sess.pid;
+  var title = data.title;
+  var description = data.description || '';
+  var sql = 'update comment set content = "' + title + '", description = "' + description + '" where sha1(cid) = "' + data.cid + '"';
+  db.query(sql, function(err, rows) {
+    if(err) throw err;
+    res.send({code: 0, info: '修改成功'});
+  });
+};
+
 comment.getPidFromCidSha1 = function(cidSha1, callback) {
   var sql = 'select id from comment where type = 0 and sha1(cid) = "' + cidSha1 + '"';
   db.query(sql, function(err, rows) {
@@ -178,5 +190,13 @@ comment.renderEditModel = function(data, sess, res) {
       if(err) throw err;
       res.send({code: 0, html: html});
     });
+  });
+};
+
+comment.delCommentList = function(data, sess, res) {
+  var sql = 'delete from comment where type = 0 and sha1(cid) = "' + data.cid + '" or type = 4 and sha1(id) = "' + data.cid + '"';
+  db.query(sql, function(err) {
+    if(err) throw err;
+    res.send({code: 0, info: '移除成功'});
   });
 };

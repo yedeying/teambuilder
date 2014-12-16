@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
   "use strict";
   require('jquery');
+  require('./publish');
   var tools = require('./tools');
   var $body = $('body');
   $body.on('click', '.add-project', function(e) {

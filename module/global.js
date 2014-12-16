@@ -33,5 +33,15 @@ module.exports = {
         res.send({code: 1, info: '没这个项目, 你是hacker吧'})
       }
     });
+  },
+  checkGroupAdmin: function(uid, callback) {
+    var sql = 'select (groups.admin = uid) as admin from groups, user where groups.gid = user.gid and user.uid = ' + uid;
+    db.query(sql, function(err, rows) {
+      if(rows.length !== 1) {
+        callback(new Error('incorrect uid'));
+        return;
+      }
+      callback(err, rows[0]['admin']);
+    });
   }
 };

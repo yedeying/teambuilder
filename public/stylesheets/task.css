@@ -2855,6 +2855,12 @@ table.layout td.left {
 table.layout td.right {
   vertical-align: top;
 }
+/* line 14, ../sass/include/_layout.scss */
+table.layout td.publish {
+  vertical-align: top;
+  width: 250px;
+  background-color: #f1f1f1;
+}
 
 /* line 12, ../sass/include/_model.scss */
 .cover {
@@ -3385,16 +3391,17 @@ table.layout td.right {
   margin-bottom: 0;
 }
 /* line 272, ../sass/include/_model.scss */
+.model .model-wrapper .del-comment-list-inner,
 .model .model-wrapper .remove-project-inner,
 .model .model-wrapper .remove-task-list-inner,
 .model .model-wrapper .remove-task-inner {
   padding: 10px 20px;
 }
-/* line 277, ../sass/include/_model.scss */
+/* line 278, ../sass/include/_model.scss */
 .model .model-wrapper .add-people-inner {
   padding: 10px 20px;
 }
-/* line 279, ../sass/include/_model.scss */
+/* line 280, ../sass/include/_model.scss */
 .model .model-wrapper .add-people-inner .email {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3414,54 +3421,54 @@ table.layout td.right {
 .model .model-wrapper .add-people-inner .email:focus {
   border-color: #a6a6a6;
 }
-/* line 284, ../sass/include/_model.scss */
+/* line 285, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner {
   padding-top: 10px;
 }
-/* line 286, ../sass/include/_model.scss */
+/* line 287, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner .radio-box {
   padding: 10px 20px;
 }
-/* line 288, ../sass/include/_model.scss */
+/* line 289, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner .radio-box label {
   margin-left: 8px;
 }
-/* line 293, ../sass/include/_model.scss */
+/* line 294, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner {
   padding: 10px 20px;
 }
-/* line 295, ../sass/include/_model.scss */
+/* line 296, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-/* line 299, ../sass/include/_model.scss */
+/* line 300, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input,
 .model .model-wrapper .remove-people-inner .name-block label {
   order: 2;
 }
-/* line 303, ../sass/include/_model.scss */
+/* line 304, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked,
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0 !important;
 }
-/* line 307, ../sass/include/_model.scss */
+/* line 308, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block hr {
   display: none;
   order: 1;
   width: 100%;
   border: 1px solid #ccc;
 }
-/* line 313, ../sass/include/_model.scss */
+/* line 314, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked ~ hr {
   display: block;
 }
-/* line 316, ../sass/include/_model.scss */
+/* line 317, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"] {
   display: none;
 }
-/* line 319, ../sass/include/_model.scss */
+/* line 320, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block label {
   min-width: 120px;
   border: 1px solid #ccc;
@@ -3475,29 +3482,29 @@ table.layout td.right {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 329, ../sass/include/_model.scss */
+/* line 330, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block label:hover {
   border-color: #adadad;
   background: #ebebeb;
   cursor: pointer;
 }
-/* line 335, ../sass/include/_model.scss */
+/* line 336, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0;
   background-color: #428bca;
   border-color: #357ebd;
   color: #fff;
 }
-/* line 340, ../sass/include/_model.scss */
+/* line 341, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label:hover {
   background-color: #3071a9;
   border-color: #285e8e;
 }
-/* line 347, ../sass/include/_model.scss */
+/* line 348, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner {
   padding: 20px;
 }
-/* line 349, ../sass/include/_model.scss */
+/* line 350, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner h4 {
   padding: 10px;
   background: #6FA9DA;
@@ -3506,11 +3513,11 @@ table.layout td.right {
   width: 50%;
   margin: 10px auto 0 auto;
 }
-/* line 357, ../sass/include/_model.scss */
+/* line 358, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table {
   width: 100%;
 }
-/* line 359, ../sass/include/_model.scss */
+/* line 360, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table input, .model .model-wrapper .edit-profile-inner table select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3531,24 +3538,24 @@ table.layout td.right {
 .model .model-wrapper .edit-profile-inner table input:focus, .model .model-wrapper .edit-profile-inner table select:focus {
   border-color: #a6a6a6;
 }
-/* line 364, ../sass/include/_model.scss */
+/* line 365, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table label {
   font-size: 16px;
 }
-/* line 368, ../sass/include/_model.scss */
+/* line 369, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td {
   padding: 4px 5px;
 }
-/* line 370, ../sass/include/_model.scss */
+/* line 371, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:first-child {
   text-align: right;
   width: 33%;
 }
-/* line 373, ../sass/include/_model.scss */
+/* line 374, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:first-child:after {
   content: ': ';
 }
-/* line 377, ../sass/include/_model.scss */
+/* line 378, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:last-child {
   text-align: left;
   width: 50%;

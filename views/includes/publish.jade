@@ -1,0 +1,12 @@
+.title-block
+  h3.title 公告
+  span.new-post 新建
+.content-block
+each publish, index in data.publish.publishList
+  .publish-container
+    .publish-block(data-pid=func.sha1(publish.pid.toString()))
+      .publish(data-origin=publish.content, data-type='modify') #{publish.content}
+      i.fa.fa-close.close-publish(title='此次隐藏')
+      if data.publish.admin === 1
+        i.fa.fa-edit.edit-publish(title='编辑')
+        i.fa.fa-trash.del-publish(title='移除')

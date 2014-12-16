@@ -8,6 +8,7 @@ define(function(require, exports, module) {
   var people = require('./people');
   var task = require('./task');
   var comment = require('./comment');
+  var commentDetail = require('./commentDetail');
   var $body = $('body');
   var $cover = $('.cover');
   var startX = 0;
@@ -135,6 +136,10 @@ define(function(require, exports, module) {
       task.editTask();
     } else if(type === 'add_comment_list') {
       comment.addCommentList();
+    } else if(type === 'edit_comment_list') {
+      commentDetail.editCommentList();
+    } else if(type === 'del_comment_list') {
+      commentDetail.delCommentList();
     }
   });
   function switchProject(option) {

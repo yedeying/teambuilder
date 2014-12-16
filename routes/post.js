@@ -12,6 +12,7 @@ var joingroup = require('../module/joingroup');
 var task = require('../module/task');
 var file = require('../module/file');
 var comment = require('../module/comment');
+var publish = require('../module/publish');
 // post mothod
 router.post('/login', function(req, res) {
   var sess = req.session;
@@ -306,6 +307,19 @@ router.post('/add_comment_list', function(req, res) {
   }
   comment.addCommentList(data, sess, res);
 });
+router.post('/edit_comment_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.title === '') {
+    res.send({code: 1, info: '讨论主题不能为空'});
+    return;
+  }
+  if(!/[0-9a-f]{40}/.test(data.cid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  comment.editCommentList(data, sess, res);
+});
 router.post('/comment/reply', function(req, res) {
   var sess = req.session;
   var data = req.body;
@@ -314,9 +328,44 @@ router.post('/comment/reply', function(req, res) {
     return;
   }
   if(!/[0-9a-f]{40}/.test(data.cid)) {
-    res.send({code: 0, info: '页面错误'});
+    res.send({code: 1, info: '页面错误'});
     return;
   }
   comment.replyComment(data, sess, res);
+});
+router.post('/del_comment_list', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.cid && /[0-9a-f]{40}/.test(data.cid)) {
+    comment.delCommentList(data, sess, res);
+  } else {
+    res.send({code: 1, info: '页面错误'});
+  }
+});
+router.post('/new_publish', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.content || data.content === '') {
+    res.send({code: 1, info: '公告不能为空'});
+    return;
+  }
+  if(!data.type || data.type === '') {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  if(data.type === 'modify' && !/[0-9a-f]{40}/.test(data.pid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  publish.newPublish(data, sess, res);
+});
+router.post('/del_publish', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.pid || !/[0-9a-f]{40}/.test(data.pid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  publish.delPublish(data, sess, res);
 });
 module.exports = router;
