@@ -13,7 +13,8 @@
     "invite": 4,
     "project": 3,
     "joingroup": 5,
-    "model": 1
+    "model": 1,
+    "file": 2
   },
   "post": {
     "login": 3,

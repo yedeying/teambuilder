@@ -9,6 +9,23 @@ body {
     margin: 0;
   }
 }
+.show-publish-btn {
+  @include border-radius(4px 0 0 8px);
+  @include transition(opacity, .3s);
+  position: fixed;
+  right: 0;
+  top: 30%;
+  color: $white;
+  background-color: #666;
+  width: 20px;
+  height: 60px;
+  padding: 5px 0px 5px 5px;
+  cursor: pointer;
+  opacity: .5;
+  &:hover {
+    opacity: 1;
+  }
+}
 .alert-box {
   @include transition(top, .5s);
   z-index: 999;
@@ -32,4 +49,40 @@ body {
       cursor: pointer;
     }
   }
+}
+.title-wrapper {
+  @include clearfix;
+  padding: 20px;
+  .title {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+  }
+  button {
+    .fa {
+      font-size: 1.2em;
+    }
+    @include btn(#ccc);
+    margin-left: 10px;
+    float: right;
+  }
+}
+.activity-label {
+  color: #777;
+  margin: 0 20px;
+}
+.activity-triangle-black {
+  @include triangle(6px, 8px, "up", #ccc);
+  left: 43px;
+  bottom: 0;
+}
+.activity-triangle-white {
+  @include triangle(6px, 8px, "up", #fff); 
+  left: 43px;
+  bottom: -2px;
+}
+.right .hr {
+  margin: 15px 0;
+  border: 0px;
+  border-top: 1px solid #ccc;
 }

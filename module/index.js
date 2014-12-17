@@ -188,9 +188,7 @@ module.exports = {
     });
     event.on('finish', function() {
       that.sortActivity(data.project);
-      publish.addPublishBar(data, sess, function() {
-        callback(data);
-      });
+      callback(data);
     });
   },
   addProject: function(email, data, sess, res) {

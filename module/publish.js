@@ -13,7 +13,7 @@ publish.addPublishBar = function(data, sess, callback) {
       data.publish.admin = bl;
       data.publish.publishList = [];
       var list = data.publish.publishList;
-      var sql = 'select pid, content, unix_timestamp(time) as time from publish where gid = ' + gid;
+      var sql = 'select pid, content, unix_timestamp(time) as time from publish where gid = ' + gid + ' order by time desc';
       db.query(sql, function(err, rows) {
         if(err) throw err;
         rows.forEach(function(row, index) {
@@ -38,7 +38,7 @@ publish.newPublish = function(data, sess, res) {
     cont(sql, '修改成功');
   } else if(data.type === 'publish') {
     people.getUid(sess, function(uid) {
-      var sql = 'insert into publish (uid, gid, content) values (' + uid + ', ' + gid + ', "' + content + '")';
+      var sql = 'insert into publish (uid, gid, content) values (' + uid + ', ' + sess.gid + ', "' + content + '")';
       cont(sql, '插入成功');
     });
   } else {

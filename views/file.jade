@@ -1,0 +1,23 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/file.css')
+
+block content
+  include includes/header
+  .task-inner
+    table.layout
+      tr
+        td.left
+          .inner
+            include includes/folder_list
+        td.right
+          .inner
+            include includes/file_list
+        //- td.publish
+          //- .inner
+            //- include includes/publish
+
+block scripts
+  script.
+    seajs.use('/javascripts/file.js');

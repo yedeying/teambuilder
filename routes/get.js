@@ -9,6 +9,7 @@ var file = require('../module/file');
 var people = require('../module/people');
 var project = require('../module/project');
 var comment = require('../module/comment');
+var publish = require('../module/publish');
 moduleArray.signup = require('../module/signup');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
@@ -25,11 +26,13 @@ router.get('/', function(req, res) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
     moduleArray[page].generatePage(sess, function(data) {
-      res.render(page, { title: 'teambuilder', page: page, data: data, func: {
-        json: JSON.stringify,
-        sha1: tools.getSha1,
-        getTime: tools.getTime
-      }});
+      publish.addPublishBar(data, sess, function() {
+        res.render(page, { title: 'teambuilder', page: page, data: data, func: {
+          json: JSON.stringify,
+          sha1: tools.getSha1,
+          getTime: tools.getTime
+        }});
+      });
     });
   });
 });
@@ -39,6 +42,10 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
     var sess = req.session;
     res.render(page, { title: titles[i], page: 'login' });
   });
+});
+router.get('/file', function(req, res) {
+  var sess = req.session;
+  file.generatePage(sess, res);
 });
 router.get('/comment', function(req, res) {
   var sess = req.session;
@@ -56,17 +63,19 @@ router.get('/comment', function(req, res) {
   }
   function cont() {
     comment.generatePage(sess, function(data) {
-      res.render('comment', {
-        title: 'teambuilder',
-        page: 'comment',
-        data: data,
-        func: {
-          json: JSON.stringify,
-          sha1: tools.getSha1,
-          getTime: tools.getTime
-        }
+      publish.addPublishBar(data, sess, function() {
+        res.render('comment', {
+          title: 'teambuilder',
+          page: 'comment',
+          data: data,
+          func: {
+            json: JSON.stringify,
+            sha1: tools.getSha1,
+            getTime: tools.getTime
+          }
+        });
       });
-    });  
+    });
   }
 });
 router.get('/comment/detail', function(req, res) {
@@ -129,11 +138,13 @@ router.get('/project', function(req, res) {
     }
   }
   project.generatePage(req.query.pid, res, sess, function(data) {
-    res.render('project', { title: 'teambuilder', page: 'project', data: data, func: {
-      JSON: JSON,
-      sha1: tools.getSha1,
-      getTime: tools.getTime
-    }});
+    publish.addPublishBar(data, sess, function() {
+      res.render('project', { title: 'teambuilder', page: 'project', data: data, func: {
+        JSON: JSON,
+        sha1: tools.getSha1,
+        getTime: tools.getTime
+      }});
+    });
   });
 });
 router.get('/task', function(req, res) {

@@ -3,6 +3,7 @@ var file = require('./file');
 var tools = require('./tools');
 var people = require('./people');
 var project = require('./project');
+var publish = require('./publish');
 var emitter = require('events').EventEmitter;
 module.exports = {
   getTaskDetail: function(tid, detail, sess, callback) {
@@ -88,15 +89,17 @@ module.exports = {
     var data = {};
     data.task = [];
     event.on('finish', function() {
-      res.render('task', {
-        page: 'task',
-        title: 'teambuilder',
-        data: data,
-        func: {
-          sha1: tools.getSha1,
-          json: JSON.stringify,
-          getTime: tools.getTime
-        }
+      publish.addPublishBar(data, sess, function() {
+        res.render('task', {
+          page: 'task',
+          title: 'teambuilder',
+          data: data,
+          func: {
+            sha1: tools.getSha1,
+            json: JSON.stringify,
+            getTime: tools.getTime
+          }
+        });
       });
     });
     if(tidSha1) {
@@ -221,9 +224,9 @@ module.exports = {
               if(err) throw err;
               if(rows.length === 1) {
                 var did = rows[0]['did'];
-                saveFile(data.files, function(sha1, fileName, callback) {
+                saveFile(data.files, function(sha1, fileName, fileSize, callback) {
                   var time = (new Date()).getTime();
-                  var sql = 'insert into file (id, uploader, type, filename, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", "' + sha1 + '", ' + time + ', current_timestamp())';
+                  var sql = 'insert into file (id, uploader, type, filename, size, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", "' + fileSize + '", "' + sha1 + '", ' + time + ', current_timestamp())';
                   db.query(sql, function(err, rows) {
                     if(err) throw err;
                     callback(sha1 + time);

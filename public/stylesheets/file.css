@@ -2756,6 +2756,97 @@ body button {
   cursor: pointer;
 }
 
+/* line 53, ../sass/include/_global.scss */
+.title-wrapper {
+  *zoom: 1;
+  padding: 20px;
+}
+/* line 12, ../sass/include/_mixins.scss */
+.title-wrapper:before, .title-wrapper:after {
+  display: table;
+  content: " ";
+}
+/* line 16, ../sass/include/_mixins.scss */
+.title-wrapper:after {
+  clear: both;
+}
+/* line 56, ../sass/include/_global.scss */
+.title-wrapper .title {
+  display: inline;
+  margin: 0;
+  font-weight: normal;
+}
+/* line 61, ../sass/include/_global.scss */
+.title-wrapper button {
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  margin: 5px;
+  color: #fff;
+  background-color: #ccc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  margin-left: 10px;
+  float: right;
+}
+/* line 62, ../sass/include/_global.scss */
+.title-wrapper button .fa {
+  font-size: 1.2em;
+}
+/* line 51, ../sass/include/_mixins.scss */
+.title-wrapper button:hover {
+  background-color: #bfbfbf;
+}
+
+/* line 70, ../sass/include/_global.scss */
+.activity-label {
+  color: #777;
+  margin: 0 20px;
+}
+
+/* line 74, ../sass/include/_global.scss */
+.activity-triangle-black {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #ccc;
+  left: 43px;
+  bottom: 0;
+}
+
+/* line 79, ../sass/include/_global.scss */
+.activity-triangle-white {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #fff;
+  left: 43px;
+  bottom: -2px;
+}
+
+/* line 84, ../sass/include/_global.scss */
+.right .hr {
+  margin: 15px 0;
+  border: 0px;
+  border-top: 1px solid #ccc;
+}
+
 @media screen and (max-width: 1100px) {
   /* line 2, ../sass/include/_publish.scss */
   .publish {
@@ -2865,187 +2956,836 @@ td.publish {
   border: 1px solid #5bb2fc;
 }
 
-/* line 3, ../sass/login.scss */
-.account-page .joingroup-inner {
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-  width: 400px;
-  padding: 20px;
-  margin: 20px auto;
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-}
-/* line 11, ../sass/login.scss */
-.account-page .join-alert, .account-page .groupname, .account-page .joingroup {
-  width: 444px !important;
-}
-/* line 14, ../sass/login.scss */
-.account-page .joingroup {
-  -webkit-transition: background-color 0.3s;
-  -o-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-  background-color: #428bca;
-  cursor: pointer;
-  color: #fff;
-  font-weight: bold;
-}
-/* line 20, ../sass/login.scss */
-.account-page .joingroup:hover {
-  background-color: #3071a9;
-}
-/* line 24, ../sass/login.scss */
-.account-page .alert {
+/* line 2, ../sass/include/_header.scss */
+.header .navbar {
   *zoom: 1;
-  margin: 20px auto;
-  padding: 8px 12px;
-  border: 0;
-  display: none;
+  display: block;
+  background-color: #2f435c;
 }
 /* line 12, ../sass/include/_mixins.scss */
-.account-page .alert:before, .account-page .alert:after {
+.header .navbar:before, .header .navbar:after {
   display: table;
   content: " ";
 }
 /* line 16, ../sass/include/_mixins.scss */
-.account-page .alert:after {
+.header .navbar:after {
   clear: both;
 }
-/* line 30, ../sass/login.scss */
-.account-page .alert.success {
-  background: #dff0d8;
+/* line 6, ../sass/include/_header.scss */
+.header .navbar > .left {
+  float: left;
+  color: #fff;
+  padding: 15px;
 }
-/* line 33, ../sass/login.scss */
-.account-page .alert.error {
-  background: #f9f2f4;
+/* line 10, ../sass/include/_header.scss */
+.header .navbar > .left:hover {
+  background-color: #27384d;
 }
-/* line 36, ../sass/login.scss */
-.account-page .alert .close {
+/* line 13, ../sass/include/_header.scss */
+.header .navbar > .left.active {
+  background-color: #3b5574;
+}
+/* line 17, ../sass/include/_header.scss */
+.header .navbar > .right {
   float: right;
+  color: #ddd;
+  padding: 15px;
+}
+/* line 21, ../sass/include/_header.scss */
+.header .navbar > .right:hover {
+  color: #fff;
+}
+/* line 26, ../sass/include/_header.scss */
+.header .title-block {
+  *zoom: 1;
+  background-color: #3b5574;
+  padding: 20px 25px 20px 20px;
+}
+/* line 12, ../sass/include/_mixins.scss */
+.header .title-block:before, .header .title-block:after {
+  display: table;
+  content: " ";
+}
+/* line 16, ../sass/include/_mixins.scss */
+.header .title-block:after {
+  clear: both;
+}
+/* line 30, ../sass/include/_header.scss */
+.header .title-block .title {
+  margin: 0;
+  padding: 5px 0;
+  font-size: 22px;
+  float: left;
+  color: #fff;
+}
+/* line 37, ../sass/include/_header.scss */
+.header .title-block .user-icon {
+  margin: 0 15px;
+  height: 39px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   cursor: pointer;
 }
-/* line 41, ../sass/login.scss */
-.account-page > .banner {
-  position: relative;
-}
-/* line 43, ../sass/login.scss */
-.account-page > .banner > .image {
-  width: 100%;
-}
-/* line 46, ../sass/login.scss */
-.account-page > .banner > .title {
-  text-align: center;
-  margin: auto;
+/* line 43, ../sass/include/_header.scss */
+.header .title-block .notification {
+  font-size: 29px;
   color: #fff;
-  font-size: 30px;
-  position: absolute;
+  cursor: pointer;
+  margin-left: 10px;
+}
+/* line 49, ../sass/include/_header.scss */
+.header .title-block .search-btn {
+  color: #aaa;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 10px 10px 10px 12px;
+  position: relative;
+  top: 1px;
+  -moz-border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+}
+/* line 58, ../sass/include/_header.scss */
+.header .title-block .search {
+  border-width: 0;
+  outline-width: 0;
+  margin: 0;
+  padding: 12px 12px 12px 0;
+  width: 230px;
+  -moz-border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0;
+  border-radius: 0 5px 5px 0;
+}
+/* line 66, ../sass/include/_header.scss */
+.header .title-block .right {
+  float: right;
+}
+
+/* line 1, ../sass/include/_layout.scss */
+table.layout {
+  min-height: 800px;
+  width: 100%;
+  border-spacing: 0;
+}
+/* line 5, ../sass/include/_layout.scss */
+table.layout td.left {
+  vertical-align: top;
+  width: 250px;
+  background-color: #f1f1f1;
+  border-right: 1px solid #b9babc;
+}
+/* line 11, ../sass/include/_layout.scss */
+table.layout td.right {
+  vertical-align: top;
+}
+/* line 14, ../sass/include/_layout.scss */
+table.layout td.publish {
+  vertical-align: top;
+  width: 250px;
+  background-color: #f1f1f1;
+}
+
+/* line 12, ../sass/include/_model.scss */
+.cover {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* line 21, ../sass/include/_model.scss */
+.model {
+  width: 800px;
+  margin: 0 auto;
   left: 0;
   right: 0;
-  bottom: 20px;
+  position: absolute;
 }
-/* line 55, ../sass/login.scss */
-.account-page > .banner > .title > h1 {
-  margin-bottom: 0;
+/* line 27, ../sass/include/_model.scss */
+.model label {
+  cursor: pointer;
 }
-/* line 60, ../sass/login.scss */
-.account-page > .form-unit {
-  margin: 20px auto;
-}
-/* line 62, ../sass/login.scss */
-.account-page > .form-unit input, .account-page > .form-unit .alert {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  margin: 25px auto;
-  display: block;
-  padding: 12px;
-  width: 300px;
-  font-size: 14px;
-  outline: none;
+/* line 30, ../sass/include/_model.scss */
+.model .model-wrapper {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
-  border: 1px solid #d9d9d9;
+  width: 800px;
+  position: relative;
+  left: 0;
+  top: 0;
+  background: #fff;
 }
-/* line 72, ../sass/login.scss */
-.account-page > .form-unit input.email, .account-page > .form-unit input.username, .account-page > .form-unit input.password, .account-page > .form-unit .alert.email, .account-page > .form-unit .alert.username, .account-page > .form-unit .alert.password {
+/* line 37, ../sass/include/_model.scss */
+.model .model-wrapper .title-block {
+  *zoom: 1;
+  -moz-border-radius: 8px 8px 0 0;
+  -webkit-border-radius: 8px;
+  border-radius: 8px 8px 0 0;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #dddddd));
+  background-image: -moz-linear-gradient(top, #ffffff, #dddddd);
+  background-image: -webkit-linear-gradient(top, #ffffff, #dddddd);
+  background-image: linear-gradient(to bottom, #ffffff, #dddddd);
+  cursor: move;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+/* line 38, ../sass/include/_model.scss */
+.model .model-wrapper .title-block h2 {
+  float: left;
+  margin: 0;
+}
+/* line 42, ../sass/include/_model.scss */
+.model .model-wrapper .title-block .close {
+  float: right;
+  cursor: pointer;
+  font-size: 21px;
+}
+/* line 12, ../sass/include/_mixins.scss */
+.model .model-wrapper .title-block:before, .model .model-wrapper .title-block:after {
+  display: table;
+  content: " ";
+}
+/* line 16, ../sass/include/_mixins.scss */
+.model .model-wrapper .title-block:after {
+  clear: both;
+}
+/* line 54, ../sass/include/_model.scss */
+.model .model-wrapper .hr {
+  border: 1px dashed #ddd;
+  margin-bottom: 0;
+}
+/* line 58, ../sass/include/_model.scss */
+.model .model-wrapper .footer {
+  padding: 10px;
+}
+/* line 60, ../sass/include/_model.scss */
+.model .model-wrapper .footer .confirm, .model .model-wrapper .footer .cancel {
+  padding: 5px;
+  margin: 0 5px;
+}
+/* line 64, ../sass/include/_model.scss */
+.model .model-wrapper .footer .confirm {
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  margin: 5px;
+  color: #fff;
+  background-color: #43c86f;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 51, ../sass/include/_mixins.scss */
+.model .model-wrapper .footer .confirm:hover {
+  background-color: #37bb62;
+}
+/* line 67, ../sass/include/_model.scss */
+.model .model-wrapper .footer .cancel {
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  margin: 5px;
+  color: #fff;
+  background-color: #eb7065;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 51, ../sass/include/_mixins.scss */
+.model .model-wrapper .footer .cancel:hover {
+  background-color: #e85b4e;
+}
+/* line 71, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner {
+  padding: 20px;
+}
+/* line 73, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner input[type="text"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
   -webkit-transition: border-color 0.3s;
   -o-transition: border-color 0.3s;
   transition: border-color 0.3s;
 }
-/* line 74, ../sass/login.scss */
-.account-page > .form-unit input.email:focus, .account-page > .form-unit input.username:focus, .account-page > .form-unit input.password:focus, .account-page > .form-unit .alert.email:focus, .account-page > .form-unit .alert.username:focus, .account-page > .form-unit .alert.password:focus {
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner input[type="text"]:focus {
   border-color: #a6a6a6;
 }
-/* line 78, ../sass/login.scss */
-.account-page > .form-unit input.alert, .account-page > .form-unit .alert.alert {
-  margin: 20px auto;
-  padding: 8px 12px;
-  border: 0;
-  display: none;
+/* line 76, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner .name {
+  width: 100%;
 }
-/* line 83, ../sass/login.scss */
-.account-page > .form-unit input.alert.success, .account-page > .form-unit .alert.alert.success {
-  background: #dff0d8;
-}
-/* line 86, ../sass/login.scss */
-.account-page > .form-unit input.alert.error, .account-page > .form-unit .alert.alert.error {
-  background: #f9f2f4;
-}
-/* line 89, ../sass/login.scss */
-.account-page > .form-unit input.alert .close, .account-page > .form-unit .alert.alert .close {
-  float: right;
-  cursor: pointer;
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.account-page > .form-unit input.alert .close:before, .account-page > .form-unit input.alert .close:after, .account-page > .form-unit .alert.alert .close:before, .account-page > .form-unit .alert.alert .close:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.account-page > .form-unit input.alert .close:after, .account-page > .form-unit .alert.alert .close:after {
-  clear: both;
-}
-/* line 95, ../sass/login.scss */
-.account-page > .form-unit input.submit, .account-page > .form-unit .alert.submit {
-  font-weight: bold;
-  color: #fff;
-  margin-bottom: 10px;
-}
-/* line 96, ../sass/login.scss */
-.account-page > .form-unit input.submit.register, .account-page > .form-unit input.submit.sendagain, .account-page > .form-unit input.submit.login, .account-page > .form-unit input.submit.vertify, .account-page > .form-unit .alert.submit.register, .account-page > .form-unit .alert.submit.sendagain, .account-page > .form-unit .alert.submit.login, .account-page > .form-unit .alert.submit.vertify {
-  -webkit-transition: background-color 0.3s;
-  -o-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-  background-color: #428bca;
-  cursor: pointer;
-}
-/* line 100, ../sass/login.scss */
-.account-page > .form-unit input.submit.register:hover, .account-page > .form-unit input.submit.sendagain:hover, .account-page > .form-unit input.submit.login:hover, .account-page > .form-unit input.submit.vertify:hover, .account-page > .form-unit .alert.submit.register:hover, .account-page > .form-unit .alert.submit.sendagain:hover, .account-page > .form-unit .alert.submit.login:hover, .account-page > .form-unit .alert.submit.vertify:hover {
-  background-color: #3071a9;
-}
-/* line 104, ../sass/login.scss */
-.account-page > .form-unit input.submit.disabled, .account-page > .form-unit .alert.submit.disabled {
-  background-color: #84b4dc;
-}
-/* line 112, ../sass/login.scss */
-.account-page > .form-unit .action-wrapper {
+/* line 79, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  margin: auto;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  resize: vertical;
+  width: 100%;
+  height: 100px;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-project-inner textarea:focus {
+  border-color: #a6a6a6;
+}
+/* line 86, ../sass/include/_model.scss */
+.model .model-wrapper .add-comment-list-inner {
+  padding: 20px;
+}
+/* line 88, ../sass/include/_model.scss */
+.model .model-wrapper .add-comment-list-inner .name {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-comment-list-inner .name:focus {
+  border-color: #a6a6a6;
+}
+/* line 92, ../sass/include/_model.scss */
+.model .model-wrapper .add-comment-list-inner .description {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  resize: vertical;
+  width: 100%;
+  height: 60px;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-comment-list-inner .description:focus {
+  border-color: #a6a6a6;
+}
+/* line 99, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner {
+  padding: 20px;
+}
+/* line 101, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .name, .model .model-wrapper .create-task-list-inner .content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .name:focus, .model .model-wrapper .create-task-list-inner .content:focus {
+  border-color: #a6a6a6;
+}
+/* line 105, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .date {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 30%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .date:focus {
+  border-color: #a6a6a6;
+}
+/* line 109, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .member {
+  padding: 4px 8px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 113, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .member:hover {
+  background-color: #f3f4f5;
+}
+/* line 118, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .check {
+  display: none;
+}
+/* line 120, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner .check:checked + .member {
+  background-color: #8cc1f8;
+  border-color: #8cc1f8;
+  color: #fff;
+}
+/* line 127, ../sass/include/_model.scss */
+.model .model-wrapper .view-task-inner {
+  padding: 20px;
+}
+/* line 129, ../sass/include/_model.scss */
+.model .model-wrapper .view-task-inner .description {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
   padding: 12px;
-  width: 300px;
-  font-size: 14px;
+  background-color: #eee;
 }
-/* line 118, ../sass/login.scss */
-.account-page > .form-unit .action-wrapper .forget {
-  color: #aaa;
-  float: left;
+/* line 134, ../sass/include/_model.scss */
+.model .model-wrapper .view-task-inner hr {
+  border-width: 0;
+  padding: 5px 0;
+  border-bottom: 1px solid #f1f2f3;
 }
-/* line 122, ../sass/login.scss */
-.account-page > .form-unit .action-wrapper .sign-up {
-  color: #428bca;
-  float: right;
+/* line 139, ../sass/include/_model.scss */
+.model .model-wrapper .view-task-inner .name {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #5A5A5A;
+  padding: 4px 8px;
+  color: white;
+  margin-right: 5px;
+}
+/* line 146, ../sass/include/_model.scss */
+.model .model-wrapper .view-task-inner .down-file {
+  cursor: pointer;
+  margin-right: 16px;
+  color: #0061bc;
+}
+/* line 152, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner {
+  padding: 20px;
+}
+/* line 154, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .name, .model .model-wrapper .add-task-inner .content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .name:focus, .model .model-wrapper .add-task-inner .content:focus {
+  border-color: #a6a6a6;
+}
+/* line 158, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .member {
+  padding: 4px 8px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 162, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .member:hover {
+  background-color: #f3f4f5;
+}
+/* line 167, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .check {
+  display: none;
+}
+/* line 169, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .check:checked + .member {
+  background-color: #8cc1f8;
+  border-color: #8cc1f8;
+  color: #fff;
+}
+/* line 175, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner #file {
+  display: none;
+}
+/* line 178, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  resize: vertical;
+  width: 100%;
+  height: 60px;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner textarea:focus {
+  border-color: #a6a6a6;
+}
+/* line 184, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .file {
+  display: inline-block;
+  background-color: #8cc1f8;
+  color: #fff;
+  padding: 7px 9px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 190, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .file:hover {
+  background-color: #a4cef9;
+}
+/* line 194, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .file-label {
+  margin-bottom: 10px;
+  color: #fff;
+  display: inline-block;
+  background: #886ecc;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+/* line 202, ../sass/include/_model.scss */
+.model .model-wrapper .add-task-inner .file-label .close-label {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+/* line 209, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner {
+  padding: 20px;
+}
+/* line 211, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .name, .model .model-wrapper .edit-task-inner .content {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .name:focus, .model .model-wrapper .edit-task-inner .content:focus {
+  border-color: #a6a6a6;
+}
+/* line 215, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .member {
+  padding: 4px 8px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 219, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .member:hover {
+  background-color: #f3f4f5;
+}
+/* line 224, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .check {
+  display: none;
+}
+/* line 226, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .check:checked + .member {
+  background-color: #8cc1f8;
+  border-color: #8cc1f8;
+  color: #fff;
+}
+/* line 232, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner #file {
+  display: none;
+}
+/* line 235, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  resize: vertical;
+  width: 100%;
+  height: 60px;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner textarea:focus {
+  border-color: #a6a6a6;
+}
+/* line 241, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .file {
+  display: inline-block;
+  background-color: #8cc1f8;
+  color: #fff;
+  padding: 7px 9px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 247, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .file:hover {
+  background-color: #a4cef9;
+}
+/* line 251, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .file-label, .model .model-wrapper .edit-task-inner .exist-file-label {
+  margin-bottom: 10px;
+  color: #fff;
+  display: inline-block;
+  background: #886ecc;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+/* line 259, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .file-label .down-file, .model .model-wrapper .edit-task-inner .exist-file-label .down-file {
+  color: #fff;
+}
+/* line 262, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .file-label .close-label, .model .model-wrapper .edit-task-inner .file-label .del-file, .model .model-wrapper .edit-task-inner .exist-file-label .close-label, .model .model-wrapper .edit-task-inner .exist-file-label .del-file {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+/* line 268, ../sass/include/_model.scss */
+.model .model-wrapper .edit-task-inner .exist-file-label {
+  margin-bottom: 0;
+}
+/* line 272, ../sass/include/_model.scss */
+.model .model-wrapper .del-comment-list-inner,
+.model .model-wrapper .remove-project-inner,
+.model .model-wrapper .remove-task-list-inner,
+.model .model-wrapper .remove-task-inner {
+  padding: 10px 20px;
+}
+/* line 278, ../sass/include/_model.scss */
+.model .model-wrapper .add-people-inner {
+  padding: 10px 20px;
+}
+/* line 280, ../sass/include/_model.scss */
+.model .model-wrapper .add-people-inner .email {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 9px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .add-people-inner .email:focus {
+  border-color: #a6a6a6;
+}
+/* line 285, ../sass/include/_model.scss */
+.model .model-wrapper .switch-project-inner {
+  padding-top: 10px;
+}
+/* line 287, ../sass/include/_model.scss */
+.model .model-wrapper .switch-project-inner .radio-box {
+  padding: 10px 20px;
+}
+/* line 289, ../sass/include/_model.scss */
+.model .model-wrapper .switch-project-inner .radio-box label {
+  margin-left: 8px;
+}
+/* line 294, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner {
+  padding: 10px 20px;
+}
+/* line 296, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* line 300, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input,
+.model .model-wrapper .remove-people-inner .name-block label {
+  order: 2;
+}
+/* line 304, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked,
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
+  order: 0 !important;
+}
+/* line 308, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block hr {
+  display: none;
+  order: 1;
+  width: 100%;
+  border: 1px solid #ccc;
+}
+/* line 314, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked ~ hr {
+  display: block;
+}
+/* line 317, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"] {
+  display: none;
+}
+/* line 320, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block label {
+  min-width: 120px;
+  border: 1px solid #ccc;
+  padding: 6px 8px;
+  text-align: center;
+  margin: 0 5px 5px 0;
+  background: #fff;
+  color: #333;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* line 330, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block label:hover {
+  border-color: #adadad;
+  background: #ebebeb;
+  cursor: pointer;
+}
+/* line 336, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
+  order: 0;
+  background-color: #428bca;
+  border-color: #357ebd;
+  color: #fff;
+}
+/* line 341, ../sass/include/_model.scss */
+.model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label:hover {
+  background-color: #3071a9;
+  border-color: #285e8e;
+}
+/* line 348, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner {
+  padding: 20px;
+}
+/* line 350, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner h4 {
+  padding: 10px;
+  background: #6FA9DA;
+  color: white;
+  border-radius: 8px;
+  width: 50%;
+  margin: 10px auto 0 auto;
+}
+/* line 358, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table {
+  width: 100%;
+}
+/* line 360, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table input, .model .model-wrapper .edit-profile-inner table select {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 8px;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  -webkit-transition: border-color 0.3s;
+  -o-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+  padding: 4px 8px;
+  height: 30px;
+}
+/* line 8, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table input:focus, .model .model-wrapper .edit-profile-inner table select:focus {
+  border-color: #a6a6a6;
+}
+/* line 365, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table label {
+  font-size: 16px;
+}
+/* line 369, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table tr td {
+  padding: 4px 5px;
+}
+/* line 371, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table tr td:first-child {
+  text-align: right;
+  width: 33%;
+}
+/* line 374, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table tr td:first-child:after {
+  content: ': ';
+}
+/* line 378, ../sass/include/_model.scss */
+.model .model-wrapper .edit-profile-inner table tr td:last-child {
+  text-align: left;
+  width: 50%;
+}
+
+/* line 5, ../sass/file.scss */
+.file-list-header {
+  position: relative;
 }

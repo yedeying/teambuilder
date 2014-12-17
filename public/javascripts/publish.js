@@ -18,6 +18,14 @@ define(function(require, exports, module) {
     $('.publish-container').prepend(html);
     $('.publish-block .publish').eq(0).focus();
   });
+  $body.on('click', '.hide-publish-block', function(e) {
+    $('td.publish').hide();
+    $('.show-publish-btn').show();
+  });
+  $body.on('click', '.show-publish-btn', function(e) {
+    $('td.publish').show();
+    $('.show-publish-btn').hide();
+  });
   $body.on('click', '.close-publish', function(e) {
     var $publish = $(this).parent().find('.publish');
     if($publish.attr('contenteditable') === 'true') {
@@ -38,6 +46,12 @@ define(function(require, exports, module) {
         }
       }
     });
+  });
+  $body.on('keypress', '.publish .publish', function(e) {
+    if($(this).attr('contenteditable') !== 'true' || e.which !== 13) {
+      return;
+    }
+    $(this).parent().find('.edit-publish').trigger('click');
   });
   $body.on('click', '.edit-publish', function(e) {
     if($(this).hasClass('fa-edit')) {

@@ -1,0 +1,26 @@
+.file-list-header
+  .title-wrapper
+    h1.title #{data.folder.name}
+    button.add-file
+      i.fa.fa-plus-circle
+      span &nbsp;上传文件
+  span.activity-label 所有文件
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.file-list
+  each file in data.folder.fileList
+    .file-block
+      .file-icon
+      .file-content
+        .file-title-block
+          span.file-title #{file.name.name}
+          span.file-suffix #{file.name.suffix}
+        .file-description
+          span.file-creater By&nbsp;#{file.username}
+          span.file-time #{func.getTime(file.time, 'hh:mm DD C')}
+          span.file-size #{file.size.num === '0' ? '未知' : file.size.num + file.size.unit}
+      .file-opeartor
+        span.file-download 下载
+        span.file-move 移动
+        span.file-delete 删除

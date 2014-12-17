@@ -1,6 +1,9 @@
 @import "include/common";
 @import "include/header";
 @import "include/model";
+.show-publish-btn {
+  display: none;
+}
 .people-inner {
   .head-block {
     position: relative;

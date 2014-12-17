@@ -1,16 +1,15 @@
 tmpuser
   uid           id
-  tid           id
   email         string
   username      string
   password      string
   timestamp     time
   createtime    time
+  tid           id
 user
   uid           id
   cid           id
   gid           id
-  icon          string +
   username      string
   email         string
   password      string
@@ -27,7 +26,7 @@ course
   cid           id
   title         string
   teacher       id
-group
+groups
   gid           id
   cid           id
   admin         id
@@ -36,25 +35,22 @@ group
 project
   pid           id
   gid           id
-  status        number
   creater       id
   name          string
   description   string
   createtime    time
-  expecttime    time
-  finishtime    time
+  status        number
 task
   tid           id
   pid           id
+  creater       id
   title         string 
   content       string
   status        number
   createtime    time
   expecttime    time
   finishtime    time
-  creater       id
   participant   array
-  visiblelist   array
 comment
   cid           id
   id            id
@@ -63,6 +59,16 @@ comment
   deep          number
   time          time
   content       string
+  description   string
+  status        string
+detail
+  did           id
+  tid           id
+  title         string
+  content       string
+  createtime    time
+  participant   array
+  finish        boolean
 update
   did           id
   tid           id
@@ -76,9 +82,16 @@ file
   type          number
   filename      string
   fsha1         string
+  timestamp     string
   uploadtime    time
 invite
-  iid
-  user
-  admin
-  sha1
+  iid           id
+  user          id
+  admin         id
+  sha1          string
+publish
+  pid           id
+  uid           id
+  gid           id
+  content       string
+  time          time

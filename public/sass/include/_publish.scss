@@ -3,6 +3,9 @@
     display: none;
   }
 }
+td.publish {
+  display: none;
+}
 .publish {
   .inner {
     padding: 10px 20px;
@@ -24,9 +27,9 @@
       top: -2px;
     }
   }
-  .new-post{
+  .new-post, .hide-publish-block {
     float: right;
-    margin: 17px 0;
+    margin: 17px 0 17px 10px;
     color: $linkblue;
     cursor: pointer;
   }

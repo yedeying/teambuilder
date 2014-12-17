@@ -36,11 +36,26 @@ module.exports = {
     db.query(sql, function(err, rows) {
       if(err) throw err;
       if(rows.length === 1) {
-        callback(rows[0]['username']);
+        callback(rows[0]['username'], uid);
       } else {
         throw new Error('unknown error');
       }
     });
+  },
+  getUsersFromUidMap: function(uidMap, callback) {
+    var cnt = 0;
+    var len = 0;
+    for(var i in uidMap) len++;
+    for(var i in uidMap) {
+      this.getUser(i, function(name, uid) {
+        uidMap[uid].uid = uid;
+        uidMap[uid].username = name;
+        cnt++;
+        if(cnt === len) {
+          callback();
+        }
+      });
+    }
   },
   sendMail: function(email, code, res, callback) {
     this.getVerifyHtml(code, function(html) {

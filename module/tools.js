@@ -82,5 +82,45 @@ module.exports = {
       return {code: 2, info: '时间不能早于当前'};
     }
     return {code: 0, info: '成功', time: time};
+  },
+  cutFloat: function(num, dig) {
+    function cutZero(str) {
+      while(str.charAt(str.length - 1) === '0') {
+        str = str.substring(0, str.length - 1);
+      }
+      if(str.charAt(str.length - 1) === '.') {
+        str = str.substring(0, str.length - 1);
+      }
+      return str;
+    }
+    var fit = 5 * Math.pow(0.1, dig + 1);
+    var str = (num + fit).toString();
+    if(str.indexOf('.') === -1) {
+      return cutZero(str);
+    }
+    var inte = str.split('.')[0];
+    var floa = str.split('.')[1];
+    if(floa.length <= dig) {
+      return cutZero(str);
+    }
+    if(dig !== 0) {
+      return cutZero(inte + '.' + floa.substring(0, dig));
+    }
+    return cutZero(inte);
+  },
+  convertFileSize: function(size) {
+    if(typeof size !== 'number') {
+      throw new Error('convertFileSize require a number params');
+    }
+    var unit = ['B', 'KB', 'MB', 'GB', 'TB'];
+    var level = 0;
+    while(size >= 1024 && level < 4) {
+      size /= 1024;
+      level += 1;
+    }
+    return {
+      num: this.cutFloat(size, 2),
+      unit: unit[level]
+    };
   }
 };
