@@ -8,19 +8,26 @@
   span.activity-triangle-black
   span.activity-triangle-white
   hr.hr
-.file-list
+.file-list(data-fid=func.sha1(data.defaultFolder.toString()))
   each file in data.folder.fileList
     .file-block
       .file-icon
+        img(src='/images/file_icons/#{file.icon}')
       .file-content
         .file-title-block
-          span.file-title #{file.name.name}
-          span.file-suffix #{file.name.suffix}
+          span.file-title #{file.name}
+          span.file-suffix #{file.suffix}
         .file-description
           span.file-creater By&nbsp;#{file.username}
           span.file-time #{func.getTime(file.time, 'hh:mm DD C')}
           span.file-size #{file.size.num === '0' ? '未知' : file.size.num + file.size.unit}
-      .file-opeartor
-        span.file-download 下载
-        span.file-move 移动
-        span.file-delete 删除
+      .file-opeartion(data-fid=func.sha1(file.fid.toString()), data-gid=func.sha1(data.gid.toString()))
+        button.file-download
+          i.fa.fa-download
+          span &nbsp;下载
+        button.file-move
+          i.fa.fa-cut
+          span &nbsp;移动
+        button.file-delete
+          i.fa.fa-remove
+          span &nbsp;删除

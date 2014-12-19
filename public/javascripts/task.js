@@ -93,45 +93,6 @@ define(function(require, exports, module) {
       }
     });
   });
-  /*
-   * file block
-   */
-  var fileList = [];
-  window.teambuilder.fileList = fileList;
-  function appendFile(file) {
-    var html = '<span data-no="' + fileList.length + '" class="file-label"><span>' + file.name + '</span><span class="close-label">×</span></span>';
-    $('.file-label-box').append(html);
-  }
-  $body.on('click', '.file-label .close-label', function() {
-    var no = parseInt($(this).parent().attr('data-no'), 10);
-    $(this).parent().remove();
-  });
-  $body.on('change', '.model #file', function(e) {
-    var files = $('.model #file').get(0).files;
-    if(files.length > 0) {
-      var file = files.item(0);
-      if(file.size > 5 * 1024 * 1024) {
-        tools.showInfo('文件大小超过5MB, 拒绝上传');
-        return;
-      }
-      var bl = false;
-      for(var i = 0; i < fileList.length; i++) {
-        var tmpFile = fileList[i];
-        if(tmpFile.name === file.name) {
-          bl = true;
-        }
-      }
-      if(bl === true) {
-        tools.showInfo('不能上传同名文件');
-        return;
-      }
-      fileList.push({
-        file: file,
-        upload: true
-      });
-      appendFile(file);
-    }
-  });
   module.exports = {
     createTaskList: function() {
       var $name = $('.model .name');

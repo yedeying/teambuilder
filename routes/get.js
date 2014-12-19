@@ -171,4 +171,12 @@ router.get('/download/task', function(req, res) {
   }
   file.downloadFile(data, 1, res);
 });
+router.get('/download/group', function(req, res) {
+  var sess = req.session;
+  var data = req.query;if(!/[0-9a-f]{40}/.test(data.id) || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '格式错误'});
+    return;
+  }
+  file.downloadFile(data, 3, res);
+});
 module.exports = router;

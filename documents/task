@@ -1,2 +1,3 @@
 jquery 的 CMD化
-任务页的未完成任务等tab被我隐掉了
+get post 按页面分文件夹
+前端js文件重构，监听代码放进init函数

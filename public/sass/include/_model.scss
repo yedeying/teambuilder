@@ -96,6 +96,25 @@
         height: 60px;
       }
     }
+    .move-file-inner {
+      padding: 20px;
+      input[type=radio] {
+        display: none;
+        &:checked + .folder-name {
+          background-color: $btnblue;
+          color: $white;
+          border: 1px solid $btnblue;
+        }
+      }
+      .folder-name {
+        @include border-radius(4px);
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        &:hover {
+          background-color: #f1f2f3;
+        }
+      }
+    }
     .create-task-list-inner {
       padding: 20px;
       .name, .content {
@@ -206,6 +225,36 @@
         }
       }
     }
+    .add-file-inner {
+      padding: 20px;
+      #file {
+        display: none;
+      }
+      .file {
+        display: inline-block;
+        background-color: $lightblue;
+        color: $white;
+        padding: 7px 9px;
+        @include border-radius(4px);
+        &:hover {
+          background-color: lighten($lightblue, 5%);
+        }
+      }
+      .file-label {
+        margin-bottom: 10px;
+        color: #fff;
+        display: inline-block;
+        background: $labelpurple;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        .close-label {
+          display: inline-block;
+          cursor: pointer;
+          margin-left: 10px;
+        }
+      }
+    }
     .edit-task-inner {
       padding: 20px;
       .name, .content {
@@ -271,6 +320,7 @@
     }
     .del-comment-list-inner,
     .remove-project-inner,
+    .delete-file-inner,
     .remove-task-list-inner,
     .remove-task-inner {
       padding: 10px 20px;

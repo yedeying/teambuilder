@@ -1,0 +1,8 @@
+.folder-list
+  .title-block
+    i.fa.fa-file
+    h4 文件夹列表
+  each folder in data.folderList
+    .line(class=(folder.fid === data.defaultFolder ? 'on' : ''), data-fid=func.sha1(folder.fid.toString()))
+      span.folder #{folder.name}
+      span.span= folder.fileList.length

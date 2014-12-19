@@ -1,12 +1,14 @@
 exports = module.exports;
 var fs = require('fs');
 var crypto = require('crypto');
+var emitter = require('events').EventEmitter;
 var db = require('./db');
 var tools = require('./tools');
 var people = require('./people');
-var emitter = require('events').EventEmitter;
+var global = require('./global');
+var icons = require('../settings/icon_config');
 var fileRoot = require('../settings/global').fileRoot;
-function getSha1(path, callback) {
+function _getSha1(path, callback) {
   var sha1 = crypto.createHash('sha1');
   fs.readFile(path, {encoding: 'utf-8'}, function(err, str) {
     if(err) throw err;
@@ -14,7 +16,7 @@ function getSha1(path, callback) {
     callback(sha1.digest('hex'));
   });
 }
-function moveFile(oriPath, desPath, callback) {
+function _moveFile(oriPath, desPath, callback) {
   var is = fs.createReadStream(oriPath);
   var os = fs.createWriteStream(desPath);
   is.pipe(os);
@@ -30,9 +32,9 @@ exports.saveFile = function(files, createFile, finish) {
     var path = file.path;
     var fileName = file.name;
     var size = file.size;
-    getSha1(path, function(sha1) {
+    _getSha1(path, function(sha1) {
       createFile(sha1, fileName, size, function(name) {
-        moveFile(path, fileRoot + name, finish);
+        _moveFile(path, fileRoot + name, finish);
       });
     });
   });
@@ -81,6 +83,8 @@ exports.generatePage = function(sess, res) {
   var folderList = [];
   var uidMap = {};
   var data = {};
+  data.groupName = sess.groupName;
+  data.gid = sess.gid;
   people.getUid(sess, function(uid, name) {
     var sql = 'select fid, folder, uploader as uid, filename as name, size, unix_timestamp(uploadtime) as time from file where type = 3 and folder != 0 and id = ' + gid;
     db.query(sql, function(err, rows) {
@@ -147,12 +151,12 @@ exports.generatePage = function(sess, res) {
       file.size = tools.convertFileSize(parseInt(file.size, 10));
       file.username = uidMap[file.uid].username;
       if(file.name.indexOf('.') !== -1) {
-        var obj = {
-          name: file.name.split('.')[0],
-          suffix: '.' + file.name.split('.')[1]
-        };
-        file.name = obj;
+        file.suffix = '.' + file.name.split('.')[1];
+        file.name = file.name.split('.')[0];
+      } else {
+        file.suffix = '';
       }
+      file.icon = (icons[file.suffix] === undefined ? icons['unknown'] : icons[file.suffix]);
       folderMap[file.folder].fileList.push(file);
     });
     if(sess.folderId === undefined) {
@@ -168,6 +172,7 @@ exports.generatePage = function(sess, res) {
       sess.folderId = folderList[0].fid;
     }
     data.defaultFolder = sess.folderId;
+    data.folderList = folderList;
     folderList.forEach(function(folder) {
       if(folder.fid === data.defaultFolder) {
         data.folder = folder;
@@ -182,6 +187,73 @@ exports.generatePage = function(sess, res) {
         getTime: tools.getTime,
         sha1: tools.getSha1
       }
+    });
+  });
+};
+exports.changeFolder = function(data, sess, res) {
+  var sql = 'select fid from folder where sha1(fid) = "' + data.fid +'"';
+  db.query(sql, function(err, rows) {
+    if(err) throw err;
+    if(rows.length === 1) {
+      sess.folderId = rows[0]['fid'];
+      res.send({code: 0, info: '成功'});
+    } else {
+      res.send({code: 1, info: '页面错误'});
+    }
+  });
+};
+exports.addFile = function(data, sess, res) {
+  var saveFile = exports.saveFile;
+  var cnt = 0;
+  var len = data.files.length;
+  global.getIdFromSha1(data.fid, 'fid', 'folder', function(err, fid) {
+    if(err) throw err;
+    people.getUid(sess, function(uid) {
+      saveFile(data.files, function(sha1, fileName, fileSize, callback) {
+        var time = (new Date()).getTime();
+        var sql = 'insert into file (id, folder, uploader, type, filename, size, fsha1, timestamp, uploadtime) values (' + sess.gid + ', ' + fid + ', ' + uid + ', 3, "' + fileName + '", "' + fileSize + '", "' + sha1 + '", "' + time + '", current_timestamp())';
+        db.query(sql, function(err) {
+          if(err) throw err;
+          callback(sha1 + time);
+        });
+      }, function() {
+        cnt++;
+        if(cnt === len) {
+          res.send({code: 0, info: '上传成功'});
+        }
+      });
+    });
+  });
+};
+exports.deleteFile = function(data, sess, res) {
+  var sql = 'delete from file where sha1(id) = "' + data.gid + '" and type = 3 and sha1(fid) = "' + data.fid + '"';
+  db.query(sql, function(err) {
+    if(err) throw err;
+    res.send({code: 0, info: '删除成功'});
+  })
+};
+exports.getFolderList = function(gid, callback) {
+  var sql = 'select fid, gid, name from folder where gid = ' + gid;
+  db.query(sql, function(err, rows) {
+    if(err) throw err;
+    var res = [];
+    rows.forEach(function(row) {
+      res.push({
+        fid: row['fid'],
+        gid: row['gid'],
+        name: row['name']
+      });
+    });
+    callback(res);
+  });
+};
+exports.moveFile = function(data, sess, res) {
+  global.getIdFromSha1(data.folder, 'fid', 'folder', function(err, fid) {
+    if(err) throw err;
+    var sql = 'update file set folder = ' + fid + ' where sha1(fid) = "' + data.fid + '"';
+    db.query(sql, function(err) {
+      if(err) throw err;
+      res.send({code: 0, info: '修改成功'});
     });
   });
 };

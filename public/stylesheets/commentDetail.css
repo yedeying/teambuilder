@@ -2710,22 +2710,21 @@ body button {
   transition: opacity 0.3s;
   position: fixed;
   right: 0;
-  top: 23%;
+  top: 30%;
   color: #fff;
   background-color: #666;
   width: 20px;
   height: 60px;
   padding: 5px 0px 5px 5px;
   cursor: pointer;
-  display: none;
   opacity: .5;
 }
-/* line 26, ../sass/include/_global.scss */
+/* line 25, ../sass/include/_global.scss */
 .show-publish-btn:hover {
   opacity: 1;
 }
 
-/* line 30, ../sass/include/_global.scss */
+/* line 29, ../sass/include/_global.scss */
 .alert-box {
   -webkit-transition: top 0.5s;
   -o-transition: top 0.5s;
@@ -2738,7 +2737,7 @@ body button {
   text-align: center;
   visibility: hidden;
 }
-/* line 39, ../sass/include/_global.scss */
+/* line 38, ../sass/include/_global.scss */
 .alert-box .info-block {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -2750,11 +2749,88 @@ body button {
   background-color: #333;
   visibility: visible;
 }
-/* line 47, ../sass/include/_global.scss */
+/* line 46, ../sass/include/_global.scss */
 .alert-box .info-block .close {
   margin-left: 30px;
   float: right;
   cursor: pointer;
+}
+
+/* line 53, ../sass/include/_global.scss */
+.title-wrapper {
+  *zoom: 1;
+  padding: 20px;
+}
+/* line 12, ../sass/include/_mixins.scss */
+.title-wrapper:before, .title-wrapper:after {
+  display: table;
+  content: " ";
+}
+/* line 16, ../sass/include/_mixins.scss */
+.title-wrapper:after {
+  clear: both;
+}
+/* line 56, ../sass/include/_global.scss */
+.title-wrapper .title {
+  display: inline;
+  margin: 0;
+  font-weight: normal;
+}
+/* line 61, ../sass/include/_global.scss */
+.title-wrapper button {
+  margin-left: 10px;
+  float: right;
+}
+/* line 62, ../sass/include/_global.scss */
+.title-wrapper button .fa {
+  font-size: 1.2em;
+}
+
+/* line 69, ../sass/include/_global.scss */
+.activity-label {
+  color: #777;
+  margin: 0 20px;
+}
+
+/* line 73, ../sass/include/_global.scss */
+.activity-triangle-black {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #ccc;
+  left: 43px;
+  bottom: 0;
+}
+
+/* line 78, ../sass/include/_global.scss */
+.activity-triangle-white {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #fff;
+  left: 43px;
+  bottom: -2px;
+}
+
+/* line 83, ../sass/include/_global.scss */
+.right .hr {
+  margin: 15px 0;
+  border: 0px;
+  border-top: 1px solid #ccc;
 }
 
 @media screen and (max-width: 1100px) {
@@ -2763,11 +2839,16 @@ body button {
     display: none;
   }
 }
-/* line 7, ../sass/include/_publish.scss */
+/* line 6, ../sass/include/_publish.scss */
+td.publish {
+  display: none;
+}
+
+/* line 10, ../sass/include/_publish.scss */
 .publish .inner {
   padding: 10px 20px;
 }
-/* line 10, ../sass/include/_publish.scss */
+/* line 13, ../sass/include/_publish.scss */
 .publish .title-block {
   *zoom: 1;
 }
@@ -2780,12 +2861,12 @@ body button {
 .publish .title-block:after {
   clear: both;
 }
-/* line 13, ../sass/include/_publish.scss */
+/* line 16, ../sass/include/_publish.scss */
 .publish .title {
   float: left;
   position: relative;
 }
-/* line 16, ../sass/include/_publish.scss */
+/* line 19, ../sass/include/_publish.scss */
 .publish .title:before {
   position: absolute;
   display: inline-block;
@@ -2796,14 +2877,14 @@ body button {
   left: -10px;
   top: -2px;
 }
-/* line 27, ../sass/include/_publish.scss */
+/* line 30, ../sass/include/_publish.scss */
 .publish .new-post, .publish .hide-publish-block {
   float: right;
   margin: 17px 0 17px 10px;
   color: #0061bc;
   cursor: pointer;
 }
-/* line 33, ../sass/include/_publish.scss */
+/* line 36, ../sass/include/_publish.scss */
 .publish .publish-block {
   -moz-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
@@ -2817,34 +2898,34 @@ body button {
   padding: 10px;
   margin-bottom: 20px;
 }
-/* line 42, ../sass/include/_publish.scss */
+/* line 45, ../sass/include/_publish.scss */
 .publish .fa {
   position: absolute;
   cursor: pointer;
 }
-/* line 46, ../sass/include/_publish.scss */
+/* line 49, ../sass/include/_publish.scss */
 .publish .edit-publish {
   right: 10px;
   top: 34px;
   color: #428bca;
 }
-/* line 50, ../sass/include/_publish.scss */
+/* line 53, ../sass/include/_publish.scss */
 .publish .edit-publish.fa-check {
   color: #43c86f !important;
 }
-/* line 54, ../sass/include/_publish.scss */
+/* line 57, ../sass/include/_publish.scss */
 .publish .del-publish {
   right: 12px;
   top: 54px;
   color: #eb7065;
 }
-/* line 59, ../sass/include/_publish.scss */
+/* line 62, ../sass/include/_publish.scss */
 .publish .close-publish {
   right: 13px;
   top: 14px;
   color: #aaa;
 }
-/* line 64, ../sass/include/_publish.scss */
+/* line 67, ../sass/include/_publish.scss */
 .publish .publish {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -2853,7 +2934,7 @@ body button {
   padding: 3px;
   outline: 0;
 }
-/* line 69, ../sass/include/_publish.scss */
+/* line 72, ../sass/include/_publish.scss */
 .publish .publish.active {
   -moz-box-shadow: 0 0 5px rgba(91, 178, 252, 0.7);
   -webkit-box-shadow: 0 0 5px rgba(91, 178, 252, 0.7);
@@ -3181,10 +3262,36 @@ body button {
   border-color: #a6a6a6;
 }
 /* line 99, ../sass/include/_model.scss */
-.model .model-wrapper .create-task-list-inner {
+.model .model-wrapper .move-file-inner {
   padding: 20px;
 }
 /* line 101, ../sass/include/_model.scss */
+.model .model-wrapper .move-file-inner input[type=radio] {
+  display: none;
+}
+/* line 103, ../sass/include/_model.scss */
+.model .model-wrapper .move-file-inner input[type=radio]:checked + .folder-name {
+  background-color: #428bca;
+  color: #fff;
+  border: 1px solid #428bca;
+}
+/* line 109, ../sass/include/_model.scss */
+.model .model-wrapper .move-file-inner .folder-name {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+}
+/* line 113, ../sass/include/_model.scss */
+.model .model-wrapper .move-file-inner .folder-name:hover {
+  background-color: #f1f2f3;
+}
+/* line 118, ../sass/include/_model.scss */
+.model .model-wrapper .create-task-list-inner {
+  padding: 20px;
+}
+/* line 120, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .name, .model .model-wrapper .create-task-list-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3204,7 +3311,7 @@ body button {
 .model .model-wrapper .create-task-list-inner .name:focus, .model .model-wrapper .create-task-list-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 105, ../sass/include/_model.scss */
+/* line 124, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .date {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3224,7 +3331,7 @@ body button {
 .model .model-wrapper .create-task-list-inner .date:focus {
   border-color: #a6a6a6;
 }
-/* line 109, ../sass/include/_model.scss */
+/* line 128, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3233,25 +3340,25 @@ body button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 113, ../sass/include/_model.scss */
+/* line 132, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 118, ../sass/include/_model.scss */
+/* line 137, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .check {
   display: none;
 }
-/* line 120, ../sass/include/_model.scss */
+/* line 139, ../sass/include/_model.scss */
 .model .model-wrapper .create-task-list-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
-/* line 127, ../sass/include/_model.scss */
+/* line 146, ../sass/include/_model.scss */
 .model .model-wrapper .view-task-inner {
   padding: 20px;
 }
-/* line 129, ../sass/include/_model.scss */
+/* line 148, ../sass/include/_model.scss */
 .model .model-wrapper .view-task-inner .description {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -3259,13 +3366,13 @@ body button {
   padding: 12px;
   background-color: #eee;
 }
-/* line 134, ../sass/include/_model.scss */
+/* line 153, ../sass/include/_model.scss */
 .model .model-wrapper .view-task-inner hr {
   border-width: 0;
   padding: 5px 0;
   border-bottom: 1px solid #f1f2f3;
 }
-/* line 139, ../sass/include/_model.scss */
+/* line 158, ../sass/include/_model.scss */
 .model .model-wrapper .view-task-inner .name {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -3275,17 +3382,17 @@ body button {
   color: white;
   margin-right: 5px;
 }
-/* line 146, ../sass/include/_model.scss */
+/* line 165, ../sass/include/_model.scss */
 .model .model-wrapper .view-task-inner .down-file {
   cursor: pointer;
   margin-right: 16px;
   color: #0061bc;
 }
-/* line 152, ../sass/include/_model.scss */
+/* line 171, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner {
   padding: 20px;
 }
-/* line 154, ../sass/include/_model.scss */
+/* line 173, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .name, .model .model-wrapper .add-task-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3305,7 +3412,7 @@ body button {
 .model .model-wrapper .add-task-inner .name:focus, .model .model-wrapper .add-task-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 158, ../sass/include/_model.scss */
+/* line 177, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3314,25 +3421,25 @@ body button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 162, ../sass/include/_model.scss */
+/* line 181, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 167, ../sass/include/_model.scss */
+/* line 186, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .check {
   display: none;
 }
-/* line 169, ../sass/include/_model.scss */
+/* line 188, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
-/* line 175, ../sass/include/_model.scss */
+/* line 194, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner #file {
   display: none;
 }
-/* line 178, ../sass/include/_model.scss */
+/* line 197, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3354,7 +3461,7 @@ body button {
 .model .model-wrapper .add-task-inner textarea:focus {
   border-color: #a6a6a6;
 }
-/* line 184, ../sass/include/_model.scss */
+/* line 203, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .file {
   display: inline-block;
   background-color: #8cc1f8;
@@ -3364,11 +3471,11 @@ body button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 190, ../sass/include/_model.scss */
+/* line 209, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .file:hover {
   background-color: #a4cef9;
 }
-/* line 194, ../sass/include/_model.scss */
+/* line 213, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .file-label {
   margin-bottom: 10px;
   color: #fff;
@@ -3378,17 +3485,55 @@ body button {
   border-radius: 4px;
   margin-right: 8px;
 }
-/* line 202, ../sass/include/_model.scss */
+/* line 221, ../sass/include/_model.scss */
 .model .model-wrapper .add-task-inner .file-label .close-label {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
 }
-/* line 209, ../sass/include/_model.scss */
+/* line 228, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner {
+  padding: 20px;
+}
+/* line 230, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner #file {
+  display: none;
+}
+/* line 233, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner .file {
+  display: inline-block;
+  background-color: #8cc1f8;
+  color: #fff;
+  padding: 7px 9px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 239, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner .file:hover {
+  background-color: #a4cef9;
+}
+/* line 243, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner .file-label {
+  margin-bottom: 10px;
+  color: #fff;
+  display: inline-block;
+  background: #886ecc;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+/* line 251, ../sass/include/_model.scss */
+.model .model-wrapper .add-file-inner .file-label .close-label {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+/* line 258, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner {
   padding: 20px;
 }
-/* line 211, ../sass/include/_model.scss */
+/* line 260, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .name, .model .model-wrapper .edit-task-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3408,7 +3553,7 @@ body button {
 .model .model-wrapper .edit-task-inner .name:focus, .model .model-wrapper .edit-task-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 215, ../sass/include/_model.scss */
+/* line 264, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3417,25 +3562,25 @@ body button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 219, ../sass/include/_model.scss */
+/* line 268, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 224, ../sass/include/_model.scss */
+/* line 273, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .check {
   display: none;
 }
-/* line 226, ../sass/include/_model.scss */
+/* line 275, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
-/* line 232, ../sass/include/_model.scss */
+/* line 281, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner #file {
   display: none;
 }
-/* line 235, ../sass/include/_model.scss */
+/* line 284, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3457,7 +3602,7 @@ body button {
 .model .model-wrapper .edit-task-inner textarea:focus {
   border-color: #a6a6a6;
 }
-/* line 241, ../sass/include/_model.scss */
+/* line 290, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .file {
   display: inline-block;
   background-color: #8cc1f8;
@@ -3467,11 +3612,11 @@ body button {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 247, ../sass/include/_model.scss */
+/* line 296, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .file:hover {
   background-color: #a4cef9;
 }
-/* line 251, ../sass/include/_model.scss */
+/* line 300, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .file-label, .model .model-wrapper .edit-task-inner .exist-file-label {
   margin-bottom: 10px;
   color: #fff;
@@ -3481,32 +3626,33 @@ body button {
   border-radius: 4px;
   margin-right: 8px;
 }
-/* line 259, ../sass/include/_model.scss */
+/* line 308, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .file-label .down-file, .model .model-wrapper .edit-task-inner .exist-file-label .down-file {
   color: #fff;
 }
-/* line 262, ../sass/include/_model.scss */
+/* line 311, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .file-label .close-label, .model .model-wrapper .edit-task-inner .file-label .del-file, .model .model-wrapper .edit-task-inner .exist-file-label .close-label, .model .model-wrapper .edit-task-inner .exist-file-label .del-file {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
 }
-/* line 268, ../sass/include/_model.scss */
+/* line 317, ../sass/include/_model.scss */
 .model .model-wrapper .edit-task-inner .exist-file-label {
   margin-bottom: 0;
 }
-/* line 272, ../sass/include/_model.scss */
+/* line 321, ../sass/include/_model.scss */
 .model .model-wrapper .del-comment-list-inner,
 .model .model-wrapper .remove-project-inner,
+.model .model-wrapper .delete-file-inner,
 .model .model-wrapper .remove-task-list-inner,
 .model .model-wrapper .remove-task-inner {
   padding: 10px 20px;
 }
-/* line 278, ../sass/include/_model.scss */
+/* line 328, ../sass/include/_model.scss */
 .model .model-wrapper .add-people-inner {
   padding: 10px 20px;
 }
-/* line 280, ../sass/include/_model.scss */
+/* line 330, ../sass/include/_model.scss */
 .model .model-wrapper .add-people-inner .email {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3526,54 +3672,54 @@ body button {
 .model .model-wrapper .add-people-inner .email:focus {
   border-color: #a6a6a6;
 }
-/* line 285, ../sass/include/_model.scss */
+/* line 335, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner {
   padding-top: 10px;
 }
-/* line 287, ../sass/include/_model.scss */
+/* line 337, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner .radio-box {
   padding: 10px 20px;
 }
-/* line 289, ../sass/include/_model.scss */
+/* line 339, ../sass/include/_model.scss */
 .model .model-wrapper .switch-project-inner .radio-box label {
   margin-left: 8px;
 }
-/* line 294, ../sass/include/_model.scss */
+/* line 344, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner {
   padding: 10px 20px;
 }
-/* line 296, ../sass/include/_model.scss */
+/* line 346, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-/* line 300, ../sass/include/_model.scss */
+/* line 350, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input,
 .model .model-wrapper .remove-people-inner .name-block label {
   order: 2;
 }
-/* line 304, ../sass/include/_model.scss */
+/* line 354, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked,
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0 !important;
 }
-/* line 308, ../sass/include/_model.scss */
+/* line 358, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block hr {
   display: none;
   order: 1;
   width: 100%;
   border: 1px solid #ccc;
 }
-/* line 314, ../sass/include/_model.scss */
+/* line 364, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked ~ hr {
   display: block;
 }
-/* line 317, ../sass/include/_model.scss */
+/* line 367, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"] {
   display: none;
 }
-/* line 320, ../sass/include/_model.scss */
+/* line 370, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block label {
   min-width: 120px;
   border: 1px solid #ccc;
@@ -3587,29 +3733,29 @@ body button {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 330, ../sass/include/_model.scss */
+/* line 380, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block label:hover {
   border-color: #adadad;
   background: #ebebeb;
   cursor: pointer;
 }
-/* line 336, ../sass/include/_model.scss */
+/* line 386, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0;
   background-color: #428bca;
   border-color: #357ebd;
   color: #fff;
 }
-/* line 341, ../sass/include/_model.scss */
+/* line 391, ../sass/include/_model.scss */
 .model .model-wrapper .remove-people-inner .name-block input[type="checkbox"]:checked + label:hover {
   background-color: #3071a9;
   border-color: #285e8e;
 }
-/* line 348, ../sass/include/_model.scss */
+/* line 398, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner {
   padding: 20px;
 }
-/* line 350, ../sass/include/_model.scss */
+/* line 400, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner h4 {
   padding: 10px;
   background: #6FA9DA;
@@ -3618,11 +3764,11 @@ body button {
   width: 50%;
   margin: 10px auto 0 auto;
 }
-/* line 358, ../sass/include/_model.scss */
+/* line 408, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table {
   width: 100%;
 }
-/* line 360, ../sass/include/_model.scss */
+/* line 410, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table input, .model .model-wrapper .edit-profile-inner table select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3643,24 +3789,24 @@ body button {
 .model .model-wrapper .edit-profile-inner table input:focus, .model .model-wrapper .edit-profile-inner table select:focus {
   border-color: #a6a6a6;
 }
-/* line 365, ../sass/include/_model.scss */
+/* line 415, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table label {
   font-size: 16px;
 }
-/* line 369, ../sass/include/_model.scss */
+/* line 419, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td {
   padding: 4px 5px;
 }
-/* line 371, ../sass/include/_model.scss */
+/* line 421, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:first-child {
   text-align: right;
   width: 33%;
 }
-/* line 374, ../sass/include/_model.scss */
+/* line 424, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:first-child:after {
   content: ': ';
 }
-/* line 378, ../sass/include/_model.scss */
+/* line 428, ../sass/include/_model.scss */
 .model .model-wrapper .edit-profile-inner table tr td:last-child {
   text-align: left;
   width: 50%;

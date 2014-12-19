@@ -9,6 +9,7 @@ define(function(require, exports, module) {
   var task = require('./task');
   var comment = require('./comment');
   var commentDetail = require('./commentDetail');
+  var file = require('./file');
   var $body = $('body');
   var $cover = $('.cover');
   var startX = 0;
@@ -16,6 +17,7 @@ define(function(require, exports, module) {
   var left = 0;
   var top = 0;
   var href = undefined;
+  var mouseStatus = false;
   $body.on('click', '.link-logout', function(e) {
     $.post('/logout', {}, function(data) {
       if(data && data.code === 6) {
@@ -53,6 +55,12 @@ define(function(require, exports, module) {
       return false;
     });
   });
+  $body.on('mousedown', function(e) {
+    mouseStatus = true;
+  });
+  $body.on('mouseup', function(e) {
+    mouseStatus = false;
+  });
   $body.on('mousedown', '.model-wrapper .title-block', function(e) {
     startX = e.pageX;
     startY = e.pageY;
@@ -61,7 +69,7 @@ define(function(require, exports, module) {
     top = parseInt($wrapper.css('top').split('px')[0], 10);
   });
   $body.on('mousemove', '.model-wrapper .title-block', function(e) {
-    if(e.which === 1) {
+    if(mouseStatus) {
       var x = e.pageX - startX;
       var y = e.pageY - startY;
       var $wrapper = $('.model-wrapper');
@@ -140,6 +148,51 @@ define(function(require, exports, module) {
       commentDetail.editCommentList();
     } else if(type === 'del_comment_list') {
       commentDetail.delCommentList();
+    } else if(type === 'add_file') {
+      file.addFile();
+    } else if(type === 'delete_file') {
+      file.deleteFile();
+    } else if(type === 'move_file') {
+      file.moveFile();
+    }
+  });
+  /*
+   * file block
+   */
+  var fileList = [];
+  window.teambuilder.fileList = fileList;
+  function appendFile(file) {
+    var html = '<span data-no="' + fileList.length + '" class="file-label"><span>' + file.name + '</span><span class="close-label">×</span></span>';
+    $('.file-label-box').append(html);
+  }
+  $body.on('click', '.file-label .close-label', function() {
+    var no = parseInt($(this).parent().attr('data-no'), 10);
+    $(this).parent().remove();
+  });
+  $body.on('change', '.model #file', function(e) {
+    var files = $('.model #file').get(0).files;
+    if(files.length > 0) {
+      var file = files.item(0);
+      if(file.size > 5 * 1024 * 1024) {
+        tools.showInfo('文件大小超过5MB, 拒绝上传');
+        return;
+      }
+      var bl = false;
+      for(var i = 0; i < fileList.length; i++) {
+        var tmpFile = fileList[i];
+        if(tmpFile.name === file.name) {
+          bl = true;
+        }
+      }
+      if(bl === true) {
+        tools.showInfo('不能上传同名文件');
+        return;
+      }
+      fileList.push({
+        file: file,
+        upload: true
+      });
+      appendFile(file);
     }
   });
   function switchProject(option) {

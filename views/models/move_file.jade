@@ -1,0 +1,8 @@
+extend model_layout
+
+block content
+  .move-file-inner
+    each folder, index in folderList
+      span.input-box
+        input(name='moveFolder', id='folder' + index, type='radio', value=sha1(folder.fid.toString()), checked=(sha1(folder.fid.toString()) === checkedFid))
+        label.folder-name(for='folder' + index)= folder.name

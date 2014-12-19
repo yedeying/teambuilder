@@ -6,8 +6,9 @@ var tools = require('../module/tools');
 var people = require('../module/people');
 var comment = require('../module/comment');
 var global = require('../module/global');
-var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list', '/del_comment_list'];
-var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论', '移除讨论'];
+var file = require('../module/file');
+var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list', '/del_comment_list', '/add_file', '/delete_file'];
+var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论', '移除讨论', '上传文件', '删除文件'];
 urls.forEach(function(url, index) {
   router.get(url, function(req, res) {
     var sess = req.session;
@@ -156,5 +157,22 @@ router.get('/edit_comment_list', function(req, res) {
   if(data.cid && /[0-9a-f]{40}/.test(data.cid)) {
     comment.renderEditModel(data, sess, res);
   }
+});
+router.get('/move_file', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid) || !sess.gid) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  file.getFolderList(sess.gid, function(folderList) {
+    res.render('models/move_file', {folderList: folderList, sha1: tools.getSha1, checkedFid: data.fid, title: '请选择要移动的文件夹'}, function(err, html) {
+      if(err) {
+        res.send({code: 1, info: 'render error'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
 });
 module.exports = router;

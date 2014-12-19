@@ -1,0 +1,11 @@
+extend model_layout
+
+block content
+  .add-file-inner
+    .file-box
+      .file-label-box
+      .file-control-box
+        input(id='file', type='file')
+        label.file(for='file')
+          i.fa.fa-plus-circle
+          span &nbsp;浏览文件

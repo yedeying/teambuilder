@@ -222,9 +222,9 @@ router.post('/add_task', multipartMiddleware, function(req, res) {
     return;
   }
   var files = [];
-  for(var file in upfile) {
-    if(upfile.hasOwnProperty(file)) {
-      files.push(upfile[file]);
+  for(var fileName in upfile) {
+    if(upfile.hasOwnProperty(fileName)) {
+      files.push(upfile[fileName]);
     }
   }
   data.files = files;
@@ -270,9 +270,9 @@ router.post('/edit_task', multipartMiddleware, function(req, res) {
     return;
   }
   var files = [];
-  for(var file in upfile) {
-    if(upfile.hasOwnProperty(file)) {
-      files.push(upfile[file]);
+  for(var fileName in upfile) {
+    if(upfile.hasOwnProperty(fileName)) {
+      files.push(upfile[fileName]);
     }
   }
   data.files = files;
@@ -367,5 +367,60 @@ router.post('/del_publish', function(req, res) {
     return;
   }
   publish.delPublish(data, sess, res);
+});
+router.post('/file/change_folder', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  file.changeFolder(data, sess, res);
+});
+router.post('/file/add_file', multipartMiddleware, function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  var upfile = req.files;
+  var files = [];
+  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  for(var fileName in upfile) {
+    if(upfile.hasOwnProperty(fileName)) {
+      files.push(upfile[fileName]);
+    }
+  }
+  if(files.length === 0) {
+    res.send({code: 1, info: '请选择文件'});
+  }
+  data.files = files;
+  file.addFile(data, sess, res);
+});
+router.post('/file/delete_file', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  if(data.gid !== tools.getSha1(sess.gid.toString())) {
+    res.send({code: 1, info: '身份不符, 操作失败'});
+    return;
+  }
+  file.deleteFile(data, sess, res);
+});
+router.post('/file/move_file', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  if(!data.folder || !/[0-9a-f]{40}/.test(data.folder)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  file.moveFile(data, sess, res);
 });
 module.exports = router;

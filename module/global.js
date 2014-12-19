@@ -43,5 +43,14 @@ module.exports = {
       }
       callback(err, rows[0]['admin']);
     });
+  },
+  getIdFromSha1: function(sha1, id, table, callback) {
+    var sql = 'select ' + id + ' from ' + table + ' where sha1(' + id + ') = "' + sha1 + '"';
+    db.query(sql, function(err, rows) {
+      if(rows.length === 1) {
+        var res = rows[0][id];
+        callback(err, res);
+      }
+    });
   }
 };
