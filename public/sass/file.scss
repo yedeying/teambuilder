@@ -115,3 +115,9 @@ $time: .2s;
     text-align: center;
   }
 }
+.manage-folder {
+  float: right;
+  padding: 10px 0;
+  cursor: pointer;
+  color: $linkblue;
+}

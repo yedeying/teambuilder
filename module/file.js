@@ -233,7 +233,7 @@ exports.deleteFile = function(data, sess, res) {
   })
 };
 exports.getFolderList = function(gid, callback) {
-  var sql = 'select fid, gid, name from folder where gid = ' + gid;
+  var sql = 'select fid, gid, name, (select count(*) from file where file.folder = folder.fid) as length from folder where gid = ' + gid;
   db.query(sql, function(err, rows) {
     if(err) throw err;
     var res = [];
@@ -241,7 +241,8 @@ exports.getFolderList = function(gid, callback) {
       res.push({
         fid: row['fid'],
         gid: row['gid'],
-        name: row['name']
+        name: row['name'],
+        length: row['length']
       });
     });
     callback(res);

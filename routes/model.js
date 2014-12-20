@@ -175,4 +175,16 @@ router.get('/move_file', function(req, res) {
     });
   });
 });
+router.get('/manage_folder', function(req, res) {
+  var sess = req.session;
+  file.getFolderList(sess.gid, function(folderList) {
+    res.render('models/manage_folder', {folderList: folderList, sha1: tools.getSha1, title: '文件夹管理'}, function(err, html) {
+      if(err) {
+        res.send({code: 1, info: 'render error'});
+        throw err;
+      }
+      res.send({code: 0, html: html});
+    });
+  });
+});
 module.exports = router;

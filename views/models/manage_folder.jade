@@ -1,0 +1,16 @@
+extend model_layout
+
+block content
+  .manage-folder-inner
+    each folder in folderList
+      .folder-block(data-type='origin', data-fid=sha1(folder.fid.toString()))
+        span.folder-name= folder.name
+        span.folder-size= '(' + folder.length + ')'
+        button.folder-remove
+          i.fa.fa-close
+          span &nbsp;删除文件夹
+    .add-folder-block
+      input.add-folder(type='text', placeholder='文件夹名称')
+      button.folder-create
+        i.fa.fa-check
+        span &nbsp;添加文件夹

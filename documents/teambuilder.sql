@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2014-12-16 13:08:08
+-- 生成日期: 2014-12-20 07:32:04
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.5.6
 
@@ -124,22 +124,24 @@ CREATE TABLE IF NOT EXISTS `detail` (
   `participant` varchar(1000) NOT NULL,
   `finish` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `detail`
 --
 
 INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`, `participant`, `finish`) VALUES
-(2, 2, '我是子任务2', '我是子任务2的内容', '2014-12-01 09:24:10', '[11,13]', 0),
-(3, 2, 'ye', 'aa', '2014-12-12 03:51:17', '[11,13]', 0),
-(5, 2, 'asf', 'sfd', '2014-12-12 03:54:23', '[11,13]', 0),
+(2, 2, '我是子任务2', '我是子任务2的内容', '2014-12-01 09:24:10', '[11,13]', 1),
+(3, 2, 'ye', 'aa', '2014-12-12 03:51:17', '[11,13]', 1),
+(5, 2, 'asf', 'sfd', '2014-12-12 03:54:23', '[11,13]', 1),
 (6, 9, 'asf', 'sdf', '2014-12-12 03:56:40', '[11,13]', 0),
 (8, 2, 'hgh', 'afds', '2014-12-12 06:41:53', '[11,13]', 0),
 (9, 2, 'a', 'f', '2014-12-12 06:45:10', '[11]', 0),
 (10, 10, 'af', 'asf', '2014-12-12 10:11:54', '[13]', 0),
 (11, 13, 'af', 'fsdfg', '2014-12-12 10:57:48', '[11]', 0),
-(12, 2, '我是来传文件的', 'yeyeey', '2014-12-12 11:48:55', '[11]', 0);
+(12, 2, '我是来传文件的', 'yeyeey', '2014-12-12 11:48:55', '[11]', 0),
+(13, 2, 'as', 'sa', '2014-12-17 07:52:45', '[11]', 0),
+(14, 2, 'sdaf', 'sadf', '2014-12-17 07:56:09', '[11]', 0);
 
 -- --------------------------------------------------------
 
@@ -150,29 +152,58 @@ INSERT INTO `detail` (`did`, `tid`, `title`, `content`, `createtime`, `participa
 CREATE TABLE IF NOT EXISTS `file` (
   `fid` bigint(20) NOT NULL AUTO_INCREMENT,
   `id` bigint(20) NOT NULL,
+  `folder` bigint(20) NOT NULL,
   `uploader` bigint(20) NOT NULL,
   `type` int(11) NOT NULL,
   `filename` varchar(1024) NOT NULL,
+  `size` varchar(100) NOT NULL,
   `fsha1` varchar(40) NOT NULL,
   `timestamp` varchar(100) NOT NULL,
   `uploadtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`fid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
 
 --
 -- 转存表中的数据 `file`
 --
 
-INSERT INTO `file` (`fid`, `id`, `uploader`, `type`, `filename`, `fsha1`, `timestamp`, `uploadtime`) VALUES
-(2, 5, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356463382', '2014-12-12 03:54:23'),
-(3, 6, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356600638', '2014-12-12 03:56:40'),
-(4, 9, 13, 1, 'ye.task', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418366710761', '2014-12-12 06:45:10'),
-(5, 10, 13, 1, 'line.png', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418379114441', '2014-12-12 10:11:54'),
-(6, 11, 13, 1, 'line.png', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418381868075', '2014-12-12 10:57:48'),
-(7, 11, 13, 1, '60045286[1].png', '8a6bd174a2d7814d2ce0dd93bb661719a4cc5f5b', '1418381868076', '2014-12-12 10:57:48'),
-(8, 11, 13, 1, '60047692[1].png', '2dfd92d2a2fb4a90c3ac34250b510451c5197677', '1418381868081', '2014-12-12 10:57:48'),
-(9, 11, 13, 1, 'LLLS0SWR', '60c31e9e889da63ded69cc71537548dda4c2235c', '1418381868083', '2014-12-12 10:57:48'),
-(10, 12, 13, 1, '高保真.zip', '1573f04160c64b5b3e6f255dde24fd66c23178c7', '1418384936003', '2014-12-12 11:48:56');
+INSERT INTO `file` (`fid`, `id`, `folder`, `uploader`, `type`, `filename`, `size`, `fsha1`, `timestamp`, `uploadtime`) VALUES
+(2, 5, 0, 13, 1, 'ye.task', '', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356463382', '2014-12-12 03:54:23'),
+(3, 6, 0, 13, 1, 'ye.task', '', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418356600638', '2014-12-12 03:56:40'),
+(4, 9, 0, 13, 1, 'ye.task', '', '2dbd28710eb4bcf8ea4b5b954418d23323a7a432', '1418366710761', '2014-12-12 06:45:10'),
+(5, 10, 0, 13, 1, 'line.png', '', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418379114441', '2014-12-12 10:11:54'),
+(6, 11, 0, 13, 1, 'line.png', '', '6be6a062fb440ce2f068d570420755cd383e8c83', '1418381868075', '2014-12-12 10:57:48'),
+(7, 11, 0, 13, 1, '60045286[1].png', '', '8a6bd174a2d7814d2ce0dd93bb661719a4cc5f5b', '1418381868076', '2014-12-12 10:57:48'),
+(8, 11, 0, 13, 1, '60047692[1].png', '', '2dfd92d2a2fb4a90c3ac34250b510451c5197677', '1418381868081', '2014-12-12 10:57:48'),
+(9, 11, 0, 13, 1, 'LLLS0SWR', '', '60c31e9e889da63ded69cc71537548dda4c2235c', '1418381868083', '2014-12-12 10:57:48'),
+(10, 12, 0, 13, 1, '高保真.zip', '', '1573f04160c64b5b3e6f255dde24fd66c23178c7', '1418384936003', '2014-12-12 11:48:56'),
+(13, 13, 0, 13, 1, '产品设计与用户体验--马化腾.ppt', '', '12613da4aece2a3d500926f3fecaa3b71e9e7150', '1418802802779', '2014-12-17 07:53:22'),
+(16, 1, 2, 13, 3, '产品设计与用户体验--马化腾.ppt', '2907648', '12613da4aece2a3d500926f3fecaa3b71e9e7150', '1418887099430', '2014-12-19 05:16:15'),
+(17, 1, 1, 13, 3, 'colorful.gif', '968576', '4f2d8f7e54c999e7b8a882f8e2165f257efa7162', '1418887439283', '2014-12-19 05:16:24'),
+(18, 1, 1, 13, 3, '搜狐WEB标准_前端技术应用规范.pdf', '714420', 'bd0a4d2cfba8f1c03ec133239add1500a62736e3', '1418891321412', '2014-12-18 08:28:41'),
+(19, 1, 1, 13, 3, '人人FED-CSS编码规范.pdf', '649524', '95cfa7bff14d9a222576c678b07e36ba99e5b9ce', '1418894384416', '2014-12-19 05:16:21'),
+(20, 1, 1, 13, 3, '搜狐WEB标准_前端技术应用规范.pdf', '714420', 'bd0a4d2cfba8f1c03ec133239add1500a62736e3', '1418894384441', '2014-12-19 07:38:21');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `folder`
+--
+
+CREATE TABLE IF NOT EXISTS `folder` (
+  `fid` bigint(20) NOT NULL AUTO_INCREMENT,
+  `gid` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`fid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `folder`
+--
+
+INSERT INTO `folder` (`fid`, `gid`, `name`) VALUES
+(1, 1, 'the first folder'),
+(2, 1, 'the second folder');
 
 -- --------------------------------------------------------
 
@@ -208,7 +239,8 @@ CREATE TABLE IF NOT EXISTS `invite` (
   `iid` bigint(20) NOT NULL,
   `user` varchar(100) NOT NULL,
   `admin` varchar(100) NOT NULL,
-  `sha1code` varchar(100) NOT NULL
+  `sha1code` varchar(100) NOT NULL,
+  UNIQUE KEY `iid` (`iid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -262,14 +294,18 @@ CREATE TABLE IF NOT EXISTS `publish` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`pid`),
   UNIQUE KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `publish`
 --
 
 INSERT INTO `publish` (`pid`, `uid`, `gid`, `content`, `time`) VALUES
-(1, 13, 1, '哈哈哈我是第一个上榜', '2014-12-16 06:17:23');
+(1, 13, 1, '哈哈哈我是第一个上榜', '2014-12-16 06:17:23'),
+(2, 13, 1, '啦啦啦', '2014-12-17 02:17:09'),
+(4, 13, 1, 'aaaaaaa', '2014-12-17 02:40:16'),
+(5, 13, 1, '一二一一二一', '2014-12-17 02:41:18'),
+(6, 13, 1, '叶德颖', '2014-12-17 02:43:03');
 
 -- --------------------------------------------------------
 

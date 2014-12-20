@@ -96,6 +96,44 @@
         height: 60px;
       }
     }
+    .manage-folder-inner {
+      padding: 20px;
+      .folder-block {
+        @include clearfix;
+        .folder-name {
+          float: left;
+          padding: 12px 0;
+          color: $linkblue;
+        }
+        .folder-size {
+          float: left;
+          padding: 12px 0;
+          color: #aaa;
+        }
+        .folder-remove {
+          @include btn($btnred);
+          margin: 5px 0;
+          float: right;
+        }
+      }
+      .add-folder-block {
+        @include clearfix;
+        input[type=text].add-folder {
+          @include input(8px);
+          @include border-radius(4px 0 0 4px);
+          border-right-width: 0;
+          width: 662px;
+          margin: 5px 0;
+        }
+        .folder-create {
+          @include btn($btngreen);
+          @include border-radius(0 4px 4px 0);
+          margin: 5px 0;
+          float: right;
+          padding-left: 6px;
+        }
+      }
+    }
     .move-file-inner {
       padding: 20px;
       input[type=radio] {

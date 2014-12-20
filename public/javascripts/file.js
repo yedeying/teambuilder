@@ -42,6 +42,9 @@ define(function(require, exports, module) {
       $('.model').attr('data-gid', gid);
     });
   });
+  $body.on('click', '.manage-folder', function(e) {
+    tools.getModel('manage_folder', 'manage_folder');
+  });
   $body.on('click', '.file-delete', function(e) {
     var $block = $(this).parent();
     var fid = $block.attr('data-fid');
@@ -50,6 +53,22 @@ define(function(require, exports, module) {
       $('.model').attr('data-fid', fid);
       $('.model').attr('data-gid', gid);
     });
+  });
+  $body.on('click', '.model .folder-remove', function(e) {
+    $(this).parent().remove();
+  });
+  $body.on('click', '.model .folder-create', function(e) {
+    var $text = $('.model .add-folder');
+    var $btn = $(this).parent();
+    var folderName = $text.val();
+    if(folderName === '') {
+      tools.showInfo('文件夹名称不能为空');
+      $text.focus();
+      return;
+    }
+    var html = '<div class="folder-block" data-type="new"><span class="folder-name">' + folderName + '</span><span class="folder-size">(0)</span><button class="folder-remove"><i class="fa fa-close"></i><span>&nbsp;删除文件夹</span></button></div>';
+    $(html).insertBefore($btn);
+    $text.val('');
   });
   module.exports = {
     deleteFile: function() {

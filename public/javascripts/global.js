@@ -154,6 +154,8 @@ define(function(require, exports, module) {
       file.deleteFile();
     } else if(type === 'move_file') {
       file.moveFile();
+    } else if(type === 'manage_folder') {
+      file.manageFolder();
     }
   });
   /*
