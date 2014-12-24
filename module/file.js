@@ -258,3 +258,50 @@ exports.moveFile = function(data, sess, res) {
     });
   });
 };
+exports.manageFolder = function(data, sess, res) {
+  var gid = sess.gid;
+  var actionCnt = 0;
+  function finish() {
+    res.send({code: 0, info: '修改成功'});
+  }
+  function deleteFolderList(list) {
+    var sqlArr = [];
+    data.deleteList.forEach(function(fid, index) {
+      sqlArr.push('sha1(fid) = "' + fid + '"');
+    });
+    var sql = 'delete from folder where gid = ' + gid + ' and (' + sqlArr.join(' or ') + ')';
+    db.query(sql, function(err) {
+      if(err) throw err;
+      actionCnt++;
+      if(actionCnt === 2) {
+        finish();
+      }
+    });
+  }
+  function createFolderList(list) {
+    var insertCnt = 0;
+    list.forEach(function(fname) {
+      var sql = 'insert into folder (gid, name) values (' + gid + ', "' + fname + '")';
+      db.query(sql, function(err) {
+        if(err) throw err;
+        insertCnt++;
+        if(insertCnt === list.length) {
+          actionCnt++;
+          if(actionCnt === 2) {
+            finish();
+          }
+        }
+      });
+    });
+  }
+  if(data.deleteList.length === 0) {
+    actionCnt++;
+  } else {
+    deleteFolderList(data.deleteList);
+  }
+  if(data.createList.length === 0) {
+    actionCnt++;
+  } else {
+    createFolderList(data.createList);
+  }
+};

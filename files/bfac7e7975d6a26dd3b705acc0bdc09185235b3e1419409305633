@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    .green { background-color: rgb(100, 213, 102); }
+    .blue { background-color: rgb(0, 122, 255); }
+    .yellow { background-color: rgb(255, 255, 142); }
+    .red { background-color: rgb(255, 81, 81); }
+    body, html, div {
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      position: relative;
+      top: 0;
+      overflow: hidden;
+      transition: top 1s cubic-bezier(0.645,.045,.355,1);
+    }
+  </style>
+</head>
+<body>
+  <div class="red"></div>
+  <div class="yellow"></div>
+  <div class="green"></div>
+  <div class="blue"></div>
+  <script>
+    var scroll = {
+      pages: 4,
+      curPage: 0,
+      isScrolling: false,
+      wheelHandler: function(e) {
+        var that = scroll;
+        var offset = e.deltaY;
+        var direction = offset > 0 ? 1 : -1;
+        var target = document.body.style;
+        e.preventDefault();
+        if(that.isScrolling) {
+          return;
+        }
+        that.isScrolling = true;
+        setTimeout(function() {
+          that.isScrolling = false;
+        }, 1000);
+        if(that.curPage + direction < that.pages && that.curPage + direction >= 0) {
+          that.curPage += direction;
+        }
+        target.top = (-1 * that.curPage * 100) + '%';
+      }
+    };
+    window.addEventListener('wheel', scroll.wheelHandler, false);
+  </script>
+</body>
+</html>

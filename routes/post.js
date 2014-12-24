@@ -423,4 +423,19 @@ router.post('/file/move_file', function(req, res) {
   }
   file.moveFile(data, sess, res);
 });
+router.post('/file/manage_folder', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  data.deleteList = JSON.parse(data.deleteList);
+  data.createList = JSON.parse(data.createList);
+  if(!(data.deleteList instanceof Array) || !(data.createList instanceof Array)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  if(data.deleteList.length === 0 && data.createList.length === 0) {
+    res.send({code: 0, info: '修改成功'});
+    return;
+  }
+  file.manageFolder(data, sess, res);
+});
 module.exports = router;

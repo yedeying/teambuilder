@@ -55,7 +55,8 @@ define(function(require, exports, module) {
     });
   });
   $body.on('click', '.model .folder-remove', function(e) {
-    $(this).parent().remove();
+    $(this).parent().attr('data-hide', 'true');
+    $(this).parent().hide();
   });
   $body.on('click', '.model .folder-create', function(e) {
     var $text = $('.model .add-folder');
@@ -66,7 +67,7 @@ define(function(require, exports, module) {
       $text.focus();
       return;
     }
-    var html = '<div class="folder-block" data-type="new"><span class="folder-name">' + folderName + '</span><span class="folder-size">(0)</span><button class="folder-remove"><i class="fa fa-close"></i><span>&nbsp;删除文件夹</span></button></div>';
+    var html = '<div class="folder-block" data-hide="false" data-type="new"><span class="folder-name">' + folderName + '</span><span class="folder-size">(0)</span><button class="folder-remove"><i class="fa fa-close"></i><span>&nbsp;删除文件夹</span></button></div>';
     $(html).insertBefore($btn);
     $text.val('');
   });
@@ -135,6 +136,31 @@ define(function(require, exports, module) {
               location.reload(true);
             }, 1000);
           }
+        }
+      });
+    },
+    manageFolder: function() {
+      var deleteList = [];
+      var createList = [];
+      $('.model .folder-block[data-type=origin][data-hide=true]').each(function() {
+        deleteList.push($(this).attr('data-fid'));
+      });
+      $('.model .folder-block[data-type=new][data-hide=false]').each(function() {
+        createList.push($(this).find('.folder-name').text());
+      });
+      if(deleteList.length === 0 && createList.length === 0) {
+        tools.showInfo('修改成功');
+        setTimeout(function() {
+          location.reload(true);
+        }, 1000);
+        return;
+      }
+      $.post('/file/manage_folder', {deleteList: JSON.stringify(deleteList), createList: JSON.stringify(createList)}, function(data) {
+        if(typeof data.code === 'number') {
+          tools.showInfo(data.info);
+          data.code === 0 && setTimeout(function() {
+            location.reload(true);
+          }, 1000);
         }
       });
     }
