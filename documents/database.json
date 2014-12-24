@@ -1,0 +1,412 @@
+{
+  "type": {
+    "id": "bigint",
+    "string": "varchar(100) or text",
+    "time": "timestamp",
+    "array": "varchar(1000)",
+    "number": "int",
+    "boolean": "tinyint"
+  },
+  "table": {
+    "tmpuser": {
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "email": {
+        "name": "email",
+        "type": "string"
+      },
+      "username": {
+        "name": "username",
+        "type": "string"
+      },
+      "password": {
+        "name": "password",
+        "type": "string"
+      },
+      "timestamp": {
+        "name": "timestamp",
+        "type": "time"
+      },
+      "createtime": {
+        "name": "createtime",
+        "type": "time"
+      },
+      "tid": {
+        "name": "tid",
+        "type": "id"
+      }
+    },
+    "user": {
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "cid": {
+        "name": "cid",
+        "type": "id"
+      },
+      "gid": {
+        "name": "gid",
+        "type": "id"
+      },
+      "username": {
+        "name": "username",
+        "type": "string"
+      },
+      "email": {
+        "name": "email",
+        "type": "string"
+      },
+      "password": {
+        "name": "password",
+        "type": "string"
+      },
+      "createtime": {
+        "name": "createtime",
+        "type": "time"
+      },
+      "contact": {
+        "name": "contact",
+        "type": "string"
+      },
+      "gender": {
+        "name": "gender",
+        "type": "boolean"
+      },
+      "accessibility": {
+        "name": "accessibility",
+        "type": "number"
+      }
+    },
+    "class": {
+      "cid": {
+        "name": "cid",
+        "type": "id"
+      },
+      "grade": {
+        "name": "grade",
+        "type": "string"
+      },
+      "major": {
+        "name": "major",
+        "type": "string"
+      },
+      "class": {
+        "name": "class",
+        "type": "string"
+      }
+    },
+    "course": {
+      "cid": {
+        "name": "cid",
+        "type": "id"
+      },
+      "title": {
+        "name": "title",
+        "type": "string"
+      },
+      "teacher": {
+        "name": "teacher",
+        "type": "id"
+      }
+    },
+    "groups": {
+      "gid": {
+        "name": "gid",
+        "type": "id"
+      },
+      "cid": {
+        "name": "cid",
+        "type": "id"
+      },
+      "admin": {
+        "name": "admin",
+        "type": "id"
+      },
+      "name": {
+        "name": "name",
+        "type": "string"
+      },
+      "memberlist": {
+        "name": "memberlist",
+        "type": "array"
+      }
+    },
+    "project": {
+      "pid": {
+        "name": "pid",
+        "type": "id"
+      },
+      "gid": {
+        "name": "gid",
+        "type": "id"
+      },
+      "creater": {
+        "name": "creater",
+        "type": "id"
+      },
+      "name": {
+        "name": "name",
+        "type": "string"
+      },
+      "description": {
+        "name": "description",
+        "type": "string"
+      },
+      "createtime": {
+        "name": "createtime",
+        "type": "time"
+      },
+      "status": {
+        "name": "status",
+        "type": "number"
+      }
+    },
+    "task": {
+      "tid": {
+        "name": "tid",
+        "type": "id"
+      },
+      "pid": {
+        "name": "pid",
+        "type": "id"
+      },
+      "creater": {
+        "name": "creater",
+        "type": "id"
+      },
+      "title": {
+        "name": "title",
+        "type": "string "
+      },
+      "content": {
+        "name": "content",
+        "type": "string"
+      },
+      "status": {
+        "name": "status",
+        "type": "number"
+      },
+      "createtime": {
+        "name": "createtime",
+        "type": "time"
+      },
+      "expecttime": {
+        "name": "expecttime",
+        "type": "time"
+      },
+      "finishtime": {
+        "name": "finishtime",
+        "type": "time"
+      },
+      "participant": {
+        "name": "participant",
+        "type": "array"
+      }
+    },
+    "comment": {
+      "cid": {
+        "name": "cid",
+        "type": "id"
+      },
+      "id": {
+        "name": "id",
+        "type": "id"
+      },
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "type": {
+        "name": "type",
+        "type": "number"
+      },
+      "deep": {
+        "name": "deep",
+        "type": "number"
+      },
+      "time": {
+        "name": "time",
+        "type": "time"
+      },
+      "content": {
+        "name": "content",
+        "type": "string"
+      },
+      "description": {
+        "name": "description",
+        "type": "string"
+      },
+      "status": {
+        "name": "status",
+        "type": "string"
+      }
+    },
+    "detail": {
+      "did": {
+        "name": "did",
+        "type": "id"
+      },
+      "tid": {
+        "name": "tid",
+        "type": "id"
+      },
+      "title": {
+        "name": "title",
+        "type": "string"
+      },
+      "content": {
+        "name": "content",
+        "type": "string"
+      },
+      "createtime": {
+        "name": "createtime",
+        "type": "time"
+      },
+      "participant": {
+        "name": "participant",
+        "type": "array"
+      },
+      "finish": {
+        "name": "finish",
+        "type": "boolean"
+      }
+    },
+    "update": {
+      "did": {
+        "name": "did",
+        "type": "id"
+      },
+      "tid": {
+        "name": "tid",
+        "type": "id"
+      },
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "time": {
+        "name": "time",
+        "type": "time"
+      },
+      "description": {
+        "name": "description",
+        "type": "string"
+      }
+    },
+    "file": {
+      "fid": {
+        "name": "fid",
+        "type": "id"
+      },
+      "id": {
+        "name": "id",
+        "type": "id"
+      },
+      "uploader": {
+        "name": "uploader",
+        "type": "id"
+      },
+      "type": {
+        "name": "type",
+        "type": "number"
+      },
+      "filename": {
+        "name": "filename",
+        "type": "string"
+      },
+      "fsha1": {
+        "name": "fsha1",
+        "type": "string"
+      },
+      "timestamp": {
+        "name": "timestamp",
+        "type": "string"
+      },
+      "uploadtime": {
+        "name": "uploadtime",
+        "type": "time"
+      }
+    },
+    "invite": {
+      "iid": {
+        "name": "iid",
+        "type": "id"
+      },
+      "user": {
+        "name": "user",
+        "type": "id"
+      },
+      "admin": {
+        "name": "admin",
+        "type": "id"
+      },
+      "sha1": {
+        "name": "sha1",
+        "type": "string"
+      }
+    },
+    "publish": {
+      "pid": {
+        "name": "pid",
+        "type": "id"
+      },
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "gid": {
+        "name": "gid",
+        "type": "id"
+      },
+      "content": {
+        "name": "content",
+        "type": "string"
+      },
+      "time": {
+        "name": "time",
+        "type": "time"
+      }
+    },
+    "note": {
+      "nid": {
+        "name": "nid",
+        "type": "id"
+      },
+      "gid": {
+        "name": "gid",
+        "type": "id"
+      },
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "title": {
+        "name": "title",
+        "type": "string"
+      },
+      "description": {
+        "name": "description",
+        "type": "string"
+      },
+      "content": {
+        "name": "content",
+        "type": "string"
+      },
+      "time": {
+        "name": "time",
+        "type": "time"
+      },
+      "visible": {
+        "name": "visible",
+        "type": "array"
+      },
+      "tag": {
+        "name": "tag",
+        "type": "string"
+      }
+    }
+  }
+}

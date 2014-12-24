@@ -14,7 +14,8 @@
     "project": 3,
     "joingroup": 5,
     "model": 1,
-    "file": 2
+    "file": 2,
+    "note": 2
   },
   "post": {
     "login": 3,

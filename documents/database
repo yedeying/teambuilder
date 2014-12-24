@@ -95,3 +95,13 @@ publish
   gid           id
   content       string
   time          time
+note
+  nid           id
+  gid           id
+  uid        id
+  title         string
+  description   string
+  content       string
+  time          time
+  visible       array
+  tag           string

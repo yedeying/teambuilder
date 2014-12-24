@@ -6,6 +6,7 @@ var tools = require('../module/tools');
 var index = require('../module/index');
 var task = require('../module/task');
 var file = require('../module/file');
+var note = require('../module/note');
 var people = require('../module/people');
 var project = require('../module/project');
 var comment = require('../module/comment');
@@ -46,6 +47,10 @@ var titles = ['登录teambuilder', '注册teambuilder', '找回密码'];
 router.get('/file', function(req, res) {
   var sess = req.session;
   file.generatePage(sess, res);
+});
+router.get('/note', function(req, res) {
+  var sess = req.session;
+  note.generatePage(sess, res);
 });
 router.get('/comment', function(req, res) {
   var sess = req.session;
