@@ -45,6 +45,7 @@ module.exports = {
   // please promise that each sign will appear as most one time, or you will get wrong
   getTime: function(stamp, format) {
     var that = module.exports;
+    // if(!format) format = 'hh:mm DD C';
     var Months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
     var date = new Date(stamp * 1000);

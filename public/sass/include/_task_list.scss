@@ -1,7 +1,7 @@
 .task-header {
   position: relative;
   .title-wrapper {
-    @include clearfix;
+    @extend %clearfix;
     padding: 20px;
     .title {
       display: inline;
@@ -160,7 +160,7 @@
 .task-list-nav {
   padding: 20px;
   .line {
-    @include clearfix;
+    @extend %clearfix;
   }
   h4 {
     display: inline-block;

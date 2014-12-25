@@ -1,0 +1,23 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/note.css')
+
+block content
+  include includes/header
+  .note-inner
+    table.layout
+      tr
+        td.left
+          .inner
+            include includes/tag_list
+        td.right
+          .inner
+            include includes/note_list
+        td.publish
+          .inner
+            include includes/publish
+
+block scripts
+  script.
+    seajs.use('/javascripts/note.js');

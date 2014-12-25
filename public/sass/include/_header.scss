@@ -1,6 +1,6 @@
 .header {
   .navbar {
-    @include clearfix;
+    @extend %clearfix;
     display: block;
     background-color: rgb(47,67,92);
     > .left {
@@ -24,7 +24,7 @@
     }
   }
   .title-block {
-    @include clearfix;
+    @extend %clearfix;
     background-color: rgb(59,85,116);
     padding: 20px 25px 20px 20px;
     .title {

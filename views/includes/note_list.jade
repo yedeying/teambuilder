@@ -1,0 +1,30 @@
+.note-header
+  .title-wrapper
+    h1.title 所有笔记
+    button.create-note
+      i.fa.fa-plus-circle
+      span &nbsp;新建笔记
+  span.activity-label.all 所有笔记
+  span.activity-triangle-black
+  span.activity-triangle-white
+  hr.hr
+.note-list
+  each note in data.notes
+    .note-block(data-tag=note.tag)
+      .icon-block
+      .detail-block
+        .note-title= note.title
+        .note-description= note.description
+        .note-other
+          span.note-author By&nbsp;#{note.name}
+          span.note-time #{func.getTime(note.time, 'hh:mm DD C')}
+      .operation-block
+        a.note-edit
+          i.fa.fa-edit
+          span &nbsp;编辑笔记
+        a.note-modify
+          i.fa.fa-info-circle
+          span &nbsp;编辑详情
+        a.note-delete
+          i.fa.fa-trash
+          span &nbsp;删除笔记

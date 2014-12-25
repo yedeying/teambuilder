@@ -1,4 +1,18 @@
 @charset "UTF-8";
+/* line 21, ../sass/include/_mixins.scss */
+.title-wrapper, .publish .title-block {
+  *zoom: 1;
+}
+/* line 22, ../sass/include/_mixins.scss */
+.title-wrapper:before, .publish .title-block:before, .title-wrapper:after, .publish .title-block:after {
+  display: table;
+  content: " ";
+}
+/* line 26, ../sass/include/_mixins.scss */
+.title-wrapper:after, .publish .title-block:after {
+  clear: both;
+}
+
 /* line 1, ../sass/include/_style_mixin.scss */
 .label {
   display: inline-block;
@@ -2756,6 +2770,73 @@ body button {
   cursor: pointer;
 }
 
+/* line 53, ../sass/include/_global.scss */
+.title-wrapper {
+  padding: 20px;
+}
+/* line 56, ../sass/include/_global.scss */
+.title-wrapper .title {
+  display: inline;
+  margin: 0;
+  font-weight: normal;
+}
+/* line 61, ../sass/include/_global.scss */
+.title-wrapper button {
+  margin-left: 10px;
+  float: right;
+}
+/* line 62, ../sass/include/_global.scss */
+.title-wrapper button .fa {
+  font-size: 1.2em;
+}
+
+/* line 69, ../sass/include/_global.scss */
+.activity-label {
+  color: #777;
+  margin: 0 20px;
+}
+
+/* line 73, ../sass/include/_global.scss */
+.activity-triangle-black {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #ccc;
+  left: 43px;
+  bottom: 0;
+}
+
+/* line 78, ../sass/include/_global.scss */
+.activity-triangle-white {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  border-bottom: 8px solid #fff;
+  left: 43px;
+  bottom: -2px;
+}
+
+/* line 83, ../sass/include/_global.scss */
+.right .hr {
+  margin: 15px 0;
+  border: 0px;
+  border-top: 1px solid #ccc;
+}
+
 @media screen and (max-width: 1100px) {
   /* line 2, ../sass/include/_publish.scss */
   .publish {
@@ -2770,19 +2851,6 @@ td.publish {
 /* line 10, ../sass/include/_publish.scss */
 .publish .inner {
   padding: 10px 20px;
-}
-/* line 13, ../sass/include/_publish.scss */
-.publish .title-block {
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.publish .title-block:before, .publish .title-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.publish .title-block:after {
-  clear: both;
 }
 /* line 16, ../sass/include/_publish.scss */
 .publish .title {

@@ -44,7 +44,7 @@
         cursor: pointer;
         font-size: 21px;
       }
-      @include clearfix;
+      @extend %clearfix;
       @include border-radius(8px 8px 0 0);
       @include background-image(linear-gradient(to bottom, #fff, #ddd));
       cursor: move;
@@ -99,7 +99,7 @@
     .manage-folder-inner {
       padding: 20px;
       .folder-block {
-        @include clearfix;
+        @extend %clearfix;
         .folder-name {
           float: left;
           padding: 12px 0;
@@ -117,7 +117,7 @@
         }
       }
       .add-folder-block {
-        @include clearfix;
+        @extend %clearfix;
         input[type=text].add-folder {
           @include input(8px);
           @include border-radius(4px 0 0 4px);

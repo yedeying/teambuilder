@@ -14,7 +14,7 @@ $time: .2s;
 }
 .file-block {
   @include transition(background-color, $time);
-  @include clearfix;
+  @extend %clearfix;
   &:hover {
     background-color: #f1f2f3;
     .file-icon {
@@ -71,7 +71,7 @@ $time: .2s;
     padding: 20px 20px 0 20px;
   }
   .line {
-    @include clearfix;
+    @extend %clearfix;
     padding: 0 20px;
     cursor: pointer;
     &:hover {

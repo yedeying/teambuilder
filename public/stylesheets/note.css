@@ -1,15 +1,15 @@
 @charset "UTF-8";
 /* line 21, ../sass/include/_mixins.scss */
-.title-wrapper, .publish .title-block, .header .navbar, .header .title-block, .model .model-wrapper .title-block, .model .model-wrapper .manage-folder-inner .folder-block, .model .model-wrapper .manage-folder-inner .add-folder-block, .people-inner .head-block .title-block {
+.title-wrapper, .publish .title-block, .header .navbar, .header .title-block, .model .model-wrapper .title-block, .model .model-wrapper .manage-folder-inner .folder-block, .model .model-wrapper .manage-folder-inner .add-folder-block, .note-block {
   *zoom: 1;
 }
 /* line 22, ../sass/include/_mixins.scss */
-.title-wrapper:before, .publish .title-block:before, .header .navbar:before, .header .title-block:before, .model .model-wrapper .title-block:before, .model .model-wrapper .manage-folder-inner .folder-block:before, .model .model-wrapper .manage-folder-inner .add-folder-block:before, .people-inner .head-block .title-block:before, .title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .people-inner .head-block .title-block:after {
+.title-wrapper:before, .publish .title-block:before, .header .navbar:before, .header .title-block:before, .model .model-wrapper .title-block:before, .model .model-wrapper .manage-folder-inner .folder-block:before, .model .model-wrapper .manage-folder-inner .add-folder-block:before, .note-block:before, .title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .note-block:after {
   display: table;
   content: " ";
 }
 /* line 26, ../sass/include/_mixins.scss */
-.title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .people-inner .head-block .title-block:after {
+.title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .note-block:after {
   clear: both;
 }
 
@@ -3856,162 +3856,115 @@ td.publish {
   width: 50%;
 }
 
-/* line 4, ../sass/people.scss */
-.show-publish-btn {
-  display: none;
+/* line 1, ../sass/include/_layout.scss */
+table.layout {
+  min-height: 800px;
+  width: 100%;
+  border-spacing: 0;
+}
+/* line 5, ../sass/include/_layout.scss */
+table.layout td.left {
+  vertical-align: top;
+  width: 250px;
+  background-color: #f1f1f1;
+  border-right: 1px solid #b9babc;
+}
+/* line 11, ../sass/include/_layout.scss */
+table.layout td.right {
+  vertical-align: top;
+}
+/* line 14, ../sass/include/_layout.scss */
+table.layout td.publish {
+  vertical-align: top;
+  width: 250px;
+  background-color: #f1f1f1;
 }
 
-/* line 8, ../sass/people.scss */
-.people-inner .head-block {
+/* line 5, ../sass/note.scss */
+.note-header {
   position: relative;
-  padding: 20px;
 }
-/* line 13, ../sass/people.scss */
-.people-inner .head-block .title-block .head-title {
+
+/* line 8, ../sass/note.scss */
+.create-note {
+  cursor: pointer;
+  outline-width: 0;
+  border-width: 0;
+  padding: 9px;
+  margin: 5px;
+  color: #fff;
+  background-color: #43c86f;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 61, ../sass/include/_mixins.scss */
+.create-note:hover {
+  background-color: #37bb62;
+}
+
+/* line 11, ../sass/note.scss */
+.note-list {
+  margin: 20px;
+}
+
+/* line 14, ../sass/note.scss */
+.note-block {
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+/* line 18, ../sass/note.scss */
+.note-block:first-child {
+  padding-top: 0;
+}
+
+/* line 22, ../sass/note.scss */
+.icon-block {
   float: left;
-  font-weight: normal;
-  margin: 0;
+  background: url(/images/icon-note.png) 100% center no-repeat;
+  background-size: 100%;
+  width: 90px;
+  height: 121.83px;
+  padding: 8px 0 7px 0;
+  margin-right: 20px;
 }
-/* line 18, ../sass/people.scss */
-.people-inner .head-block .title-block .add-people {
-  float: right;
-  cursor: pointer;
-  outline-width: 0;
-  border-width: 0;
-  padding: 9px;
-  margin: 5px;
-  color: #fff;
-  background-color: #7cd79c;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+
+/* line 31, ../sass/note.scss */
+.detail-block {
+  float: left;
+  width: 50%;
+  padding: 10px 0;
 }
-/* line 61, ../sass/include/_mixins.scss */
-.people-inner .head-block .title-block .add-people:hover {
-  background-color: #68d18d;
+
+/* line 36, ../sass/note.scss */
+.operation-block {
+  float: left;
 }
-/* line 22, ../sass/people.scss */
-.people-inner .head-block .title-block .remove-people, .people-inner .head-block .title-block .exit-group, .people-inner .head-block .title-block .remove-group {
-  float: right;
-  cursor: pointer;
-  outline-width: 0;
-  border-width: 0;
-  padding: 9px;
-  margin: 5px;
-  color: #fff;
-  background-color: #f19a92;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+
+/* line 39, ../sass/note.scss */
+.note-description, .note-other {
+  color: #999;
 }
-/* line 61, ../sass/include/_mixins.scss */
-.people-inner .head-block .title-block .remove-people:hover, .people-inner .head-block .title-block .exit-group:hover, .people-inner .head-block .title-block .remove-group:hover {
-  background-color: #ee857b;
+
+/* line 42, ../sass/note.scss */
+.note-title {
+  font-size: 24px;
 }
-/* line 27, ../sass/people.scss */
-.people-inner .head-block .hr {
-  margin: 15px 0;
-  border: 0px;
-  border-top: 1px solid #ccc;
-}
-/* line 33, ../sass/people.scss */
-.people-inner .main {
-  padding: 0 20px;
-}
-/* line 35, ../sass/people.scss */
-.people-inner .main .icon-inform {
-  text-align: right;
-  position: relative;
-  top: -10px;
-}
-/* line 39, ../sass/people.scss */
-.people-inner .main .icon-inform > span {
+
+/* line 45, ../sass/note.scss */
+.note-time {
   margin-left: 10px;
 }
-/* line 41, ../sass/people.scss */
-.people-inner .main .icon-inform > span.user .fa {
-  color: #55cb7e;
+
+/* line 48, ../sass/note.scss */
+.operation-block {
+  border-left: 1px solid #ccc;
+  padding: 0 20px;
 }
-/* line 44, ../sass/people.scss */
-.people-inner .main .icon-inform > span.admin .fa {
-  color: #5eb1ff;
-}
-/* line 47, ../sass/people.scss */
-.people-inner .main .icon-inform > span.edit .fa {
-  color: #888;
-}
-/* line 52, ../sass/people.scss */
-.people-inner .main table {
-  width: 100%;
-  text-align: left;
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-/* line 57, ../sass/people.scss */
-.people-inner .main table tr:hover {
-  background-color: #f8f8f8;
+/* line 51, ../sass/note.scss */
+.operation-block a {
+  display: block;
+  color: #666;
   cursor: pointer;
-}
-/* line 61, ../sass/people.scss */
-.people-inner .main table tr:first-child {
-  cursor: auto;
-}
-/* line 64, ../sass/people.scss */
-.people-inner .main table th:first-child {
-  -moz-border-radius: 8px 0 0 0;
-  -webkit-border-radius: 8px;
-  border-radius: 8px 0 0 0;
-  border-left-width: 0;
-  padding-left: 11px;
-}
-/* line 69, ../sass/people.scss */
-.people-inner .main table th:last-child {
-  -moz-border-radius: 0 8px 0 0;
-  -webkit-border-radius: 0;
-  border-radius: 0 8px 0 0;
-  border-right-width: 0;
-  padding-right: 11px;
-}
-/* line 74, ../sass/people.scss */
-.people-inner .main table th {
-  padding: 11px 10px;
-  border-left: 1px solid #667686;
-  border-right: 1px solid #667686;
-  background-color: #667686;
-  color: white;
-}
-/* line 81, ../sass/people.scss */
-.people-inner .main table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-/* line 85, ../sass/people.scss */
-.people-inner .main table .self {
-  color: #55cb7e;
-}
-/* line 88, ../sass/people.scss */
-.people-inner .main table .creater {
-  color: #5eb1ff;
-}
-/* line 91, ../sass/people.scss */
-.people-inner .main table .self, .people-inner .main table .creater, .people-inner .main table .edit {
-  width: 19px;
-  text-align: center;
-}
-/* line 96, ../sass/people.scss */
-.people-inner .main table .email a {
-  color: #0061bc;
-}
-/* line 98, ../sass/people.scss */
-.people-inner .main table .email a:hover {
-  color: #56adff;
-}
-/* line 103, ../sass/people.scss */
-.people-inner .main table .edit {
-  color: #888;
-}
-/* line 105, ../sass/people.scss */
-.people-inner .main table .edit:hover {
-  cursor: pointer;
-  color: #000;
+  margin: 20px 0;
 }

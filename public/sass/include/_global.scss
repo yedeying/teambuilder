@@ -51,7 +51,7 @@ body {
   }
 }
 .title-wrapper {
-  @include clearfix;
+  @extend %clearfix;
   padding: 20px;
   .title {
     display: inline;

@@ -1,0 +1,57 @@
+@import "include/common";
+@import "include/header";
+@import "include/model";
+@import "include/layout";
+.note-header {
+  position: relative;
+}
+.create-note {
+  @include btn($btngreen);
+}
+.note-list {
+  margin: 20px;
+}
+.note-block {
+  @extend %clearfix;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+  &:first-child {
+    padding-top: 0;
+  }
+}
+.icon-block {
+  float: left;
+  background: url(/images/icon-note.png) 100% center no-repeat;
+  background-size: 100%;
+  width: 90px;
+  height: 121.83px;
+  padding: 8px 0 7px 0;
+  margin-right: 20px;
+}
+.detail-block {
+  float: left;
+  width: 50%;
+  padding: 10px 0;
+}
+.operation-block {
+  float: left;
+}
+.note-description, .note-other {
+  color: #999;
+}
+.note-title {
+  font-size: 24px;
+}
+.note-time {
+  margin-left: 10px;
+}
+.operation-block {
+  border-left: 1px solid #ccc;
+  padding: 0 20px;
+  a {
+    display: block;
+    color: #666;
+    cursor: pointer;
+    margin: 20px 0;
+  }
+}

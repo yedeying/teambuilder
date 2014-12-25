@@ -11,7 +11,7 @@ td.publish {
     padding: 10px 20px;
   }
   .title-block {
-    @include clearfix;
+    @extend %clearfix;
   }
   .title {
     float: left;

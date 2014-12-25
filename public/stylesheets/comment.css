@@ -1,4 +1,18 @@
 @charset "UTF-8";
+/* line 21, ../sass/include/_mixins.scss */
+.title-wrapper, .publish .title-block, .header .navbar, .header .title-block, .model .model-wrapper .title-block, .model .model-wrapper .manage-folder-inner .folder-block, .model .model-wrapper .manage-folder-inner .add-folder-block, .comment-header .title-wrapper, .comment-list-nav .line {
+  *zoom: 1;
+}
+/* line 22, ../sass/include/_mixins.scss */
+.title-wrapper:before, .publish .title-block:before, .header .navbar:before, .header .title-block:before, .model .model-wrapper .title-block:before, .model .model-wrapper .manage-folder-inner .folder-block:before, .model .model-wrapper .manage-folder-inner .add-folder-block:before, .comment-header .title-wrapper:before, .comment-list-nav .line:before, .title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .comment-header .title-wrapper:after, .comment-list-nav .line:after {
+  display: table;
+  content: " ";
+}
+/* line 26, ../sass/include/_mixins.scss */
+.title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .model .model-wrapper .manage-folder-inner .folder-block:after, .model .model-wrapper .manage-folder-inner .add-folder-block:after, .comment-header .title-wrapper:after, .comment-list-nav .line:after {
+  clear: both;
+}
+
 /* line 1, ../sass/include/_style_mixin.scss */
 .label {
   display: inline-block;
@@ -2758,17 +2772,7 @@ body button {
 
 /* line 53, ../sass/include/_global.scss */
 .title-wrapper {
-  *zoom: 1;
   padding: 20px;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.title-wrapper:before, .title-wrapper:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.title-wrapper:after {
-  clear: both;
 }
 /* line 56, ../sass/include/_global.scss */
 .title-wrapper .title {
@@ -2847,19 +2851,6 @@ td.publish {
 /* line 10, ../sass/include/_publish.scss */
 .publish .inner {
   padding: 10px 20px;
-}
-/* line 13, ../sass/include/_publish.scss */
-.publish .title-block {
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.publish .title-block:before, .publish .title-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.publish .title-block:after {
-  clear: both;
 }
 /* line 16, ../sass/include/_publish.scss */
 .publish .title {
@@ -2944,18 +2935,8 @@ td.publish {
 
 /* line 2, ../sass/include/_header.scss */
 .header .navbar {
-  *zoom: 1;
   display: block;
   background-color: #2f435c;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.header .navbar:before, .header .navbar:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.header .navbar:after {
-  clear: both;
 }
 /* line 6, ../sass/include/_header.scss */
 .header .navbar > .left {
@@ -2983,18 +2964,8 @@ td.publish {
 }
 /* line 26, ../sass/include/_header.scss */
 .header .title-block {
-  *zoom: 1;
   background-color: #3b5574;
   padding: 20px 25px 20px 20px;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.header .title-block:before, .header .title-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.header .title-block:after {
-  clear: both;
 }
 /* line 30, ../sass/include/_header.scss */
 .header .title-block .title {
@@ -3084,7 +3055,6 @@ td.publish {
 }
 /* line 37, ../sass/include/_model.scss */
 .model .model-wrapper .title-block {
-  *zoom: 1;
   -moz-border-radius: 8px 8px 0 0;
   -webkit-border-radius: 8px;
   border-radius: 8px 8px 0 0;
@@ -3108,15 +3078,6 @@ td.publish {
   float: right;
   cursor: pointer;
   font-size: 21px;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.model .model-wrapper .title-block:before, .model .model-wrapper .title-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.model .model-wrapper .title-block:after {
-  clear: both;
 }
 /* line 54, ../sass/include/_model.scss */
 .model .model-wrapper .hr {
@@ -3145,7 +3106,7 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .model .model-wrapper .footer .confirm:hover {
   background-color: #37bb62;
 }
@@ -3162,7 +3123,7 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .model .model-wrapper .footer .cancel:hover {
   background-color: #e85b4e;
 }
@@ -3265,19 +3226,6 @@ td.publish {
 .model .model-wrapper .manage-folder-inner {
   padding: 20px;
 }
-/* line 101, ../sass/include/_model.scss */
-.model .model-wrapper .manage-folder-inner .folder-block {
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.model .model-wrapper .manage-folder-inner .folder-block:before, .model .model-wrapper .manage-folder-inner .folder-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.model .model-wrapper .manage-folder-inner .folder-block:after {
-  clear: both;
-}
 /* line 103, ../sass/include/_model.scss */
 .model .model-wrapper .manage-folder-inner .folder-block .folder-name {
   float: left;
@@ -3305,22 +3253,9 @@ td.publish {
   margin: 5px 0;
   float: right;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .model .model-wrapper .manage-folder-inner .folder-block .folder-remove:hover {
   background-color: #e85b4e;
-}
-/* line 119, ../sass/include/_model.scss */
-.model .model-wrapper .manage-folder-inner .add-folder-block {
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.model .model-wrapper .manage-folder-inner .add-folder-block:before, .model .model-wrapper .manage-folder-inner .add-folder-block:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.model .model-wrapper .manage-folder-inner .add-folder-block:after {
-  clear: both;
 }
 /* line 121, ../sass/include/_model.scss */
 .model .model-wrapper .manage-folder-inner .add-folder-block input[type=text].add-folder {
@@ -3366,7 +3301,7 @@ td.publish {
   float: right;
   padding-left: 6px;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .model .model-wrapper .manage-folder-inner .add-folder-block .folder-create:hover {
   background-color: #37bb62;
 }
@@ -3951,17 +3886,7 @@ table.layout td.publish {
 }
 /* line 7, ../sass/comment.scss */
 .comment-header .title-wrapper {
-  *zoom: 1;
   padding: 20px;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.comment-header .title-wrapper:before, .comment-header .title-wrapper:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.comment-header .title-wrapper:after {
-  clear: both;
 }
 /* line 10, ../sass/comment.scss */
 .comment-header .title-wrapper .title {
@@ -3988,7 +3913,7 @@ table.layout td.publish {
 .comment-header .title-wrapper .add-comment-list .fa {
   font-size: 1.2em;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .comment-header .title-wrapper .add-comment-list:hover {
   background-color: #37bb62;
 }
@@ -4010,7 +3935,7 @@ table.layout td.publish {
 .comment-header .title-wrapper .edit-comment .fa {
   font-size: 1.2em;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .comment-header .title-wrapper .edit-comment:hover {
   background-color: #357ebd;
 }
@@ -4032,7 +3957,7 @@ table.layout td.publish {
 .comment-header .title-wrapper .remove-comment .fa {
   font-size: 1.2em;
 }
-/* line 51, ../sass/include/_mixins.scss */
+/* line 61, ../sass/include/_mixins.scss */
 .comment-header .title-wrapper .remove-comment:hover {
   background-color: #e85b4e;
 }
@@ -4176,19 +4101,6 @@ table.layout td.publish {
 /* line 130, ../sass/comment.scss */
 .comment-list-nav {
   padding: 20px;
-}
-/* line 132, ../sass/comment.scss */
-.comment-list-nav .line {
-  *zoom: 1;
-}
-/* line 12, ../sass/include/_mixins.scss */
-.comment-list-nav .line:before, .comment-list-nav .line:after {
-  display: table;
-  content: " ";
-}
-/* line 16, ../sass/include/_mixins.scss */
-.comment-list-nav .line:after {
-  clear: both;
 }
 /* line 135, ../sass/comment.scss */
 .comment-list-nav h4 {

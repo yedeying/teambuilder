@@ -9,7 +9,7 @@
     position: relative;
     padding: 20px;
     .title-block {
-      @include clearfix;
+      @extend %clearfix;
       .head-title {
         float: left;
         font-weight: normal;
