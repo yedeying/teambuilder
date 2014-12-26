@@ -20,4 +20,6 @@ block content
 
 block scripts
   script.
-    seajs.use('/javascripts/note.js');
+    seajs.use('/javascripts/note.js', function(note) {
+      note.init();
+    });

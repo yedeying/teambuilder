@@ -138,17 +138,7 @@ module.exports = {
       var content = row['content'];
       var participant = tools.decodeNumberArray(row['participant']);
       var time = tools.getTime(row['time'], 'YY/MM/DD hh:mm');
-      people.getMemberList(sess, function(memberList) {
-        memberList.forEach(function(member) {
-          member.on = false;
-        });
-        participant.forEach(function(uid) {
-          memberList.forEach(function(member) {
-            if(uid === member.uid) {
-              member.on = true;
-            }
-          });
-        });
+      people.getMemberList(sess, participant, function(memberList) {
         res.render('models/edit_task_list', {
           title: '编辑任务列表',
           name: name,
@@ -286,17 +276,7 @@ module.exports = {
       var title = row['title'];
       var content = row['content'];
       var participant = tools.decodeNumberArray(row['participant']);
-      people.getMemberList(sess, function(memberList) {
-        for(var i = 0; i < memberList.length; i++) {
-          memberList[i].on = false;
-        }
-        for(var i = 0; i < memberList.length; i++) {
-          for(var j = 0; j < participant.length; j++) {
-            if(memberList[i].uid == participant[j]) {
-              memberList[i].on = true;
-            }
-          }
-        }
+      people.getMemberList(sess, participant, function(memberList) {
         file.getFile(did, 1, function(files) {
           callback({
             did: did,

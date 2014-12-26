@@ -86,3 +86,34 @@ exports.generatePage = function(sess, res) {
     });
   }
 };
+exports.getDescription = function(data, sess, res) {
+  var nid = data.nid;
+  var gid = sess.gid;
+  var sql = 'select title, description, tag, visible from note where sha1(nid) = "' + nid + '"';
+  db.query(sql, function(err, rows) {
+    if(err) throw err;
+    if(rows.length !== 1) {
+      res.send({code: 1, info: '页面错误'});
+      return;
+    }
+    var row = rows[0];
+    data.title = row['title'];
+    data.description = row['description'];
+    data.tag = row['tag'];
+    data.visible = tools.decodeNumberArray(row['visible']);
+    exports.getTags(gid, function(err, tags) {
+      if(err) throw err;
+      data.tags = tags;
+      people.getMemberList(sess, data.visible, function(memberList) {
+        data.memberList = memberList;
+        res.render('models/modify_note', {data: data, sha1: tools.getSha1, title: '修改笔记详情'}, function(err, html) {
+          if(err) {
+            res.send({code: 1, info: 'render error'});
+            throw err;
+          }
+          res.send({code: 0, html: html});
+        });
+      });
+    });
+  });
+}

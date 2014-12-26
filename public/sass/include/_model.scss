@@ -68,408 +68,435 @@
         @include btn($btnred);
       }
     }
-    .add-project-inner {
-      padding: 20px;
-      input[type="text"] {
-        @include input(9px);
-      }
-      .name {
-        width: 100%;
-      }
-      textarea {
-        @include input(9px);
-        resize: vertical;
-        width: 100%;
-        height: 100px;
-      }
+  }
+}
+.add-comment-list-inner {
+  padding: 20px;
+  .name {
+    @include input(9px);
+    width: 100%;
+  }
+  .description {
+    @include input(9px);
+    resize: vertical;
+    width: 100%;
+    height: 60px;
+  }
+}
+.add-file-inner {
+  padding: 20px;
+  #file {
+    display: none;
+  }
+  .file {
+    display: inline-block;
+    background-color: $lightblue;
+    color: $white;
+    padding: 7px 9px;
+    @include border-radius(4px);
+    &:hover {
+      background-color: lighten($lightblue, 5%);
     }
-    .add-comment-list-inner {
-      padding: 20px;
-      .name {
-        @include input(9px);
-        width: 100%;
-      }
-      .description {
-        @include input(9px);
-        resize: vertical;
-        width: 100%;
-        height: 60px;
-      }
+  }
+  .file-label {
+    margin-bottom: 10px;
+    color: #fff;
+    display: inline-block;
+    background: $labelpurple;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    .close-label {
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 10px;
     }
-    .manage-folder-inner {
-      padding: 20px;
-      .folder-block {
-        @extend %clearfix;
-        .folder-name {
-          float: left;
-          padding: 12px 0;
-          color: $linkblue;
-        }
-        .folder-size {
-          float: left;
-          padding: 12px 0;
-          color: #aaa;
-        }
-        .folder-remove {
-          @include btn($btnred);
-          margin: 5px 0;
-          float: right;
-        }
-      }
-      .add-folder-block {
-        @extend %clearfix;
-        input[type=text].add-folder {
-          @include input(8px);
-          @include border-radius(4px 0 0 4px);
-          border-right-width: 0;
-          width: 662px;
-          margin: 5px 0;
-        }
-        .folder-create {
-          @include btn($btngreen);
-          @include border-radius(0 4px 4px 0);
-          margin: 5px 0;
-          float: right;
-          padding-left: 6px;
-        }
-      }
+  }
+}
+.add-people-inner {
+  padding: 10px 20px;
+  .email {
+    @include input(9px);
+    width: 100%;
+  }
+}
+.add-project-inner {
+  padding: 20px;
+  input[type="text"] {
+    @include input(9px);
+  }
+  .name {
+    width: 100%;
+  }
+  textarea {
+    @include input(9px);
+    resize: vertical;
+    width: 100%;
+    height: 100px;
+  }
+}
+.add-task-inner {
+  padding: 20px;
+  .name, .content {
+    @include input(9px);
+    width: 100%;
+  }
+  .member {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: #f3f4f5;
     }
-    .move-file-inner {
-      padding: 20px;
-      input[type=radio] {
-        display: none;
-        &:checked + .folder-name {
-          background-color: $btnblue;
-          color: $white;
-          border: 1px solid $btnblue;
-        }
-      }
-      .folder-name {
-        @include border-radius(4px);
-        padding: 5px 10px;
-        border: 1px solid #ccc;
-        &:hover {
-          background-color: #f1f2f3;
-        }
-      }
+    @include border-radius(4px);
+  }
+  .check {
+    display: none;
+    &:checked + .member {
+      background-color: $lightblue;
+      border-color: $lightblue;
+      color: $white;
     }
-    .create-task-list-inner {
-      padding: 20px;
-      .name, .content {
-        @include input(9px);
-        width: 100%;
-      }
-      .date {
-        @include input(9px);
-        width: 30%;
-      }
-      .member {
-        padding: 4px 8px;
-        margin-right: 8px;
-        border: 1px solid #ccc;
-        &:hover {
-          background-color: #f3f4f5;
-        }
-        @include border-radius(4px);
-      }
-      .check {
-        display: none;
-        &:checked + .member {
-          background-color: $lightblue;
-          border-color: $lightblue;
-          color: $white;
-        }
-      }
+  }
+  #file {
+    display: none;
+  }
+  textarea {
+    @include input(9px);
+    resize: vertical;
+    width: 100%;
+    height: 60px;
+  }
+  .file {
+    display: inline-block;
+    background-color: $lightblue;
+    color: $white;
+    padding: 7px 9px;
+    @include border-radius(4px);
+    &:hover {
+      background-color: lighten($lightblue, 5%);
     }
-    .view-task-inner {
-      padding: 20px;
-      .description {
-        @include border-radius(4px);
-        padding: 12px;
-        background-color: #eee;
-      }
-      hr {
-        border-width: 0;
-        padding: 5px 0;
-        border-bottom: 1px solid #f1f2f3;
-      }
-      .name {
-        @include border-radius(4px);
-        background-color: #5A5A5A;
-        padding: 4px 8px;
-        color: white;
-        margin-right: 5px;
-      }
-      .down-file {
-        cursor: pointer;
-        margin-right: 16px;
-        color: $linkblue;
-      }
+  }
+  .file-label {
+    margin-bottom: 10px;
+    color: #fff;
+    display: inline-block;
+    background: $labelpurple;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    .close-label {
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 10px;
     }
-    .add-task-inner {
-      padding: 20px;
-      .name, .content {
-        @include input(9px);
-        width: 100%;
-      }
-      .member {
-        padding: 4px 8px;
-        margin-right: 8px;
-        border: 1px solid #ccc;
-        &:hover {
-          background-color: #f3f4f5;
-        }
-        @include border-radius(4px);
-      }
-      .check {
-        display: none;
-        &:checked + .member {
-          background-color: $lightblue;
-          border-color: $lightblue;
-          color: $white;
-        }
-      }
-      #file {
-        display: none;
-      }
-      textarea {
-        @include input(9px);
-        resize: vertical;
-        width: 100%;
-        height: 60px;
-      }
-      .file {
-        display: inline-block;
-        background-color: $lightblue;
-        color: $white;
-        padding: 7px 9px;
-        @include border-radius(4px);
-        &:hover {
-          background-color: lighten($lightblue, 5%);
-        }
-      }
-      .file-label {
-        margin-bottom: 10px;
-        color: #fff;
-        display: inline-block;
-        background: $labelpurple;
-        padding: 2px 8px;
-        border-radius: 4px;
-        margin-right: 8px;
-        .close-label {
-          display: inline-block;
-          cursor: pointer;
-          margin-left: 10px;
-        }
-      }
+  }
+}
+.create-task-list-inner {
+  padding: 20px;
+  .name, .content {
+    @include input(9px);
+    width: 100%;
+  }
+  .date {
+    @include input(9px);
+    width: 30%;
+  }
+  .member {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: #f3f4f5;
     }
-    .add-file-inner {
-      padding: 20px;
-      #file {
-        display: none;
-      }
-      .file {
-        display: inline-block;
-        background-color: $lightblue;
-        color: $white;
-        padding: 7px 9px;
-        @include border-radius(4px);
-        &:hover {
-          background-color: lighten($lightblue, 5%);
-        }
-      }
-      .file-label {
-        margin-bottom: 10px;
-        color: #fff;
-        display: inline-block;
-        background: $labelpurple;
-        padding: 2px 8px;
-        border-radius: 4px;
-        margin-right: 8px;
-        .close-label {
-          display: inline-block;
-          cursor: pointer;
-          margin-left: 10px;
-        }
-      }
+    @include border-radius(4px);
+  }
+  .check {
+    display: none;
+    &:checked + .member {
+      background-color: $lightblue;
+      border-color: $lightblue;
+      color: $white;
     }
-    .edit-task-inner {
-      padding: 20px;
-      .name, .content {
-        @include input(9px);
-        width: 100%;
-      }
-      .member {
-        padding: 4px 8px;
-        margin-right: 8px;
-        border: 1px solid #ccc;
-        &:hover {
-          background-color: #f3f4f5;
-        }
-        @include border-radius(4px);
-      }
-      .check {
-        display: none;
-        &:checked + .member {
-          background-color: $lightblue;
-          border-color: $lightblue;
-          color: $white;
-        }
-      }
-      #file {
-        display: none;
-      }
-      textarea {
-        @include input(9px);
-        resize: vertical;
-        width: 100%;
-        height: 60px;
-      }
-      .file {
-        display: inline-block;
-        background-color: $lightblue;
-        color: $white;
-        padding: 7px 9px;
-        @include border-radius(4px);
-        &:hover {
-          background-color: lighten($lightblue, 5%);
-        }
-      }
-      .file-label, .exist-file-label {
-        margin-bottom: 10px;
-        color: #fff;
-        display: inline-block;
-        background: $labelpurple;
-        padding: 2px 8px;
-        border-radius: 4px;
-        margin-right: 8px;
-        .down-file {
-          color: $white;
-        }
-        .close-label, .del-file {
-          display: inline-block;
-          cursor: pointer;
-          margin-left: 10px;
-        }
-      }
-      .exist-file-label {
-        margin-bottom: 0;
-      }
+  }
+}
+.edit-profile-inner {
+  padding: 20px;
+  h4 {
+    padding: 10px;
+    background: #6FA9DA;
+    color: white;
+    border-radius: 8px;
+    width: 50%;
+    margin: 10px auto 0 auto;
+  }
+  table {
+    width: 100%;
+    input, select {
+      @include input(8px);
+      padding: 4px 8px;
+      height: 30px;
     }
-    .del-comment-list-inner,
-    .remove-project-inner,
-    .delete-file-inner,
-    .remove-task-list-inner,
-    .remove-task-inner {
-      padding: 10px 20px;
+    label {
+      font-size: 16px;
     }
-    .add-people-inner {
-      padding: 10px 20px;
-      .email {
-        @include input(9px);
-        width: 100%;
-      }
-    }
-    .switch-project-inner {
-      padding-top: 10px;
-      .radio-box {
-        padding: 10px 20px;
-        label {
-          margin-left: 8px;
-        }
-      }
-    }
-    .remove-people-inner {
-      padding: 10px 20px;
-      .name-block {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        input,
-        label {
-          order: 2;
-        }
-        input[type="checkbox"]:checked,
-        input[type="checkbox"]:checked + label {
-          order: 0 !important;
-        }
-        hr {
-          display: none;
-          order: 1;
-          width: 100%;
-          border: 1px solid #ccc;
-        }
-        input[type="checkbox"]:checked ~ hr {
-          display: block;
-        }
-        input[type="checkbox"] {
-          display: none;
-        }
-        label {
-          min-width: 120px;
-          border: 1px solid #ccc;
-          padding: 6px 8px;
-          text-align: center;
-          margin: 0 5px 5px 0;
-          background: #fff;
-          color: #333;
-          border-radius: 3px;
-          @include box-sizing;
-          &:hover {
-            border-color: #adadad;
-            background: #ebebeb;
-            cursor: pointer;
+    tr {
+      td {
+        padding: 4px 5px;
+        &:first-child {
+          text-align: right;
+          width: 33%;
+          &:after {
+            content:': ';
           }
         }
-        input[type="checkbox"]:checked + label {
-          order: 0;
-          background-color: #428bca;
-          border-color: #357ebd;
-          color: #fff;
-          &:hover {
-            background-color: darken(#428bca, 10%);
-            border-color: #285e8e;
-          }
-        }
-      }
-    }
-    .edit-profile-inner {
-      padding: 20px;
-      h4 {
-        padding: 10px;
-        background: #6FA9DA;
-        color: white;
-        border-radius: 8px;
-        width: 50%;
-        margin: 10px auto 0 auto;
-      }
-      table {
-        width: 100%;
-        input, select {
-          @include input(8px);
-          padding: 4px 8px;
-          height: 30px;
-        }
-        label {
-          font-size: 16px;
-        }
-        tr {
-          td {
-            padding: 4px 5px;
-            &:first-child {
-              text-align: right;
-              width: 33%;
-              &:after {
-                content:': ';
-              }
-            }
-            &:last-child {
-              text-align: left;
-              width: 50%;
-            }
-          }
+        &:last-child {
+          text-align: left;
+          width: 50%;
         }
       }
     }
   }
+}
+.edit-task-inner {
+  padding: 20px;
+  .name, .content {
+    @include input(9px);
+    width: 100%;
+  }
+  .member {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: #f3f4f5;
+    }
+    @include border-radius(4px);
+  }
+  .check {
+    display: none;
+    &:checked + .member {
+      background-color: $lightblue;
+      border-color: $lightblue;
+      color: $white;
+    }
+  }
+  #file {
+    display: none;
+  }
+  textarea {
+    @include input(9px);
+    resize: vertical;
+    width: 100%;
+    height: 60px;
+  }
+  .file {
+    display: inline-block;
+    background-color: $lightblue;
+    color: $white;
+    padding: 7px 9px;
+    @include border-radius(4px);
+    &:hover {
+      background-color: lighten($lightblue, 5%);
+    }
+  }
+  .file-label, .exist-file-label {
+    margin-bottom: 10px;
+    color: #fff;
+    display: inline-block;
+    background: $labelpurple;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    .down-file {
+      color: $white;
+    }
+    .close-label, .del-file {
+      display: inline-block;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+  .exist-file-label {
+    margin-bottom: 0;
+  }
+}
+.manage-folder-inner {
+  padding: 20px;
+  .folder-block {
+    @extend %clearfix;
+    .folder-name {
+      float: left;
+      padding: 12px 0;
+      color: $linkblue;
+    }
+    .folder-size {
+      float: left;
+      padding: 12px 0;
+      color: #aaa;
+    }
+    .folder-remove {
+      @include btn($btnred);
+      margin: 5px 0;
+      float: right;
+    }
+  }
+  .add-folder-block {
+    @extend %clearfix;
+    input[type=text].add-folder {
+      @include input(8px);
+      @include border-radius(4px 0 0 4px);
+      border-right-width: 0;
+      width: 662px;
+      margin: 5px 0;
+    }
+    .folder-create {
+      @include btn($btngreen);
+      @include border-radius(0 4px 4px 0);
+      margin: 5px 0;
+      float: right;
+      padding-left: 6px;
+    }
+  }
+}
+.modify-note-inner {
+  padding: 20px;
+  h3 {
+    width: 100%;
+  }
+  input[type=text] {
+    @include input(9px);
+    width: 100%;
+  }
+  .member {
+    padding: 4px 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: #f3f4f5;
+    }
+    @include border-radius(4px);
+  }
+  .check {
+    display: none;
+    &:checked + .member {
+      background-color: $lightblue;
+      border-color: $lightblue;
+      color: $white;
+    }
+  }
+}
+.move-file-inner {
+  padding: 20px;
+  input[type=radio] {
+    display: none;
+    &:checked + .folder-name {
+      background-color: $btnblue;
+      color: $white;
+      border: 1px solid $btnblue;
+    }
+  }
+  .folder-name {
+    @include border-radius(4px);
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    &:hover {
+      background-color: #f1f2f3;
+    }
+  }
+}
+.remove-people-inner {
+  padding: 10px 20px;
+  .name-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    input,
+    label {
+      order: 2;
+    }
+    input[type="checkbox"]:checked,
+    input[type="checkbox"]:checked + label {
+      order: 0 !important;
+    }
+    hr {
+      display: none;
+      order: 1;
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+    input[type="checkbox"]:checked ~ hr {
+      display: block;
+    }
+    input[type="checkbox"] {
+      display: none;
+    }
+    label {
+      min-width: 120px;
+      border: 1px solid #ccc;
+      padding: 6px 8px;
+      text-align: center;
+      margin: 0 5px 5px 0;
+      background: #fff;
+      color: #333;
+      border-radius: 3px;
+      @include box-sizing;
+      &:hover {
+        border-color: #adadad;
+        background: #ebebeb;
+        cursor: pointer;
+      }
+    }
+    input[type="checkbox"]:checked + label {
+      order: 0;
+      background-color: #428bca;
+      border-color: #357ebd;
+      color: #fff;
+      &:hover {
+        background-color: darken(#428bca, 10%);
+        border-color: #285e8e;
+      }
+    }
+  }
+}
+.switch-project-inner {
+  padding-top: 10px;
+  .radio-box {
+    padding: 10px 20px;
+    label {
+      margin-left: 8px;
+    }
+  }
+}
+.view-task-inner {
+  padding: 20px;
+  .description {
+    @include border-radius(4px);
+    padding: 12px;
+    background-color: #eee;
+  }
+  hr {
+    border-width: 0;
+    padding: 5px 0;
+    border-bottom: 1px solid #f1f2f3;
+  }
+  .name {
+    @include border-radius(4px);
+    background-color: #5A5A5A;
+    padding: 4px 8px;
+    color: white;
+    margin-right: 5px;
+  }
+  .down-file {
+    cursor: pointer;
+    margin-right: 16px;
+    color: $linkblue;
+  }
+}
+.del-comment-list-inner,
+.remove-project-inner,
+.delete-file-inner,
+.remove-task-list-inner,
+.remove-task-inner {
+  padding: 10px 20px;
 }

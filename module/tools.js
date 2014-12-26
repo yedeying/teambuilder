@@ -123,5 +123,20 @@ module.exports = {
       num: this.cutFloat(size, 2),
       unit: unit[level]
     };
+  },
+  testId: function(id) {
+    if(typeof id === 'string') {
+      return (!id || !/[0-9a-f]{40}/.test(id)) ? true : false;
+    }
+    if(id instanceof Array) {
+      var bl = false;
+      id.forEach(function(id) {
+        if(!id || !/[0-9a-f]{40}/.test(id)) {
+          bl = true;
+        }
+      });
+      return bl;
+    }
+    throw new Error('tools.testId invalid params');
   }
 };

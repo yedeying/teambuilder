@@ -115,6 +115,9 @@ define(function(require, exports, module) {
     getModel: function(url, type, data, callback, callback2) {
       require('jquery');
       var that = this;
+      if(!type) {
+        type = url;
+      }
       var $body = $('body');
       var $cover = $('.cover');
       if(typeof data !== 'object') {
@@ -148,6 +151,29 @@ define(function(require, exports, module) {
       var $white = $('.activity-triangle-white');
       $black.css({left: left + 'px'});
       $white.css({left: left + 'px'});
+    },
+    /**
+     * @type binary digit
+     *   1 - showSuccess
+     *   2 - fresh
+     *   3 - if fresh, delay
+     */
+    handleData: function(data, type, time) {
+      time = time || 1000;
+      if(typeof data.code === 'number') {
+        if(data.code !== 0 || (type & 1)) {
+          this.showInfo(data.info);
+        }
+        if(data.code === 0 && (type & 2)) {
+          if(type & 4) {
+            setTimeout(function() {
+              location.reload(true);
+            }, time);
+          } else {
+            location.reload(true);
+          }
+        }
+      }
     }
   }
 });

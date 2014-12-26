@@ -42,6 +42,50 @@ module.exports = {
       }
     });
   },
+  getMemberList: function(sess, participant, callback) {
+    if(typeof participant === 'function') {
+      callback = participant;
+      participant = [];
+    }
+    var sql = 'select user.username as username, user.uid as uid from user user, user self where user.gid = self.gid and self.email = "' + sess.email + '"';
+    var memberList = [];
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      rows.forEach(function(row, index) {
+        memberList.push({
+          name: row['username'],
+          uid: row['uid'],
+          on: false
+        });
+        participant.forEach(function(people) {
+          if(row['uid'] === people) {
+            memberList[index].on = true;
+          }
+        });
+      });
+      callback(memberList);
+    });
+  },
+  decodeUidArray: function(arr, callback) {
+    arr = arr.map(function(uid) {
+      return 'sha1(uid) = "' + uid + '"';
+    });
+    var userList = [];
+    var sql = 'select uid, email, username from user where ' + arr.join(' or ');
+    db.query(sql, function(err, rows) {
+      if(err) {
+        callback(err);
+        return;
+      }
+      if(rows.length !== arr.length) {
+        callback(new Error('格式有误'));
+      }
+      rows.forEach(function(row) {
+        userList.push(row['uid']);
+      });
+      callback(null, userList);
+    });
+  },
   getUsersFromUidMap: function(uidMap, callback) {
     var cnt = 0;
     var len = 0;
@@ -430,20 +474,6 @@ module.exports = {
         });
       });
     }
-  },
-  getMemberList: function(sess, callback) {
-    var sql = 'select user.username as username, user.uid as uid from user user, user self where user.gid = self.gid and self.email = "' + sess.email + '"';
-    var memberList = [];
-    db.query(sql, function(err, rows) {
-      if(err) throw err;
-      for(var i = 0; i < rows.length; i++) {
-        memberList.push({
-          name: rows[i]['username'],
-          uid: rows[i]['uid']
-        });
-      }
-      callback(memberList);
-    });
   },
   getUidFromMail: function(email, callback) {
     var sql = 'select uid from user where email = "' + email + '"';

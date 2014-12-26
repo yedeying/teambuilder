@@ -1,0 +1,15 @@
+- totle = 0
+- data.tags.forEach(function(tag) {
+-   totle += tag.length;
+- });
+.tag-list
+  .title-block
+    i.fa.fa-file
+    h4 分类列表
+  .line.all.on
+    span.tag 所有笔记
+    span.span= totle
+  each tag in data.tags
+    .line
+      span.tag #{tag.name}
+      span.span= tag.length

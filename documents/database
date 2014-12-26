@@ -98,7 +98,7 @@ publish
 note
   nid           id
   gid           id
-  uid        id
+  uid           id
   title         string
   description   string
   content       string

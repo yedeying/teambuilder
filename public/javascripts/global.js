@@ -7,6 +7,7 @@ define(function(require, exports, module) {
   var project = require('./project');
   var people = require('./people');
   var task = require('./task');
+  var note = require('./note');
   var comment = require('./comment');
   var commentDetail = require('./commentDetail');
   var file = require('./file');
@@ -156,6 +157,8 @@ define(function(require, exports, module) {
       file.moveFile();
     } else if(type === 'manage_folder') {
       file.manageFolder();
+    } else if(type === 'modify_note') {
+      note.modifyNote();
     }
   });
   /*

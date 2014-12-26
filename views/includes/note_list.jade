@@ -1,7 +1,7 @@
 .note-header
   .title-wrapper
     h1.title 所有笔记
-    button.create-note
+    button.create-note(data-action='create')
       i.fa.fa-plus-circle
       span &nbsp;新建笔记
   span.activity-label.all 所有笔记
@@ -10,7 +10,7 @@
   hr.hr
 .note-list
   each note in data.notes
-    .note-block(data-tag=note.tag)
+    .note-block(data-tag=note.tag, data-nid=func.sha1(note.nid.toString()))
       .icon-block
       .detail-block
         .note-title= note.title
@@ -19,12 +19,12 @@
           span.note-author By&nbsp;#{note.name}
           span.note-time #{func.getTime(note.time, 'hh:mm DD C')}
       .operation-block
-        a.note-edit
+        a.note-edit(data-action='edit')
           i.fa.fa-edit
           span &nbsp;编辑笔记
-        a.note-modify
+        a.note-modify(data-action='modify')
           i.fa.fa-info-circle
           span &nbsp;编辑详情
-        a.note-delete
+        a.note-delete(data-action='remove')
           i.fa.fa-trash
           span &nbsp;删除笔记

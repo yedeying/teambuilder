@@ -362,7 +362,7 @@ router.post('/new_publish', function(req, res) {
 router.post('/del_publish', function(req, res) {
   var sess = req.session;
   var data = req.body;
-  if(!data.pid || !/[0-9a-f]{40}/.test(data.pid)) {
+  if(tools.testId(data.pid)) {
     res.send({code: 1, info: '页面错误'});
     return;
   }
@@ -371,7 +371,7 @@ router.post('/del_publish', function(req, res) {
 router.post('/file/change_folder', function(req, res) {
   var sess = req.session;
   var data = req.body;
-  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+  if(tools.testId(data.fid)) {
     res.send({code: 1, info: '页面错误'});
     return;
   }
@@ -382,7 +382,7 @@ router.post('/file/add_file', multipartMiddleware, function(req, res) {
   var data = req.body;
   var upfile = req.files;
   var files = [];
-  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+  if(tools.testId(data.fid)) {
     res.send({code: 1, info: '页面错误'});
     return;
   }
@@ -400,7 +400,7 @@ router.post('/file/add_file', multipartMiddleware, function(req, res) {
 router.post('/file/delete_file', function(req, res) {
   var sess = req.session;
   var data = req.body;
-  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+  if(tools.testId(data.fid)) {
     res.send({code: 1, info: '页面错误'});
     return;
   }
@@ -413,7 +413,7 @@ router.post('/file/delete_file', function(req, res) {
 router.post('/file/move_file', function(req, res) {
   var sess = req.session;
   var data = req.body;
-  if(!data.fid || !/[0-9a-f]{40}/.test(data.fid)) {
+  if(tools.testId(data.fid)) {
     res.send({code: 1, info: '页面错误'});
     return;
   }
@@ -437,5 +437,22 @@ router.post('/file/manage_folder', function(req, res) {
     return;
   }
   file.manageFolder(data, sess, res);
+});
+router.post('/note/modify_note', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(tools.testId(data.nid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  if(data.title === '') {
+    res.send({code: 1, info: '主题不能为空'});
+    return;
+  }
+  people.decodeUidArray(JSON.parse(data.visible), function(err, uidList) {
+    if(err) res.send(err);
+    data.visible = uidList;
+    note.modifyNote(data, sess, res);
+  });
 });
 module.exports = router;

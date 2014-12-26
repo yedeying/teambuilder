@@ -1,0 +1,15 @@
+extend model_layout
+
+block content
+  .modify-note-inner(data-nid=data.nid)
+    h3 笔记主题
+    input.name(type='text', placeholder='笔记主题', value=data.title)
+    h3 笔记描述
+    input.description(type='text', placeholder='笔记描述', value=data.description)
+    h3 笔记分类
+    input.tag(type='text', value=data.tag)
+    h3 成员可见性
+    each people, index in data.memberList
+      input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}', checked=people.on)
+      label.member(for='member#{index}')
+        span.username= people.name
