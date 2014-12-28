@@ -11,6 +11,7 @@ var people = require('../module/people');
 var joingroup = require('../module/joingroup');
 var task = require('../module/task');
 var file = require('../module/file');
+var note = require('../module/note');
 var comment = require('../module/comment');
 var publish = require('../module/publish');
 // post mothod
@@ -455,4 +456,13 @@ router.post('/note/modify_note', function(req, res) {
     note.modifyNote(data, sess, res);
   });
 });
+router.post('/note/delete_note', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(tools.testId(data.nid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  note.deleteNote(data, sess, res);
+})
 module.exports = router;

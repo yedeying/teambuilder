@@ -18,6 +18,11 @@
   }
   *zoom: 1;
 }
+%box-sizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 %clearfix {
   &:before, &:after {
     display: table;
@@ -60,5 +65,16 @@
   @include border-radius(4px);
   &:hover {
     background-color: darken($color, 5%);
+  }
+}
+@mixin input($padding) {
+  @include box-sizing;
+  @include border-radius(4px);
+  padding: $padding;
+  outline: none;
+  border: 1px solid #d9d9d9;
+  @include transition(border-color, .3s);
+  &:focus {
+    border-color: #a6a6a6;
   }
 }

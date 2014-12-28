@@ -1,0 +1,21 @@
+FE signup中收到的code {code, info}
+  0: 成功
+  1: 失败
+  2: 邮件已发送
+  3: 验证成功
+  4: 登录 - 邮箱未注册
+  5: 登录 - 成功
+  6: 退出登录 - 成功
+database status
+  0 未开始
+  1 进行中
+  2 已完成
+  3 已过期
+database type
+  0 project
+  1 task
+  2 user
+  3 group
+  4 reply
+FE get model中收到的code {code, html}
+  0: 成功

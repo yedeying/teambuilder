@@ -197,4 +197,18 @@ router.get('/modify_note', function(req, res) {
   }
   note.getDescription(data, sess, res);
 });
+router.get('/delete_note', function(req, res) {
+  var data = req.query;
+  if(tools.testId(data.nid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  res.render('models/delete_note', {nid: data.nid, title: '删除笔记'}, function(err, html) {
+    if(err) {
+      res.send({code: 1, info: 'render error'});
+      throw err;
+    }
+    res.send({code: 0, html: html});
+  });
+});
 module.exports = router;

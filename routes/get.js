@@ -52,6 +52,19 @@ router.get('/note', function(req, res) {
   var sess = req.session;
   note.generatePage(sess, res);
 });
+router.get('/note/edit', function(req, res) {
+  var sess = req.session;
+  note.generateEditPage({}, sess, res);
+});
+router.get('/note/edit/:nid', function(req, res) {
+  var sess = req.session;
+  var data = req.params;
+  if(tools.testId(data.nid)) {
+    res.redirect('/404');
+    return;
+  }
+  note.generateEditPage(data, sess, res);
+});
 router.get('/comment', function(req, res) {
   var sess = req.session;
   var data = req.query;
@@ -59,14 +72,14 @@ router.get('/comment', function(req, res) {
     comment.getPidFromCidSha1(data.cid, function(pid, name) {
       sess.pid = pid;
       sess.projectTitle = name;
-      cont();
+      _continue();
     });
   } else if(sess.pid !== undefined) {
-    cont();
+    _continue();
   } else {
     res.redirect('/index');
   }
-  function cont() {
+  function _continue() {
     comment.generatePage(sess, function(data) {
       publish.addPublishBar(data, sess, function() {
         res.render('comment', {

@@ -1,0 +1,105 @@
+@import "include/common";
+@import "include/header";
+@import "include/model";
+@import "include/layout";
+.show-publish-btn {
+  display: none;
+}
+.note-edit-inner {
+  width: 900px;
+  margin: auto;
+  .title-block {
+    @extend %clearfix;
+  }
+  h1.title {
+    font-weight: normal;
+    float: left;
+    margin: 10px 0;
+  }
+  button.back {
+    @include btn($btnblue);
+    float: right;
+    margin: 12px 0;
+  }
+  .warpper {
+    @include border-radius(8px);
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  %text {
+    text-indent: 36px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+  .input-block {
+    position: relative;
+    .info {
+      @include border-radius(4px);
+      position: absolute;
+      left: 0;
+      background-color: $lightpurple;
+      color: $white;
+      padding: 1px 5px;
+      margin: 9px 0;
+    }
+  }
+  input.title {
+    @extend %text;
+    border-bottom: 1px dashed #ccc;
+  }
+  input.description {
+    @extend %text;
+  }
+}
+.editor-container {
+  background-color: $white;
+  .editor-toolbar {
+    border-bottom: 1px solid #eee;
+  }
+  .btn-group {
+    display: inline-block;
+    padding-left: 4px;
+    border-left: 1px solid #eee;
+    &:first-child {
+      border-left: none;
+    }
+  }
+  .btn {
+    padding: 6px;
+    width: 19px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #e5e5e5;
+    }
+    &.btn-info {
+      background-color: $lightblue;
+      color: $white;
+    }
+  }
+  .editor {
+    height: 300px;
+    padding: 10px;
+    overflow-y: auto;
+    outline: none;
+  }
+  .operation {
+    border-top: 1px solid #eee;
+    padding: 5px;
+    text-align: right;
+    .create {
+      @include btn($btngreen);
+      padding: 7px 10px;
+      display: inline-block;
+    }
+    .clear {
+      @include btn($btnred);
+      padding: 7px 10px;
+      display: inline-block;
+    }
+  }
+}

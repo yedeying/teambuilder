@@ -10,7 +10,7 @@ body {
   }
 }
 .show-publish-btn {
-  @include border-radius(4px 0 0 8px);
+  @include border-radius(6px 0 0 6px);
   @include transition(opacity, .3s);
   position: fixed;
   right: 0;

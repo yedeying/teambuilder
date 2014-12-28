@@ -4,6 +4,7 @@ define(function(require, exports, module) {
   exports = module.exports;
   var tools = require('./tools');
   var $body = $('body');
+  var globalData = {};
   var actionList = {
     create: function(e) {
       location.href = '/note/edit';
@@ -17,7 +18,26 @@ define(function(require, exports, module) {
       tools.getModel('modify_note', null, {nid: nid});
     },
     remove: function(e) {
-      tools.getModel('remove_note');
+      var nid = $(this).parents('.note-block').attr('data-nid');
+      tools.getModel('delete_note', null, {nid: nid});
+    },
+    back: function(e) {
+      history.go(-1);
+    },
+    save: function(e) {
+      var html = $('#editor').html();
+      console.log(html);
+    },
+    clear: function(e) {
+      $('#editor').html('').focus();
+    },
+    increaseFontSize: function(e) {
+      var fontSize = parseInt(document.queryCommandValue('fontsize'));
+      document.execCommand('fontsize', 0, (fontSize + 1).toString());
+    },
+    decreaseFontSize: function(e) {
+      var fontSize = parseInt(document.queryCommandValue('fontsize'));
+      document.execCommand('fontsize', 0, (fontSize - 1).toString());
     }
   };
   function _initTagNav() {
@@ -33,7 +53,7 @@ define(function(require, exports, module) {
         $('.note-block').show();
       } else {
         $('.note-block').hide();
-        $('.note-block[data-tag=' + tag + ']').show();
+        $('.note-block[data-tag="' + tag + '"]').show();
       }
     });
   }
@@ -71,8 +91,21 @@ define(function(require, exports, module) {
       tools.handleData(data, 7);
     });
   };
+  exports.deleteNote = function() {
+    var nid = $('.delete-note-inner').attr('data-nid');
+    $.post('/note/delete_note', {nid: nid}, function(data) {
+      tools.handleData(data, 7);
+    });
+  };
   exports.init = function() {
     _initTagNav();
     _initPageEvent();
+  };
+  exports.initEdit = function() {
+    _initPageEvent();
+    require('hotkeys');
+    require('editor');
+    $('#editor').initEditor();
+    document.execCommand('justifyleft');
   };
 });

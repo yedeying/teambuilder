@@ -1,14 +1,3 @@
-@mixin input($padding) {
-  @include box-sizing;
-  @include border-radius(4px);
-  padding: $padding;
-  outline: none;
-  border: 1px solid #d9d9d9;
-  @include transition(border-color, .3s);
-  &:focus {
-    border-color: #a6a6a6;
-  }
-}
 .cover {
   visibility: hidden;
   position: fixed;
@@ -496,6 +485,7 @@
 .del-comment-list-inner,
 .remove-project-inner,
 .delete-file-inner,
+.delete-note-inner,
 .remove-task-list-inner,
 .remove-task-inner {
   padding: 10px 20px;

@@ -1,15 +1,15 @@
 @charset "UTF-8";
 /* line 21, ../sass/include/_mixins.scss */
-.title-wrapper, .publish .title-block, .header .navbar, .header .title-block, .model .model-wrapper .title-block, .manage-folder-inner .folder-block, .manage-folder-inner .add-folder-block, .note-block, .tag-list .line {
+.title-wrapper, .publish .title-block, .header .navbar, .header .title-block, .model .model-wrapper .title-block, .manage-folder-inner .folder-block, .manage-folder-inner .add-folder-block, .note-block, .note-title-block, .tag-list .line {
   *zoom: 1;
 }
 /* line 22, ../sass/include/_mixins.scss */
-.title-wrapper:before, .publish .title-block:before, .header .navbar:before, .header .title-block:before, .model .model-wrapper .title-block:before, .manage-folder-inner .folder-block:before, .manage-folder-inner .add-folder-block:before, .note-block:before, .tag-list .line:before, .title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .manage-folder-inner .folder-block:after, .manage-folder-inner .add-folder-block:after, .note-block:after, .tag-list .line:after {
+.title-wrapper:before, .publish .title-block:before, .header .navbar:before, .header .title-block:before, .model .model-wrapper .title-block:before, .manage-folder-inner .folder-block:before, .manage-folder-inner .add-folder-block:before, .note-block:before, .note-title-block:before, .tag-list .line:before, .title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .manage-folder-inner .folder-block:after, .manage-folder-inner .add-folder-block:after, .note-block:after, .note-title-block:after, .tag-list .line:after {
   display: table;
   content: " ";
 }
 /* line 26, ../sass/include/_mixins.scss */
-.title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .manage-folder-inner .folder-block:after, .manage-folder-inner .add-folder-block:after, .note-block:after, .tag-list .line:after {
+.title-wrapper:after, .publish .title-block:after, .header .navbar:after, .header .title-block:after, .model .model-wrapper .title-block:after, .manage-folder-inner .folder-block:after, .manage-folder-inner .add-folder-block:after, .note-block:after, .note-title-block:after, .tag-list .line:after {
   clear: both;
 }
 
@@ -2716,9 +2716,9 @@ body button {
 
 /* line 12, ../sass/include/_global.scss */
 .show-publish-btn {
-  -moz-border-radius: 4px 0 0 8px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px 0 0 8px;
+  -moz-border-radius: 6px 0 0 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px 0 0 6px;
   -webkit-transition: opacity 0.3s;
   -o-transition: opacity 0.3s;
   transition: opacity 0.3s;
@@ -3019,7 +3019,7 @@ td.publish {
   float: right;
 }
 
-/* line 12, ../sass/include/_model.scss */
+/* line 1, ../sass/include/_model.scss */
 .cover {
   visibility: hidden;
   position: fixed;
@@ -3030,7 +3030,7 @@ td.publish {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* line 21, ../sass/include/_model.scss */
+/* line 10, ../sass/include/_model.scss */
 .model {
   width: 800px;
   margin: 0 auto;
@@ -3038,11 +3038,11 @@ td.publish {
   right: 0;
   position: absolute;
 }
-/* line 27, ../sass/include/_model.scss */
+/* line 16, ../sass/include/_model.scss */
 .model label {
   cursor: pointer;
 }
-/* line 30, ../sass/include/_model.scss */
+/* line 19, ../sass/include/_model.scss */
 .model .model-wrapper {
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
@@ -3053,7 +3053,7 @@ td.publish {
   top: 0;
   background: #fff;
 }
-/* line 37, ../sass/include/_model.scss */
+/* line 26, ../sass/include/_model.scss */
 .model .model-wrapper .title-block {
   -moz-border-radius: 8px 8px 0 0;
   -webkit-border-radius: 8px;
@@ -3068,32 +3068,32 @@ td.publish {
   padding: 20px;
   border-bottom: 1px solid #ccc;
 }
-/* line 38, ../sass/include/_model.scss */
+/* line 27, ../sass/include/_model.scss */
 .model .model-wrapper .title-block h2 {
   float: left;
   margin: 0;
 }
-/* line 42, ../sass/include/_model.scss */
+/* line 31, ../sass/include/_model.scss */
 .model .model-wrapper .title-block .close {
   float: right;
   cursor: pointer;
   font-size: 21px;
 }
-/* line 54, ../sass/include/_model.scss */
+/* line 43, ../sass/include/_model.scss */
 .model .model-wrapper .hr {
   border: 1px dashed #ddd;
   margin-bottom: 0;
 }
-/* line 58, ../sass/include/_model.scss */
+/* line 47, ../sass/include/_model.scss */
 .model .model-wrapper .footer {
   padding: 10px;
 }
-/* line 60, ../sass/include/_model.scss */
+/* line 49, ../sass/include/_model.scss */
 .model .model-wrapper .footer .confirm, .model .model-wrapper .footer .cancel {
   padding: 5px;
   margin: 0 5px;
 }
-/* line 64, ../sass/include/_model.scss */
+/* line 53, ../sass/include/_model.scss */
 .model .model-wrapper .footer .confirm {
   cursor: pointer;
   outline-width: 0;
@@ -3110,7 +3110,7 @@ td.publish {
 .model .model-wrapper .footer .confirm:hover {
   background-color: #37bb62;
 }
-/* line 67, ../sass/include/_model.scss */
+/* line 56, ../sass/include/_model.scss */
 .model .model-wrapper .footer .cancel {
   cursor: pointer;
   outline-width: 0;
@@ -3128,11 +3128,11 @@ td.publish {
   background-color: #e85b4e;
 }
 
-/* line 73, ../sass/include/_model.scss */
+/* line 62, ../sass/include/_model.scss */
 .add-comment-list-inner {
   padding: 20px;
 }
-/* line 75, ../sass/include/_model.scss */
+/* line 64, ../sass/include/_model.scss */
 .add-comment-list-inner .name {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3148,11 +3148,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-comment-list-inner .name:focus {
   border-color: #a6a6a6;
 }
-/* line 79, ../sass/include/_model.scss */
+/* line 68, ../sass/include/_model.scss */
 .add-comment-list-inner .description {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3170,20 +3170,20 @@ td.publish {
   width: 100%;
   height: 60px;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-comment-list-inner .description:focus {
   border-color: #a6a6a6;
 }
 
-/* line 86, ../sass/include/_model.scss */
+/* line 75, ../sass/include/_model.scss */
 .add-file-inner {
   padding: 20px;
 }
-/* line 88, ../sass/include/_model.scss */
+/* line 77, ../sass/include/_model.scss */
 .add-file-inner #file {
   display: none;
 }
-/* line 91, ../sass/include/_model.scss */
+/* line 80, ../sass/include/_model.scss */
 .add-file-inner .file {
   display: inline-block;
   background-color: #8cc1f8;
@@ -3193,11 +3193,11 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 97, ../sass/include/_model.scss */
+/* line 86, ../sass/include/_model.scss */
 .add-file-inner .file:hover {
   background-color: #a4cef9;
 }
-/* line 101, ../sass/include/_model.scss */
+/* line 90, ../sass/include/_model.scss */
 .add-file-inner .file-label {
   margin-bottom: 10px;
   color: #fff;
@@ -3207,18 +3207,18 @@ td.publish {
   border-radius: 4px;
   margin-right: 8px;
 }
-/* line 109, ../sass/include/_model.scss */
+/* line 98, ../sass/include/_model.scss */
 .add-file-inner .file-label .close-label {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
 }
 
-/* line 116, ../sass/include/_model.scss */
+/* line 105, ../sass/include/_model.scss */
 .add-people-inner {
   padding: 10px 20px;
 }
-/* line 118, ../sass/include/_model.scss */
+/* line 107, ../sass/include/_model.scss */
 .add-people-inner .email {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3234,16 +3234,16 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-people-inner .email:focus {
   border-color: #a6a6a6;
 }
 
-/* line 123, ../sass/include/_model.scss */
+/* line 112, ../sass/include/_model.scss */
 .add-project-inner {
   padding: 20px;
 }
-/* line 125, ../sass/include/_model.scss */
+/* line 114, ../sass/include/_model.scss */
 .add-project-inner input[type="text"] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3258,15 +3258,15 @@ td.publish {
   -o-transition: border-color 0.3s;
   transition: border-color 0.3s;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-project-inner input[type="text"]:focus {
   border-color: #a6a6a6;
 }
-/* line 128, ../sass/include/_model.scss */
+/* line 117, ../sass/include/_model.scss */
 .add-project-inner .name {
   width: 100%;
 }
-/* line 131, ../sass/include/_model.scss */
+/* line 120, ../sass/include/_model.scss */
 .add-project-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3284,16 +3284,16 @@ td.publish {
   width: 100%;
   height: 100px;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-project-inner textarea:focus {
   border-color: #a6a6a6;
 }
 
-/* line 138, ../sass/include/_model.scss */
+/* line 127, ../sass/include/_model.scss */
 .add-task-inner {
   padding: 20px;
 }
-/* line 140, ../sass/include/_model.scss */
+/* line 129, ../sass/include/_model.scss */
 .add-task-inner .name, .add-task-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3309,11 +3309,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-task-inner .name:focus, .add-task-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 144, ../sass/include/_model.scss */
+/* line 133, ../sass/include/_model.scss */
 .add-task-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3322,25 +3322,25 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 148, ../sass/include/_model.scss */
+/* line 137, ../sass/include/_model.scss */
 .add-task-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 153, ../sass/include/_model.scss */
+/* line 142, ../sass/include/_model.scss */
 .add-task-inner .check {
   display: none;
 }
-/* line 155, ../sass/include/_model.scss */
+/* line 144, ../sass/include/_model.scss */
 .add-task-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
-/* line 161, ../sass/include/_model.scss */
+/* line 150, ../sass/include/_model.scss */
 .add-task-inner #file {
   display: none;
 }
-/* line 164, ../sass/include/_model.scss */
+/* line 153, ../sass/include/_model.scss */
 .add-task-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3358,11 +3358,11 @@ td.publish {
   width: 100%;
   height: 60px;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .add-task-inner textarea:focus {
   border-color: #a6a6a6;
 }
-/* line 170, ../sass/include/_model.scss */
+/* line 159, ../sass/include/_model.scss */
 .add-task-inner .file {
   display: inline-block;
   background-color: #8cc1f8;
@@ -3372,11 +3372,11 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 176, ../sass/include/_model.scss */
+/* line 165, ../sass/include/_model.scss */
 .add-task-inner .file:hover {
   background-color: #a4cef9;
 }
-/* line 180, ../sass/include/_model.scss */
+/* line 169, ../sass/include/_model.scss */
 .add-task-inner .file-label {
   margin-bottom: 10px;
   color: #fff;
@@ -3386,18 +3386,18 @@ td.publish {
   border-radius: 4px;
   margin-right: 8px;
 }
-/* line 188, ../sass/include/_model.scss */
+/* line 177, ../sass/include/_model.scss */
 .add-task-inner .file-label .close-label {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
 }
 
-/* line 195, ../sass/include/_model.scss */
+/* line 184, ../sass/include/_model.scss */
 .create-task-list-inner {
   padding: 20px;
 }
-/* line 197, ../sass/include/_model.scss */
+/* line 186, ../sass/include/_model.scss */
 .create-task-list-inner .name, .create-task-list-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3413,11 +3413,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .create-task-list-inner .name:focus, .create-task-list-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 201, ../sass/include/_model.scss */
+/* line 190, ../sass/include/_model.scss */
 .create-task-list-inner .date {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3433,11 +3433,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 30%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .create-task-list-inner .date:focus {
   border-color: #a6a6a6;
 }
-/* line 205, ../sass/include/_model.scss */
+/* line 194, ../sass/include/_model.scss */
 .create-task-list-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3446,26 +3446,26 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 209, ../sass/include/_model.scss */
+/* line 198, ../sass/include/_model.scss */
 .create-task-list-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 214, ../sass/include/_model.scss */
+/* line 203, ../sass/include/_model.scss */
 .create-task-list-inner .check {
   display: none;
 }
-/* line 216, ../sass/include/_model.scss */
+/* line 205, ../sass/include/_model.scss */
 .create-task-list-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
 
-/* line 223, ../sass/include/_model.scss */
+/* line 212, ../sass/include/_model.scss */
 .edit-profile-inner {
   padding: 20px;
 }
-/* line 225, ../sass/include/_model.scss */
+/* line 214, ../sass/include/_model.scss */
 .edit-profile-inner h4 {
   padding: 10px;
   background: #6FA9DA;
@@ -3474,11 +3474,11 @@ td.publish {
   width: 50%;
   margin: 10px auto 0 auto;
 }
-/* line 233, ../sass/include/_model.scss */
+/* line 222, ../sass/include/_model.scss */
 .edit-profile-inner table {
   width: 100%;
 }
-/* line 235, ../sass/include/_model.scss */
+/* line 224, ../sass/include/_model.scss */
 .edit-profile-inner table input, .edit-profile-inner table select {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3495,38 +3495,38 @@ td.publish {
   padding: 4px 8px;
   height: 30px;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .edit-profile-inner table input:focus, .edit-profile-inner table select:focus {
   border-color: #a6a6a6;
 }
-/* line 240, ../sass/include/_model.scss */
+/* line 229, ../sass/include/_model.scss */
 .edit-profile-inner table label {
   font-size: 16px;
 }
-/* line 244, ../sass/include/_model.scss */
+/* line 233, ../sass/include/_model.scss */
 .edit-profile-inner table tr td {
   padding: 4px 5px;
 }
-/* line 246, ../sass/include/_model.scss */
+/* line 235, ../sass/include/_model.scss */
 .edit-profile-inner table tr td:first-child {
   text-align: right;
   width: 33%;
 }
-/* line 249, ../sass/include/_model.scss */
+/* line 238, ../sass/include/_model.scss */
 .edit-profile-inner table tr td:first-child:after {
   content: ': ';
 }
-/* line 253, ../sass/include/_model.scss */
+/* line 242, ../sass/include/_model.scss */
 .edit-profile-inner table tr td:last-child {
   text-align: left;
   width: 50%;
 }
 
-/* line 261, ../sass/include/_model.scss */
+/* line 250, ../sass/include/_model.scss */
 .edit-task-inner {
   padding: 20px;
 }
-/* line 263, ../sass/include/_model.scss */
+/* line 252, ../sass/include/_model.scss */
 .edit-task-inner .name, .edit-task-inner .content {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3542,11 +3542,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .edit-task-inner .name:focus, .edit-task-inner .content:focus {
   border-color: #a6a6a6;
 }
-/* line 267, ../sass/include/_model.scss */
+/* line 256, ../sass/include/_model.scss */
 .edit-task-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3555,25 +3555,25 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 271, ../sass/include/_model.scss */
+/* line 260, ../sass/include/_model.scss */
 .edit-task-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 276, ../sass/include/_model.scss */
+/* line 265, ../sass/include/_model.scss */
 .edit-task-inner .check {
   display: none;
 }
-/* line 278, ../sass/include/_model.scss */
+/* line 267, ../sass/include/_model.scss */
 .edit-task-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
-/* line 284, ../sass/include/_model.scss */
+/* line 273, ../sass/include/_model.scss */
 .edit-task-inner #file {
   display: none;
 }
-/* line 287, ../sass/include/_model.scss */
+/* line 276, ../sass/include/_model.scss */
 .edit-task-inner textarea {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3591,11 +3591,11 @@ td.publish {
   width: 100%;
   height: 60px;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .edit-task-inner textarea:focus {
   border-color: #a6a6a6;
 }
-/* line 293, ../sass/include/_model.scss */
+/* line 282, ../sass/include/_model.scss */
 .edit-task-inner .file {
   display: inline-block;
   background-color: #8cc1f8;
@@ -3605,11 +3605,11 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 299, ../sass/include/_model.scss */
+/* line 288, ../sass/include/_model.scss */
 .edit-task-inner .file:hover {
   background-color: #a4cef9;
 }
-/* line 303, ../sass/include/_model.scss */
+/* line 292, ../sass/include/_model.scss */
 .edit-task-inner .file-label, .edit-task-inner .exist-file-label {
   margin-bottom: 10px;
   color: #fff;
@@ -3619,38 +3619,38 @@ td.publish {
   border-radius: 4px;
   margin-right: 8px;
 }
-/* line 311, ../sass/include/_model.scss */
+/* line 300, ../sass/include/_model.scss */
 .edit-task-inner .file-label .down-file, .edit-task-inner .exist-file-label .down-file {
   color: #fff;
 }
-/* line 314, ../sass/include/_model.scss */
+/* line 303, ../sass/include/_model.scss */
 .edit-task-inner .file-label .close-label, .edit-task-inner .file-label .del-file, .edit-task-inner .exist-file-label .close-label, .edit-task-inner .exist-file-label .del-file {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
 }
-/* line 320, ../sass/include/_model.scss */
+/* line 309, ../sass/include/_model.scss */
 .edit-task-inner .exist-file-label {
   margin-bottom: 0;
 }
 
-/* line 324, ../sass/include/_model.scss */
+/* line 313, ../sass/include/_model.scss */
 .manage-folder-inner {
   padding: 20px;
 }
-/* line 328, ../sass/include/_model.scss */
+/* line 317, ../sass/include/_model.scss */
 .manage-folder-inner .folder-block .folder-name {
   float: left;
   padding: 12px 0;
   color: #0061bc;
 }
-/* line 333, ../sass/include/_model.scss */
+/* line 322, ../sass/include/_model.scss */
 .manage-folder-inner .folder-block .folder-size {
   float: left;
   padding: 12px 0;
   color: #aaa;
 }
-/* line 338, ../sass/include/_model.scss */
+/* line 327, ../sass/include/_model.scss */
 .manage-folder-inner .folder-block .folder-remove {
   cursor: pointer;
   outline-width: 0;
@@ -3669,7 +3669,7 @@ td.publish {
 .manage-folder-inner .folder-block .folder-remove:hover {
   background-color: #e85b4e;
 }
-/* line 346, ../sass/include/_model.scss */
+/* line 335, ../sass/include/_model.scss */
 .manage-folder-inner .add-folder-block input[type=text].add-folder {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3690,11 +3690,11 @@ td.publish {
   width: 662px;
   margin: 5px 0;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .manage-folder-inner .add-folder-block input[type=text].add-folder:focus {
   border-color: #a6a6a6;
 }
-/* line 353, ../sass/include/_model.scss */
+/* line 342, ../sass/include/_model.scss */
 .manage-folder-inner .add-folder-block .folder-create {
   cursor: pointer;
   outline-width: 0;
@@ -3718,15 +3718,15 @@ td.publish {
   background-color: #37bb62;
 }
 
-/* line 362, ../sass/include/_model.scss */
+/* line 351, ../sass/include/_model.scss */
 .modify-note-inner {
   padding: 20px;
 }
-/* line 364, ../sass/include/_model.scss */
+/* line 353, ../sass/include/_model.scss */
 .modify-note-inner h3 {
   width: 100%;
 }
-/* line 367, ../sass/include/_model.scss */
+/* line 356, ../sass/include/_model.scss */
 .modify-note-inner input[type=text] {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -3742,11 +3742,11 @@ td.publish {
   transition: border-color 0.3s;
   width: 100%;
 }
-/* line 8, ../sass/include/_model.scss */
+/* line 72, ../sass/include/_mixins.scss */
 .modify-note-inner input[type=text]:focus {
   border-color: #a6a6a6;
 }
-/* line 371, ../sass/include/_model.scss */
+/* line 360, ../sass/include/_model.scss */
 .modify-note-inner .member {
   padding: 4px 8px;
   margin-right: 8px;
@@ -3755,36 +3755,36 @@ td.publish {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 375, ../sass/include/_model.scss */
+/* line 364, ../sass/include/_model.scss */
 .modify-note-inner .member:hover {
   background-color: #f3f4f5;
 }
-/* line 380, ../sass/include/_model.scss */
+/* line 369, ../sass/include/_model.scss */
 .modify-note-inner .check {
   display: none;
 }
-/* line 382, ../sass/include/_model.scss */
+/* line 371, ../sass/include/_model.scss */
 .modify-note-inner .check:checked + .member {
   background-color: #8cc1f8;
   border-color: #8cc1f8;
   color: #fff;
 }
 
-/* line 389, ../sass/include/_model.scss */
+/* line 378, ../sass/include/_model.scss */
 .move-file-inner {
   padding: 20px;
 }
-/* line 391, ../sass/include/_model.scss */
+/* line 380, ../sass/include/_model.scss */
 .move-file-inner input[type=radio] {
   display: none;
 }
-/* line 393, ../sass/include/_model.scss */
+/* line 382, ../sass/include/_model.scss */
 .move-file-inner input[type=radio]:checked + .folder-name {
   background-color: #428bca;
   color: #fff;
   border: 1px solid #428bca;
 }
-/* line 399, ../sass/include/_model.scss */
+/* line 388, ../sass/include/_model.scss */
 .move-file-inner .folder-name {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -3792,47 +3792,47 @@ td.publish {
   padding: 5px 10px;
   border: 1px solid #ccc;
 }
-/* line 403, ../sass/include/_model.scss */
+/* line 392, ../sass/include/_model.scss */
 .move-file-inner .folder-name:hover {
   background-color: #f1f2f3;
 }
 
-/* line 408, ../sass/include/_model.scss */
+/* line 397, ../sass/include/_model.scss */
 .remove-people-inner {
   padding: 10px 20px;
 }
-/* line 410, ../sass/include/_model.scss */
+/* line 399, ../sass/include/_model.scss */
 .remove-people-inner .name-block {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-/* line 414, ../sass/include/_model.scss */
+/* line 403, ../sass/include/_model.scss */
 .remove-people-inner .name-block input,
 .remove-people-inner .name-block label {
   order: 2;
 }
-/* line 418, ../sass/include/_model.scss */
+/* line 407, ../sass/include/_model.scss */
 .remove-people-inner .name-block input[type="checkbox"]:checked,
 .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0 !important;
 }
-/* line 422, ../sass/include/_model.scss */
+/* line 411, ../sass/include/_model.scss */
 .remove-people-inner .name-block hr {
   display: none;
   order: 1;
   width: 100%;
   border: 1px solid #ccc;
 }
-/* line 428, ../sass/include/_model.scss */
+/* line 417, ../sass/include/_model.scss */
 .remove-people-inner .name-block input[type="checkbox"]:checked ~ hr {
   display: block;
 }
-/* line 431, ../sass/include/_model.scss */
+/* line 420, ../sass/include/_model.scss */
 .remove-people-inner .name-block input[type="checkbox"] {
   display: none;
 }
-/* line 434, ../sass/include/_model.scss */
+/* line 423, ../sass/include/_model.scss */
 .remove-people-inner .name-block label {
   min-width: 120px;
   border: 1px solid #ccc;
@@ -3846,43 +3846,43 @@ td.publish {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* line 444, ../sass/include/_model.scss */
+/* line 433, ../sass/include/_model.scss */
 .remove-people-inner .name-block label:hover {
   border-color: #adadad;
   background: #ebebeb;
   cursor: pointer;
 }
-/* line 450, ../sass/include/_model.scss */
+/* line 439, ../sass/include/_model.scss */
 .remove-people-inner .name-block input[type="checkbox"]:checked + label {
   order: 0;
   background-color: #428bca;
   border-color: #357ebd;
   color: #fff;
 }
-/* line 455, ../sass/include/_model.scss */
+/* line 444, ../sass/include/_model.scss */
 .remove-people-inner .name-block input[type="checkbox"]:checked + label:hover {
   background-color: #3071a9;
   border-color: #285e8e;
 }
 
-/* line 462, ../sass/include/_model.scss */
+/* line 451, ../sass/include/_model.scss */
 .switch-project-inner {
   padding-top: 10px;
 }
-/* line 464, ../sass/include/_model.scss */
+/* line 453, ../sass/include/_model.scss */
 .switch-project-inner .radio-box {
   padding: 10px 20px;
 }
-/* line 466, ../sass/include/_model.scss */
+/* line 455, ../sass/include/_model.scss */
 .switch-project-inner .radio-box label {
   margin-left: 8px;
 }
 
-/* line 471, ../sass/include/_model.scss */
+/* line 460, ../sass/include/_model.scss */
 .view-task-inner {
   padding: 20px;
 }
-/* line 473, ../sass/include/_model.scss */
+/* line 462, ../sass/include/_model.scss */
 .view-task-inner .description {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -3890,13 +3890,13 @@ td.publish {
   padding: 12px;
   background-color: #eee;
 }
-/* line 478, ../sass/include/_model.scss */
+/* line 467, ../sass/include/_model.scss */
 .view-task-inner hr {
   border-width: 0;
   padding: 5px 0;
   border-bottom: 1px solid #f1f2f3;
 }
-/* line 483, ../sass/include/_model.scss */
+/* line 472, ../sass/include/_model.scss */
 .view-task-inner .name {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -3906,17 +3906,18 @@ td.publish {
   color: white;
   margin-right: 5px;
 }
-/* line 490, ../sass/include/_model.scss */
+/* line 479, ../sass/include/_model.scss */
 .view-task-inner .down-file {
   cursor: pointer;
   margin-right: 16px;
   color: #0061bc;
 }
 
-/* line 496, ../sass/include/_model.scss */
+/* line 485, ../sass/include/_model.scss */
 .del-comment-list-inner,
 .remove-project-inner,
 .delete-file-inner,
+.delete-note-inner,
 .remove-task-list-inner,
 .remove-task-inner {
   padding: 10px 20px;
@@ -3947,11 +3948,16 @@ table.layout td.publish {
 }
 
 /* line 5, ../sass/note.scss */
+.right .hr {
+  margin-bottom: 0px;
+}
+
+/* line 8, ../sass/note.scss */
 .note-header {
   position: relative;
 }
 
-/* line 8, ../sass/note.scss */
+/* line 11, ../sass/note.scss */
 .create-note {
   cursor: pointer;
   outline-width: 0;
@@ -3969,19 +3975,15 @@ table.layout td.publish {
   background-color: #37bb62;
 }
 
-/* line 11, ../sass/note.scss */
+/* line 14, ../sass/note.scss */
 .note-list {
-  margin: 20px;
+  margin: 0 20px 20px 20px;
 }
 
-/* line 14, ../sass/note.scss */
+/* line 17, ../sass/note.scss */
 .note-block {
   padding: 20px 0;
   border-bottom: 1px solid #ccc;
-}
-/* line 18, ../sass/note.scss */
-.note-block:first-child {
-  padding-top: 0;
 }
 
 /* line 22, ../sass/note.scss */
@@ -4013,73 +4015,95 @@ table.layout td.publish {
 }
 
 /* line 42, ../sass/note.scss */
-.note-title {
-  font-size: 24px;
+.note-title-block {
   cursor: pointer;
 }
 
 /* line 46, ../sass/note.scss */
+.note-tag {
+  float: left;
+  -moz-border-radius: 11px;
+  -webkit-border-radius: 11px;
+  border-radius: 11px;
+  background-color: #afa4df;
+  padding: 2px 10px;
+  color: #fff;
+  margin: 5px 5px 5px 0;
+  display: inline-block;
+}
+
+/* line 55, ../sass/note.scss */
+.note-title {
+  float: left;
+  font-size: 24px;
+}
+
+/* line 59, ../sass/note.scss */
 .note-time {
   margin-left: 10px;
 }
 
-/* line 49, ../sass/note.scss */
+/* line 62, ../sass/note.scss */
 .operation-block {
   border-left: 1px solid #ccc;
   padding: 0 20px;
 }
-/* line 52, ../sass/note.scss */
+/* line 65, ../sass/note.scss */
 .operation-block a {
   display: block;
   color: #666;
   cursor: pointer;
   margin: 20px 0;
 }
+/* line 70, ../sass/note.scss */
+.operation-block a:hover {
+  color: #888;
+}
 
-/* line 60, ../sass/note.scss */
+/* line 76, ../sass/note.scss */
 .tag-list .title-block {
   padding: 20px 20px 0 20px;
 }
-/* line 63, ../sass/note.scss */
+/* line 79, ../sass/note.scss */
 .tag-list .line {
   padding: 0 20px;
   cursor: pointer;
 }
-/* line 67, ../sass/note.scss */
+/* line 83, ../sass/note.scss */
 .tag-list .line:hover {
   background-color: #ddd;
 }
-/* line 70, ../sass/note.scss */
+/* line 86, ../sass/note.scss */
 .tag-list .line.on {
   cursor: auto;
   background-color: #8190a3;
 }
-/* line 73, ../sass/note.scss */
+/* line 89, ../sass/note.scss */
 .tag-list .line.on .tag {
   color: #fff;
 }
-/* line 76, ../sass/note.scss */
+/* line 92, ../sass/note.scss */
 .tag-list .line.on .span {
   background-color: #fff;
   color: #000;
 }
-/* line 82, ../sass/note.scss */
-.tag-list .fa-file {
+/* line 98, ../sass/note.scss */
+.tag-list .fa {
   color: #888;
 }
-/* line 85, ../sass/note.scss */
+/* line 101, ../sass/note.scss */
 .tag-list h4 {
   display: inline-block;
   margin: 10px 5px;
 }
-/* line 89, ../sass/note.scss */
+/* line 105, ../sass/note.scss */
 .tag-list .tag {
   float: left;
   display: block;
   padding: 5px 0;
   margin-left: 20px;
 }
-/* line 95, ../sass/note.scss */
+/* line 111, ../sass/note.scss */
 .tag-list span.span {
   float: right;
   margin: 5px 0;

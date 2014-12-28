@@ -2,6 +2,9 @@
 @import "include/header";
 @import "include/model";
 @import "include/layout";
+.right .hr {
+  margin-bottom: 0px;
+}
 .note-header {
   position: relative;
 }
@@ -9,15 +12,12 @@
   @include btn($btngreen);
 }
 .note-list {
-  margin: 20px;
+  margin: 0 20px 20px 20px;
 }
 .note-block {
   @extend %clearfix;
   padding: 20px 0;
   border-bottom: 1px solid #ccc;
-  &:first-child {
-    padding-top: 0;
-  }
 }
 .icon-block {
   float: left;
@@ -39,9 +39,22 @@
 .note-description, .note-other {
   color: #999;
 }
-.note-title {
-  font-size: 24px;
+.note-title-block {
+  @extend %clearfix;
   cursor: pointer;
+}
+.note-tag {
+  float: left;
+  @include border-radius(11px);
+  background-color: $lightpurple;
+  padding: 2px 10px;
+  color: $white;
+  margin: 5px 5px 5px 0;
+  display: inline-block;
+}
+.note-title {
+  float: left;
+  font-size: 24px;
 }
 .note-time {
   margin-left: 10px;
@@ -54,6 +67,9 @@
     color: #666;
     cursor: pointer;
     margin: 20px 0;
+    &:hover {
+      color: #888;
+    }
   }
 }
 .tag-list {
@@ -79,7 +95,7 @@
       }
     }
   }
-  .fa-file {
+  .fa {
     color: #888;
   }
   h4 {

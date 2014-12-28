@@ -1,0 +1,66 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/note_edit.css')
+
+block content
+  - var action = data.nid ? '编辑' : '创建'
+  include includes/header
+  .note-edit-inner
+    .title-block
+      h1.title #{action}笔记
+      button.back(data-action='back') 取消#{action}
+    .warpper
+      .input-block
+        span.info 标题
+        input.title(placeholder='输入标题', value=data.title)
+      .input-block
+        span.info 描述
+        input.description(placeholder='输入一段简单的介绍', value=data.description)
+      .editor-container
+        .editor-toolbar(data-role='editor-toolbar', data-target='#editor')
+          .btn-group
+            span.btn(data-action='increaseFontSize')
+              i.fa.fa-plus
+            span.btn(data-action='decreaseFontSize')
+              i.fa.fa-minus
+            span.btn(data-edit='bold')
+              i.fa.fa-bold
+            span.btn(data-edit='italic')
+              i.fa.fa-italic
+            span.btn(data-edit='strikethrough')
+              i.fa.fa-strikethrough
+            span.btn(data-edit='underline')
+              i.fa.fa-underline
+          .btn-group
+            span.btn(data-edit='insertunorderedlist')
+              i.fa.fa-list-ul
+            span.btn(data-edit='insertorderedlist')
+              i.fa.fa-list-ol
+            span.btn(data-edit='indent')
+              i.fa.fa-indent
+            span.btn(data-edit='outdent')
+              i.fa.fa-dedent
+          .btn-group
+            span.btn.btn-info(data-edit='justifyleft')
+              i.fa.fa-align-left
+            span.btn(data-edit='justifycenter')
+              i.fa.fa-align-center
+            span.btn(data-edit='justifyright')
+              i.fa.fa-align-right
+            span.btn(data-edit='justifyfull')
+              i.fa.fa-align-justify
+          .btn-group
+            span.btn(data-edit='undo')
+              i.fa.fa-undo
+            span.btn(data-edit='redo')
+              i.fa.fa-repeat
+        .editor(id='editor', data-nid=(data.nid || ''))
+        .operation
+          button.create(data-action='save') 确认#{action}
+          button.clear(data-action='clear') 清空内容
+block scripts
+  script.
+    seajs.use('/javascripts/note.js', function(note) {
+      note.initEdit();
+    });

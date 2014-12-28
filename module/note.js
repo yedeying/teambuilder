@@ -3,6 +3,22 @@ var tools = require('./tools');
 var people = require('./people');
 var publish = require('./publish');
 exports = module.exports;
+function _generateTags(data) {
+  var tags = {};
+  data.notes.forEach(function(note) {
+    tags[note.tag] = tags[note.tag] || {
+      name: note.tag,
+      length: 0
+    };
+    tags[note.tag].length++;
+  });
+  data.tags = [];
+  for(var i in tags) {
+    data.tags.push(tags[i]);
+  }
+  console.log(data.tags);
+  console.log(tags);
+}
 exports.getTags = function(gid, callback) {
   var sql = 'select distinct tag, (select count(*) from note tmp where tmp.tag = note.tag) as length from note where gid = ' + gid;
   var tags = [];
@@ -50,28 +66,16 @@ exports.getNotes = function(gid, uid, callback) {
 exports.generatePage = function(sess, res) {
   var gid = sess.gid;
   var data = {};
-  var actionCnt = 0;
-  var actionLen = 2;
   data.groupName = sess.groupName;
-  exports.getTags(gid, function(err, tags) {
-    // if(err) throw err;
-    data.tags = tags;
-    actionCnt++;
-    if(actionCnt === actionLen) {
-      send();
-    }
-  });
   people.getUid(sess, function(uid) {
     exports.getNotes(gid, uid, function(err, notes) {
-      // if(err) throw err;
+      if(err) throw err;
       data.notes = notes;
-      actionCnt++;
-      if(actionCnt === actionLen) {
-        send();
-      }
+      _generateTags(data);
+      _send();
     });
   });
-  function send() {
+  function _send() {
     publish.addPublishBar(data, sess, function() {
       res.render('note', {
         page: 'note',
@@ -101,19 +105,64 @@ exports.getDescription = function(data, sess, res) {
     data.description = row['description'];
     data.tag = row['tag'];
     data.visible = tools.decodeNumberArray(row['visible']);
-    exports.getTags(gid, function(err, tags) {
-      if(err) throw err;
-      data.tags = tags;
-      people.getMemberList(sess, data.visible, function(memberList) {
-        data.memberList = memberList;
-        res.render('models/modify_note', {data: data, sha1: tools.getSha1, title: '修改笔记详情'}, function(err, html) {
-          if(err) {
-            res.send({code: 1, info: 'render error'});
-            throw err;
-          }
-          res.send({code: 0, html: html});
-        });
+    if(err) throw err;
+    people.getMemberList(sess, data.visible, function(memberList) {
+      data.memberList = memberList;
+      res.render('models/modify_note', {data: data, sha1: tools.getSha1, title: '修改笔记详情'}, function(err, html) {
+        if(err) {
+          res.send({code: 1, info: 'render error'});
+          throw err;
+        }
+        res.send({code: 0, html: html});
       });
     });
   });
+};
+exports.modifyNote = function(data, sess, res) {
+  var sql = 'update note set title = "' + data.title + '", description = "' + data.description + '", tag = "' + data.tag + '", visible = "' + JSON.stringify(data.visible) + '" where sha1(nid) = "' + data.nid + '"';
+  db.query(sql, function(err) {
+    res.send({code: 0, info: '修改成功'});
+  });
+};
+exports.deleteNote = function(data, sess, res) {
+  var sql = 'delete from note where sha1(nid) = "' + data.nid + '"';
+  db.query(sql, function(err) {
+    if(err) throw err;
+    res.send({code: 0, info: '删除成功'});
+  });
+};
+exports.generateEditPage = function(data, sess, res) {
+  tools.merge(data, {
+    title: '',
+    description: '',
+    tag: '',
+    content: '',
+    visible: []
+  });
+  data.groupName = sess.groupName;
+  if(data.nid) {
+    var sql = 'select title, description, tag, content, visible from note where sha1(nid) = "' + data.nid + '"';
+    db.query(sql, function(err, rows) {
+      if(err) throw err;
+      if(rows.length !== 1) {
+        res.redirect('/404');
+        return;
+      }
+      var row = rows[0];
+      data.title = row['title'],
+      data.description = row['description'];
+      data.tag = row['tag'];
+      data.content = row['content'];
+      data.visible = tools.decodeNumberArray(row['visible']);
+      _continue();
+    });
+  } else {
+    _continue();
+  }
+  function _continue() {
+    people.getMemberList(sess, data.visible, function(memberList) {
+      data.memberList = memberList;
+      res.render('note_edit', {data: data, sha1: tools.getSha1, json: JSON.stringify, title: 'teambilder', page: 'note'});
+    });
+  }
 }

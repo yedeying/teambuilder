@@ -138,5 +138,10 @@ module.exports = {
       return bl;
     }
     throw new Error('tools.testId invalid params');
+  },
+  merge: function(objA, objB) {
+    for(var i in objB) {
+      objA[i] = objB[i];
+    }
   }
 };

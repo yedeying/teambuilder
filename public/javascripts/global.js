@@ -111,54 +111,36 @@ define(function(require, exports, module) {
   $body.on('click', '.model .confirm', function(e) {
     var $model = $('.model');
     var type = $model.data('type');
-    if(type === 'add_project') {
-      index.addProject();
-    } else if(type === 'edit_project') {
-      project.editProject();
-    } else if(type === 'remove_project') {
-      project.removeProject();
-    } else if(type === 'add_people') {
-      people.addPeople();
-    } else if(type === 'remove_people') {
-      people.removePeople();
-    } else if(type === 'exit_group') {
-      people.exitGroup();
-    } else if(type === 'remove_group') {
-      people.removeGroup();
-    } else if(type === 'switch_project') {
-      switchProject();
+    var actionList = {
+      'add_project': index.addProject,
+      'edit_project': project.editProject,
+      'remove_project': project.removeProject,
+      'add_people': people.addPeople,
+      'remove_people': people.removePeople,
+      'switch_project': switchProject,
+      'exit_group': people.exitGroup,
+      'remove_group': people.removeGroup,
+      'edit_profile': people.editProfile,
+      'create_task_list': task.createTaskList,
+      'edit_task_list': task.editTaskList,
+      'add_task': task.addTask,
+      'remove_task_list': task.removeTaskList,
+      'remove_task': task.removeTask,
+      'edit_task': task.editTask,
+      'add_comment_list': comment.addCommentList,
+      'edit_comment_list': commentDetail.editCommentList,
+      'del_comment_list': commentDetail.delCommentList,
+      'add_file': file.addFile,
+      'delete_file': file.deleteFile,
+      'move_file': file.moveFile,
+      'manage_folder': file.manageFolder,
+      'modify_note': note.modifyNote,
+      'delete_note': note.deleteNote
+    };
+    if(actionList.hasOwnProperty(type)) {
+      actionList[type]();
     } else if(type === 'switch_project_beta') {
       switchProject(true);
-    } else if(type === 'edit_profile') {
-      people.editProfile();
-    } else if(type === 'create_task_list') {
-      task.createTaskList();
-    } else if(type === 'edit_task_list') {
-      task.editTaskList();
-    } else if(type === 'add_task') {
-      task.addTask();
-    } else if(type === 'remove_task_list') {
-      task.removeTaskList();
-    } else if(type === 'remove_task') {
-      task.removeTask();
-    } else if(type === 'edit_task') {
-      task.editTask();
-    } else if(type === 'add_comment_list') {
-      comment.addCommentList();
-    } else if(type === 'edit_comment_list') {
-      commentDetail.editCommentList();
-    } else if(type === 'del_comment_list') {
-      commentDetail.delCommentList();
-    } else if(type === 'add_file') {
-      file.addFile();
-    } else if(type === 'delete_file') {
-      file.deleteFile();
-    } else if(type === 'move_file') {
-      file.moveFile();
-    } else if(type === 'manage_folder') {
-      file.manageFolder();
-    } else if(type === 'modify_note') {
-      note.modifyNote();
     }
   });
   /*

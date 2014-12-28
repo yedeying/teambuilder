@@ -13,7 +13,9 @@
     .note-block(data-tag=note.tag, data-nid=func.sha1(note.nid.toString()))
       .icon-block
       .detail-block
-        .note-title= note.title
+        .note-title-block
+          span.note-tag= note.tag
+          span.note-title= note.title
         .note-description= note.description
         .note-other
           span.note-author By&nbsp;#{note.name}
