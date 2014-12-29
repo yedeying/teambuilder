@@ -7,7 +7,8 @@ css_dir = "public/stylesheets"
 sass_dir = "public/sass"
 images_dir = "public/images"
 javascripts_dir = "public/javascripts"
-
+output_style = :compressed
+line_comments = false
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed
 
@@ -15,7 +16,6 @@ javascripts_dir = "public/javascripts"
 # relative_assets = true
 
 # To disable debugging comments that display the original location of your selectors. Uncomment:
-# line_comments = false
 
 
 # If you prefer the indented syntax, you might want to regenerate this
