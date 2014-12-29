@@ -1,4 +1,57 @@
 extends layout
 
+block styles
+  link(rel='stylesheet', href='/stylesheets/calendar.css')
+
 block content
   include includes/header
+  .calendar-inner
+    .calendar-header
+      .title-wrapper
+        h1.title 我的日程
+        button.add-schedule
+          i.fa.fa-plus-circle
+          span &nbsp;添加日程
+    .calendar-container
+      .title-block
+        span.switch-group
+          span.prev(data-action='prev')
+            i.fa.fa-angle-left
+          span.today(data-action='today') Today
+          span.next(data-action='next')
+            i.fa.fa-angle-right
+        span.dropdown(data-action='dropdown', data-dropdown='.month-selector')
+          i.fa.fa-caret-down
+        .month-selector
+          span.triangle-black
+          span.triangle-white
+          .slide-left(data-action='prevYear')
+            i.fa.fa-caret-left
+          .month-block
+            - for(var i = 0; i < 2; i++)
+              .month-line(data-offset=i)
+                span.year
+                - for(var j = 0; j < 12; j++)
+                  span.month(data-action='selectMonth', data-month=j)= j + 1
+          .slide-right(data-action='nextYear')
+            i.fa.fa-caret-right
+        .cur-month &nbsp;
+      - var tableHead = ['一', '二', '三', '四', '五', '六', '日'].map(function(str) {return '星期' + str;})
+      - var weekLength = 6
+      - var dayLength = 7
+      table.calendar-table
+        tr.row-head
+          each head in tableHead
+            th #{head}
+        - for(var i = 0; i < weekLength; i++)
+          tr.row
+            - for(var j = 0; j < dayLength; j++)
+              td(data-row='#{i + 1}', data-col='#{j + 1}')
+                .content
+                .num
+
+block scripts
+  script.
+    seajs.use('/javascripts/calendar.js', function(calendar) {
+      calendar.init();
+    });

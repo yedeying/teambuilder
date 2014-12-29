@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
     res.redirect('/login');
   }
 });
-['index', 'calendar', 'people'].forEach(function(page) {
+['index', 'people'].forEach(function(page) {
   router.get('/' + page, function(req, res) {
     var sess = req.session;
     moduleArray[page].generatePage(sess, function(data) {
@@ -64,6 +64,10 @@ router.get('/note/edit/:nid', function(req, res) {
     return;
   }
   note.generateEditPage(data, sess, res);
+});
+router.get('/calendar', function(req, res) {
+  var sess = req.session;
+  res.render('calendar', {page: 'calendar', title: 'teambuilder', groupName: sess.groupName});
 });
 router.get('/comment', function(req, res) {
   var sess = req.session;

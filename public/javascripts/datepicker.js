@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
   "use strict";
-  require('jquery');
+  var $ = require('jquery');
   module.exports = {
     width: 226,
     height: 226,

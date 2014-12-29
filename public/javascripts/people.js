@@ -1,6 +1,6 @@
 define(function(require, exports, module) {
   "use strict";
-  require('jquery');
+  var $ = require('jquery');
   var tools = require('./tools');
   var $body = $('body');
   $body.on('click', '.add-people', function(e) {

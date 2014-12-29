@@ -81,10 +81,30 @@ define(function(require, exports, module) {
         time: date
       }
     },
+    cloneDate: function(date) {
+      return new Date(date.getTime());
+    },
+    getMonthLength: function(date) {
+      var tmpDate = this.cloneDate(date);
+      tmpDate.setMonth(tmpDate.getMonth() + 1);
+      tmpDate.setDate(0);
+      return tmpDate.getDate();
+    },
+    toDateFormat: function(date) {
+      date.setHours(0);
+      date.setMinutes(0);
+      date.setSeconds(0);
+      date.setMilliseconds(0);
+    },
+    merge: function(objA, objB) {
+      for(var i in objB) {
+        objA[i] = objB[i];
+      }
+    },
     tid: undefined,
     showing: false,
     showInfo: function(str, time) {
-      require('jquery');
+      var $ = require('jquery');
       var that = this;
       var $body = $('body');
       var $alert = $('.alert-box');
@@ -113,7 +133,7 @@ define(function(require, exports, module) {
       }
     },
     getModel: function(url, type, data, callback, callback2) {
-      require('jquery');
+      var $ = require('jquery');
       var that = this;
       if(!type) {
         type = url;
