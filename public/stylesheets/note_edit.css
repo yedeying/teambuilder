@@ -4039,6 +4039,11 @@ table.layout td.publish {
   border-left: none;
 }
 /* line 70, ../sass/note_edit.scss */
+.editor-container .url {
+  outline: none;
+  padding: 2px;
+}
+/* line 74, ../sass/note_edit.scss */
 .editor-container .btn {
   padding: 6px;
   width: 19px;
@@ -4046,29 +4051,29 @@ table.layout td.publish {
   text-align: center;
   cursor: pointer;
 }
-/* line 76, ../sass/note_edit.scss */
+/* line 80, ../sass/note_edit.scss */
 .editor-container .btn:hover {
   background-color: #e5e5e5;
 }
-/* line 79, ../sass/note_edit.scss */
+/* line 83, ../sass/note_edit.scss */
 .editor-container .btn.btn-info {
   background-color: #8cc1f8;
   color: #fff;
 }
-/* line 84, ../sass/note_edit.scss */
+/* line 88, ../sass/note_edit.scss */
 .editor-container .editor {
   height: 300px;
   padding: 10px;
   overflow-y: auto;
   outline: none;
 }
-/* line 90, ../sass/note_edit.scss */
+/* line 94, ../sass/note_edit.scss */
 .editor-container .operation {
   border-top: 1px solid #eee;
   padding: 5px;
   text-align: right;
 }
-/* line 94, ../sass/note_edit.scss */
+/* line 98, ../sass/note_edit.scss */
 .editor-container .operation .create {
   cursor: pointer;
   outline-width: 0;
@@ -4087,7 +4092,7 @@ table.layout td.publish {
 .editor-container .operation .create:hover {
   background-color: #37bb62;
 }
-/* line 99, ../sass/note_edit.scss */
+/* line 103, ../sass/note_edit.scss */
 .editor-container .operation .clear {
   cursor: pointer;
   outline-width: 0;

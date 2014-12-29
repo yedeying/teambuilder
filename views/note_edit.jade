@@ -51,6 +51,14 @@ block content
             span.btn(data-edit='justifyfull')
               i.fa.fa-align-justify
           .btn-group
+            input(type='file', id='insertImage', data-edit='insertImage', style='display:none')
+            label.btn(for='insertImage')
+              i.fa.fa-image
+          .btn-group
+            input.url(type='text')
+            span.btn(data-action='insertLink')
+              i.fa.fa-link
+          .btn-group
             span.btn(data-edit='undo')
               i.fa.fa-undo
             span.btn(data-edit='redo')

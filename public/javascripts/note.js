@@ -38,6 +38,15 @@ define(function(require, exports, module) {
     decreaseFontSize: function(e) {
       var fontSize = parseInt(document.queryCommandValue('fontsize'));
       document.execCommand('fontsize', 0, (fontSize - 1).toString());
+    },
+    insertLink: function(e) {
+      var url = $('.url').val();
+      if(url === '') {
+        tools.showInfo('请输入url');
+        $('url').focus();
+        return;
+      }
+      document.execCommand('createlink', 0, url);
     }
   };
   function _initTagNav() {
