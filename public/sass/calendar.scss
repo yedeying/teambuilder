@@ -1,0 +1,188 @@
+@import "include/common";
+@import "include/header";
+@import "include/model";
+@import "include/layout";
+.show-publish-btn {
+  display: none;
+}
+.calendar-header {
+  position: relative;
+  .title-wrapper {
+    padding: 20px 50px;
+  }
+}
+.add-schedule {
+  @include btn($btngreen);
+}
+.calendar-container {
+  padding: 0 50px 50px 50px;
+  .title-block {
+    position: relative;
+    padding: 10px 0 20px 0;
+  }
+  .cur-month {
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+  }
+}
+.switch-group {
+  position: absolute;
+  left: 0;
+  top: 15px;
+  span {
+    display: inline-block;
+    padding: 3px 10px;
+    color: #555;
+    background-color: #e7e7e7;
+    cursor: pointer;
+    &:hover {
+      background-color: #aaa;
+      color: $white;
+    }
+    &:first-child {
+      @include border-radius(3px 0 0 3px);
+    }
+    &:last-child {
+      @include border-radius(0 3px 3px 0);
+    }
+  }
+  .today {
+    border-left: 1px solid $white;
+    border-right: 1px solid $white;
+  }
+}
+.dropdown {
+  @include border-radius(3px);
+  position: absolute;
+  top: 15px;
+  left: 120px;
+  padding: 3px 10px;
+  color: #555;
+  background-color: #e7e7e7;
+  cursor: pointer;
+  &:hover {
+    background-color: #aaa;
+    color: $white;
+  }
+  &.checked {
+    background-color: rgb(102,118,134);
+    color: $white; 
+  }
+}
+.month-selector {
+  @include box-shadow(0 0 5px rgba(0,0,0,.7));
+  @extend %clearfix;
+  display: none;
+  z-index: 100;
+  position: absolute;
+  background-color: $white;
+  padding: 10px;
+  left: 120px;
+  top: 50px;
+}
+.slide-left, .slide-right {
+  @extend %clearfix;
+  @include border-radius(4px);
+  float: left;
+  padding: 10px;
+  margin: 10px 0 10px 0;
+  cursor: pointer;
+  &:hover {
+    color: $linkblue;
+    background-color: #f5f5f5;
+  }
+}
+.slide-left {
+  margin-right: 10px;
+}
+.slide-right {
+  margin-left: 10px;
+}
+.month-block {
+  float: left;
+}
+.month-line {
+  span {
+    @extend %box-sizing;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    color: #666;
+  }
+  .year {
+    margin-right: 20px;
+    font-weight: bold;
+  }
+  .month {
+    @include border-radius(50%);
+    width: 30px;
+    text-align: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #ddd;
+      color: $black;
+    }
+    &.active {
+      background-color: $btnblue;
+      color: $white;
+    }
+  }
+}
+.triangle-black {
+  @include triangle(6px, 8px, "up", #ccc);
+  left: 9px;
+  top: -17px;
+}
+.triangle-white {
+  @include triangle(6px, 8px, "up", #fff); 
+  left: 9px;
+  top: -15px;
+}
+.calendar-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  th {
+    background-color: #f6f6f6;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: normal;
+    &:first-child {
+      border-left: 1px solid #ccc;
+    }
+    &:last-child {
+      border-right: 1px solid #ccc;
+    }
+  }
+  td {
+    @extend %box-sizing;
+    width: 14.2857%;
+    border: 1px solid #ccc;
+    background: #f5f5f5;
+    cursor: auto;
+    position: relative;
+    .content {
+      min-height: 80px;
+    }
+    .num {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      font-size: 12px;
+      color: #888;
+    }
+    &.effect {
+      cursor: pointer;
+      background-color: $white;
+      &.today {
+        background-color: rgb(255,255,204) !important;
+      }
+      &:hover {
+        background-color: #fafafa;
+      }
+    }
+  }
+}

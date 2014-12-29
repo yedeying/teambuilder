@@ -80,8 +80,11 @@ body {
   left: 43px;
   bottom: -2px;
 }
-.right .hr {
+.hr {
   margin: 15px 0;
   border: 0px;
   border-top: 1px solid #ccc;
+}
+.hide {
+  display: none;
 }

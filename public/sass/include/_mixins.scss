@@ -1,22 +1,47 @@
-@mixin box-sizing {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-@mixin transition($type, $time) {
-  -webkit-transition: $type $time;
-  -o-transition: $type $time;
-  transition: $type $time;
-}
-@mixin clearfix {
-  &:before, &:after {
-    display: table;
-    content: " ";
+$prefix-for-webkit: true !default;
+$prefix-for-mozilla: true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera: true !default;
+$prefix-for-spec: true !default;
+@mixin prefixer ($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix == webkit and $prefix-for-webkit == true {
+      -webkit-#{$property}: $value;
+    }
+    @else if $prefix == moz and $prefix-for-mozilla == true {
+      -moz-#{$property}: $value;
+    }
+    @else if $prefix == ms and $prefix-for-microsoft == true {
+      -ms-#{$property}: $value;
+    }
+    @else if $prefix == o and $prefix-for-opera == true {
+      -o-#{$property}: $value;
+    }
+    @else if $prefix == spec and $prefix-for-spec == true {
+      #{$property}: $value;
+    }
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
   }
-  &:after {
-    clear: both;
-  }
-  *zoom: 1;
+}
+@mixin box-shadow($shadow...) {
+  @include prefixer(box-shadow, $shadow, webkit spec);
+}
+%box-sizing {
+  @include prefixer(box-sizing, border-box, webkit moz spec);
+}
+@mixin box-sizing($type:border-box) {
+  @include prefixer(box-sizing, $type, webkit moz spec);
+}
+@mixin transform($property...) {
+  @include prefixer(transform, $property, webkit moz o spec);
+}
+@mixin border-radius($property...) {
+  @include prefixer(border-radius, $property, webkit moz spec);
+}
+@mixin transition($property...) {
+  @include prefixer(transition, $property, webkit moz o spec);
 }
 %clearfix {
   &:before, &:after {
@@ -28,13 +53,19 @@
   }
   *zoom: 1;
 }
-@mixin triangle($width, $height, $direction, $color) {
+@mixin clearfix {
+  @extend %clearfix;
+}
+%triangle {
   width: 0;
   height: 0;
   padding: 0;
   margin: 0;
   display: inline-block;
   position: absolute;
+}
+@mixin triangle($width, $height, $direction, $color) {
+  @extend %triangle;
   border-top: $height solid rgba(0,0,0,0);
   border-right: $width solid rgba(0,0,0,0);
   border-bottom: $height solid rgba(0,0,0,0);
@@ -49,15 +80,18 @@
     border-left: $width solid $color;
   }
 }
-@mixin btn($color) {
+%btn {
   cursor: pointer;
   outline-width: 0;
   border-width: 0;
   padding: 9px;
   margin: 5px;
   color: $white;
-  background-color: $color;
   @include border-radius(4px);
+}
+@mixin btn($color) {
+  @extend %btn;
+  background-color: $color;
   &:hover {
     background-color: darken($color, 5%);
   }
