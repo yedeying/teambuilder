@@ -25,6 +25,7 @@
     @include border-radius(8px);
     padding: 20px;
     background-color: #f5f5f5;
+    margin-bottom: 50px;
   }
   %text {
     text-indent: 36px;
@@ -43,15 +44,12 @@
       background-color: $lightpurple;
       color: $white;
       padding: 1px 5px;
-      margin: 9px 0;
+      margin: 7px 0;
     }
   }
-  input.title {
+  .input-block input[type="text"] {
     @extend %text;
     border-bottom: 1px dashed #ccc;
-  }
-  input.description {
-    @extend %text;
   }
 }
 .editor-container {
@@ -92,16 +90,47 @@
     outline: none;
   }
   .operation {
+    @extend %clearfix;
     border-top: 1px solid #eee;
     padding: 5px;
-    text-align: right;
+    .visible-block {
+      display: inline-block;
+      margin: 9px 0;
+      .info {
+        @include border-radius(4px);
+        background-color: $lightpurple;
+        color: $white;
+        padding: 1px 5px;
+        margin-right: 5px;
+      }
+      .member {
+        padding: 2px 8px;
+        margin-left: 4px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        &:hover {
+          background-color: #f3f4f5;
+        }
+        @include border-radius(4px);
+      }
+      .check {
+        display: none;
+        &:checked + .member {
+          background-color: $lightblue;
+          border-color: $lightblue;
+          color: $white;
+        }
+      }
+    }
     .create {
       @include btn($btngreen);
+      float: right;
       padding: 7px 10px;
       display: inline-block;
     }
     .clear {
       @include btn($btnred);
+      float: right;
       padding: 7px 10px;
       display: inline-block;
     }

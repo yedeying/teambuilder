@@ -165,4 +165,16 @@ exports.generateEditPage = function(data, sess, res) {
       res.render('note_edit', {data: data, sha1: tools.getSha1, json: JSON.stringify, title: 'teambilder', page: 'note'});
     });
   }
-}
+};
+exports.saveNote = function(data, sess, res) {
+  var bl = tools.testId(data.nid);
+  people.decodeUidArray(data.participant, function(err, visible) {
+    if(err) throw err;
+    
+  });
+  if(bl) {
+    var sql = 'update note set title = "' + data.title + '", description = "' + data.description + '", tag = "' + data.tag + '", content = "' + data.html + '" where sha1(nid) = "' + data.nid + '"';
+  } else {
+    var sql = 'insert into note (gid, uid, )'
+  }
+};

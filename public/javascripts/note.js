@@ -25,8 +25,32 @@ define(function(require, exports, module) {
       history.go(-1);
     },
     save: function(e) {
+      var title = $('.title-block .input').val();
+      var description = $('.title-block .description').val();
+      var tag = (".title-block .tag").val();
       var html = $('#editor').html();
-      console.log(html);
+      var nid = $('#editor').attr('data-nid');
+      if(title === '') {
+        tools.showInfo('标题不能为空');
+        return;
+      }
+      var $check = $('.visible-block .check:checked');
+      var participant = [];
+      $check.each(function(index) {
+        participant.push(this.getAttribute('data-uid'));
+      });
+      if(participant.length === 0) {
+        tools.showInfo('请至少选择一个以上的参与者');
+        return;
+      }
+      $.post('/note/save_note', {html: html, title: title, description: description, tag: tag, participant: JSON.stringify(participant), nid: nid}, function(data) {
+        if(typeof data === 'number') {
+          tools.showInfo(data.info);
+          if(data.code === 0) {
+            location.href = '/note/show/' + data.nid;
+          }
+        }
+      });
     },
     clear: function(e) {
       $('#editor').html('').focus();

@@ -464,5 +464,18 @@ router.post('/note/delete_note', function(req, res) {
     return;
   }
   note.deleteNote(data, sess, res);
-})
+});
+router.post('/note/save_note', function(req, res) {
+  var sess = req.session;
+  var data = req.body;
+  if(data.title === '') {
+    res.send({code: 1, info: '标题不能为空'});
+    return;
+  }
+  data.description = data.description || '';
+  data.content = data.content || '';
+  data.tag = data.tag || '';
+  data.participant = JSON.parse(data.participant) || [];
+  note.saveNote(data, sess, res);
+});
 module.exports = router;

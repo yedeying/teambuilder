@@ -13,10 +13,14 @@ block content
     .warpper
       .input-block
         span.info 标题
-        input.title(placeholder='输入标题', value=data.title)
+        input.title(type='text', placeholder='输入标题', value=data.title)
       .input-block
         span.info 描述
-        input.description(placeholder='输入一段简单的介绍', value=data.description)
+        input.description(type='text', placeholder='输入一段简单的介绍', value=data.description)
+      .input-block
+        span.info 分类
+        input.tag(type='text', placeholder='输入该笔记的分类, 可以使用已有分类, 也可以创建一个新分类', value=data.tag) 
+      .input
       .editor-container
         .editor-toolbar(data-role='editor-toolbar', data-target='#editor')
           .btn-group
@@ -65,8 +69,14 @@ block content
               i.fa.fa-repeat
         .editor(id='editor', data-nid=(data.nid || ''))
         .operation
-          button.create(data-action='save') 确认#{action}
+          span.visible-block
+            span.info 指定可见成员
+            each people, index in data.memberList
+              input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}', checked=people.on)
+              label.member(for='member#{index}')
+                span.username= people.name
           button.clear(data-action='clear') 清空内容
+          button.create(data-action='save') 确认#{action}
 block scripts
   script.
     seajs.use('/javascripts/note.js', function(note) {
