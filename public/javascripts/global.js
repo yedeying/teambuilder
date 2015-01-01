@@ -9,6 +9,7 @@ define(function(require, exports, module) {
   var task = require('./task');
   var note = require('./note');
   var comment = require('./comment');
+  var calendar = require('./calendar');
   var commentDetail = require('./commentDetail');
   var file = require('./file');
   var $body = $('body');
@@ -135,7 +136,9 @@ define(function(require, exports, module) {
       'move_file': file.moveFile,
       'manage_folder': file.manageFolder,
       'modify_note': note.modifyNote,
-      'delete_note': note.deleteNote
+      'delete_note': note.deleteNote,
+      'add_schedule': calendar.addSchedule,
+      'modify_schedule': calendar.modifySchedule
     };
     if(actionList.hasOwnProperty(type)) {
       actionList[type]();

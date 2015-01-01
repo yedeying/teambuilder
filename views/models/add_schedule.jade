@@ -1,0 +1,13 @@
+extend model_layout
+
+block content
+  .add-schedule-inner
+    h3 日程名称
+    input.title(type='text', placeholder='日程名称')
+    h3 日程详情
+    input.detail(type='text', placeholder='日程详情')
+    h3
+      span 开始时间
+      a.select-now(data-action='selectNow') 选择现在
+    input.date(type='text', placeholder='1900/00/00')
+    input.time(type='text', placeholder='00:00')

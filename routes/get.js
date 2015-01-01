@@ -56,6 +56,15 @@ router.get('/note/edit', function(req, res) {
   var sess = req.session;
   note.generateEditPage({}, sess, res);
 });
+router.get('/note/edit/get_content', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(tools.testId(data.nid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  note.getContent(data, sess, res);
+});
 router.get('/note/edit/:nid', function(req, res) {
   var sess = req.session;
   var data = req.params;
@@ -64,6 +73,15 @@ router.get('/note/edit/:nid', function(req, res) {
     return;
   }
   note.generateEditPage(data, sess, res);
+});
+router.get('/note/show/:nid', function(req, res) {
+  var sess = req.session;
+  var data = req.params;
+  if(tools.testId(data.nid)) {
+    res.redirect('/404');
+    return;
+  }
+  note.generateShowPage(data, sess, res);
 });
 router.get('/calendar', function(req, res) {
   var sess = req.session;

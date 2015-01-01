@@ -9,7 +9,9 @@ block content
   .note-edit-inner
     .title-block
       h1.title #{action}笔记
-      button.back(data-action='back') 取消#{action}
+      button.back(data-action='back')
+        i.fa.fa-reply
+        span &nbsp;取消#{action}
     .warpper
       .input-block
         span.info 标题

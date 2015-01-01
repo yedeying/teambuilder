@@ -105,3 +105,9 @@ note
   time          time
   visible       array
   tag           string
+schedule
+  sid           id
+  uid           id
+  timestamp     string
+  title         string
+  detail        string

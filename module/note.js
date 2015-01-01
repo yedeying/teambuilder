@@ -16,8 +16,6 @@ function _generateTags(data) {
   for(var i in tags) {
     data.tags.push(tags[i]);
   }
-  console.log(data.tags);
-  console.log(tags);
 }
 exports.getTags = function(gid, callback) {
   var sql = 'select distinct tag, (select count(*) from note tmp where tmp.tag = note.tag) as length from note where gid = ' + gid;
@@ -170,11 +168,74 @@ exports.saveNote = function(data, sess, res) {
   var bl = tools.testId(data.nid);
   people.decodeUidArray(data.participant, function(err, visible) {
     if(err) throw err;
-    
+    if(!bl) {
+      var sql = 'update note set ? where sha1(nid) = ?';
+      var params = [{
+        title: data.title,
+        description: data.description,
+        tag: data.tag,
+        content: data.html,
+        visible: JSON.stringify(visible)
+      }, data.nid];
+      _continue(sql, params);
+    } else {
+      people.getUid(sess, function(uid) {
+        var sql = 'insert into note (gid, uid, title, content, description, tag, visible) values (?, ?, ?, ?, ?, ?, ?)';
+        var params = [sess.gid, uid, data.title, data.html, data.description, data.tag, JSON.stringify(visible)];
+        _continue(sql, params);
+      });
+    }
   });
-  if(bl) {
-    var sql = 'update note set title = "' + data.title + '", description = "' + data.description + '", tag = "' + data.tag + '", content = "' + data.html + '" where sha1(nid) = "' + data.nid + '"';
-  } else {
-    var sql = 'insert into note (gid, uid, )'
+  function _continue(sql, params) {
+    var query = db.query(sql, params, function(err, result) {
+      if(err) throw err;
+      if(bl) {
+        res.send({code: 0, info: '笔记已保存', nid: tools.getSha1(result.insertId.toString())});
+      } else {
+        res.send({code: 0, info: '笔记已保存', nid: data.nid});
+      }
+    });
   }
+};
+exports.getContent = function(data, sess, res) {
+  var sql = 'select content from note where sha1(nid) = ?';
+  db.query(sql, data.nid, function(err, rows) {
+    if(err) throw err;
+    if(rows.length !== 1) {
+      res.send({code: 1, info: '页面错误'});
+      return;
+    }
+    res.send({code: 0, info: 'success', html: rows[0]['content']});
+  });
+};
+exports.generateShowPage = function(data, sess, res) {
+  var sql = 'select nid, uid, (select username from user where user.uid = note.uid) as name, title, content, description, unix_timestamp(time) as time, tag, visible from note where sha1(nid) = ?';
+  db.query(sql, data.nid, function(err, rows) {
+    if(err) throw err;
+    if(rows.length !== 1) {
+      res.redirect('/404');
+      return;
+    }
+    var row = rows[0];
+    data.nid = row['nid'];
+    data.uid = row['uid'];
+    data.name = row['name'];
+    data.title = row['title'];
+    data.content = row['content'];
+    data.description = row['description'];
+    data.time = row['time'];
+    data.tag = row['tag'];
+    data.visible = tools.decodeNumberArray(row['visible']);
+    people.getMemberList(sess, data.visible, function(memberList) {
+      data.memberList = memberList;
+      res.render('note_show', {
+        title: 'teambuilder',
+        page: 'note',
+        data: data,
+        sha1: tools.getSha1,
+        json: JSON.stringify,
+        getTime: tools.getTime
+      });
+    });
+  });
 };

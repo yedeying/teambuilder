@@ -407,6 +407,28 @@
         "name": "tag",
         "type": "string"
       }
+    },
+    "schedule": {
+      "sid": {
+        "name": "sid",
+        "type": "id"
+      },
+      "uid": {
+        "name": "uid",
+        "type": "id"
+      },
+      "timestamp": {
+        "name": "timestamp",
+        "type": "string"
+      },
+      "title": {
+        "name": "title",
+        "type": "string"
+      },
+      "detail": {
+        "name": "detail",
+        "type": "string"
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
-(function ($) {
+define(function(require, exports, module) {
   'use strict';
+  var $ = require('jquery');
   var readFileIntoDataUrl = function (fileInfo) {
     var loader = $.Deferred(),
       fReader = new FileReader();
@@ -197,4 +198,4 @@
     dragAndDropImages: true,
     fileUploadError: function (reason, detail) { console.log("File upload error", reason, detail); }
   };
-}(window.jQuery));
+});

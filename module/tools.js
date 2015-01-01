@@ -143,5 +143,35 @@ module.exports = {
     for(var i in objB) {
       objA[i] = objB[i];
     }
+  },
+  after: function(times, callback) {
+    var count = 0, result = {};
+    return function(key, value) {
+      result[key] = value;
+      count++;
+      if(count === times) {
+        callback(results);
+      }
+    };
+  },
+  getDate: function(date) {
+    if(!(date instanceof Date)) {
+      date = new Date(date);
+    }
+    var resDate = _fillDigit(date.getFullYear(), 4) + '/' + _fillDigit(date.getMonth() + 1, 2) + '/' + _fillDigit(date.getDate(), 2);
+    var resTime = _fillDigit(date.getHours(), 2) + ':'+ _fillDigit(date.getMinutes(), 2);
+    return {
+      date: resDate,
+      time: resTime
+    }
+    function _fillDigit(str, digit) {
+      if(typeof str !== 'string') str = str.toString();
+      if(digit < str.length) return str;
+      var cnt = digit - str.length;
+      while(cnt--) {
+        str = '0' + str;
+      }
+      return str;
+    }
   }
 };

@@ -38,7 +38,7 @@ define(function(require, exports, module) {
       if(!/\d\d\d\d\/\d\d\/\d\d \d\d\:\d\d/.test(str)) {
         return {
           code: 1,
-          info: '格式不满足1990/01/01 12:00'
+          info: '格式不满足1990/01/01 00:00'
         };
       }
       var now = new Date();
@@ -79,6 +79,26 @@ define(function(require, exports, module) {
         code: 0,
         info: '成功',
         time: date
+      }
+    },
+    getDate: function(date) {
+      if(!(date instanceof Date)) {
+        date = new Date(date);
+      }
+      var resDate = _fillDigit(date.getFullYear(), 4) + '/' + _fillDigit(date.getMonth() + 1, 2) + '/' + _fillDigit(date.getDate(), 2);
+      var resTime = _fillDigit(date.getHours(), 2) + ':'+ _fillDigit(date.getMinutes(), 2);
+      return {
+        date: resDate,
+        time: resTime
+      }
+      function _fillDigit(str, digit) {
+        if(typeof str !== 'string') str = str.toString();
+        if(digit < str.length) return str;
+        var cnt = digit - str.length;
+        while(cnt--) {
+          str = '0' + str;
+        }
+        return str;
       }
     },
     cloneDate: function(date) {
@@ -180,6 +200,7 @@ define(function(require, exports, module) {
      */
     handleData: function(data, type, time) {
       time = time || 1000;
+      if(type === undefined) type = 7; 
       if(typeof data.code === 'number') {
         if(data.code !== 0 || (type & 1)) {
           this.showInfo(data.info);
@@ -194,6 +215,27 @@ define(function(require, exports, module) {
           }
         }
       }
+    },
+    /**
+     * if the event effected the element
+     *   return true
+     * else
+     *   return false
+     */
+    isParentOf: function(ele, target) {
+      while(ele) {
+        if(target instanceof Array) {
+          for(var i = 0, len = target.length; i < len; i++) {
+            if(ele === target[i]) {
+              return true;
+            }
+          }
+        } else if(ele === target) {
+          return true;
+        }
+        ele = ele.parentNode;
+      }
+      return false;
     }
   }
 });

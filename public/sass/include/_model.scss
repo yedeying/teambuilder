@@ -47,7 +47,7 @@
     .footer {
       padding: 10px;
       .confirm, .cancel {
-        padding: 5px;
+        padding: 7px 10px;
         margin: 0 5px;
       }
       .confirm {
@@ -122,6 +122,36 @@
     resize: vertical;
     width: 100%;
     height: 100px;
+  }
+}
+.add-schedule-inner, .modify-schedule-inner {
+  padding: 20px;
+  position: relative;
+  .remove-schedule {
+    @include btn($btnred);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  .title, .detail {
+    @include input(9px);
+    width: 100%;
+  }
+  .select-now {
+    margin-left: 10px;
+    cursor: pointer;
+    color: $linkblue;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  .date, .time {
+    @include input(9px);
+  }
+  .date {
+    width: 90px;
+  }
+  .time {
+    width: 60px;
   }
 }
 .add-task-inner {

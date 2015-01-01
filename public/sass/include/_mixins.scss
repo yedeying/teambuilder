@@ -101,14 +101,17 @@ $prefix-for-spec: true !default;
     background-color: darken($color, 5%);
   }
 }
-@mixin input($padding) {
+%input {
   @include box-sizing;
   @include border-radius(4px);
-  padding: $padding;
   outline: none;
   border: 1px solid #d9d9d9;
   @include transition(border-color, .3s);
   &:focus {
     border-color: #a6a6a6;
   }
+}
+@mixin input($padding) {
+  @extend %input;
+  padding: $padding;
 }

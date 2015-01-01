@@ -6,10 +6,10 @@
   .title-block
     i.fa.fa-book
     h4 分类列表
-  .line.all.on
+  .line.all.on(data-action='selectTag')
     span.tag 所有笔记
     span.span= totle
   each tag in data.tags
-    .line
-      span.tag #{tag.name}
+    .line(data-action='selectTag')
+      span.tag(data-tag=tag.name) #{tag.name || '(未指定分类)'}
       span.span= tag.length

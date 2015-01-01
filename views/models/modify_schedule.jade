@@ -1,0 +1,16 @@
+extend model_layout
+
+block content
+  .modify-schedule-inner(data-sid=data.sid)
+    button.remove-schedule(data-action='removeSchedule')
+      i.fa.fa-close
+      span &nbsp;删除日程
+    h3 日程名称
+    input.title(type='text', placeholder='日程名称', value=data.title)
+    h3 日程详情
+    input.detail(type='text', placeholder='日程详情', value=data.detail)
+    h3
+      span 开始时间
+      a.select-now(data-action='selectNow') 选择现在
+    input.date(type='text', placeholder='1900/00/00', value=data.date)
+    input.time(type='text', placeholder='00:00', value=data.time)

@@ -1,0 +1,36 @@
+extends layout
+
+block styles
+  link(rel='stylesheet', href='/stylesheets/note_show.css')
+
+block content
+  include includes/header
+  .note-edit-inner
+    .title-block
+      h1.title 笔记浏览
+      button.back(data-action='link', href='/note')
+        i.fa.fa-reply
+        span &nbsp;返回列表
+      button.edit(data-action='link', href='/note/edit/' + sha1(data.nid.toString()))
+        i.fa.fa-edit
+        span &nbsp;编辑笔记
+    .warpper
+      .detail-block
+        .note-title-block
+          h2.note-title= data.title
+        .note-other
+          span.note-author By&nbsp;#{data.name}
+          span.note-time #{getTime(data.time, 'hh:mm DD C')}
+      .editor-container
+        .show-box!= data.content
+        .operation
+          span.visible-block
+            span.info 可见成员
+            each people, index in data.memberList
+              if people.on
+                span.member= people.name
+block scripts
+  script.
+    seajs.use('/javascripts/note.js', function(note) {
+      note.initShow();
+    });

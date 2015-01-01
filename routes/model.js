@@ -8,8 +8,9 @@ var comment = require('../module/comment');
 var global = require('../module/global');
 var file = require('../module/file');
 var note = require('../module/note');
-var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list', '/del_comment_list', '/add_file', '/delete_file'];
-var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论', '移除讨论', '上传文件', '删除文件'];
+var calendar = require('../module/calendar');
+var urls = ['/add_project', '/add_to_project', '/edit_project', '/remove_project', '/add_people', '/exit_group', '/remove_group', '/remove_task', '/remove_task_list', '/remove_task', '/add_comment_list', '/del_comment_list', '/add_file', '/delete_file', '/add_schedule'];
+var title = ['添加项目', '添加内容', '编辑项目', '移除项目', '邀请成员', '退出该组', '解散该组', '移除任务', '移除任务列表', '移除任务', '创建讨论', '移除讨论', '上传文件', '删除文件', '添加日程'];
 urls.forEach(function(url, index) {
   router.get(url, function(req, res) {
     var sess = req.session;
@@ -210,5 +211,14 @@ router.get('/delete_note', function(req, res) {
     }
     res.send({code: 0, html: html});
   });
+});
+router.get('/modify_schedule', function(req, res) {
+  var sess = req.session;
+  var data = req.query;
+  if(tools.testId(data.sid)) {
+    res.send({code: 1, info: '页面错误'});
+    return;
+  }
+  calendar.getScheduleFromSid(data, sess, res);
 });
 module.exports = router;

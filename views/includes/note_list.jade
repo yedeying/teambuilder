@@ -14,8 +14,8 @@
       .icon-block
       .detail-block
         .note-title-block
-          span.note-tag= note.tag
-          span.note-title= note.title
+          span.note-tag= note.tag || '(未指定分类)'
+          span.note-title(data-action='show')= note.title
         .note-description= note.description
         .note-other
           span.note-author By&nbsp;#{note.name}

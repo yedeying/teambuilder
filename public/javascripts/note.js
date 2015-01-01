@@ -6,6 +6,21 @@ define(function(require, exports, module) {
   var $body = $('body');
   var globalData = {};
   var actionList = {
+    selectTag: function(e) {
+      var $this = $(this);
+      if($(this).hasClass('on')) {
+        return;
+      }
+      var tag = $this.find('.tag').attr('data-tag');
+      $('.tag-list .line').removeClass('on');
+      $this.addClass('on');
+      if($this.hasClass('all')) {
+        $('.note-block').show();
+      } else {
+        $('.note-block').hide();
+        $('.note-block[data-tag="' + tag + '"]').show();
+      }
+    },
     create: function(e) {
       location.href = '/note/edit';
     },
@@ -25,9 +40,9 @@ define(function(require, exports, module) {
       history.go(-1);
     },
     save: function(e) {
-      var title = $('.title-block .input').val();
-      var description = $('.title-block .description').val();
-      var tag = (".title-block .tag").val();
+      var title = $('.input-block .title').val();
+      var description = $('.input-block .description').val();
+      var tag = $(".input-block .tag").val();
       var html = $('#editor').html();
       var nid = $('#editor').attr('data-nid');
       if(title === '') {
@@ -44,7 +59,7 @@ define(function(require, exports, module) {
         return;
       }
       $.post('/note/save_note', {html: html, title: title, description: description, tag: tag, participant: JSON.stringify(participant), nid: nid}, function(data) {
-        if(typeof data === 'number') {
+        if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
             location.href = '/note/show/' + data.nid;
@@ -71,31 +86,33 @@ define(function(require, exports, module) {
         return;
       }
       document.execCommand('createlink', 0, url);
+    },
+    show: function(e) {
+      location.href = '/note/show/' + $(this).parents('.note-block').attr('data-nid');
+    },
+    link: function(e) {
+      location.href = $(this).attr('href');
     }
   };
-  function _initTagNav() {
-    $body.on('click', '.tag-list .line', function(e) {
-      var $this = $(this);
-      if($(this).hasClass('on')) {
-        return;
-      }
-      var tag = $this.find('.tag').text();
-      $('.tag-list .line').removeClass('on');
-      $this.addClass('on');
-      if($this.hasClass('all')) {
-        $('.note-block').show();
-      } else {
-        $('.note-block').hide();
-        $('.note-block[data-tag="' + tag + '"]').show();
-      }
-    });
-  }
   function _initPageEvent() {
     $body.on('click', '[data-action]', function(e) {
       var action = $(this).attr('data-action');
-      actionList[action].call(this, e);
+      actionList[action] && actionList[action].call(this, e);
     });
   };
+  function _loadContent() {
+    var nid = $('#editor').attr('data-nid');
+    if(!/[0-9a-f]{40}/.test(nid)) {
+      return;
+    }
+    $.get('/note/edit/get_content', {nid: nid}, function(data) {
+      if(typeof data.code === 'number') {
+        if(data.code === 0) {
+          $('#editor').html(data.html);
+        }
+      }
+    });
+  }
   exports.modifyNote = function() {
     var nid = $('.modify-note-inner').attr('data-nid');
     var title = $('.model .name').val();
@@ -131,14 +148,17 @@ define(function(require, exports, module) {
     });
   };
   exports.init = function() {
-    _initTagNav();
     _initPageEvent();
   };
   exports.initEdit = function() {
-    _initPageEvent();
     require('hotkeys');
     require('editor');
     $('#editor').initEditor();
+    _initPageEvent();
+    _loadContent();
     document.execCommand('justifyleft');
+  };
+  exports.initShow = function() {
+    _initPageEvent();
   };
 });
