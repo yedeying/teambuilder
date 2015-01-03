@@ -1,0 +1,62 @@
+* [31m419a74e[m -[33m (HEAD, origin/master, origin/HEAD, master)[m fixed some bugs for calendar [32m(2 minutes ago) [1;34m<yedeying999>[m
+* [31m7d0014a[m -[33m[m finish all [32m(14 hours ago) [1;34m<yedeying999>[m
+* [31me8f90c4[m -[33m[m test [32m(3 days ago) [1;34m<yedeying999>[m
+* [31m3ea8d1e[m -[33m[m f [32m(4 days ago) [1;34m<yedeying999>[m
+*   [31mcf04549[m -[33m[m fixed [32m(4 days ago) [1;34m<yedeying999>[m
+[32m|[m[33m\[m  
+[32m|[m * [31md76d04f[m -[33m[m 2014/12/29 add calendar page [32m(4 days ago) [1;34m<yedeying999>[m
+* [33m|[m [31m7a47ce5[m -[33m[m add note.js [32m(4 days ago) [1;34m<yedeying999>[m
+* [33m|[m [31mb572245[m -[33m[m 2014/12/28 generating note edit page [32m(5 days ago) [1;34m<yedeying999>[m
+[33m|[m[33m/[m  
+* [31mfe44c94[m -[33m[m 2014/12/26 developing note page [32m(7 days ago) [1;34m<yedeying999>[m
+* [31md11058e[m -[33m[m 2014/12/25 xxx [32m(8 days ago) [1;34m<yedeying999>[m
+* [31m5969cbd[m -[33m[m 2014/12/24 starting note page [32m(9 days ago) [1;34m<yedeying999>[m
+* [31mc26a3a0[m -[33m[m 2014/12/24 finish file page [32m(9 days ago) [1;34m<yedeying999>[m
+* [31m85edc28[m -[33m[m 2014/12/22 add setting folder [32m(11 days ago) [1;34m<yedeying999>[m
+* [31madc8172[m -[33m[m 2014/12/20 manage folder [32m(13 days ago) [1;34m<yedeying999>[m
+* [31m7011dbb[m -[33m[m developing file page [32m(2 weeks ago) [1;34m<yedeying999>[m
+* [31m4245299[m -[33m[m 2014/12/17 developing file page [32m(2 weeks ago) [1;34m<yedeying999>[m
+* [31med29d91[m -[33m[m 2014/12/16 [32m(2 weeks ago) [1;34m<yedeying999>[m
+* [31mb307625[m -[33m[m 2014/12/15 developing comment page [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [31med0e893[m -[33m[m 2014/12/14 truely finish task page [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [31m0251295[m -[33m[m 2014/12/14 finish task page [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [31m4ed165b[m -[33m[m 2014/12/12 file done [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [31m7756d98[m -[33m[m change [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [31m521cf19[m -[33m[m fix [32m(3 weeks ago) [1;34m<yedeying999>[m
+*   [31m2e179e1[m -[33m[m 2014/12/12 del high [32m(3 weeks ago) [1;34m<yedeying999>[m
+[34m|[m[35m\[m  
+[34m|[m * [31m8988143[m -[33m[m add high [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [35m|[m [31mfba55a7[m -[33m[m 2014/12/12 del high [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [35m|[m [31m9565a9c[m -[33m[m 2014/12/11 [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [35m|[m [31m115a610[m -[33m[m 2014/12/10 add task file [32m(3 weeks ago) [1;34m<yedeying999>[m
+* [35m|[m [31m77c210a[m -[33m[m 1 [32m(3 weeks ago) [1;34m<yedeying999>[m
+[35m|[m[35m/[m  
+* [31m7c836b1[m -[33m[m 2014/12/8 upload module [32m(4 weeks ago) [1;34m<yedeying999>[m
+* [31m338a137[m -[33m[m 2014/12/7 [32m(4 weeks ago) [1;34m<yedeying999>[m
+* [31m040dee4[m -[33m[m 2014/12/4 doing task page [32m(4 weeks ago) [1;34m<yedeying999>[m
+* [31m8df78b7[m -[33m[m 2014/12/3 no mood [32m(4 weeks ago) [1;34m<yedeying999>[m
+* [31m60aa7d3[m -[33m[m 2014/12/2 starting datepicker plugin [32m(4 weeks ago) [1;34m<yedeying999>[m
+* [31mbe87721[m -[33m[m 2014/12/1 starting task page [32m(5 weeks ago) [1;34m<yedeying999>[m
+* [31m77714bb[m -[33m[m 2014/11/28 finish edit profile [32m(5 weeks ago) [1;34m<unknown>[m
+* [31m0474a6a[m -[33m[m again [32m(5 weeks ago) [1;34m<yedeying999>[m
+* [31m1882bed[m -[33m[m 2014/11/28 morning [32m(5 weeks ago) [1;34m<yedeying999>[m
+* [31mb72fae3[m -[33m[m anything [32m(5 weeks ago) [1;34m<unknown>[m
+* [31maa70f8b[m -[33m[m 2014/11/25 finish joingroup page [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m300f0f5[m -[33m[m hgehe [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31me28332d[m -[33m[m 2014/11/24 finish invite [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m02c107f[m -[33m[m 2014/11/23 added review page [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m77f497b[m -[33m[m 2014/11/23 adding modle [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m755c4d2[m -[33m[m 2014/11/21 finish project_list [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m7f27dc6[m -[33m[m 2014/11/21 finish project_list [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m3a290cd[m -[33m[m 2014/11/21 [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m359dd0c[m -[33m[m 2014/11/21 developing index page [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31mb9521b3[m -[33m[m 2014/11/20 in lab [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31m624338e[m -[33m[m 2014/11/20 developing index page [32m(6 weeks ago) [1;34m<yedeying999>[m
+* [31mee733af[m -[33m[m 2014/11/17 finish register page [32m(7 weeks ago) [1;34m<yedeying999>[m
+* [31m7bc3e11[m -[33m[m 2014/11/17 finish register page [32m(7 weeks ago) [1;34m<yedeying999>[m
+* [31m505fce7[m -[33m[m 2014/11/16 adding signup validate [32m(7 weeks ago) [1;34m<yedeying999>[m
+* [31mdf2cd49[m -[33m[m 2014/11/9 21:58 [32m(8 weeks ago) [1;34m<yedeying999>[m
+* [31m6c11392[m -[33m[m 2014/11/7 coding the email module [32m(8 weeks ago) [1;34m<yedeying999>[m
+* [31md3ac7aa[m -[33m[m added login page without script [32m(3 months ago) [1;34m<yedeying999>[m
+* [31m3b67eb2[m -[33m[m create [32m(3 months ago) [1;34m<yedeying999>[m
+* [31m31ffaeb[m -[33m[m Initial commit [32m(3 months ago) [1;34m<yedeying999>[m

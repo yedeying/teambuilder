@@ -1,3 +1,20 @@
-jquery 的 CMD化
-get post 按页面分文件夹
-前端js文件重构，监听代码放进init函数
+jquery 的 CMD化 clear
+get post 按页面分文件夹 planning
+前端js文件重构，监听代码放进init函数 planning
+重构计划:
+  node
+    session-validate从app.js分离
+    路由的分类化
+    url包含模块
+    sql语句的escape
+    exports代替module.exports
+    require置顶
+    参数配置化
+    接口参数格式统一
+  js
+    插件模块化
+    事件语句写在函数里
+    页面由init调用
+    事情使用actionList形式
+  sass
+  jade
