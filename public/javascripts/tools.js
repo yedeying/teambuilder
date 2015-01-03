@@ -186,6 +186,7 @@ define(function(require, exports, module) {
       });
     },
     slideActivityTriangle: function(ele) {
+      var $ = require('jquery');
       var left = ele.offsetLeft + ele.offsetWidth / 2 - 6;
       var $black = $('.activity-triangle-black');
       var $white = $('.activity-triangle-white');

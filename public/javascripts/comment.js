@@ -19,7 +19,7 @@ define(function(require, exports, module) {
         title: $title.val(),
         description: $description.text()
       };
-      $.post('/add_comment_list', data, function(data) {
+      $.post('/comment/add_comment_list', data, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

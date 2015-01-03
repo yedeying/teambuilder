@@ -22,7 +22,7 @@ define(function(require, exports, module) {
         title: $title.val(),
         description: $description.val()
       };
-      $.post('/edit_project', data, function(data) {
+      $.post('/project/edit_project', data, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -34,7 +34,7 @@ define(function(require, exports, module) {
       });
     },
     removeProject: function() {
-      $.post('/remove_project', {}, function(data) {
+      $.post('/project/remove_project', {}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

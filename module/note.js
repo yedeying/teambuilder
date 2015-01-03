@@ -117,9 +117,13 @@ exports.getDescription = function(data, sess, res) {
   });
 };
 exports.modifyNote = function(data, sess, res) {
-  var sql = 'update note set title = "' + data.title + '", description = "' + data.description + '", tag = "' + data.tag + '", visible = "' + JSON.stringify(data.visible) + '" where sha1(nid) = "' + data.nid + '"';
-  db.query(sql, function(err) {
-    res.send({code: 0, info: '修改成功'});
+  people.decodeUidArray(JSON.parse(data.visible), function(err, uidList) {
+    if(err) res.send(err);
+    data.visible = uidList;
+    var sql = 'update note set title = "' + data.title + '", description = "' + data.description + '", tag = "' + data.tag + '", visible = "' + JSON.stringify(data.visible) + '" where sha1(nid) = "' + data.nid + '"';
+    db.query(sql, function(err) {
+      res.send({code: 0, info: '修改成功'});
+    });
   });
 };
 exports.deleteNote = function(data, sess, res) {

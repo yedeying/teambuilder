@@ -75,7 +75,7 @@ define(function(require, exports, module) {
     deleteFile: function() {
       var fid = $('.model').attr('data-fid');
       var gid = $('.model').attr('data-gid');
-      $.post('/file/delete_file', {fid: fid, gid: gid}, function(data) {
+      $.post('/file/delete_file', {fid: fid, id: gid}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

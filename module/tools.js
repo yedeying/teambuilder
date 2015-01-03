@@ -1,5 +1,10 @@
 var setting = require('../settings/global');
 var crypto = require('crypto');
+var _isType = function(type) {
+  return function(obj) {
+    return typeof obj === type;
+  }
+}
 module.exports = {
   getCommonUrl: function() {
     if(setting.port && setting.port != 80) {
@@ -8,6 +13,11 @@ module.exports = {
       return 'http://' + setting.url + '/';
     }
   },
+  isBoolean: _isType('boolean'),
+  isArray: function(arr) {
+    return arr instanceof Array;
+  },
+  isFunction: _isType('function'),
   getSha1: function(str) {
     if(typeof str !== 'string') {
       str = str.toString();
@@ -31,18 +41,19 @@ module.exports = {
     }
     return res;
   },
-  // format:
-  // Y year
-  // M month
-  // D date
-  // h hour
-  // m minute
-  // s second
-  // C Month Name
-  // c month name
-  // double charactor to owning zeros
-  // format as 'YY/MM/DD hh:mm:ss'
-  // please promise that each sign will appear as most one time, or you will get wrong
+  /* format:
+   * Y year
+   * M month
+   * D date
+   * h hour
+   * m minute
+   * s second
+   * C Month Name
+   * c month name
+   * double charactor to owning zeros
+   * format as 'YY/MM/DD hh:mm:ss'
+   * please promise that each sign will appear as most one time, or you will get wrong
+  **/
   getTime: function(stamp, format) {
     var that = module.exports;
     // if(!format) format = 'hh:mm DD C';

@@ -84,7 +84,7 @@ define(function(require, exports, module) {
     var id = $(this).attr('data-id');
     var fid = $(this).attr('data-fid');
     var that = this;
-    $.post('/delete_file', {id: id, fid: fid}, function(data) {
+    $.post('/task/delete_file', {id: id, fid: fid}, function(data) {
       if(typeof data.code === 'number') {
         tools.showInfo(data.info);
         if(data.code === 0) {
@@ -121,7 +121,7 @@ define(function(require, exports, module) {
         time: time
       };
       data = JSON.stringify(data);
-      $.post('/create_task_list', {data: data}, function(data) {
+      $.post('/task/create_task_list', {data: data}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -162,7 +162,7 @@ define(function(require, exports, module) {
         tid: tid
       };
       data = JSON.stringify(data);
-      $.post('/edit_task_list', {data: data}, function(data) {
+      $.post('/task/edit_task_list', {data: data}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -210,7 +210,7 @@ define(function(require, exports, module) {
       data.append('content', content);
       data.append('fileName', JSON.stringify(fileName));
       var xhr = new XMLHttpRequest();
-      xhr.open('post', '/add_task');
+      xhr.open('post', '/task/add_task');
       xhr.send(data);
       xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
@@ -228,7 +228,7 @@ define(function(require, exports, module) {
     },
     removeTaskList: function() {
       var tid = $('.model').attr('data-tid');
-      $.post('/remove_task_list', {tid: tid}, function(data) {
+      $.post('/task/remove_task_list', {tid: tid}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -241,7 +241,7 @@ define(function(require, exports, module) {
     },
     removeTask: function() {
       var did = $('.model').attr('data-did');
-      $.post('/remove_task', {did: did}, function(data) {
+      $.post('/task/remove_task', {did: did}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -289,7 +289,7 @@ define(function(require, exports, module) {
       data.append('content', content);
       data.append('fileName', JSON.stringify(fileName));
       var xhr = new XMLHttpRequest();
-      xhr.open('post', '/edit_task');
+      xhr.open('post', '/task/edit_task');
       xhr.send(data);
       xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {

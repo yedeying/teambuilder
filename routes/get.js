@@ -11,7 +11,7 @@ var people = require('../module/people');
 var project = require('../module/project');
 var comment = require('../module/comment');
 var publish = require('../module/publish');
-moduleArray.signup = require('../module/signup');
+moduleArray.signup = require('../module/login');
 moduleArray.index = require('../module/index');
 moduleArray.people = require('../module/people');
 // get mothod

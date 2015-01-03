@@ -67,13 +67,6 @@ exports.downloadFile = function(data, type, res) {
     res.download(path, name);
   });
 };
-exports.deleteFile = function(data, type, res) {
-  var sql = 'delete from file where type = ' + type + ' and sha1(id) = "' + data.id +'" and sha1(fid) = "' + data.fid + '"';
-  db.query(sql, function(err) {
-    if(err) throw err;
-    res.send({code: 0, info: '删除成功'});
-  });
-};
 exports.generatePage = function(sess, res) {
   var gid = sess.gid;
   var email = sess.email;
@@ -225,12 +218,12 @@ exports.addFile = function(data, sess, res) {
     });
   });
 };
-exports.deleteFile = function(data, sess, res) {
-  var sql = 'delete from file where sha1(id) = "' + data.gid + '" and type = 3 and sha1(fid) = "' + data.fid + '"';
+exports.deleteFile = function(data, type, res) {
+  var sql = 'delete from file where type = ' + type + ' and sha1(id) = "' + data.id +'" and sha1(fid) = "' + data.fid + '"';
   db.query(sql, function(err) {
     if(err) throw err;
     res.send({code: 0, info: '删除成功'});
-  })
+  });
 };
 exports.getFolderList = function(gid, callback) {
   var sql = 'select fid, gid, name, (select count(*) from file where file.folder = folder.fid) as length from folder where gid = ' + gid;

@@ -3,7 +3,7 @@ var fs = require('fs');
 var emitter = require('events').EventEmitter;
 var db = require('./db');
 var tools = require('./tools');
-var signup = require('./signup');
+var login = require('./login');
 var mailTransporter = require('./mail');
 var setting = require('../settings/global');
 var mailSetting = require('../settings/mail');
@@ -213,7 +213,7 @@ module.exports = {
       res.send({code: 2, info: '邮箱名不能为空'});
       return;
     }
-    if(!signup.checkMailFormat(email)) {
+    if(!login.checkMailFormat(email)) {
       res.send({code: 1, info: '邮箱名格式错误'});
       return;
     }

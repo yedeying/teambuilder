@@ -50,7 +50,7 @@ define(function(require, exports, module) {
         description: $description.val(),
         cid: cid
       };
-      $.post('/edit_comment_list', data, function(data) {
+      $.post('/comment/edit_comment_list', data, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -62,7 +62,7 @@ define(function(require, exports, module) {
       });
     },
     delCommentList: function() {
-      $.post('/del_comment_list', {cid: cid}, function(data) {
+      $.post('/comment/del_comment_list', {cid: cid}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

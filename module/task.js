@@ -329,10 +329,10 @@ module.exports = {
             if(err) throw err;
             if(rows.length === 1) {
               var did = rows[0]['did'];
-              saveFile(data.files, function(sha1, fileName, callback) {
+              saveFile(data.files, function(sha1, fileName, fileSize, callback) {
                 var time = (new Date()).getTime();
                 people.getUid(sess, function(uid) {
-                  var sql = 'insert into file (id, uploader, type, filename, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", "' + sha1 + '", ' + time + ', current_timestamp())';
+                  var sql = 'insert into file (id, uploader, type, filename, size, fsha1, timestamp, uploadtime) values (' + did + ', ' + uid + ', 1, "' + fileName + '", ' + fileSize + ', "' + sha1 + '", ' + time + ', current_timestamp())';
                   db.query(sql, function(err, rows) {
                     if(err) throw err;
                     callback(sha1 + time);

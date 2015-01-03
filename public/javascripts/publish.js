@@ -38,7 +38,7 @@ define(function(require, exports, module) {
   $body.on('click', '.del-publish', function(e) {
     var pid = $(this).parent().attr('data-pid');
     var that = this;
-    $.post('/del_publish', {pid: pid}, function(data) {
+    $.post('/publish/del_publish', {pid: pid}, function(data) {
       if(typeof data.code === 'number') {
         tools.showInfo(data.info);
         if(data.code === 0) {
@@ -72,7 +72,7 @@ define(function(require, exports, module) {
         tools.showInfo('公告不能为空');
         return;
       }
-      $.post('/new_publish', {content: content, pid: pid, type: type}, function(data) {
+      $.post('/publish/new_publish', {content: content, pid: pid, type: type}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {

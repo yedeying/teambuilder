@@ -164,6 +164,7 @@ define(function(require, exports, module) {
     $('.calendar-table .num').text('');
     $('.calendar-table td').removeClass('effect');
     $('.calendar-table td').removeClass('today');
+    $('.calendar-table .schedule').remove();
     $('.calendar-container .cur-month').text(date.getFullYear() + ' - ' + (date.getMonth() + 1));
     var start = tools.cloneDate(date);
     start.setDate(1);
@@ -203,6 +204,8 @@ define(function(require, exports, module) {
     selector.month = date.getMonth();
     _showMonthSelector();
     // when clicking other space, hide the dropdown box
+    var $dropdown = $('.dropdown');
+    var $selector = $('.month-selector');
     $body.on('click', function(e) {
       if(!tools.isParentOf(e.target, [$selector.get(0), $dropdown.get(0)])) {
         $dropdown.removeClass('checked');
