@@ -80,7 +80,7 @@ define(function(require, exports, module) {
         $email.focus();
         return; 
       }
-      $.post('/add_people', {email: email}, function(data) {
+      $.post('/people/add_people', {email: email}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -102,7 +102,7 @@ define(function(require, exports, module) {
         return;
       }
       uid = JSON.stringify(uid);
-      $.post('/remove_people', {uid: uid}, function(data) {
+      $.post('/people/remove_people', {uid: uid}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -114,7 +114,7 @@ define(function(require, exports, module) {
       });
     },
     exitGroup: function() {
-      $.post('/exit_group', {}, function(data) {
+      $.post('/people/exit_group', {}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -126,7 +126,7 @@ define(function(require, exports, module) {
       });
     },
     removeGroup: function() {
-      $.post('/remove_group', {}, function(data) {
+      $.post('/people/remove_group', {}, function(data) {
         if(typeof data.code === 'number') {
           tools.showInfo(data.info);
           if(data.code === 0) {
@@ -143,7 +143,7 @@ define(function(require, exports, module) {
       if(data.contact === undefined) data.contact = '';
       if(validateProfileData(data)) {
         data.uid = $form.attr('data-uid');
-        $.post('/edit_profile', data, function(data) {
+        $.post('/people/edit_profile', data, function(data) {
           if(typeof data.code === 'number') {
             tools.showInfo(data.info);
             if(data.code === 0) {

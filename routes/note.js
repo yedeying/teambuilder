@@ -2,7 +2,7 @@ var router = module.exports = require('express').Router();
 var tools = require('../module/tools');
 var note = require('../module/note');
 
-router.post('/note/modify_note', function(req, res) {
+router.post('/modify_note', function(req, res) {
   var sess = req.session;
   var data = req.body;
   if(tools.testId(data.nid)) {
@@ -16,7 +16,7 @@ router.post('/note/modify_note', function(req, res) {
   note.modifyNote(data, sess, res);
 });
 
-router.post('/note/delete_note', function(req, res) {
+router.post('/delete_note', function(req, res) {
   var sess = req.session;
   var data = req.body;
   if(tools.testId(data.nid)) {
@@ -26,7 +26,7 @@ router.post('/note/delete_note', function(req, res) {
   note.deleteNote(data, sess, res);
 });
 
-router.post('/note/save_note', function(req, res) {
+router.post('/save_note', function(req, res) {
   var sess = req.session;
   var data = req.body;
   console.log('aaaaaaa');

@@ -17,7 +17,7 @@ define(function(require, exports, module) {
       }
       var data = {
         title: $title.val(),
-        description: $description.text()
+        description: $description.val()
       };
       $.post('/comment/add_comment_list', data, function(data) {
         if(typeof data.code === 'number') {

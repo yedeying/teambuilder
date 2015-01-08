@@ -105,6 +105,10 @@ define(function(require, exports, module) {
         $name.focus();
         return;
       }
+      if(time === '') {
+        tools.showInfo('截止日期不能为空');
+        return;
+      }
       if(time !== '') {
         var res = tools.checkDateFormat(time);
         if(res.code !== 0) {

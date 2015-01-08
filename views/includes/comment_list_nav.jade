@@ -4,5 +4,5 @@
     h4 讨论列表
   each comment in data.commentList
     .line
-      a.project(href="/comment?cid=#{func.sha1(comment.cid.toString())}") #{comment.title}
+      a.project(href="/comment/detail?cid=#{func.sha1(comment.cid.toString())}") #{comment.title}
       span= comment.comments.length

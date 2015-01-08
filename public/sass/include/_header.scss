@@ -35,18 +35,21 @@
       color: #fff;
     }
     .user-icon {
+      display: none;
       margin: 0 15px;
       height: 39px;
       @include border-radius(4px);
       cursor: pointer;
     }
     .notification {
+      display: none;
       font-size: 29px;
       color: #fff;
       cursor: pointer;
       margin-left: 10px;
     }
     .search-btn {
+      display: none;
       color: #aaa;
       background-color: #fff;
       cursor: pointer;
@@ -56,6 +59,7 @@
       @include border-radius(5px 0 0 5px);
     }
     .search {
+      display: none;
       border-width: 0;
       outline-width: 0;
       margin: 0;

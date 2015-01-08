@@ -1,7 +1,7 @@
 module.exports = {
   service: 'QQ',
   auth: {
-    user: 'teambuilder@qq.com',
-    pass: 'b13872739661'
+    user: '346445631@qq.com',
+    pass: 'a13872739661'
   }
 }
