@@ -18,3 +18,9 @@ get post 按页面分文件夹 planning
     事情使用actionList形式
   sass
   jade
+
+bug to fix
+  动态回顾可以加一些筛选项和搜索
+  文件夹列表标签对齐
+  任务列表添加权限系统
+  任务列表：取消不能早于现在

@@ -1,5 +1,5 @@
 module.exports = {
-  url: '172.31.196.49',
+  url: '192.168.40.78',
   port: 80,
   appName: 'teambuilder',
   fileRoot: 'C:\\Users\\Yedeying\\Desktop\\teambuilder\\files\\'

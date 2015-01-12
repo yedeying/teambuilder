@@ -1,6 +1,7 @@
 .title-block
   h3.title 公告
-  span.new-post 新建
+  if data.publish.admin === 1
+    span.new-post 新建
   span.hide-publish-block 隐藏
 .content-block
   .publish-container

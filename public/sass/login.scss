@@ -1,12 +1,23 @@
 @import "include/common";
+.show-publish-btn {
+  display: none;
+}
 .account-page {
   .joingroup-inner {
+    @extend %clearfix;
     @include border-radius(8px);
     width: 400px;
     padding: 20px;
     margin: 20px auto;
     background-color: #f8f8f8;
     border: 1px solid #ccc;
+  }
+  .link-logout {
+    cursor: pointer;
+    float: right;
+    color: $linkblue;
+    position: relative;
+    top: -10px;
   }
   .join-alert, .groupname, .joingroup {
     width: 444px !important;

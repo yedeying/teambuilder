@@ -97,7 +97,7 @@ define(function(require, exports, module) {
     createTaskList: function() {
       var $name = $('.model .name');
       var $time = $('.model .date');
-      var content = $('.model .content').val();
+      var content = $('.model input.content').val();
       var name = $name.val();
       var time = $time.val();
       if(name === '') {
@@ -139,7 +139,7 @@ define(function(require, exports, module) {
     editTaskList: function() {
       var $name = $('.model .name');
       var $time = $('.model .date');
-      var content = $('.model .content').val();
+      var content = $('.model input.content').val();
       var name = $name.val();
       var time = $time.val();
       var tid = $('.create-task-list-inner').attr('data-tid');

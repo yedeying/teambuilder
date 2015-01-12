@@ -17,7 +17,7 @@ header.header
           i.fa(class='fa-#{icons[i]}')
           span &nbsp;#{texts[i]}
   .title-block
-    h1.left.title #{page === 'index' && data.groupName || (page === 'project' || page === 'task' || page === 'comment' || page === 'commentDetail') && (data.title) || page === 'people' && '通讯录 - ' + data.groupName || page === 'file' && '文件中心 - ' + data.groupName || page === 'note' && '在线笔记 - ' + data.groupName || page === 'calendar' && '日程表 - ' + groupName}
+    h1.left.title #{page === 'index' && '首页 - ' + data.groupName || page === 'project' && '动态回顾 - ' + data.title || page === 'task' && '任务列表 - ' + data.title || (page === 'comment' || page === 'commentDetail') && '讨论区 - ' + data.title || page === 'people' && '通讯录 - ' + data.groupName || page === 'file' && '文件中心 - ' + data.groupName || page === 'note' && '在线笔记 - ' + data.groupName || page === 'calendar' && '日程表 - ' + groupName}
     span.right.notification
       i.fa.fa-bell
     span.right.search-block.

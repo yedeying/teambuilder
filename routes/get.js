@@ -104,6 +104,7 @@ router.get('/comment', function(req, res) {
   function _continue() {
     comment.generatePage(sess, function(data) {
       publish.addPublishBar(data, sess, function() {
+        data.title = sess.projectTitle;
         res.render('comment', {
           title: 'teambuilder',
           page: 'comment',
@@ -138,15 +139,18 @@ router.get('/comment/detail', function(req, res) {
       res.redirect('/404');
       return;
     }
-    res.render('comment_detail', {
-      title: 'teambuilder',
-      page: 'commentDetail',
-      data: data,
-      func: {
-        json: JSON.stringify,
-        sha1: tools.getSha1,
-        getTime: tools.getTime
-      }
+    publish.addPublishBar(data, sess, function() {
+      data.title = sess.projectTitle;
+      res.render('comment_detail', {
+        title: 'teambuilder',
+        page: 'commentDetail',
+        data: data,
+        func: {
+          json: JSON.stringify,
+          sha1: tools.getSha1,
+          getTime: tools.getTime
+        }
+      });
     });
   });
 });
@@ -179,6 +183,7 @@ router.get('/project', function(req, res) {
   }
   project.generatePage(req.query.pid, res, sess, function(data) {
     publish.addPublishBar(data, sess, function() {
+      data.title = sess.projectTitle;
       res.render('project', { title: 'teambuilder', page: 'project', data: data, func: {
         JSON: JSON,
         sha1: tools.getSha1,

@@ -88,6 +88,7 @@ module.exports = {
     var email = sess.email;
     var data = {};
     data.task = [];
+    data.title = sess.projectTitle;
     event.on('finish', function() {
       publish.addPublishBar(data, sess, function() {
         res.render('task', {

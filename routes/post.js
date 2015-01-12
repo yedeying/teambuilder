@@ -1,6 +1,7 @@
 var router = module.exports = require('express').Router();
 var index = require('../module/index');
 var global = require('../module/global');
+var joingroup = require('../module/joingroup');
 
 router.post('/add_project', function(req, res) {
   var sess = req.session;

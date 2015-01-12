@@ -68,6 +68,7 @@ $time: .2s;
 }
 .folder-list {
   .title-block {
+    @extend %clearfix;
     padding: 20px 20px 0 20px;
   }
   .line {

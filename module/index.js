@@ -1,6 +1,5 @@
 var db = require('./db');
 var tools = require('./tools');
-var publish = require('./publish');
 var emitter = require('events').EventEmitter;    
 module.exports = {
   sortActivity: function(project) {
