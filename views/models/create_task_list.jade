@@ -8,8 +8,3 @@ block content
     input.content(id='content', type='text', placeholder='任务列表描述')
     h3 截止日期
     input.date(id='expected_time', type='text', placeholder='1990/01/01 12:00', value='#{now}')
-    h3 指定参与者
-    each people, index in memberList
-      input.check(id='member#{index}', type='checkbox', data-uid='#{sha1(people.uid.toString())}')
-      label.member(for='member#{index}')
-        span.username= people.name

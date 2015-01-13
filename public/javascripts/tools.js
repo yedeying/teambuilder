@@ -70,7 +70,7 @@ define(function(require, exports, module) {
       date.setSeconds(0);
       if(date.getTime() < now.getTime()) {
         return {
-          code: 2,
+          code: 0,
           info: '时间不能早于当前',
           time: date
         };
