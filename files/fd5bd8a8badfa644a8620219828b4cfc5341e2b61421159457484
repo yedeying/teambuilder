@@ -1,0 +1,62 @@
+#navList {
+    min-height: 60px;
+}
+#navList li {
+    height: 60px;
+}
+#navList a {
+    margin: 0px 5px !important;
+    padding: 19px 10px !important;
+    -webkit-transition: background 0.5s;
+    -moz-transition: background 0.5s;
+    -ms-transition: background 0.5s;
+    -o-transition: background 0.5s;
+    transition: background 0.5s;
+}
+#navList a:hover {
+    background: #003DFF;
+    text-decoration: none;
+}
+.postTitle a {
+    -webkit-transition: color .3s;
+    -moz-transition: color .3s;
+    -ms-transition: color .3s;
+    -o-transition: color .3s;
+    transition: color .3s;
+    -webkit-transition: -webkit-transform .5s;
+    -moz-transition: -moz-transform .5s;
+    -ms-transition: -ms-transform .5s;
+    -o-transition: -o-transform .5s;
+    transition: transform .5s;
+    float: left;
+    padding: 2px 0;
+}
+.postTitle {
+    height: 15px;
+}
+.postTitle a:hover {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.postTitle {
+    border-left-color: #ffffff;
+    -webkit-transition: border-left-color .5s;
+    -moz-transition: border-left-color .5s;
+    -ms-transition: border-left-color .5s;
+    -o-transition: border-left-color .5s;
+    transition: border-left-color .5s;
+}
+.postTitle:hover {
+    border-left-color: #1fa6e6;
+}
+.postCon {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 20px 10px;
+    border: 1px solid #bbbbbb;
+    border-radius: 20px;
+    background: #eeeeee;
+}

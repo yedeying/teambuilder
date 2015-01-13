@@ -43,7 +43,7 @@ exports.getSchedule = function(data, sess, res) {
   var schedules = [];
   people.getUid(sess, function(uid) {
     var sql = 'select sid, timestamp, title, detail from schedule where timestamp >= ? and timestamp <= ? and uid = ?';
-    db.query(sql, [start, end, sess.uid], function(err, rows) {
+    db.query(sql, [start, end, uid], function(err, rows) {
       if(err) throw err;
       rows.forEach(function(row, index) {
         schedules.push({
