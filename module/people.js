@@ -16,6 +16,16 @@ module.exports = {
       callback(html);
     });
   },
+  isAdmin: function(uid, callback) {
+    var sql = 'select (groups.admin = user.uid) as admin from groups, user where user.gid = groups.gid and user.uid = ?';
+    db.query(sql, uid, function(err, rows) {
+      if(err) { throw err; }
+      if(rows.length !== 1) {
+        throw new Error('people.isAdmin: unknown error');
+      }
+      callback(rows[0]['admin']);
+    });
+  },
   getUid: function(sess, callback) {
     if(sess.uid) {
       callback(sess.uid);

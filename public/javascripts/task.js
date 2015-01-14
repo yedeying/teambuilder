@@ -18,9 +18,9 @@ define(function(require, exports, module) {
     });
   });
   $body.on('click', '.del-task', function(e) {
-    var that = this;
-    tools.getModel('remove_task', 'remove_task', {}, undefined, function() {
-      $('.model').attr('data-did', $(that).parent().attr('data-did'));
+    var did = $(this).parent().attr('data-did');
+    tools.getModel('remove_task', 'remove_task', {did: did}, undefined, function() {
+      $('.model').attr('data-did', did);
     });
   });
   $body.on('click', '.edit-task', function(e) {

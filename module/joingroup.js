@@ -20,6 +20,19 @@ module.exports = {
       }
     });
   },
+  checkGroup: function(sess, res, callback) {
+    var sql = 'select gid from user where email = ?';
+    db.query(sql, sess.email, function(err, rows) {
+      if(err) throw err;
+      if(rows.length !== 1) {
+        res.redirect('/404');
+      } else if (rows[0]['gid'] !== 0) {
+        res.redirect('/');
+      } else {
+        callback();
+      }
+    });
+  },
   joinGroup: function(data, sess, res) {
     var email = sess.email;
     var that = this;

@@ -205,7 +205,10 @@ router.get('/task', function(req, res) {
   task.generatePage(sess, res, tid);
 });
 router.get('/joingroup', function(req, res) {
-  res.render('joingroup', {page: 'index'});
+  var sess = req.session;
+  joingroup.checkGroup(sess, res, function() {
+    res.render('joingroup', {page: 'index'});
+  });
 });
 router.get('/download/task', function(req, res) {
   var sess = req.session;

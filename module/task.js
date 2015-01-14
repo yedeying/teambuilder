@@ -277,16 +277,30 @@ module.exports = {
       var title = row['title'];
       var content = row['content'];
       var participant = tools.decodeNumberArray(row['participant']);
-      people.getMemberList(sess, participant, function(memberList) {
-        file.getFile(did, 1, function(files) {
-          callback({
-            did: did,
-            taskTitle: title,
-            content: content,
-            memberList: memberList,
-            fileList: files,
-            sha1: tools.getSha1
+      people.getUid(sess, function(uid) {
+        people.isAdmin(uid, function(admin) {
+          var visible = false;
+          participant.forEach(function(id) {
+            if(uid === id) {
+              visible = true;
+            }
           });
+          if(visible || admin) {
+            people.getMemberList(sess, participant, function(memberList) {
+              file.getFile(did, 1, function(files) {
+                callback({
+                  did: did,
+                  taskTitle: title,
+                  content: content,
+                  memberList: memberList,
+                  fileList: files,
+                  sha1: tools.getSha1
+                });
+              });
+            });
+          } else {
+            res.send({code: 1, info: '没有权限'});
+          }
         });
       });
     });
