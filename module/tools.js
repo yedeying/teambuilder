@@ -91,7 +91,7 @@ module.exports = {
     var time = new Date(stamp);
     var now = new Date();
     if(stamp < now.getTime()) {
-      return {code: 2, info: '时间不能早于当前'};
+      return {code: 0, info: '时间不能早于当前', time: time};
     }
     return {code: 0, info: '成功', time: time};
   },
