@@ -150,7 +150,7 @@ exports.generatePage = function(sess, res) {
         file.suffix = '';
       }
       file.icon = (icons[file.suffix] === undefined ? icons['unknown'] : icons[file.suffix]);
-      folderMap[file.folder].fileList.push(file);
+      folderMap[file.folder] && folderMap[file.folder].fileList.push(file);
     });
     if(sess.folderId === undefined) {
       sess.folderId = folderList[0].fid;

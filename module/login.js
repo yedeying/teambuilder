@@ -32,7 +32,7 @@ var signup = {
         throw err;
       } 
       if(rows && rows.length >= 1) {
-        res.send({code: 1, info: '该邮箱已注册，可以尝试进行密码找回'});
+        res.send({code: 1, info: '该邮箱已注册'});
         return;
       }
       sql = 'select * from tmpuser where email = "' + email + '"';
